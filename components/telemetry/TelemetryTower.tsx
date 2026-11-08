@@ -1,4 +1,7 @@
 "use client";
+import { chromeEra } from "@/data/chromeEra";
+import { FacilityWalls } from "@/components/theme/FacilityWalls";
+
 
 import React, { useRef, useMemo, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -16,7 +19,7 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
   position = [14, 0, -18],
 }) => {
   const { inspectProject, activeProject, mode, reducedMotion } = useWorldStore();
-  const { registerObject, unregisterObject } = useInteractionRegistry();
+  const { registerObject, unregisterObject, openStationModal } = useInteractionRegistry();
   const beaconRef = useRef<THREE.Mesh>(null);
   const dishClusterRef = useRef<THREE.Group>(null);
   const screenCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -24,22 +27,51 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
 
   const [isActivated, setIsActivated] = useState(false);
 
-  // Register interactive terminal
+  // Register interactive stations in Telemetry Tower
   useEffect(() => {
-    const terminalPos: [number, number, number] = [
-      position[0],
-      position[1] + 1.2,
-      position[2] + 5.8,
-    ];
+    // 1. F1 Telemetry Signal Explorer
+    registerObject({
+      id: "telemetry_explorer",
+      type: "terminal",
+      label: "F1 Telemetry Signal Explorer",
+      sublabel: "Multi-Session Comparison & Speed/Throttle/Brake Traces",
+      actionPrompt: "[E] OPEN TELEMETRY SIGNAL EXPLORER",
+      position: [position[0] - 2.5, position[1] + 1.2, position[2] + 4.5],
+      boundsRadius: 5.5,
+      projectSlug: "live-f1-intelligence",
+      facilityId: "telemetry",
+      onInteract: () => {
+        worldSound.playInspectChime();
+        openStationModal("telemetry_explorer");
+      },
+    });
 
+    // 2. Data Pipeline Observatory
+    registerObject({
+      id: "pipeline_observatory",
+      type: "station",
+      label: "Data Pipeline Observatory",
+      sublabel: "Distributed 6-Stage Gantry Ingestion Architecture",
+      actionPrompt: "[E] INSPECT DATA PIPELINE OBSERVATORY",
+      position: [position[0] + 2.5, position[1] + 1.2, position[2] + 4.5],
+      boundsRadius: 5.5,
+      projectSlug: "live-f1-intelligence",
+      facilityId: "telemetry",
+      onInteract: () => {
+        worldSound.playInspectChime();
+        openStationModal("pipeline_observatory");
+      },
+    });
+
+    // 3. Main Race Control Telemetry Blueprint Terminal
     registerObject({
       id: "telemetry_terminal",
       type: "terminal",
       label: "Live F1 Telemetry Terminal",
       sublabel: "1,067,193 Canonical Event Stream Gantry",
       actionPrompt: "[E] INSPECT RACE CONTROL TELEMETRY",
-      position: terminalPos,
-      boundsRadius: 7,
+      position: [position[0], position[1] + 1.2, position[2] + 5.8],
+      boundsRadius: 6,
       projectSlug: "live-f1-intelligence",
       facilityId: "telemetry",
       onInteract: () => {
@@ -48,8 +80,12 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
       },
     });
 
-    return () => unregisterObject("telemetry_terminal");
-  }, [position, registerObject, unregisterObject, inspectProject]);
+    return () => {
+      unregisterObject("telemetry_explorer");
+      unregisterObject("pipeline_observatory");
+      unregisterObject("telemetry_terminal");
+    };
+  }, [position, registerObject, unregisterObject, openStationModal, inspectProject]);
 
   // Create dynamic canvas texture for race control timing screen
   const dynamicScreenMaterial = useMemo(() => {
@@ -70,15 +106,15 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
     return new THREE.MeshBasicMaterial({ map: tex });
   }, []);
 
-  const stoneBrickMat = useMemo(() => getVoxelMaterial("stone_bricks"), []);
-  const oakPlankMat = useMemo(() => getVoxelMaterial("oak_planks"), []);
+  const stoneBrickMat = useMemo(() => getVoxelMaterial("chrome_brushed"), []);
+  const oakPlankMat = useMemo(() => getVoxelMaterial("chrome_graphite"), []);
   const signMat = useMemo(
     () => getVoxelSignMaterial("TELEMETRY TOWER", "LIVE F1 INTELLIGENCE"),
     []
   );
   const glassMat = useMemo(
     () =>
-      getVoxelMaterial("glass", {
+      getVoxelMaterial("chrome_glass", {
         transparent: true,
         opacity: 0.65,
       }),
@@ -86,8 +122,8 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
   );
   const glowstoneMat = useMemo(
     () =>
-      getVoxelMaterial("glowstone", {
-        emissive: new THREE.Color("#fab005"),
+      getVoxelMaterial("chrome_light", {
+        emissive: new THREE.Color(chromeEra.white),
         emissiveIntensity: 1.5,
       }),
     []
@@ -181,22 +217,19 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
       }}
     >
       {/* 1. Stone Brick Foundation (10x10 blocks) */}
-      <mesh position={[0, 0.25, 0]} receiveShadow>
+      <mesh position={[0, 0.28, 0]} receiveShadow>
         <boxGeometry args={[10, 0.5, 10]} />
         <primitive object={stoneBrickMat} attach="material" />
       </mesh>
 
       {/* 2. Lower Control Hub (Stone Brick Walls, 8x8x4 high) */}
-      <mesh position={[0, 2.5, 0]} castShadow receiveShadow>
-        <boxGeometry args={[8.0, 4.0, 8.0]} />
-        <primitive object={stoneBrickMat} attach="material" />
-      </mesh>
+      <FacilityWalls id="telemetry" />
 
       {/* Ground Floor Windows (Glass Blocks on 4 sides) */}
-      <mesh position={[0, 2.5, 4.05]} castShadow>
-        <boxGeometry args={[6.0, 1.8, 0.2]} />
+      {[-2.75, 2.75].map(x => <mesh key={x} position={[x, 2.5, 4.05]} castShadow>
+        <boxGeometry args={[2, 1.8, 0.2]} />
         <primitive object={glassMat} attach="material" />
-      </mesh>
+      </mesh>)}
       <mesh position={[0, 2.5, -4.05]} castShadow>
         <boxGeometry args={[6.0, 1.8, 0.2]} />
         <primitive object={glassMat} attach="material" />
@@ -237,6 +270,8 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
       </mesh>
 
       {/* Interior Glowing Telemetry Monitor Array (Dynamic Canvas Texture) */}
+      <mesh position={[0, 2.5, -2.9]}><boxGeometry args={[4.2, 1.8, .1]} /><primitive object={dynamicScreenMaterial} attach="material" /></mesh>
+      <mesh position={[0, 3.65, -2.8]}><planeGeometry args={[4.2, .4]} /><primitive object={getVoxelSignMaterial("ILLUSTRATIVE TELEMETRY FEED", "OPEN THE SYSTEM FOR VALIDATED OUTPUT")} attach="material" /></mesh>
       <mesh position={[0, 6.75, 2.5]}>
         <boxGeometry args={[4.2, 1.8, 0.1]} />
         <primitive object={dynamicScreenMaterial} attach="material" />
@@ -303,7 +338,7 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
       </group>
 
       {/* 8. Physical Minecraft Sign at Tower Base: [ TELEMETRY TOWER / LIVE F1 INTELLIGENCE ] */}
-      <group position={[0, 2.0, 4.4]}>
+      <group position={[0, 3.85, 4.4]}>
         <mesh castShadow>
           <boxGeometry args={[5.2, 1.0, 0.2]} />
           <primitive object={oakPlankMat} attach="material" />

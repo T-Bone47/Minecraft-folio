@@ -8,12 +8,15 @@ export interface RenderStats {
   triangles: number;
   geometries: number;
   textures: number;
+  textureBytesEstimate: number;
 }
 
 interface SettingsState {
   qualityTierOverride: DeviceTier | "auto";
   showPerformanceHUD: boolean;
   showControlsHelp: boolean;
+  directoryOpen: boolean;
+  setDirectoryOpen: (open: boolean) => void;
   minimapOpen: boolean;
   commandPaletteOpen: boolean;
   profileModalOpen: boolean;
@@ -34,6 +37,8 @@ export const useSettingsStore = create<SettingsState>((set) => ({
   qualityTierOverride: "auto",
   showPerformanceHUD: false,
   showControlsHelp: true,
+  directoryOpen: false,
+  setDirectoryOpen: (directoryOpen) => set({ directoryOpen }),
   minimapOpen: false,
   commandPaletteOpen: false,
   profileModalOpen: false,
@@ -43,6 +48,7 @@ export const useSettingsStore = create<SettingsState>((set) => ({
     triangles: 0,
     geometries: 0,
     textures: 0,
+    textureBytesEstimate: 0,
   },
 
   setQualityTierOverride: (qualityTierOverride) => set({ qualityTierOverride }),

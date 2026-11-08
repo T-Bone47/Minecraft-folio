@@ -23,6 +23,7 @@ import {
   Radio,
   ExternalLink,
   ChevronRight,
+  FileText,
 } from "lucide-react";
 
 export const WorldFallback: React.FC = () => {
@@ -66,7 +67,7 @@ export const WorldFallback: React.FC = () => {
               <Terminal className="w-4 h-4" />
               <span>ASISH OLIVER M // ENGINEERING WORLD</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white mb-2">
+            <a href="/visit" className="underline text-cyan-300">Visitor journeys, project depths and architecture exhibits</a><h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white mb-2">
               {profileData.name}
             </h1>
             <div className="flex flex-wrap gap-2 mb-3">
@@ -86,6 +87,42 @@ export const WorldFallback: React.FC = () => {
               <span>LOCATION: <strong className="text-zinc-300">{profileData.location.display}</strong></span>
               <span>•</span>
               <span>EDUCATION: <strong className="text-zinc-300">{profileData.education.institution} (M.Tech CSE)</strong></span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2.5 mt-4 pt-3 border-t border-[#27272a]">
+              <a
+                href="/Asish_Oliver_M_Resume.pdf"
+                download="Asish_Oliver_M_Resume.pdf"
+                className="px-3 py-1.5 bg-[#0284c7] hover:bg-[#0369a1] text-white text-xs font-bold border border-[#38bdf8] shadow-[2px_2px_0px_#000] flex items-center gap-1.5 transition-colors"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>DOWNLOAD RESUME (PDF)</span>
+              </a>
+              <a
+                href={siteIdentity.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 bg-[#18181b] hover:bg-[#27272a] text-zinc-300 hover:text-white text-xs border border-[#3f3f46] shadow-[2px_2px_0px_#000] flex items-center gap-1.5 transition-colors"
+              >
+                <span>GITHUB</span>
+                <ExternalLink className="w-3 h-3 text-zinc-500" />
+              </a>
+              <a
+                href={siteIdentity.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 bg-[#18181b] hover:bg-[#27272a] text-zinc-300 hover:text-white text-xs border border-[#3f3f46] shadow-[2px_2px_0px_#000] flex items-center gap-1.5 transition-colors"
+              >
+                <span>LINKEDIN</span>
+                <ExternalLink className="w-3 h-3 text-zinc-500" />
+              </a>
+              <a
+                href={`mailto:${siteIdentity.social.email}`}
+                className="px-3 py-1.5 bg-[#18181b] hover:bg-[#27272a] text-emerald-400 text-xs border border-emerald-800 shadow-[2px_2px_0px_#000] flex items-center gap-1.5 transition-colors"
+              >
+                <Mail className="w-3.5 h-3.5" />
+                <span>EMAIL</span>
+              </a>
             </div>
           </div>
           <div className="md:col-span-4 flex flex-col items-center">
@@ -590,4 +627,6 @@ export const WorldFallback: React.FC = () => {
     </div>
   );
 };
+
+
 

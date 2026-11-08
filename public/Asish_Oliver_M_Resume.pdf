@@ -1,0 +1,102 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 7498 >>
+stream
+1 1 1 rg 0 0 612 792 re f
+0.9 0.5 0 rg 36 742 540 2 re f
+BT /F2 20 Tf 0.08 0.08 0.1 rg 1 0 0 1 36 752 Tm (ASISH OLIVER M) Tj ET
+BT /F2 9.5 Tf 0.2 0.4 0.7 rg 1 0 0 1 36 730 Tm (MOTORSPORT SOFTWARE ENGINEER  |  AI / ML ENGINEER) Tj ET
+BT /F1 8 Tf 0.35 0.35 0.4 rg 1 0 0 1 36 716 Tm (Trichy, Tamil Nadu, India  *  dreamteamoliver@gmail.com  *  github.com/T-Bone47  *  linkedin.com/in/asish-oliver-56b454324) Tj ET
+1 w 0.85 0.85 0.88 RG 36 706 m 576 706 l S
+BT /F2 11 Tf 0.08 0.08 0.12 rg 1 0 0 1 36 690 Tm (ENGINEERING PROFILE) Tj ET
+1.2 w 0.2 0.4 0.7 RG 36 686 m 576 686 l S
+BT /F1 8.8 Tf 0.2 0.2 0.22 rg 1 0 0 1 36 672 Tm (Motorsport Software Engineer and AI/ML Systems Engineer specializing in high-throughput real-time telemetry) Tj ET
+BT /F1 8.8 Tf 0.2 0.2 0.22 rg 1 0 0 1 36 660 Tm (pipelines, numerical quasi-steady vehicle dynamics simulation, race strategy modeling, and applied machine learning.) Tj ET
+BT /F1 8.8 Tf 0.2 0.2 0.22 rg 1 0 0 1 36 648 Tm (Committed to zero-fabrication engineering rigor, mathematical verification, strict architectural decoupling, and clean systems design.) Tj ET
+BT /F2 11 Tf 0.08 0.08 0.12 rg 1 0 0 1 36 626 Tm (EDUCATION) Tj ET
+1.2 w 0.2 0.4 0.7 RG 36 622 m 576 622 l S
+BT /F2 9.5 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 608 Tm (VIT-AP UNIVERSITY) Tj ET
+BT /F2 9 Tf 0.3 0.3 0.35 rg 1 0 0 1 480 608 Tm (2021 - Present) Tj ET
+BT /F1 9 Tf 0.25 0.25 0.28 rg 1 0 0 1 36 596 Tm (Integrated M.Tech in Computer Science and Engineering) Tj ET
+BT /F1 8 Tf 0.4 0.4 0.45 rg 1 0 0 1 36 584 Tm (Core Coursework: Distributed Systems, High-Performance Computing, Machine Learning, Numerical Methods, Software Architecture.) Tj ET
+BT /F2 11 Tf 0.08 0.08 0.12 rg 1 0 0 1 36 562 Tm (ENGINEERING EXPERIENCE) Tj ET
+1.2 w 0.2 0.4 0.7 RG 36 558 m 576 558 l S
+BT /F2 9.5 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 544 Tm (Independent Motorsport / eSports) Tj ET
+BT /F2 9 Tf 0.3 0.3 0.35 rg 1 0 0 1 480 544 Tm (2025 - Present) Tj ET
+BT /F3 9 Tf 0.2 0.4 0.7 rg 1 0 0 1 36 532 Tm (Race & Strategy Engineer) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 520 Tm (* Architected game-agnostic UDP telemetry acquisition pipeline ingesting high-frequency F1 vehicle motion and physics packets.) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 509 Tm (* Formulated dynamic stint degradation models & regression curves estimating thermal wear cliff and optimal pit-stop windows.) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 498 Tm (* Built AI Race Engineer reasoning engine providing automated fuel, tire delta, and safety car tactical advisories.) Tj ET
+BT /F2 9.5 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 482 Tm (IGNICT) Tj ET
+BT /F2 9 Tf 0.3 0.3 0.35 rg 1 0 0 1 480 482 Tm (2026 - Present) Tj ET
+BT /F3 9 Tf 0.2 0.4 0.7 rg 1 0 0 1 36 470 Tm (AI / Machine Learning Intern) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 458 Tm (* Engineered end-to-end Python data preprocessing pipelines, feature engineering, and model evaluation routines.) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 447 Tm (* Researched unsupervised player representation vectors and dimensionality reduction architectures using PCA and t-SNE.) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 436 Tm (* Developed offline-first speech-to-text inference integration \(Vosk\) and time-series demand forecasting models \(XGBoost\).) Tj ET
+BT /F2 11 Tf 0.08 0.08 0.12 rg 1 0 0 1 36 414 Tm (CANONICAL ENGINEERING SYSTEMS) Tj ET
+1.2 w 0.2 0.4 0.7 RG 36 410 m 576 410 l S
+BT /F2 9 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 396 Tm (Live F1 Intelligence  |  High-Throughput Distributed Telemetry Pipeline) Tj ET
+BT /F1 7.5 Tf 0.4 0.4 0.45 rg 1 0 0 1 340 396 Tm (Python, FastAPI, TimescaleDB, WebSockets, Docker) Tj ET
+BT /F1 8 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 385 Tm (* Ingests 4 live feeds \(OpenF1, FastF1, Jolpica, SignalR\), validates schemas, and normalises events into a single canonical model.) Tj ET
+BT /F1 8 Tf 0.05 0.45 0.3 rg 1 0 0 1 42 375 Tm (* Benchmark Evidence: 1,067,193 canonical events processed, 0 malformed records, ~2,650 events/s, ~0.10 ms p50, 99 MB peak memory.) Tj ET
+BT /F2 9 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 361 Tm (F1 Lap-Time Simulator & Lap Prediction  |  Numerical Vehicle Dynamics) Tj ET
+BT /F1 7.5 Tf 0.4 0.4 0.45 rg 1 0 0 1 400 361 Tm (Python, NumPy, SciPy, Matplotlib) Tj ET
+BT /F1 8 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 350 Tm (* Formulated quasi-steady-state numerical lap solver utilizing G-G friction circles, aero downforce mapping, and grip envelopes.) Tj ET
+BT /F1 8 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 340 Tm (* Computes forward acceleration and backward braking numerical integration passes to solve theoretical minimum lap times.) Tj ET
+BT /F2 9 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 326 Tm (RaceMind-AI  |  Real-Time Race Strategy & UDP Telemetry Bridge) Tj ET
+BT /F1 7.5 Tf 0.4 0.4 0.45 rg 1 0 0 1 360 326 Tm (Python, UDP Sockets, Streamlit, Scikit-learn) Tj ET
+BT /F1 8 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 315 Tm (* Game-agnostic telemetry abstraction layer decoding multi-generation F1 UDP packets \(velocities, sector deltas, tire temperatures\).) Tj ET
+BT /F1 8 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 305 Tm (* Implemented rolling stint wear regression and live AI Race Engineer contextual query terminal for undercut/overcut decisions.) Tj ET
+BT /F2 9 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 291 Tm (F1 Race Manager  |  F1 Team Management Simulation Game Engine) Tj ET
+BT /F1 7.5 Tf 0.4 0.4 0.45 rg 1 0 0 1 325 291 Tm (TypeScript, React, Next.js, State Machine Architecture) Tj ET
+BT /F1 8 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 280 Tm (* Deterministic race simulation architecture featuring lap-by-lap pace calculation, weather radar volatility, and safety car triggers.) Tj ET
+BT /F2 9 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 266 Tm (Football Intelligence OS  |  128D Player Representation Vector Engine) Tj ET
+BT /F1 7.5 Tf 0.4 0.4 0.45 rg 1 0 0 1 345 266 Tm (Python, Pandas, Scikit-learn, PCA, Cosine Metric) Tj ET
+BT /F1 8 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 255 Tm (* Cleaned and normalized 16,228 FC26 players into a dense 128D latent embedding space; serves tactical similarity replacements.) Tj ET
+BT /F2 9 Tf 0.1 0.1 0.15 rg 1 0 0 1 36 241 Tm (VyaparPulse  |  Offline-First Voice Ledger & XGBoost Demand Forecasting) Tj ET
+BT /F1 7.5 Tf 0.4 0.4 0.45 rg 1 0 0 1 365 241 Tm (Python, FastAPI, Vosk STT, XGBoost, SQLite) Tj ET
+BT /F1 8 Tf 0.2 0.2 0.25 rg 1 0 0 1 42 230 Tm (* Offline voice-to-structured ledger committing transactions in <800 ms; 7-day revenue forecasting with cold-start fallbacks.) Tj ET
+BT /F2 11 Tf 0.08 0.08 0.12 rg 1 0 0 1 36 210 Tm (TECHNICAL ARSENAL) Tj ET
+1.2 w 0.2 0.4 0.7 RG 36 206 m 576 206 l S
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 36 192 Tm (Languages: Python 3.12, TypeScript, MATLAB, C#, SQL, HTML5 / CSS3) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 36 181 Tm (Systems & Backend: FastAPI, Next.js 15, React 19, WebSockets, UDP Sockets, Docker, Microservices Architecture) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 36 170 Tm (Data & Time-Series: TimescaleDB, PostgreSQL, SQLite, SQLAlchemy, Pandas, NumPy, FastF1, OpenF1 Ingestion) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 36 159 Tm (AI / Machine Learning: Scikit-learn, XGBoost, PyTorch, Vosk Offline STT, PCA, t-SNE Embeddings, Time-Series Forecasting) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 36 148 Tm (Motorsport Engineering: Vehicle Dynamics Modeling, Quasi-Steady Lap Solver, G-G Friction Circle, Tyre Degradation Regression) Tj ET
+BT /F1 8.2 Tf 0.2 0.2 0.25 rg 1 0 0 1 36 137 Tm (3D & Visualization: Three.js, React Three Fiber, WebGL Performance Profiling, Voxel Engine Architecture) Tj ET
+
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000007811 00000 n 
+0000007881 00000 n 
+0000007956 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+8034
+%%EOF

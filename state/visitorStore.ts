@@ -1,0 +1,4 @@
+import { create } from "zustand";
+import { tourRoute, type JourneyId, type TourLength } from "@/lib/visitor/journeys";
+interface VisitorState {journey:JourneyId;length:TourLength;index:number;status:"idle"|"active"|"paused"|"completed";choose:(id:JourneyId)=>void;start:(length:TourLength)=>void;pause:()=>void;resume:()=>void;cancel:()=>void;advance:()=>void;}
+export const useVisitorStore=create<VisitorState>((set)=>({journey:"explorer",length:"short",index:0,status:"idle",choose:journey=>set({journey,index:0,status:"idle"}),start:length=>set({length,index:0,status:"active"}),pause:()=>set(s=>s.status==="active"?{status:"paused"}:{}),resume:()=>set(s=>s.status==="paused"?{status:"active"}:{}),cancel:()=>set({index:0,status:"idle"}),advance:()=>set(s=>s.status!=="active"?{}:s.index+1>=tourRoute(s.journey,s.length).length?{status:"completed"}:{index:s.index+1})}));

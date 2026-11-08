@@ -23,7 +23,7 @@ import {
 export const InspectionOverlay: React.FC = () => {
   const { mode, activeProject, activeLocation, closeInspection } = useWorldStore();
 
-  if (mode !== "inspect" && activeLocation !== "hq") return null;
+  if (mode !== "inspect") return null;
 
   // If inspecting Engineering HQ
   if (activeLocation === "hq" && (!activeProject || activeProject === "hq")) {
@@ -203,6 +203,18 @@ export const InspectionOverlay: React.FC = () => {
           </div>
         )}
 
+        {project.slug === "ea-fc-intelligence" && (
+          <div className="mb-5 bg-purple-950/40 border-2 border-purple-500/60 p-3 text-purple-300 text-[11px] font-mono leading-relaxed">
+            [NOTE] FOOTBALL INTELLIGENCE OS. 128D latent player vector representations and cosine similarity recommendations over 16,228 FC26 players.
+          </div>
+        )}
+
+        {project.slug === "saksham" && (
+          <div className="mb-5 bg-teal-950/40 border-2 border-teal-500/60 p-3 text-teal-300 text-[11px] font-mono leading-relaxed">
+            [NOTE] SAKSHAM ASSISTIVE AI/ML PIPELINE. Multi-modal signal processing, offline feature extraction, and accessible evaluation frameworks.
+          </div>
+        )}
+
         {/* Engineering Problem & Challenge */}
         <div className="mb-6">
           <h3 className="font-pixel text-[9px] uppercase tracking-wider text-zinc-400 mb-2 flex items-center gap-1.5">
@@ -246,6 +258,7 @@ export const InspectionOverlay: React.FC = () => {
         )}
 
         {/* Verified Engineering Metrics / Evidence */}
+        {project.evidenceReview && <p className="border border-amber-600 p-3 text-xs text-amber-100">{project.evidenceReview.status}: {project.evidenceReview.summary}</p>}
         {project.metrics && project.metrics.length > 0 && (
           <div className="mb-6">
             <h3 className="font-pixel text-[9px] uppercase tracking-wider text-emerald-300 mb-2.5 flex items-center gap-1.5">
@@ -292,12 +305,28 @@ export const InspectionOverlay: React.FC = () => {
           [ESC] EXIT
         </button>
 
+        {project.slug === "racemind-ai" && (
+          <button
+            onClick={() => {
+              closeInspection();
+              useWorldStore.getState().startDriving();
+            }}
+            className="mc-btn-gold px-4 py-2.5 text-xs font-bold flex items-center justify-center gap-1.5 text-white shadow-lg cursor-pointer"
+          >
+            <span>🏎️ TEST DRIVE</span>
+          </button>
+        )}
+
         <Link
           href={`/work/${project.slug}`}
           onClick={() => {
             // Save state confirmation
             if (typeof window !== "undefined") {
-              sessionStorage.setItem("asish_world_last_case_study", project.slug);
+              try {
+                sessionStorage.setItem("asish_world_last_case_study", project.slug);
+              } catch {
+                // The project link works even when preferences cannot persist.
+              }
             }
           }}
           className="mc-btn flex-1 py-2.5 px-4 text-xs font-bold text-center flex items-center justify-center gap-2 text-white !bg-sky-700 hover:!bg-sky-600 border-sky-400"

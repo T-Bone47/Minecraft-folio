@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-08T12:39:23.069Z",
+  "checks": [
+    "3D preview supports front, side, back and drag orbit",
+    "V shows new third-person body without moving player",
+    "Walking moves the real player and articulated avatar",
+    "Running follows actual player movement",
+    "Jump rises, falls and lands at ground height",
+    "Mouse orbit preserves idle player position",
+    "Returning to first person preserves player position",
+    "Facility interaction works with new third-person model",
+    "HQ uses the same character design",
+    "Mobile character inspection fits viewport"
+  ],
+  "errors": [],
+  "passed": true
+}

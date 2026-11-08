@@ -2,6 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { projects, getProjectBySlug } from "@/data/projects";
+import { canonicalUrl } from "@/lib/siteMetadata";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
 import {
@@ -39,6 +40,8 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${project.title} — Technical Case Study | Asish Oliver M`,
     description: project.description,
+    alternates: canonicalUrl(`/projects/${slug}`) ? { canonical: canonicalUrl(`/projects/${slug}`) } : undefined,
+    openGraph: { title: project.title, description: project.description, url: canonicalUrl(`/projects/${slug}`), images: ["/og-image.png"] },
   };
 }
 
@@ -97,6 +100,7 @@ export default async function CaseStudyPage({ params }: Props) {
           </Link>
         </div>
 
+        {project.evidenceReview && <aside className="border-l-4 border-amber-400 bg-zinc-900 p-4 text-sm text-zinc-300"><strong>{project.evidenceReview.status} · {project.evidenceReview.checkedAt}</strong><p>{project.evidenceReview.summary}</p><p>Detailed legacy narrative below is author-reported. The campus demonstrations are separate, explicitly synthetic teaching examples.</p></aside>}
         {/* Case Study Header as Minecraft GUI Sign Panel */}
         <header className="mc-sign p-6 sm:p-8 space-y-4 shadow-[0_6px_0_#000000]">
           <div className="flex flex-wrap items-center gap-2 text-[10px] font-pixel text-yellow-300 mc-text-shadow-gold uppercase">
@@ -410,3 +414,4 @@ export default async function CaseStudyPage({ params }: Props) {
     </div>
   );
 }
+

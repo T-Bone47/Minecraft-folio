@@ -1,0 +1,93 @@
+name: Release validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-validation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      QA_URL: http://127.0.0.1:3005
+      QA_SOFTWARE_GL: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: TypeScript
+        run: npm run typecheck
+      - name: ESLint
+        run: npm run lint
+      - name: Behavioral tests
+        run: npm test
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+      - name: Production build
+        run: npm run build
+      - name: Prepare browser and fresh evidence
+        shell: bash
+        run: |
+          echo "QA_BROWSER_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          google-chrome --version
+          mkdir -p qa-results docs/screenshots
+          # This is an ephemeral checkout: discard old generated evidence before QA.
+          find docs -maxdepth 1 -type f -name '*-results.json' -delete
+          find docs/screenshots -maxdepth 1 -type f -name '*.png' -delete
+      - name: Start production server
+        shell: bash
+        run: |
+          node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3005 > qa-results/server.log 2>&1 &
+          echo "$!" > qa-results/server.pid
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent "$QA_URL/" > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat qa-results/server.log
+          exit 1
+      - name: Browser gameplay and professional journeys
+        run: |
+          node scripts/qa-cockpit.mjs
+          node scripts/qa-stations.mjs
+          node scripts/qa-controls-release.mjs
+          node scripts/qa-visitors.mjs
+          node scripts/qa-avatar.mjs
+          node scripts/qa-release-final.mjs
+          node scripts/qa-audio.mjs
+          node scripts/qa-release-audio.mjs
+          node scripts/qa-release-routes.mjs
+          node scripts/qa-production.mjs
+      - name: Stop owned server
+        if: always()
+        shell: bash
+        run: |
+          if test -f qa-results/server.pid; then
+            kill "$(cat qa-results/server.pid)" 2>/dev/null || true
+          fi
+      - name: Upload executed QA evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: release-qa-${{ github.sha }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            qa-results/server.log
+            docs/*-results.json
+            docs/screenshots/*.png
+

@@ -14,13 +14,14 @@ import {
   Menu,
   X,
   Sparkles,
+  FileText,
 } from "lucide-react";
 
 export const PortfolioNav: React.FC = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const navLinks = [
+  const navLinks = [{ href: "/visit", label: "FIELD GUIDE", icon: Box },
     { href: "/", label: "HOME", icon: Terminal },
     { href: "/work", label: "SYSTEMS & WORK", icon: Cpu },
     { href: "/experience", label: "EXPERIENCE", icon: Activity },
@@ -72,6 +73,17 @@ export const PortfolioNav: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5 text-emerald-200" />
             <span>RECRUITER</span>
           </Link>
+
+          {/* Direct Resume Download */}
+          <a
+            href="/Asish_Oliver_M_Resume.pdf"
+            download="Asish_Oliver_M_Resume.pdf"
+            className="mc-btn px-2.5 py-1.5 text-[10px] font-pixel flex items-center gap-1.5 text-sky-300 hover:text-white"
+            title="Download Asish Oliver M Resume (PDF)"
+          >
+            <FileText className="w-3.5 h-3.5 text-sky-400" />
+            <span>RESUME</span>
+          </a>
         </div>
 
         {/* Right CTA: 3D Engineering World as Minecraft Gold/Papaya Button */}
@@ -128,8 +140,21 @@ export const PortfolioNav: React.FC = () => {
             </div>
             <span className="text-[10px] text-emerald-200 font-mono">30s</span>
           </Link>
+          <a
+            href="/Asish_Oliver_M_Resume.pdf"
+            download="Asish_Oliver_M_Resume.pdf"
+            onClick={() => setMobileOpen(false)}
+            className="mc-btn p-2.5 flex items-center justify-between text-xs text-sky-300 hover:text-white"
+          >
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-sky-400" />
+              <span>DOWNLOAD RESUME (PDF)</span>
+            </div>
+            <span className="text-[10px] text-zinc-400 font-mono">PDF</span>
+          </a>
         </div>
       )}
     </nav>
   );
 };
+

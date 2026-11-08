@@ -1,31 +1,34 @@
+import { chromeEra,chromeCssVariables } from "@/data/chromeEra";
 import type { Metadata, Viewport } from "next";
-import { seo, siteIdentity, SITE_URL } from "@/data/site";
+import { seo, siteIdentity } from "@/data/site";
+import { siteConfig, canonicalUrl } from "@/lib/siteMetadata";
 import { MinecraftAtmosphere } from "@/components/ambient/MinecraftAtmosphere";
 import { education } from "@/data/experience";
 // Runs content integrity checks (duplicate slugs, missing status, undeclared
 // evidence grades, broken links) and warns in development.
 import "@/lib/validateContent";
 import "./globals.css";
+import "./chrome-era.css";
 
 const TITLE = seo.title;
 const DESCRIPTION = seo.description;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(siteConfig.metadataBase),
   title: {
-    default: TITLE,
-    template: `%s — ASISH ENGINEERING WORLD`,
+    default: `${TITLE} | ASISH: THE ENGINEERING FRONTIER`,
+    template: `%s — ASISH: THE ENGINEERING FRONTIER`,
   },
   description: DESCRIPTION,
   keywords: seo.keywords,
   authors: [{ name: siteIdentity.name }],
   creator: siteIdentity.name,
-  applicationName: "Asish Engineering World",
-  alternates: { canonical: "/" },
+  applicationName: "ASISH: THE ENGINEERING FRONTIER",
+  alternates: siteConfig.indexable ? { canonical: "./" } : undefined,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
+    url: siteConfig.indexable ? "./" : undefined,
     siteName: "Asish Engineering World",
     title: TITLE,
     description: DESCRIPTION,
@@ -45,19 +48,19 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    index: siteConfig.indexable,
+    follow: siteConfig.indexable,
+    googleBot: { index: siteConfig.indexable, follow: siteConfig.indexable, "max-image-preview": "large" },
   },
   category: "technology",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0e0e13",
+  themeColor: chromeEra.carbon,
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 /**
@@ -65,14 +68,14 @@ export const viewport: Viewport = {
  *
  * Deliberately declares only what is verifiable: identity, roles, location,
  * education, the verified professional links and the portfolio subject areas.
- * No `alumniOf` grades, no employer claims beyond the two known roles, and no
- * fabricated award or affiliation data.
+ * Current university affiliation does not imply graduation. No fabricated
+ * award or racing-team affiliation data is included.
  */
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: siteIdentity.name,
-  url: SITE_URL,
+  url: canonicalUrl("/"),
   email: `mailto:${siteIdentity.social.email}`,
   jobTitle: "Motorsport Software Engineer and AI/ML Engineer",
   description: siteIdentity.supportingStatement,
@@ -82,7 +85,7 @@ const personJsonLd = {
     addressRegion: "Tamil Nadu",
     addressCountry: "IN",
   },
-  alumniOf: {
+  affiliation: {
     "@type": "CollegeOrUniversity",
     name: education.institution,
   },
@@ -103,12 +106,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark bg-[#0e0e13]">
+    <html lang="en" className="dark" style={chromeCssVariables as React.CSSProperties}>
       <body className="bg-[#0e0e13] text-[#f4f4f5] technical-grid-bg min-h-screen selection:bg-[#ff8000] selection:text-black relative">
         <script
           type="application/ld+json"
-          // Static, developer-authored object — no user input reaches this string.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          // Escape the script delimiter even when an origin is supplied through deployment configuration.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
         />
         <MinecraftAtmosphere />
         <a

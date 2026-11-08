@@ -1,0 +1,5 @@
+import test from "node:test";import assert from "node:assert/strict";
+import {newDrive,stepDrive,generateReference} from "../lib/frontier/drive";
+import {useCockpitStore} from "../state/cockpitStore";
+test("camera preferences do not mutate simulation and steering returns toward centre",()=>{let s=newDrive();for(let i=0;i<60;i++)s=stepDrive(s,{throttle:1,brake:0,steering:1}).state;const before=structuredClone(s);useCockpitStore.getState().toggle();useCockpitStore.getState().configure({fov:75,seat:.05});assert.deepEqual(s,before);const next=stepDrive(s,{throttle:0,brake:0,steering:0});assert.ok(next.state.steering<s.steering);assert.equal(next.sample.steering,next.state.steering);assert.equal(next.sample.yaw,next.state.yaw);assert.equal(next.sample.throttle,next.state.throttle);});
+test("recorded reference contains finite authoritative replay channels",()=>{const lap=generateReference();for(const s of lap.samples)for(const v of [s.yaw,s.steering,s.brake,s.throttle,s.timestamp])assert.ok(Number.isFinite(v));assert.equal(lap.samples.at(-1)?.timestamp,lap.state.time);});

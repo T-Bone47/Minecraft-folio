@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-08T12:28:57.889Z",
+  "base": "http://localhost:3005",
+  "checks": [
+    "Walked inside AI lab and opened physical workstation",
+    "classification: fit, held-out metrics, baseline and mission completion",
+    "Decision stump runs with irrelevant gradient settings disabled",
+    "regression: fit, held-out metrics, baseline and mission completion",
+    "forecast: fit, held-out metrics, baseline and mission completion",
+    "Station close and reopen preserves results",
+    "Walked inside Telemetry Tower and opened incident workstation",
+    "malformed: diagnosis, repair, invariant validation",
+    "Incorrect repair fails recovery",
+    "duplicates: diagnosis, repair, invariant validation",
+    "out-of-order: diagnosis, repair, invariant validation",
+    "delayed: diagnosis, repair, invariant validation",
+    "backlog: diagnosis, repair, invariant validation",
+    "schema: diagnosis, repair, invariant validation",
+    "missing: diagnosis, repair, invariant validation",
+    "Collected actual renderer and frame measurements at low quality",
+    "Direct route /",
+    "Direct route /recruiter",
+    "Direct route /projects",
+    "Direct route /projects/racemind-ai",
+    "Direct route /projects/live-f1-intelligence",
+    "Direct route /contact",
+    "Direct route /engineering",
+    "Resume PDF served",
+    "Recruiter page fits mobile viewport",
+    "WebGL unavailable exposes 2D fallback",
+    "No runtime errors"
+  ],
+  "errors": [],
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12450H",
+    "logicalCpus": 12,
+    "memoryGiB": 15.675926208496094,
+    "platform": "win32",
+    "browser": "Chrome/158.0.8127.18"
+  },
+  "loadMs": 540,
+  "rendererStats": "ENGINEERING DIAGNOSTICS [F3]\n✕\nFPS:\n144\nFRAME TIME:\n6.9 ms\nDRAW CALLS:\n158\nTRIANGLES:\n56,920\nGEOMETRIES:\n341\nTEXTURES:\n53\nTEXTURE ESTIMATE: 14.85 MiB (RGBA+mips)\nENVIRONMENT:\nDAY\nFACILITY:\nTELEMETRY\nTIER:\nLOW\nWORLD MODE:\nEXPLORE\nPOSITION:\n[14.0, 2.1, -16.3]",
+  "performance": {
+    "samples": 90,
+    "meanFrameMs": 6.897777777810875,
+    "p95FrameMs": 7.100000000000364,
+    "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x000046A3) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "jsHeapBytes": 63914816
+  },
+  "passed": true
+}

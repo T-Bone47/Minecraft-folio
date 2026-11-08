@@ -1,30 +1,41 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useWorldStore } from "@/state/worldStore";
 import { useInteractionRegistry, InteractiveObject } from "@/state/interactionRegistry";
 import { facilities } from "@/data/facilities";
 
+// Module-level reusable scratch vectors to eliminate garbage collection stutters
+const _forward = new THREE.Vector3();
+const _targetPos = new THREE.Vector3();
+const _toTarget = new THREE.Vector3();
+
 export const BlockHighlight: React.FC = () => {
   const { camera } = useThree();
-  const { mode, inspectProject, setNearbyTarget } = useWorldStore();
-  const { interactiveObjects, setActiveTarget, activeTarget } = useInteractionRegistry();
+  const mode = useWorldStore((s) => s.mode);
+  const inspectProject = useWorldStore((s) => s.inspectProject);
+  const setNearbyTarget = useWorldStore((s) => s.setNearbyTarget);
+  const interactiveObjects = useInteractionRegistry((s) => s.interactiveObjects);
+  const setActiveTarget = useInteractionRegistry((s) => s.setActiveTarget);
+  const activeTarget = useInteractionRegistry((s) => s.activeTarget);
 
-  const boxRef = useRef<THREE.LineSegments>(null);
-  const [highlightPos, setHighlightPos] = useState<[number, number, number] | null>(
-    null
-  );
+  const groupRef = useRef<THREE.Group>(null);
+  const activeTargetIdRef = useRef<string | null>(null);
 
   useFrame(() => {
+    if (!groupRef.current) return;
+
     if (mode === "inspect" || mode === "boot") {
-      if (highlightPos) setHighlightPos(null);
-      if (activeTarget) setActiveTarget(null);
+      groupRef.current.visible = false;
+      if (activeTargetIdRef.current !== null) {
+        activeTargetIdRef.current = null;
+        setActiveTarget(null);
+      }
       return;
     }
 
     // Raycast forward from camera center
-    const forward = new THREE.Vector3();
-    camera.getWorldDirection(forward);
+    camera.getWorldDirection(_forward);
     const camPos = camera.position;
 
     let bestTarget: InteractiveObject | null = null;
@@ -32,13 +43,13 @@ export const BlockHighlight: React.FC = () => {
 
     // 1. Check registered interactive stations and terminals first
     for (const obj of interactiveObjects) {
-      const targetPos = new THREE.Vector3(...obj.position);
-      const toTarget = targetPos.clone().sub(camPos);
-      const dist = toTarget.length();
+      _targetPos.set(obj.position[0], obj.position[1], obj.position[2]);
+      _toTarget.subVectors(_targetPos, camPos);
+      const dist = _toTarget.length();
 
       if (dist <= obj.boundsRadius) {
-        toTarget.normalize();
-        const dot = forward.dot(toTarget);
+        _toTarget.divideScalar(dist || 1);
+        const dot = _forward.dot(_toTarget);
         if (dot > 0.72) {
           const score = dist * (1.1 - dot);
           if (score < minScore) {
@@ -52,13 +63,13 @@ export const BlockHighlight: React.FC = () => {
     // 2. Fallback check against facility centers if no specific station is focused
     if (!bestTarget) {
       for (const fac of facilities) {
-        const targetPos = new THREE.Vector3(...fac.coordinates);
-        const toTarget = targetPos.clone().sub(camPos);
-        const dist = toTarget.length();
+        _targetPos.set(fac.coordinates[0], fac.coordinates[1], fac.coordinates[2]);
+        _toTarget.subVectors(_targetPos, camPos);
+        const dist = _toTarget.length();
 
         if (dist <= 14) {
-          toTarget.normalize();
-          const dot = forward.dot(toTarget);
+          _toTarget.divideScalar(dist || 1);
+          const dot = _forward.dot(_toTarget);
           if (dot > 0.75) {
             const score = dist * (1.1 - dot);
             if (score < minScore) {
@@ -86,8 +97,15 @@ export const BlockHighlight: React.FC = () => {
     }
 
     if (bestTarget) {
-      setHighlightPos(bestTarget.position);
-      if (activeTarget?.id !== bestTarget.id) {
+      groupRef.current.position.set(
+        bestTarget.position[0],
+        bestTarget.position[1],
+        bestTarget.position[2]
+      );
+      groupRef.current.visible = true;
+
+      if (activeTargetIdRef.current !== bestTarget.id) {
+        activeTargetIdRef.current = bestTarget.id;
         setActiveTarget(bestTarget);
         setNearbyTarget({
           id: bestTarget.id,
@@ -101,20 +119,19 @@ export const BlockHighlight: React.FC = () => {
         });
       }
     } else {
-      if (highlightPos) setHighlightPos(null);
-      if (activeTarget !== null) {
+      groupRef.current.visible = false;
+      if (activeTargetIdRef.current !== null) {
+        activeTargetIdRef.current = null;
         setActiveTarget(null);
         setNearbyTarget(null);
       }
     }
   });
 
-  if (!highlightPos) return null;
-
   return (
-    <group position={highlightPos}>
+    <group ref={groupRef} visible={false}>
       {/* Subtle authentic Minecraft 3D Block Wireframe Outline (Black, 1.02 scale) */}
-      <lineSegments ref={boxRef}>
+      <lineSegments>
         <edgesGeometry args={[new THREE.BoxGeometry(1.02, 1.02, 1.02)]} />
         <lineBasicMaterial color="#000000" linewidth={2} depthTest={false} transparent opacity={0.85} />
       </lineSegments>

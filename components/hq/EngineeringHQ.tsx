@@ -1,6 +1,9 @@
 "use client";
+import { chromeEra } from "@/data/chromeEra";
+import { FacilityWalls } from "@/components/theme/FacilityWalls";
 
-import React, { useRef, useMemo, useEffect, useState } from "react";
+
+import React, { useRef, useMemo, useEffect } from "react";
 import * as THREE from "three";
 import { useWorldStore } from "@/state/worldStore";
 import { getVoxelMaterial, getVoxelSignMaterial } from "@/lib/voxelTextures";
@@ -19,15 +22,15 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
   const groupRef = useRef<THREE.Group>(null);
   const isActivated = activeLocation === "hq";
 
-  const stoneBrickMat = useMemo(() => getVoxelMaterial("stone_bricks"), []);
-  const oakPlankMat = useMemo(() => getVoxelMaterial("oak_planks"), []);
+  const stoneBrickMat = useMemo(() => getVoxelMaterial("chrome_brushed"), []);
+  const oakPlankMat = useMemo(() => getVoxelMaterial("chrome_graphite"), []);
   const signMat = useMemo(
     () => getVoxelSignMaterial("ENGINEERING HQ", "ASISH OLIVER M"),
     []
   );
   const glassMat = useMemo(
     () =>
-      getVoxelMaterial("glass", {
+      getVoxelMaterial("chrome_glass", {
         transparent: true,
         opacity: 0.65,
       }),
@@ -35,8 +38,8 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
   );
   const glowstoneMat = useMemo(
     () =>
-      getVoxelMaterial("glowstone", {
-        emissive: new THREE.Color("#fab005"),
+      getVoxelMaterial("chrome_light", {
+        emissive: new THREE.Color(chromeEra.white),
         emissiveIntensity: isActivated ? 2.2 : 1.2,
       }),
     [isActivated]
@@ -50,35 +53,36 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
     canvas.height = 340;
     const ctx = canvas.getContext("2d");
     if (ctx) {
-      ctx.fillStyle = "#02121e";
+      ctx.fillStyle = chromeEra.carbon;
       ctx.fillRect(0, 0, 512, 340);
-      ctx.strokeStyle = "#0284c7";
+      ctx.strokeStyle = chromeEra.red;
       ctx.lineWidth = 6;
       ctx.strokeRect(6, 6, 500, 328);
 
-      ctx.fillStyle = "#38bdf8";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "bold 24px monospace";
       ctx.fillText("2025 - PRESENT", 24, 48);
 
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = chromeEra.white;
       ctx.font = "bold 20px monospace";
       ctx.fillText("INDEPENDENT MOTORSPORT", 24, 90);
       ctx.fillText("RACE & STRATEGY ENGINEER", 24, 118);
 
-      ctx.fillStyle = "#94a3b8";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "16px monospace";
       ctx.fillText("Telemetry pipelines & live", 24, 160);
       ctx.fillText("stint analytics for sim racing.", 24, 185);
       ctx.fillText("F1 23/24/25 UDP ingestion.", 24, 210);
 
-      ctx.fillStyle = "#0284c7";
+      ctx.fillStyle = chromeEra.red;
       ctx.fillRect(24, 240, 464, 3);
 
-      ctx.fillStyle = "#38bdf8";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "14px monospace";
       ctx.fillText("STATUS: ACTIVE PRACTICE", 24, 280);
     }
     const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
     tex.magFilter = THREE.NearestFilter;
     tex.minFilter = THREE.NearestFilter;
     return tex;
@@ -91,35 +95,36 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
     canvas.height = 340;
     const ctx = canvas.getContext("2d");
     if (ctx) {
-      ctx.fillStyle = "#0f081d";
+      ctx.fillStyle = chromeEra.carbon;
       ctx.fillRect(0, 0, 512, 340);
-      ctx.strokeStyle = "#7c3aed";
+      ctx.strokeStyle = chromeEra.red;
       ctx.lineWidth = 6;
       ctx.strokeRect(6, 6, 500, 328);
 
-      ctx.fillStyle = "#c084fc";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "bold 24px monospace";
       ctx.fillText("2026 - PRESENT", 24, 48);
 
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = chromeEra.white;
       ctx.font = "bold 20px monospace";
       ctx.fillText("IGNICT", 24, 90);
       ctx.fillText("AI / ML INTERN", 24, 118);
 
-      ctx.fillStyle = "#94a3b8";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "16px monospace";
       ctx.fillText("Predictive architecture &", 24, 160);
       ctx.fillText("applied machine learning models.", 24, 185);
       ctx.fillText("FastAPI & PyTorch pipelines.", 24, 210);
 
-      ctx.fillStyle = "#7c3aed";
+      ctx.fillStyle = chromeEra.red;
       ctx.fillRect(24, 240, 464, 3);
 
-      ctx.fillStyle = "#c084fc";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "14px monospace";
       ctx.fillText("STATUS: ACTIVE INTERNSHIP", 24, 280);
     }
     const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
     tex.magFilter = THREE.NearestFilter;
     tex.minFilter = THREE.NearestFilter;
     return tex;
@@ -132,39 +137,46 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
     canvas.height = 340;
     const ctx = canvas.getContext("2d");
     if (ctx) {
-      ctx.fillStyle = "#031510";
+      ctx.fillStyle = chromeEra.carbon;
       ctx.fillRect(0, 0, 512, 340);
-      ctx.strokeStyle = "#059669";
+      ctx.strokeStyle = chromeEra.red;
       ctx.lineWidth = 6;
       ctx.strokeRect(6, 6, 500, 328);
 
-      ctx.fillStyle = "#34d399";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "bold 24px monospace";
       ctx.fillText("ACADEMIC FOUNDATION", 24, 48);
 
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = chromeEra.white;
       ctx.font = "bold 20px monospace";
       ctx.fillText("VIT-AP UNIVERSITY", 24, 90);
       ctx.fillText("M.TECH COMP. SCI. & ENGG", 24, 118);
 
-      ctx.fillStyle = "#94a3b8";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "16px monospace";
       ctx.fillText("Distributed systems, software", 24, 160);
       ctx.fillText("architecture & high-throughput", 24, 185);
       ctx.fillText("data processing focus.", 24, 210);
 
-      ctx.fillStyle = "#059669";
+      ctx.fillStyle = chromeEra.red;
       ctx.fillRect(24, 240, 464, 3);
 
-      ctx.fillStyle = "#34d399";
+      ctx.fillStyle = chromeEra.silver;
       ctx.font = "14px monospace";
-      ctx.fillText("VERIFIED CANONICAL DATA", 24, 280);
+      ctx.fillText("PROFILE / OWNER-SUPPLIED", 24, 280);
     }
     const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
     tex.magFilter = THREE.NearestFilter;
     tex.minFilter = THREE.NearestFilter;
     return tex;
   }, []);
+
+  useEffect(() => () => {
+    motorsportTimelineTex.dispose();
+    aiTimelineTex.dispose();
+    eduTimelineTex.dispose();
+  }, [motorsportTimelineTex, aiTimelineTex, eduTimelineTex]);
 
   // Register Interactive Elements
   useEffect(() => {
@@ -175,7 +187,7 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
       label: "ENGINEERING HQ",
       sublabel: "Personal identity anchor & career timeline",
       actionPrompt: "[E] ENTER ENGINEERING HQ",
-      position: [position[0], position[1] + 1.5, position[2] + 6.0],
+      position: [position[0] + 6.4, position[1] + 1.5, position[2] + 1],
       boundsRadius: 5.5,
       facilityId: "hq",
       onInteract: () => {
@@ -189,9 +201,9 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
       id: "hq_career_wall",
       type: "wall",
       label: "CAREER TIMELINE & ROLES",
-      sublabel: "Verified engineering roles & academic background",
+      sublabel: "Owner-supplied roles and academic background; inspect source details",
       actionPrompt: "[E] VIEW CAREER DETAILS",
-      position: [position[0], position[1] + 2.6, position[2] + 5.3],
+      position: [position[0] - 4.85, position[1] + 2.6, position[2] + 1],
       boundsRadius: 4.5,
       facilityId: "hq",
       onInteract: () => {
@@ -207,7 +219,7 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
       label: "COMMUNICATIONS TERMINAL",
       sublabel: "Connect with Asish Oliver M",
       actionPrompt: "[E] OPEN COMMUNICATIONS",
-      position: [position[0], position[1] + 1.2, position[2] + 7.6],
+      position: [position[0] + 3.3, position[1] + 1.7, position[2] + 1],
       boundsRadius: 3.5,
       facilityId: "hq",
       onInteract: () => {
@@ -241,22 +253,19 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
       }}
     >
       {/* 1. Monolith Foundation (14x12 blocks) */}
-      <mesh position={[0, 0.25, 0]} receiveShadow>
-        <boxGeometry args={[14, 0.5, 12]} />
-        <primitive object={stoneBrickMat} attach="material" />
+      <mesh position={[0, 0.28, 1]} receiveShadow>
+        <boxGeometry args={[14, 0.5, 14]} />
+        <primitive object={getVoxelMaterial("chrome_floor")} attach="material" />
       </mesh>
 
-      {/* 2. Lower Floor (13x11x4 high) */}
-      <mesh position={[0, 2.5, 0]} castShadow receiveShadow>
-        <boxGeometry args={[13, 4.0, 11]} />
-        <primitive object={stoneBrickMat} attach="material" />
-      </mesh>
-
-      {/* Grand Front Glass Portal facing the campus */}
-      <mesh position={[0, 2.5, 5.55]} castShadow>
-        <boxGeometry args={[9.0, 2.8, 0.2]} />
-        <primitive object={glassMat} attach="material" />
-      </mesh>
+      {/* Visible walls follow the canonical collision footprint, including its
+          open east entrance. A single solid box previously hid that doorway. */}
+      <FacilityWalls id="hq" height={3.9} />
+      <mesh position={[0, 4.5, 1]} castShadow><boxGeometry args={[12.8, .3, 12.8]} /><primitive object={oakPlankMat} attach="material" /></mesh>
+      <mesh position={[7, 4.25, 1]} castShadow><boxGeometry args={[3, .2, 6.5]} /><primitive object={getVoxelMaterial("chrome_polished")} attach="material" /></mesh>
+      <mesh position={[8.45, 4.14, 1]}><boxGeometry args={[.08, .08, 6.3]} /><primitive object={getVoxelMaterial("chrome_red")} attach="material" /></mesh>
+      {[-1.5, 3.5].map(z => <mesh key={z} position={[6.08, 2.35, z]}><boxGeometry args={[.14, 3.6, .14]} /><primitive object={getVoxelMaterial("chrome_red")} attach="material" /></mesh>)}
+      <mesh position={[2, 4.28, 1]}><boxGeometry args={[4.8, .09, 3.6]} /><primitive object={glowstoneMat} attach="material" /></mesh>
 
       {/* 3. Upper Tower Level (10x8x3 high) */}
       <mesh position={[0, 5.8, -1.0]} castShadow>
@@ -276,8 +285,8 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
         <primitive object={stoneBrickMat} attach="material" />
       </mesh>
 
-      {/* 5. ENGINEERING TIMELINE WALL (Mounted on interior rear wall, visible through glass) */}
-      <group position={[0, 2.6, 5.3]}>
+      {/* 5. Timeline faces the physical east entrance across the open foyer. */}
+      <group position={[-4.94, 2.6, 1]} rotation={[0, Math.PI / 2, 0]}>
         {/* Timeline Panel 1: Independent Motorsport / eSports Engineer */}
         <group position={[-2.8, 0, 0]}>
           <mesh>
@@ -302,15 +311,15 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
       </group>
 
       {/* Glowstone Lanterns */}
-      {[-5, 5].map((x) => (
-        <mesh key={x} position={[x, 4.2, 5.6]}>
-          <boxGeometry args={[0.7, 0.7, 0.7]} />
+      {[-1.5, 3.5].map((z) => (
+        <mesh key={z} position={[6.1, 4.0, z]}>
+          <boxGeometry args={[0.12, 0.12, 0.7]} />
           <primitive object={glowstoneMat} attach="material" />
         </mesh>
       ))}
 
       {/* 6. Physical Minecraft Sign: [ ENGINEERING HQ / ASISH OLIVER M ] */}
-      <group position={[0, 2.0, 6.2]}>
+      <group position={[6.2, 3.65, 1]} rotation={[0, Math.PI / 2, 0]}>
         <mesh castShadow>
           <boxGeometry args={[6.5, 1.1, 0.2]} />
           <primitive object={oakPlankMat} attach="material" />
@@ -319,18 +328,10 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
           <planeGeometry args={[6.3, 1.0]} />
           <primitive object={signMat} attach="material" />
         </mesh>
-        <mesh position={[-3.0, -0.8, 0]} castShadow>
-          <boxGeometry args={[0.15, 1.6, 0.15]} />
-          <primitive object={stoneBrickMat} attach="material" />
-        </mesh>
-        <mesh position={[3.0, -0.8, 0]} castShadow>
-          <boxGeometry args={[0.15, 1.6, 0.15]} />
-          <primitive object={stoneBrickMat} attach="material" />
-        </mesh>
       </group>
 
       {/* 7. Interactive Contact Terminal Pedestal */}
-      <group position={[0, 0, 7.6]}>
+      <group position={[3.3, 0.5, 1]} rotation={[0, Math.PI / 2, 0]}>
         <mesh position={[0, 0.5, 0]} castShadow>
           <boxGeometry args={[0.9, 1.0, 0.9]} />
           <primitive object={stoneBrickMat} attach="material" />
@@ -347,4 +348,3 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
     </group>
   );
 };
-

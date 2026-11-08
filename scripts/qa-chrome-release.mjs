@@ -1,0 +1,2 @@
+import { spawnSync } from 'node:child_process';
+for(const script of ['qa-chrome-captures.mjs','qa-cockpit.mjs','qa-stations.mjs','qa-controls-release.mjs','qa-visitors.mjs','qa-audio.mjs','qa-production.mjs']){console.log('\nVERIFY',script);const result=spawnSync(process.execPath,['scripts/'+script],{stdio:'inherit',env:{...process.env,CHROME_STAGE:'after'}});if(result.status!==0)process.exit(result.status??1);}

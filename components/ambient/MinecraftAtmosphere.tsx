@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 
 interface Particle {
@@ -18,9 +19,11 @@ interface Particle {
 }
 
 export const MinecraftAtmosphere: React.FC = () => {
+  const pathname=usePathname();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    if(pathname === "/world" || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -153,8 +156,9 @@ export const MinecraftAtmosphere: React.FC = () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       cancelAnimationFrame(animId);
     };
-  }, []);
+  }, [pathname]);
 
+  if(pathname === "/world")return null;
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
       {/* 1. Rich Volumetric Ambient Glow Highlights */}

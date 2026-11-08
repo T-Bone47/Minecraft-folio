@@ -40,6 +40,8 @@ const STATUS_TONE: Record<Project["status"], string> = {
 };
 
 const EVIDENCE_TONE: Record<EvidenceLevel, string> = {
+  "repository-reported": "text-amber-300 border-amber-700/60",
+  unverified: "text-zinc-400 border-zinc-700",
   verified: "text-emerald-300 border-emerald-700/60",
   measured: "text-emerald-300 border-emerald-700/60",
   tested: "text-sky-300 border-sky-700/60",
@@ -224,7 +226,7 @@ export const EngineeringIndex: React.FC = () => {
         </div>
         <p className="font-mono text-[10px] text-zinc-500 flex items-center gap-2 pt-1">
           <FlaskConical className="w-3 h-3 shrink-0" />
-          No metric on this site is invented. Where a number is not verified, it is not
+          Metrics identify their provenance. Repository-reported results have not been independently reproduced here. Where a number is not sourced, it is not
           shown.
         </p>
       </div>

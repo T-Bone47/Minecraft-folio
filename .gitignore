@@ -14,3 +14,7 @@ coverage/
 .DS_Store
 Thumbs.db
 *.tsbuildinfo
+.freebuff/
+dev_stdout.txt
+dev_stderr.txt
+public/world/spawn-mclaren-garage.jpg

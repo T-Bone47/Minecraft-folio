@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "V changes perspective without moving the player",
+    "Trusted click acquires pointer lock and mouse-look receives input",
+    "Map releases pointer lock, freezes movement and returns to spawn",
+    "Jump raises the player above grounded eye height",
+    "Vehicle accelerates, switches cockpit camera and resets",
+    "HUD vehicle exit transfers walking position beside the circuit",
+    "High, medium and low quality switches remain usable",
+    "Reload resumes an explorable world",
+    "Mobile world fits screen and touch hold moves player",
+    "Mobile touch accelerates and switches cockpit camera",
+    "Runtime WebGL context loss exposes fallback"
+  ],
+  "errors": [],
+  "passed": true
+}

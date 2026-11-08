@@ -1,0 +1,7 @@
+import Link from "next/link";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+export const dynamic = "force-static";
+export const metadata = { title: "Engineering field manual", description: "Methods, telemetry schema and limitations behind the playable engineering campus." };
+const documents = ["GAMEPLAY_ARCHITECTURE", "PLAYER_AND_CAMERA_SYSTEM", "VEHICLE_SIMULATION", "TELEMETRY_SCHEMA", "MISSION_FRAMEWORK", "ML_PLAYGROUND", "PIPELINE_SIMULATION", "PROJECT_EVIDENCE"];
+export default function EngineeringManual() { return <main id="main-content" className="max-w-4xl mx-auto p-6 text-zinc-200"><nav className="flex gap-5 mb-8"><Link href="/world">← Explore campus</Link><Link href="/projects">Project evidence</Link><Link href="/recruiter">Recruiter access</Link></nav><h1 className="text-3xl text-amber-300 mb-4">Engineering field manual</h1><p className="mb-8">Actual methods and implementation boundaries for the three playable experiences. Local demonstrations are distinct from repository-reported project results.</p><nav className="flex flex-wrap gap-3 mb-10">{documents.map(d => <a key={d} href={`#${d}`} className="underline text-cyan-300">{d.replaceAll("_", " ").toLowerCase()}</a>)}</nav>{documents.map(name => <section key={name} id={name} className="mb-12 border-t border-zinc-600 pt-5"><pre className="whitespace-pre-wrap break-words text-sm leading-7 font-mono">{readFileSync(join(process.cwd(), "docs", `${name}.md`), "utf8")}</pre></section>)}</main>; }

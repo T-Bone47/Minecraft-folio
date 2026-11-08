@@ -1,125 +1,105 @@
-# ASISH OLIVER M — 3D Engineering World Portfolio
+# ASISH: THE ENGINEERING FRONTIER
 
-> **An interactive, Minecraft-inspired 3D motorsport & software systems engineering facility.**
+![ASISH: The Engineering Frontier — Explore. Experiment. Engineer.](public/og-image.png)
 
-![Voxel Engineering World](https://img.shields.io/badge/Minecraft-Voxel_Architecture-brightgreen)
-![Three.js](https://img.shields.io/badge/Three.js-0.180-black)
-![Next.js](https://img.shields.io/badge/Next.js-15.2-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38bdf8)
+An explorable voxel engineering campus by **Asish Oliver M**, Integrated M.Tech Computer Science & Engineering student at VIT-AP. Visitors can participate in local software, AI/ML and motorsport demonstrations, then inspect their methods and source evidence.
 
----
+**Status:** local release candidate. No public live demo has been published from this checkout. Vercel is the selected host; initial deployment requires owner approval. See [production readiness](docs/PRODUCTION_READINESS.md).
 
-## 1. Overview & Vision
+## Playable engineering
 
-**ASISH OLIVER M — Engineering World** turns a conventional portfolio into an explorable, first-person 3D voxel campus. The visitor steps onto a 72×72 block island hosting a central motorsport circuit and 6 physical engineering facilities.
+- **The Drive:** inspect the original voxel single-seater, enter its 3D cockpit, drive through four ordered gates, then inspect simulated telemetry, sector/reference comparisons and a recorded top-down replay. JSON export is available. The educational model omits tyre, aero and transmission dynamics.
+- **The Experiment:** fit local models to seeded synthetic classification, regression and forecasting datasets. Inspect splits, held-out metrics and explicit baselines.
+- **The System:** diagnose seven event-pipeline faults, apply actual repair transformations and validate recovered output. Timing and throughput describe a local simulation.
 
-The core philosophy:
-1. **Unmistakable Minecraft Identity**: Stepped grass terrain, 16×16 NearestFilter pixel textures, oak signs, stone brick towers, cubic clouds, square sun and moon, and an authentic Minecraft-inspired HUD.
-2. **Motorsport & Software Engineering Rigor**: Real telemetry streams, numerical vehicle performance simulation, race strategy models, and offline AI/ML architectures.
-3. **Strict Content Truth**: 0 fabricated metrics, 0 fake telemetry logs. All synthetic demo sessions are explicitly labeled `ILLUSTRATIVE DEMO SESSION` / `ILLUSTRATIVE DEMO OUTPUT`. Zero academic score metadata.
+Recruiter, Developer, AI/ML Engineer, Motorsport Engineer and Explorer journeys share the same world. Routes are optional and never restrict resume, projects or contact access. `/visit` provides the shared field guide; `/recruiter`, `/projects` and `/engineering` work without WebGL.
 
----
+## Actual captures
 
-## 2. Campus Facilities & Systems
+| Cockpit and steering | Experiment and evaluation |
+| --- | --- |
+| ![Original Chrome Era voxel cockpit with steering-linked wheel and simulated display](docs/screenshots/chrome-after-cockpit.png) | ![Local ML experiment with held-out results](docs/screenshots/frontier-experiment.png) |
 
-| Facility | Code | Coordinates `[X, Y, Z]` | System / Canonical Project | Interactive Experience |
-|---|---|---|---|---|
-| **Telemetry Tower / Race Control** | `FAC-02 / CTL` | `[14, 0, -18]` | **Live F1 Intelligence** | Quad rotating satellite dishes, live canvas telemetry trace (`ILLUSTRATIVE ENGINEERING TRACE`), verified canonical evidence (`1,067,193 canonical events`, `0 malformed`, `~2,650/s`, `~0.10 ms p50`, `99 MB`). |
-| **Vehicle Simulation Lab** | `FAC-03 / SIM` | `[22, 0, 8]` | **F1 Lap-Time Simulator** | Spinning wind-tunnel intake turbine, live G-G friction circle point animation, step-by-step numerical solver modal (`ILLUSTRATIVE DEMO OUTPUT`). |
-| **Race Engineering Garage** | `FAC-01 / GAR` | `[-12, 0, -8]` | **RaceMind-AI** | Voxel single-seater F1 car, pit gantry, tyre warming racks, strategy board with stint degradation curves, and AI Race Engineer terminal (4 bounded query prompts). |
-| **Team Operations HQ** | `FAC-04 / OPS` | `[-12, 0, 14]` | **F1 Race Manager** | Rotating rooftop weather radar dome, war-room display matrices for F1 team management & strategy game simulation. |
-| **AI / Data Intelligence Lab** | `FAC-05 / ML` | `[0, 0, 24]` | **EA FC Intelligence** & **VyaparPulse** | Twin-wing AI facility: East Wing houses EA FC player representation vectors; West Wing houses VyaparPulse offline Vosk speech ledger & XGBoost 7-day demand pipeline. |
-| **Engineering HQ & Monolith** | `FAC-00 / HQ` | `[-26, 0, -22]` | **About, Experience, Contact** | Multi-story headquarters with 3-panel Career Timeline Wall (Independent Motorsport & IGNICT AI/ML Intern) and Direct Email Communications Terminal. |
+[Mobile cockpit](docs/screenshots/cockpit-touch.png) · [Pipeline mission](docs/screenshots/frontier-system.png) · [Lap analysis](docs/screenshots/frontier-drive-debrief.png)
 
----
+Captures are browser evidence, not a claim of real-world racing or production ML performance.
 
-## 3. Controls & Navigation
+## Controls
 
-### Desktop First-Person Controls
-- **`W / A / S / D` or `Arrow Keys`**: Move forward, backward, strafe left/right (with smooth acceleration & deceleration damping).
-- **`Mouse Look`**: Click world to engage pointer lock; move mouse to look around (clamped vertical pitch -80° to +80°).
-- **`Shift`**: Sprint (boosts speed from 7.5 to 11.5 blocks/sec).
-- **`Space`**: Jump (includes 1-block auto-stepping).
-- **`E`**: Contextual interaction with targeted station, facility, or vehicle.
-- **`1 – 8`**: Hotbar slots:
-  - `[1]` Telemetry Tower
-  - `[2]` Simulation Lab
-  - `[3]` RaceMind Garage
-  - `[4]` Team Operations HQ
-  - `[5]` Cartographer Map
-  - `[6]` Project Inventory Directory
-  - `[7]` AI / Data Lab
-  - `[8]` Engineering HQ
-- **`I`**: Open Project Directory Inventory.
-- **`M`**: Open 2D Cartographer Campus Map with instant teleportation.
-- **`/` or `K`**: Open Command Palette with categorized autocomplete (`/telemetry`, `/simulation`, `/day`, `/night`, etc.).
-- **`F3`**: Toggle real-time WebGL Telemetry & Diagnostics HUD (FPS, draw calls, triangles, geometries, textures, device tier).
-- **`AUTO / HIGH / MED / LOW`**: Manual render-quality override in the HUD. `AUTO` follows the detected device tier; an explicit choice is the only way to opt into more expensive settings.
-- **`ESC`**: Unlock pointer lock / close overlays.
+On foot: WASD/arrows move, Shift runs, Space jumps, V switches perspective, E interacts and M opens the map. Click the viewport for mouse look; Escape releases it. Use the wheel to adjust third-person distance. Touch controls provide movement, look, jump, run and interaction.
 
-### Mobile Touch Controls
-- Dedicated touch buttons in HUD top bar for `[I] PROJECTS`, `[M] MAP`, `[/] CMD`, and `AUDIO`.
-- Touch-friendly 48×48px hotbar slots at the bottom.
-- 2D Cartographer Radar with touch-selectable facility pins.
+Driving: W/S accelerate or brake/reverse, A/D steer, Space brakes, C switches camera (configurable to B; V also works), R resets and E exits. Cockpit FOV and seating are adjustable. Audio starts muted; mute and volume controls are available.
 
----
+## Architecture
 
-## 4. Technical Architecture
+Next.js 15.5.29 App Router · React 19 · TypeScript · React Three Fiber 9 · Three.js 0.180 · Zustand · Tailwind CSS.
 
-- **Next.js 15.2 (App Router)**: Hybrid static prerendering (SSG) with React 19.
-- **Single source of truth for world geometry** (`lib/terrainModel.ts`): the terrain generator and the first-person controller sample the *same* pure functions for ground height, circuit flattening, facility pads and collision volumes. Previously each kept a private copy of the hill function, so the player floated above and sank below the visible terrain.
-- **Exposure culling**: terrain fills each column down to bedrock, but ~88% of those stone blocks are fully enclosed by their neighbours and can never be seen. Only exposed blocks are emitted — 8,705 → 1,080 stone blocks (**-87.6%**), and 14,118 → 6,493 total blocks (**-54%**).
-- **Spatial chunking**: terrain is batched into 16×16 chunks, each with its own `InstancedMesh` and an explicit `computeBoundingSphere()`. Without the bounding sphere Three.js falls back to the shared unit-cube bounds and never culls a chunk. Measured in-engine: **~56k triangles drawn vs ~169k** before.
-- **Distance LOD**: footpaths are high-frequency detail that is imperceptible past the profile's LOD distance, so distant chunks drop them and trim their shadow casters.
-- **Render quality profiles** (`lib/renderQuality.ts`): the detected device tier now drives real renderer configuration (DPR, shadows, shadow-map resolution, antialiasing, LOD distances, fog range), and the HUD exposes a manual `AUTO / HIGH / MED / LOW` override so visitors on capable hardware are not stuck with a user-agent guess.
-- **GPU resource lifecycle** (`components/world/WorldResourceBoundary.tsx`): walks the scene graph and releases cached materials/textures on unmount. It deliberately does *not* call `forceContextLoss()` — that irreversibly invalidates the WebGL context, which breaks the StrictMode remount.
-- **Lighting rig**: a hemisphere light separates sky-facing from ground-facing normals. Under a single ambient term a block's top and side faces receive identical light and voxel terrain reads as flat cardboard. The shadow camera is fitted to the island rather than a fixed oversized box.
-- **Web Audio API**: Procedural sound synthesis engine with zero external audio assets (synthesized pink-noise wind, 38 Hz engine rumble, 120 Hz server hum, UI clicks, and inspect chimes).
-- **State Architecture**:
-  - `worldStore.ts`: Global exploration, inspection mode, active target, and a low-frequency player position feed for the HUD.
-  - `cameraStore.ts`: Dynamic camera choreography and coordinate transitions.
-  - `interactionRegistry.ts`: Decoupled interactive object and station modal registry.
-  - `settingsStore.ts`: Atmosphere time profile (`day`, `sunset`, `night`), render quality override, minimap, and live WebGL diagnostics (`gl.info`).
-- **Session Continuity**: Player position, yaw, pitch, and active facility are persisted to `sessionStorage` (`asish_world_player_state`) across `/world` and `/work/[slug]` routes.
+| Module | Responsibility |
+| --- | --- |
+| `app/` | Server-rendered professional routes and client-only world entry |
+| `components/world`, `components/camera` | Voxel scene, player/camera control and fallback |
+| `lib/frontier/` | Pure vehicle, ML, pipeline and mission logic |
+| `state/` | Separate player, camera, mission, visitor and published drive state |
+| `data/projects.ts`, `data/projectEvidence.ts` | Canonical project content and evidence adapter |
+| `components/frontier`, `components/visitor` | Accessible stations, journeys and exhibit depth |
+| `tests/`, `scripts/qa-*.mjs` | Behavioral tests and reproducible browser journeys |
 
----
+Physics advances at 60 fixed steps per simulated second; recorded telemetry and the in-world texture publish at 10 Hz. The cockpit reads the same simulation state. Evidence pages distinguish local measured behavior, repository-reported results and unverified owner narratives. [Architecture and implementation](docs/FINAL_REPOSITORY_AUDIT.md).
 
-## 5. Development & Build Commands
+## Local development
 
-```bash
-# Install dependencies
-npm install
+Use Node.js 24.x, as declared in package.json. This release candidate passes locked installation, TypeScript, lint, 51 tests and production build on Node 24.22.2. A hosted Vercel build remains a separate verification gate.
 
-# Start local development server
+```sh
+npm ci
 npm run dev
-
-# Run TypeScript typecheck (zero emit)
 npm run typecheck
-
-# Run production build
+npm run lint
+npm test
 npm run build
-
-# Start production server
-npm start
 ```
 
----
+Core gameplay has no required runtime environment variables. See [.env.example](.env.example). Deployment credentials stay in the Vercel credential store.
 
-## 6. Accessibility & WebGL Fallback
+For browser QA, start `npm run start -- --port 3005`, then run the relevant scripts in another terminal:
 
-In environments where WebGL is unavailable or disabled, the application automatically mounts **`WorldFallback.tsx`**:
-- Interactive SVG Cartographer Radar of the 72×72 island.
-- Complete facility dossiers with verified metrics and case study links.
-- Full semantic project directory, career timeline, and direct contact uplink.
-- Fully compatible with screen readers, keyboard tab navigation, and search engine crawlers.
+```sh
+npm run test:qa
+npm run test:visitors
+node scripts/qa-cockpit.mjs
+node scripts/qa-controls-release.mjs
+node scripts/qa-release-final.mjs
+node scripts/qa-production.mjs
+```
 
----
+Scripts currently use Windows Chrome at `C:/Program Files/Google/Chrome/Application/chrome.exe`. `qa-stations.mjs` accepts `QA_URL`. [Executed results and limits](docs/PRODUCTION_READINESS.md) · [Performance sample](docs/PERFORMANCE_REPORT.md) · [Security review](docs/SECURITY_REVIEW.md).
 
-## 7. Contact & Links
+## Hosting and release
 
-- **Engineer**: Asish Oliver M
-- **Roles**: Motorsport Software Engineer | AI / ML Engineer
-- **Email**: [dreamteamoliver@gmail.com](mailto:dreamteamoliver@gmail.com)
-- **GitHub**: [github.com/AsishOliver](https://github.com/AsishOliver)
-- **LinkedIn**: [linkedin.com/in/asish-oliver](https://www.linkedin.com/in/asish-oliver)
+Vercel is selected. No project has been linked or deployed from this checkout. Vercel classifies a new project's first deployment as production, even with a preview target; obtain explicit approval before that step. [Deployment and rollback runbook](docs/DEPLOYMENT_RUNBOOK.md). Feature freeze follows the five-audience verification; new ideas belong in the [post-launch backlog](docs/POST_LAUNCH_BACKLOG.md).
+
+## Licensing and asset provenance
+
+No repository LICENSE was supplied. This README does not grant a new license; the owner must select the intended code/asset license before advertising reuse rights. Third-party package licenses remain their own. Google Fonts are requested at runtime with monospace fallbacks. The original scene/car geometry is code-built; an unused legacy team-branded photo is excluded from Vercel uploads pending provenance review. Avatar and other existing asset provenance still needs owner confirmation. No official Formula 1 or team affiliation is claimed.
+
+## Professional links
+
+[GitHub](https://github.com/T-Bone47) · [Source repository](https://github.com/T-Bone47/Minecraft-folio) · [Configured LinkedIn](https://www.linkedin.com/in/asish-oliver-56b454324) · [Email](mailto:dreamteamoliver@gmail.com) · [Resume](public/Asish_Oliver_M_Resume.pdf)
+
+LinkedIn blocks the automated reachability check; owner confirmation is pending. Professional history and extended project narratives remain owner-supplied. [Launch copy and demo storyboard](docs/LINKEDIN_GITHUB_LAUNCH_KIT.md).
+
+## Chrome Era edition
+
+The campus now uses shared silver, graphite, carbon and racing-red materials, original ASISH signage, a modernised chrome-liveried car, bright technical garage and neutral pixel-metal facilities. [Before/after gallery and regression report](docs/CHROME_ERA_BROWSER_QA.md) · [Design tokens](docs/CHROME_ERA_DESIGN_SYSTEM.md) · [Asset provenance](docs/CHROME_ERA_ASSET_PROVENANCE.md). Historical styling is inspiration, with no official team or driver affiliation.
+
+## Race Engineer avatar
+
+The player, garage crew and HQ preview share an original articulated Chrome Era engineer: silver/red jacket, layered hair, headset, microphone, wrist device and utility radio. V switches perspective; mouse look orbits the idle third-person character. Walking/running animation follows resolved movement, with jump/fall, landing and station-reading poses. Hotbar tools remain equipped.
+
+`/avatar` provides full-body inspection with front/side/back buttons, drag orbit and zoom. The spawn and profile portrait is rendered from this same model. [Implementation, screenshots and QA](docs/AVATAR_UPGRADE.md).
+
+## Final release audit
+
+The complete source candidate is prepared on `codex/release-candidate-2026-11-08`. See [final release decision](docs/FINAL_RELEASE_DECISION.md), [audit and fixes](docs/FINAL_PORTFOLIO_AUDIT.md), [CI setup](docs/CI_VALIDATION.md) and [Vercel runbook](docs/VERCEL_DEPLOYMENT_RUNBOOK.md). Unconfigured or preview environments deliberately use noindex and omit canonical claims; set SITE_ORIGIN only after confirming the actual production hostname. Main/public deployment requires separate release approval.
+
+

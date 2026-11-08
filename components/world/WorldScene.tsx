@@ -1,5 +1,9 @@
 "use client";
 
+import { ChromeEnvironment } from "./ChromeEnvironment";
+import { WorldRenderBudget } from "./WorldRenderBudget";
+import { VisitorWorldDisplays } from "@/components/visitor/VisitorWorld";
+import { FieldGuides } from "@/components/frontier/FieldGuides";
 import React from "react";
 import { VoxelSky } from "./VoxelSky";
 import { VoxelTerrain } from "../terrain/VoxelTerrain";
@@ -11,8 +15,11 @@ import { SimulationLab } from "../simulation/SimulationLab";
 import { TeamOperationsHQ } from "../operations/TeamOperationsHQ";
 import { AIMLLab } from "../aiml/AIMLLab";
 import { EngineeringHQ } from "../hq/EngineeringHQ";
+import { CentralPlaza } from "./CentralPlaza";
 import { BlockHighlight } from "./BlockHighlight";
 import { ThreeDiagnosticsTracker } from "../diagnostics/ThreeDiagnosticsTracker";
+import { DriveableF1Car } from "../vehicles/DriveableF1Car";
+import { DroneTourCamera } from "../camera/DroneTourCamera";
 import { getFacilityById } from "@/data/facilities";
 import type { FacilityLocation } from "@/types/world";
 import type { QualityProfile } from "@/lib/renderQuality";
@@ -54,7 +61,8 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
   return (
     <>
       {/* 0. Live WebGL Renderer Diagnostics Engine */}
-      <ThreeDiagnosticsTracker />
+      <ThreeDiagnosticsTracker /><ChromeEnvironment/>
+      <WorldRenderBudget quality={quality} />
 
       {/* 1. Minecraft Daylight Atmosphere, Sun, Sky, Clouds & Warm Lighting */}
       <VoxelSky quality={quality} />
@@ -67,6 +75,16 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
 
       {/* 4. Voxel Motorsport Circuit, Curbs, Pit Wall, Timing Gantry, Grandstand */}
       <Circuit />
+      <FieldGuides /><VisitorWorldDisplays />
+
+      {/* 4b. Central Engineering Plaza Landmark & Directional Compass */}
+      <CentralPlaza position={[0, 0, 0]} />
+
+      {/* 4c. Driveable Voxel F1 Car (Track Test Drive Mode) */}
+      <DriveableF1Car />
+
+      {/* 4d. 45-Second Recruiter Drone Tour Spline Rig */}
+      <DroneTourCamera />
 
       {/* 5–10. Facilities, positioned from canonical data.
               garage · telemetry · simulation · operations · aiml · hq */}
@@ -76,7 +94,7 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
 
       {/* Signature voxel engineer avatar — present at spawn and near the garage. */}
       <VoxelEngineerAvatar
-        position={[-13, 0, -5]}
+        position={[-13, 0.5, -5]}
         rotation={[0, -0.35, 0]}
         scale={1}
         idlePose
@@ -84,7 +102,7 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
 
       {/* Avatar preview for Engineering HQ identity panel. */}
       <VoxelEngineerAvatar
-        position={[-26.5, 0, -21.5]}
+        position={[-27.5, 0.53, -17.5]}
         rotation={[0, 0.15, 0]}
         scale={0.9}
       />

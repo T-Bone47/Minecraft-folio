@@ -9,6 +9,8 @@ export type WorldMode =
 
 export type DeviceTier = "high" | "medium" | "low" | "mobile";
 
+export type PerspectiveMode = "first-person" | "third-person";
+
 export type CameraMode =
   | "boot"
   | "cinematic"
@@ -26,6 +28,10 @@ export interface FacilityLocation {
   discipline: string;
   projectSlug?: string;
   coordinates: [number, number, number]; // [x, y, z] — authoritative anchor
+  /** Authoritative player arrival position outside the facility entrance, clear of all collision. */
+  approachPosition: [number, number, number];
+  /** Direction vector or target coordinate the player camera/avatar looks toward upon arrival. */
+  approachLookAt: [number, number, number];
   cameraPosition: [number, number, number];
   cameraTarget: [number, number, number];
   colorAccent: string;

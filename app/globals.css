@@ -81,6 +81,47 @@ body {
   background-attachment: scroll, scroll, scroll, scroll, fixed;
 }
 
+/* Authentic Minecraft Dirt Texture Pattern (Classic Title / Pause Menu Wallpaper) */
+.mc-dirt-bg {
+  background-color: #3e281c;
+  background-image:
+    /* Dark vignette for depth */
+    radial-gradient(circle at 50% 50%, rgba(20, 12, 6, 0.45) 0%, rgba(10, 6, 3, 0.88) 100%),
+    /* Authentic 16x16 pixel Minecraft dirt tile pattern */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23614126'/%3E%3Crect x='1' y='1' width='2' height='2' fill='%2348301c'/%3E%3Crect x='4' y='0' width='1' height='2' fill='%23543821'/%3E%3Crect x='6' y='2' width='2' height='1' fill='%233a2716'/%3E%3Crect x='10' y='1' width='2' height='2' fill='%2348301c'/%3E%3Crect x='14' y='0' width='2' height='2' fill='%23543821'/%3E%3Crect x='0' y='5' width='2' height='2' fill='%233a2716'/%3E%3Crect x='3' y='4' width='2' height='2' fill='%2348301c'/%3E%3Crect x='8' y='5' width='3' height='2' fill='%23302012'/%3E%3Crect x='13' y='4' width='2' height='2' fill='%2348301c'/%3E%3Crect x='2' y='8' width='3' height='2' fill='%23543821'/%3E%3Crect x='7' y='9' width='2' height='2' fill='%233a2716'/%3E%3Crect x='11' y='8' width='2' height='2' fill='%2348301c'/%3E%3Crect x='0' y='12' width='2' height='2' fill='%2348301c'/%3E%3Crect x='5' y='13' width='2' height='2' fill='%23302012'/%3E%3Crect x='9' y='12' width='3' height='2' fill='%23543821'/%3E%3Crect x='14' y='11' width='2' height='2' fill='%233a2716'/%3E%3Crect x='3' y='15' width='2' height='1' fill='%2348301c'/%3E%3Crect x='12' y='14' width='2' height='2' fill='%23302012'/%3E%3Crect x='3' y='1' width='1' height='1' fill='%23734e2e'/%3E%3Crect x='12' y='2' width='1' height='1' fill='%23734e2e'/%3E%3Crect x='7' y='4' width='1' height='1' fill='%23734e2e'/%3E%3Crect x='1' y='9' width='1' height='1' fill='%23734e2e'/%3E%3Crect x='14' y='7' width='1' height='1' fill='%23734e2e'/%3E%3Crect x='6' y='11' width='1' height='1' fill='%23734e2e'/%3E%3Crect x='10' y='15' width='1' height='1' fill='%23734e2e'/%3E%3C/svg%3E");
+  background-size: auto, 32px 32px;
+  image-rendering: pixelated;
+}
+
+/* Authentic Minecraft Stone Brick Texture Pattern */
+.mc-stonebrick-bg {
+  background-color: #4a4a4d;
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(30, 30, 32, 0.4) 0%, rgba(15, 15, 18, 0.85) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%235a5a5e'/%3E%3Crect x='0' y='0' width='8' height='8' fill='%23636367'/%3E%3Crect x='8' y='8' width='8' height='8' fill='%23636367'/%3E%3Cline x1='0' y1='8' x2='16' y2='8' stroke='%23333336' stroke-width='1'/%3E%3Cline x1='8' y1='0' x2='8' y2='8' stroke='%23333336' stroke-width='1'/%3E%3Cline x1='0' y1='16' x2='16' y2='16' stroke='%23333336' stroke-width='1'/%3E%3Cline x1='0' y1='8' x2='0' y2='16' stroke='%23333336' stroke-width='1'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%2375757a'/%3E%3Crect x='10' y='10' width='1' height='1' fill='%2375757a'/%3E%3C/svg%3E");
+  background-size: auto, 32px 32px;
+  image-rendering: pixelated;
+}
+
+/* Minecraft Pulsing Yellow Splash Text */
+@keyframes mcSplashPulse {
+  0%, 100% {
+    transform: scale(1) rotate(-18deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(-18deg);
+  }
+}
+
+.mc-splash-text {
+  font-family: "Press Start 2P", monospace;
+  color: #ffff00;
+  text-shadow: 2px 2px 0px #3f3f00;
+  animation: mcSplashPulse 1.2s ease-in-out infinite;
+  display: inline-block;
+  transform-origin: center center;
+}
+
 /* Authentic Minecraft Crosshair */
 .mc-crosshair {
   position: fixed;
@@ -431,3 +472,21 @@ body {
 
 
 
+
+/* Engineering field stations: physical exhibit companions, not desktop windows. */
+.frontier-backdrop{position:fixed;inset:0;background:#071011db;z-index:80;display:grid;place-items:center;padding:20px}
+.frontier-station{width:min(860px,100%);max-height:92dvh;overflow:auto;background:#152022;color:#e7eee7;border:3px solid #a7b6a3;box-shadow:8px 8px 0 #050a0b;padding:24px;font:15px/1.65 var(--font-geist-mono),monospace}
+.frontier-station header{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #52605b;padding-bottom:16px;margin-bottom:20px}.frontier-station small,.frontier-kicker{font-size:11px;letter-spacing:1px;color:#b1c4b9}.frontier-station h2{font-size:28px;color:#f1c36d}.frontier-station h3{font-size:32px}.frontier-flow{display:grid;gap:18px}.frontier-station button,.frontier-station select,.frontier-actions a,.frontier-drive-progress button,.frontier-touch button{background:#263c3c;border:1px solid #8fa394;padding:8px 12px;color:#f4ecd6;cursor:pointer}.frontier-station button:hover,.frontier-actions a:hover{background:#3d5650}.frontier-station select{max-width:100%}.frontier-station table{width:100%;text-align:left;font-size:13px;border-collapse:collapse}.frontier-station th,.frontier-station td{border-bottom:1px solid #3c5149;padding:8px}.frontier-station caption{text-align:left;color:#b8ccbd}.frontier-actions{display:flex;flex-wrap:wrap;gap:10px}.frontier-station label{display:grid;gap:5px}.frontier-station pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#091213;padding:16px;font-size:12px}.frontier-station svg{width:100%;background:#0d191b}.frontier-station figcaption{font-size:12px;color:#adc2bd}.frontier-drive-progress{pointer-events:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;background:#102421ed;border:2px solid #9da981;color:#eef4df;padding:8px;width:min(95vw,550px);font:12px/1.5 monospace}.frontier-drive-progress small{width:100%;text-align:center;color:#b4c8bc}.frontier-touch{position:fixed;bottom:125px;left:12px;right:12px;z-index:45;display:flex;justify-content:space-between;gap:8px;pointer-events:none}.frontier-touch button{touch-action:none;pointer-events:auto;min-height:44px}.frontier-touch>div{display:flex;flex-wrap:wrap;max-width:180px;gap:4px}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #f4c76c;outline-offset:3px}@media(max-width:600px){.frontier-station{padding:16px;font-size:13px}.frontier-station h2{font-size:22px}.frontier-backdrop{padding:8px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.frontier-pipeline{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0}.frontier-pipeline button{font-size:11px}.frontier-pipeline [aria-pressed=true]{border-color:#f6c66c;background:#4f4b2c}.frontier-station button:disabled{opacity:.45;cursor:not-allowed}.frontier-station input{background:#0e1b1b;border:1px solid #8fa394;color:#fff;padding:8px;max-width:150px}
+
+.frontier-nearby{position:fixed;left:18px;bottom:130px;z-index:35;display:grid;gap:7px;max-width:240px;background:#17241deF;border-left:4px solid #eabc5e;padding:14px;color:#dfebdf;font:12px/1.5 monospace}.frontier-nearby strong{font-size:20px;color:#f0c56e}.frontier-nearby button{border:1px solid #9eaf99;background:#304338;padding:8px;cursor:pointer}.frontier-nearby small{font-size:10px;color:#a9c0ad}@media(max-width:700px){.frontier-nearby{left:auto;right:8px;bottom:200px;max-width:175px;padding:8px}.frontier-nearby span{display:none}.frontier-nearby strong{font-size:15px}}
+
+.frontier-touch{display:grid;grid-template-columns:1fr auto;align-items:end;bottom:185px}.frontier-touch>div{grid-row:span 3}.frontier-station table{display:block;overflow-x:auto}.frontier-station header{position:sticky;top:-24px;background:#152022;z-index:2;padding-top:12px}.frontier-station input:disabled{opacity:.5}
+
+@media(max-width:600px){.frontier-hotbar{width:100%;max-width:380px;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px}.frontier-hotbar .mc-slot{width:100%;height:42px;min-width:0}.frontier-hotbar .mc-slot-active{transform:translateY(-2px)}}
+.visitor-center {color:#e8edf0;line-height:1.65}.visitor-center nav,.visitor-content nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.visitor-center button,.visitor-content button,.visitor-hud button{padding:10px 14px;border:1px solid #6b8083;background:#243638;color:#fff;margin:3px;min-height:44px}.visitor-center button[aria-pressed=true],.visitor-content button[aria-pressed=true]{border-color:#f9cf59;background:#514522}.visitor-center button:disabled,.visitor-hud button:disabled{opacity:.4}.visitor-center a,.visitor-content a{color:#a6e8e3;text-decoration:underline}.visitor-content h2{font-size:1.5rem;margin:20px 0 12px}.visitor-content h3{font-size:1.15rem;color:#f9cf59;margin-top:22px}.visitor-content p{margin:12px 0}.visitor-content article{border-top:1px solid #536362;padding:12px 0}.visitor-center select{background:#172528;color:white;max-width:100%;padding:12px}.visitor-note{border-left:3px solid #f9cf59;padding:12px}.visitor-hud{position:absolute;left:16px;top:125px;z-index:25;display:flex;flex-wrap:wrap;align-items:center;max-width:min(520px,calc(100vw - 32px));background:#152122ee;font:12px monospace;padding:6px;color:white}.visitor-hud span{padding:5px}.visitor-center :focus-visible,.visitor-hud :focus-visible{outline:3px solid #f9cf59;outline-offset:3px}@media(max-width:640px){.visitor-hud{top:130px;max-height:130px;overflow:auto;font-size:10px}.visitor-hud button{padding:6px;min-height:40px}}
+.cockpit-hud{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:50;max-width:96vw;width:480px;background:#081316ed;border:2px solid #4f737b;padding:10px;color:#eefafa;font:12px monospace;text-align:center}.cockpit-hud button,.cockpit-hud select{background:#22464b;padding:9px;margin:3px;min-height:40px}.cockpit-hud label{display:inline-flex;align-items:center;margin:5px}.cockpit-hud .frontier-drive-progress{padding:4px}.cockpit-hud summary{cursor:pointer}@media(max-width:640px){.cockpit-hud{font-size:10px;bottom:6px}.cockpit-hud .frontier-drive-progress span:nth-of-type(2){display:none}}
+.cockpit-hud{top:12px;bottom:auto;left:12px;transform:none;width:440px}.cockpit-hud .frontier-drive-progress{width:100%;box-sizing:border-box}.frontier-touch.driving-touch{bottom:25px}@media(max-width:640px){.cockpit-hud{left:8px;width:calc(100vw - 16px);max-width:none}.cockpit-hud details[open]{max-height:120px;overflow:auto}}
+.frontier-audio{position:relative;color:#e7f8f8;background:#173136;font:11px monospace;padding:6px}.frontier-audio summary{cursor:pointer;min-height:28px;display:flex;align-items:center}.frontier-audio[open]{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.frontier-audio button{border:1px solid #799f9d;padding:8px;min-height:40px}.frontier-audio label{display:flex;align-items:center;gap:6px}.frontier-audio input{width:90px;min-height:40px}.cockpit-hud .frontier-audio{display:inline-block;vertical-align:middle}
+.frontier-audio{display:inline-block;flex-shrink:0}.frontier-audio[open]{display:inline-block}.frontier-audio-panel{position:fixed;z-index:150;width:min(300px,calc(100vw - 24px));padding:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#173136;border:1px solid #799f9d;box-shadow:0 8px 28px #0008}.frontier-world-audio{position:fixed;right:12px;bottom:112px;z-index:55}.frontier-audio-panel input{width:130px}

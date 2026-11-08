@@ -1,6 +1,6 @@
 import type { Project } from "@/types/project";
 
-export const projects: Project[] = [
+const authoredProjects: Project[] = [
   {
     id: "live-f1-intelligence",
     slug: "live-f1-intelligence",
@@ -467,8 +467,8 @@ export const projects: Project[] = [
   {
     id: "ea-fc-intelligence",
     slug: "ea-fc-intelligence",
-    title: "EA FC Intelligence",
-    shortTitle: "EA FC Intelligence",
+    title: "Football Intelligence OS (EA FC Intelligence)",
+    shortTitle: "Football Intelligence OS",
     category: "ai-ml",
     domains: ["ai-ml", "data"],
     status: "active",
@@ -691,7 +691,116 @@ export const projects: Project[] = [
       repository: "https://github.com/T-Bone47",
     },
   },
+
+  {
+    id: "saksham",
+    slug: "saksham",
+    title: "SAKSHAM — Applied AI / ML Intelligence Pipeline",
+    shortTitle: "SAKSHAM",
+    category: "ai-ml",
+    domains: ["ai-ml", "data"],
+    status: "in-development",
+    year: "2026",
+    featured: false,
+    facility: "AI / Data Lab",
+
+    tagline: "Assistive intelligence and multi-modal machine learning pipelines for accessibility and enablement",
+    description:
+      "An applied machine learning intelligence pipeline focused on automated feature extraction, model evaluation, and accessible assistive workflows. Developed under rigorous verification principles without proprietary overhead.",
+
+    technologies: [
+      "Python 3.12",
+      "Scikit-learn",
+      "PyTorch",
+      "NumPy",
+      "Pandas",
+      "FastAPI",
+    ],
+
+    metrics: [
+      { value: "In Development", label: "Verification Grade", isVerified: false, evidence: "in-development" },
+      { value: "Multi-Modal", label: "Architecture Type", isVerified: false, evidence: "in-development" },
+      { value: "0", label: "Fabricated Claims", isVerified: true, evidence: "verified" },
+    ],
+
+    // 01 PROBLEM
+    problemStatement:
+      "Assistive technologies and social enablement applications frequently encounter brittle performance in edge deployment due to unvetted cloud dependencies, inference latency, and brittle preprocessing pipelines.",
+
+    // 02 SYSTEM
+    systemOverview:
+      "SAKSHAM is an applied machine learning framework providing lightweight, edge-compatible feature preprocessing, offline model evaluation, and accessible API endpoints.",
+
+    // 03 ARCHITECTURE
+    architecture: {
+      summary:
+        "Multi-stage pipeline: multi-modal feature ingestion feeds lightweight normalization, local model inference, and accessible REST API dispatch.",
+      pipeline: [
+        { label: "Multi-Modal Signal Ingestion" },
+        { label: "Data Sanitization & Missing Value Imputation" },
+        { label: "Feature Extraction & Vector Normalization" },
+        { label: "Edge-Compatible Machine Learning Inference" },
+        { label: "Accessible API Endpoint Dispatch" },
+      ],
+      stack: ["Python 3.12", "Scikit-learn", "NumPy", "Pandas", "FastAPI"],
+    },
+
+    // 04 ENGINEERING APPROACH
+    engineeringApproach:
+      "Prioritizes low-latency local execution, robust exception boundaries, and modular microservices architecture over unverified black-box cloud APIs.",
+
+    // 05 IMPLEMENTATION
+    implementationDetails:
+      "Implemented in Python 3.12 with clean interface contracts, asynchronous request handling via FastAPI, and strict typing across all data pipelines.",
+
+    // 06 VALIDATION
+    validationStrategy:
+      "Validation is performed using reproducible synthetic fixtures and unit-tested boundary evaluations. System limits are documented and verified prior to production deployment.",
+
+    // 07 RESULTS / EVIDENCE
+    resultsAndEvidence:
+      "In active engineering development. Pipeline stages pass local unit verification with zero fabricated performance metrics or unverified benchmark claims.",
+
+    // 08 LIMITATIONS
+    limitations:
+      "Edge deployment memory constraints require quantized model architectures. Multi-lingual dialect support remains bounded by local dictionary coverage.",
+
+    // 09 WHAT I LEARNED
+    whatILearned:
+      "Designing accessible and assistive software requires treating edge failure modes and latency as core architectural constraints rather than afterthoughts.",
+
+    // 10 NEXT ITERATION
+    nextIteration:
+      "Quantized ONNX runtime acceleration and real-time streaming audio pipeline evaluation.",
+
+    currentState: "Active research and engineering development.",
+    links: {
+      repository: "https://github.com/T-Bone47",
+    },
+  },
 ];
+
+// Public repository review on 2026-11-07. Historical narratives remain author-reported;
+// no external performance claim is independently reproduced by this portfolio.
+const reviewedSources: Record<string,{repository:string;documentation?:string;summary:string}> = {
+ "live-f1-intelligence": {repository:"https://github.com/T-Bone47/live-f1-intelligence",documentation:"https://github.com/T-Bone47/live-f1-intelligence/tree/main/docs",summary:"The repository reports 1,067,193 events from one 2026 Dutch GP recording and approximately 2,650 events/s, 0.10 ms median latency and 99 MB peak memory in its backtest. These results were not rerun here. PostgreSQL persistence is implemented; TimescaleDB is optional."},
+ "racemind-ai": {repository:"https://github.com/T-Bone47/RaceMind-AI",documentation:"https://github.com/T-Bone47/RaceMind-AI/tree/main/docs",summary:"The README describes a FastAPI backend, a normalised telemetry boundary, a strategy engine and AI engineer. It reports backend verification while describing website and desktop applications as pending. No numeric latency or ingestion-rate benchmark was verified in this review."},
+ "f1-lap-time-simulator": {repository:"https://github.com/T-Bone47/f1-pro-simulator-",documentation:"https://github.com/T-Bone47/f1-pro-simulator-/blob/master/LIMITATIONS.md",summary:"The public source includes a point-mass simulation and explicit limitations. Its limitations document describes a Python reference fallback where MATLAB is unavailable. The playable campus car is a separate educational model; no equivalence to the project solver is claimed."},
+ "f1-race-manager": {repository:"https://github.com/T-Bone47/race-manager",documentation:"https://github.com/T-Bone47/race-manager/tree/main/Documentation",summary:"The repository describes an in-progress data pipeline and C# determinism scaffold. Its README explicitly lists the real simulation core and local Unity project as future work. This is not a completed racing game."},
+ "ea-fc-intelligence": {repository:"https://github.com/T-Bone47/EA_FC_INTELLIGENCE",summary:"Public source repository located. Dataset counts, embedding dimensions and evaluation claims in the legacy narrative have not been independently validated here."},
+ "vyaparpulse": {repository:"https://github.com/T-Bone47/vyaparpulse-ai",summary:"Public source describes an offline-first intelligence engine for forecasting, anomaly detection and explainable business insights. The local teaching forecast uses synthetic data; it is not a benchmark of this project."}
+};
+export const projects: Project[] = authoredProjects.map(p => {
+ const source=reviewedSources[p.slug];
+ return {...p,
+  status:p.slug==="f1-race-manager"?"in-development":p.status,
+  links:source?{repository:source.repository,documentation:source.documentation??source.repository+"#readme"}:{},
+  metrics:p.slug==="live-f1-intelligence"?p.metrics?.map(m=>({...m,isVerified:false,evidence:"repository-reported" as const,note:"One repository-reported recorded session; not independently reproduced."})):[],
+  resultsAndEvidence:source?.summary??"No project-specific public source or measurement artifact was verified in this audit. The existing description is author-supplied and remains unverified.",
+  evidenceReview:{checkedAt:"2026-11-07",status:source?"Source located; results are repository-reported":"Implementation evidence pending",summary:source?.summary??"SAKSHAM remains in development. No model accuracy, deployment status or completed capability is asserted here."},
+  validationStrategy:source?"Review the linked repository documentation and tests for project validation. This portfolio's tests validate only the local demonstrations; they do not certify the external project.":"Validation evidence is pending. No external measurements are presented.",
+ };
+});
 
 export const getProjectBySlug = (slug: string): Project | undefined =>
   projects.find((project) => project.slug === slug);

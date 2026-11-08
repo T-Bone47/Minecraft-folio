@@ -1,4 +1,7 @@
 "use client";
+import { chromeEra } from "@/data/chromeEra";
+import { FacilityWalls } from "@/components/theme/FacilityWalls";
+
 
 import React, { useRef, useMemo, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -71,8 +74,8 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
       id: "eafc_ball",
       type: "station",
       label: "EA FC Match Ball",
-      sublabel: "Interactive Shot Physics & Trajectory Analytics",
-      actionPrompt: "[E] KICK FOOTBALL // SHOT ANALYTICS",
+      sublabel: "Illustrative shot animation; not fitted model output",
+      actionPrompt: "[E] PLAY ILLUSTRATIVE SHOT",
       position: [position[0], position[1] + 0.3, position[2] - 6],
       boundsRadius: 3.5,
       projectSlug: "ea-fc-intelligence",
@@ -133,17 +136,69 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
       },
     });
 
+    // 5. SAKSHAM Applied AI / ML Terminal (Central Atrium)
+    registerObject({
+      id: "saksham_terminal",
+      type: "terminal",
+      label: "SAKSHAM Applied AI / ML Station",
+      sublabel: "Assistive Intelligence & Multi-Modal Pipeline Framework",
+      actionPrompt: "[E] INSPECT SAKSHAM PIPELINE",
+      position: [position[0], position[1] + 1.2, position[2] + 4.0],
+      boundsRadius: 5.0,
+      projectSlug: "saksham",
+      facilityId: "aiml",
+      onInteract: () => {
+        worldSound.playInspectChime();
+        inspectProject("saksham");
+      },
+    });
+
+    // 6. IGNICT AI/ML Applied Research & Opportunity Matcher
+    registerObject({
+      id: "ignict_bench",
+      type: "station",
+      label: "IGNICT Vector Opportunity Matcher",
+      sublabel: "Candidate-Opportunity Cosine Similarity & Ranking Pipeline",
+      actionPrompt: "[E] OPEN IGNICT OPPORTUNITY MATCHER",
+      position: [position[0] + 7.6, position[1] + 0.7, position[2] - 6],
+      boundsRadius: 4.5,
+      facilityId: "aiml",
+      onInteract: () => {
+        worldSound.playInspectChime();
+        openStationModal("ignict_matcher");
+      },
+    });
+
+    // 7. Machine Learning Experimentation Bench
+    registerObject({
+      id: "ml_playground_station",
+      type: "terminal",
+      label: "ML Experimentation Bench",
+      sublabel: "Dataset Evaluation, Confusion Matrix & Feature Weights",
+      actionPrompt: "[E] LAUNCH ML EXPERIMENT BENCH",
+      position: [position[0], position[1] + 1.2, position[2] + 1.2],
+      boundsRadius: 5.0,
+      facilityId: "aiml",
+      onInteract: () => {
+        worldSound.playInspectChime();
+        openStationModal("ml_playground");
+      },
+    });
+
     return () => {
       unregisterObject("eafc_ball");
       unregisterObject("eafc_tactical_board");
       unregisterObject("eafc_terminal");
       unregisterObject("vyaparpulse_terminal");
+      unregisterObject("saksham_terminal");
+      unregisterObject("ignict_bench");
+      unregisterObject("ml_playground_station");
     };
   }, [position, registerObject, unregisterObject, inspectProject, openStationModal]);
 
   // Materials
-  const stoneBrickMat = useMemo(() => getVoxelMaterial("stone_bricks"), []);
-  const oakPlankMat = useMemo(() => getVoxelMaterial("oak_planks"), []);
+  const stoneBrickMat = useMemo(() => getVoxelMaterial("chrome_brushed"), []);
+  const oakPlankMat = useMemo(() => getVoxelMaterial("chrome_graphite"), []);
   const pitchLightMat = useMemo(() => getVoxelMaterial("pitch_grass_light"), []);
   const pitchDarkMat = useMemo(() => getVoxelMaterial("pitch_grass_dark"), []);
   const pitchLineMat = useMemo(() => getVoxelMaterial("pitch_line"), []);
@@ -167,8 +222,8 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
   );
   const floodlightMat = useMemo(
     () =>
-      getVoxelMaterial("glowstone", {
-        emissive: new THREE.Color("#f8fafc"),
+      getVoxelMaterial("chrome_light", {
+        emissive: new THREE.Color(chromeEra.white),
         emissiveIntensity: 2.5,
       }),
     []
@@ -278,7 +333,7 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
         {/* Halfway Line & Center Circle (at z = -4.5 relative to pitch) */}
         <mesh position={[0, 0.06, -4.8]}>
           <ringGeometry args={[1.5, 1.62, 32]} />
-          <meshBasicMaterial color="#f8fafc" side={THREE.DoubleSide} />
+          <meshBasicMaterial color={chromeEra.white} side={THREE.DoubleSide} />
         </mesh>
 
         {/* Penalty Spot */}
@@ -297,7 +352,7 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
           <group key={idx} position={[cx, 0, cz]}>
             <mesh position={[0, 0.8, 0]}>
               <cylinderGeometry args={[0.04, 0.04, 1.6, 8]} />
-              <meshStandardMaterial color="#f8fafc" />
+              <meshStandardMaterial color={chromeEra.white} />
             </mesh>
             <mesh position={[0.2, 1.4, 0]}>
               <boxGeometry args={[0.4, 0.3, 0.02]} />
@@ -320,17 +375,17 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
         {/* Left Upright Post */}
         <mesh position={[-2.2, 1.25, 0]} castShadow>
           <cylinderGeometry args={[0.09, 0.09, 2.5, 12]} />
-          <meshStandardMaterial color="#f8fafc" roughness={0.3} metalness={0.8} />
+          <meshStandardMaterial color={chromeEra.white} roughness={0.3} metalness={0.8} />
         </mesh>
         {/* Right Upright Post */}
         <mesh position={[2.2, 1.25, 0]} castShadow>
           <cylinderGeometry args={[0.09, 0.09, 2.5, 12]} />
-          <meshStandardMaterial color="#f8fafc" roughness={0.3} metalness={0.8} />
+          <meshStandardMaterial color={chromeEra.white} roughness={0.3} metalness={0.8} />
         </mesh>
         {/* Top Crossbar */}
         <mesh position={[0, 2.45, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
           <cylinderGeometry args={[0.09, 0.09, 4.49, 12]} />
-          <meshStandardMaterial color="#f8fafc" roughness={0.3} metalness={0.8} />
+          <meshStandardMaterial color={chromeEra.white} roughness={0.3} metalness={0.8} />
         </mesh>
 
         {/* Back Support Posts */}
@@ -349,24 +404,15 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
           <primitive object={netMat} attach="material" />
         </mesh>
 
-        {/* Live In-World Shot Analytics Display above crossbar */}
+        {/* Clearly labeled animation prop; fitted results live in The Experiment. */}
         <group position={[0, 3.1, 0]}>
           <mesh>
             <boxGeometry args={[4.6, 0.65, 0.15]} />
             <meshStandardMaterial color="#09090b" roughness={0.2} metalness={0.8} />
           </mesh>
-          <mesh position={[0, 0, 0.09]}>
-            <planeGeometry args={[4.4, 0.55]} />
-            <meshBasicMaterial color="#022c22" />
-          </mesh>
-          {/* Glowing HUD Shot Result */}
-          <mesh position={[0, 0, 0.1]}>
+          <mesh position={[0, 0, -0.09]} rotation={[0, Math.PI, 0]}>
             <planeGeometry args={[4.2, 0.45]} />
-            <meshStandardMaterial
-              color={kickState.kicking ? "#10b981" : "#38bdf8"}
-              emissive={kickState.kicking ? "#10b981" : "#38bdf8"}
-              emissiveIntensity={1.4}
-            />
+            <primitive object={getVoxelSignMaterial(kickState.kicking ? "SHOT ANIMATION PLAYING" : "ILLUSTRATIVE SHOT ANIMATION", "FITTED RESULTS: OPEN THE EXPERIMENT")} attach="material" />
           </mesh>
         </group>
       </group>
@@ -445,15 +491,15 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
       {/* ======================================================== */}
       {/* 6. GIANT STADIUM JUMBOTRON (EA FC 91 OVR GOLD CARD)      */}
       {/* ======================================================== */}
-      <group position={[0, 7.8, 1.5]}>
+      <group position={[-8.7, 4.2, 3]}>
         {/* Steel Gantry Frame */}
         <mesh castShadow>
-          <boxGeometry args={[5.6, 7.8, 0.6]} />
+          <boxGeometry args={[3.2, 4.6, 0.6]} />
           <meshStandardMaterial color="#1e293b" metalness={0.9} roughness={0.2} />
         </mesh>
         {/* The Authentic EA FC Ultimate Team Gold Card Screen (facing North toward pitch) */}
-        <mesh position={[0, 0, -0.32]}>
-          <planeGeometry args={[5.2, 7.4]} />
+        <mesh position={[0, 0, -0.32]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[2.8, 4.2]} />
           <primitive object={eafcCardMat} attach="material" />
         </mesh>
         {/* Top Stadium Beacon */}
@@ -467,78 +513,80 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
       {/* 7. MAIN AI / DATA LAB FACILITY ARCHITECTURE              */}
       {/* ======================================================== */}
       {/* Base Foundation (16x10 blocks) */}
-      <mesh position={[0, 0.25, 4.0]} receiveShadow>
-        <boxGeometry args={[16, 0.5, 8]} />
-        <primitive object={stoneBrickMat} attach="material" />
+      <mesh position={[0, 0.28, 0]} receiveShadow>
+        <boxGeometry args={[16, 0.5, 10]} />
+        <primitive object={getVoxelMaterial("chrome_floor")} attach="material" />
       </mesh>
 
-      {/* Central Neural Atrium & Server Block */}
-      <mesh position={[0, 2.5, 4.0]} castShadow receiveShadow>
-        <boxGeometry args={[6, 4.0, 7.5]} />
+      {/* Open research floor follows the canonical north-facing doorway. */}
+      <FacilityWalls id="aiml" height={3.8} />
+      <mesh position={[0, 4.4, 0]} castShadow><boxGeometry args={[16, .3, 10]} /><primitive object={stoneBrickMat} attach="material" /></mesh>
+      <mesh position={[0, 5.4, 1]} castShadow receiveShadow>
+        <boxGeometry args={[6, 1.8, 5]} />
         <primitive object={stoneBrickMat} attach="material" />
       </mesh>
 
       {/* Front North Glass Observation Window */}
-      <mesh position={[0, 2.6, 0.2]} castShadow>
-        <boxGeometry args={[4.5, 2.2, 0.2]} />
-        <primitive object={getVoxelMaterial("glass", { transparent: true, opacity: 0.65 })} attach="material" />
-      </mesh>
+      {[-4.7, 4.7].map(x => <mesh key={x} position={[x, 2.6, -4.05]} castShadow>
+        <boxGeometry args={[3.5, 1.8, 0.2]} />
+        <primitive object={getVoxelMaterial("chrome_glass", { transparent: true, opacity: 0.65 })} attach="material" />
+      </mesh>)}
 
       {/* Left Wing: EA FC Intelligence Wing (x = -5.5) */}
       <group
-        position={[-5.5, 2.0, 4.0]}
+        position={[-4.5, 0.5, 1]}
         onClick={(e) => {
           e.stopPropagation();
           inspectProject("ea-fc-intelligence");
         }}
       >
-        <mesh castShadow receiveShadow>
-          <boxGeometry args={[5, 3.5, 7.0]} />
-          <primitive object={stoneBrickMat} attach="material" />
+        <mesh position={[0, .8, 0]} castShadow receiveShadow>
+          <boxGeometry args={[2.8, 1.6, 1.4]} />
+          <primitive object={oakPlankMat} attach="material" />
         </mesh>
         {/* Front window */}
-        <mesh position={[0, 0.2, -3.55]} castShadow>
-          <boxGeometry args={[3.8, 1.8, 0.2]} />
-          <primitive object={getVoxelMaterial("glass", { transparent: true, opacity: 0.65 })} attach="material" />
+        <mesh position={[0, 1.65, 0]} castShadow>
+          <boxGeometry args={[3, .1, 1.6]} />
+          <primitive object={getVoxelMaterial("chrome_polished")} attach="material" />
         </mesh>
         {/* Interior EA FC Vector Display */}
-        <mesh position={[0, 0.2, -3.4]}>
-          <planeGeometry args={[3.2, 1.4]} />
-          <meshBasicMaterial color="#7c3aed" />
+        <mesh position={[0, 2.2, .45]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[2.2, .9]} />
+          <primitive object={getVoxelSignMaterial("PLAYER VECTOR RESEARCH", "EA FC INTELLIGENCE / OPEN CASE STUDY")} attach="material" />
         </mesh>
       </group>
 
       {/* Right Wing: VyaparPulse Intelligence Wing (x = +5.5) */}
       <group
-        position={[5.5, 2.0, 4.0]}
+        position={[4.5, 0.5, 1]}
         onClick={(e) => {
           e.stopPropagation();
           inspectProject("vyaparpulse");
         }}
       >
-        <mesh castShadow receiveShadow>
-          <boxGeometry args={[5, 3.5, 7.0]} />
-          <primitive object={stoneBrickMat} attach="material" />
+        <mesh position={[0, .8, 0]} castShadow receiveShadow>
+          <boxGeometry args={[2.8, 1.6, 1.4]} />
+          <primitive object={oakPlankMat} attach="material" />
         </mesh>
         {/* Front window */}
-        <mesh position={[0, 0.2, -3.55]} castShadow>
-          <boxGeometry args={[3.8, 1.8, 0.2]} />
-          <primitive object={getVoxelMaterial("glass", { transparent: true, opacity: 0.65 })} attach="material" />
+        <mesh position={[0, 1.65, 0]} castShadow>
+          <boxGeometry args={[3, .1, 1.6]} />
+          <primitive object={getVoxelMaterial("chrome_polished")} attach="material" />
         </mesh>
         {/* Interior VyaparPulse Voice / Forecast Pipeline Display */}
-        <mesh position={[0, 0.2, -3.4]}>
-          <planeGeometry args={[3.2, 1.4]} />
-          <meshBasicMaterial color="#0284c7" />
+        <mesh position={[0, 2.2, .45]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[2.2, .9]} />
+          <primitive object={getVoxelSignMaterial("VOICE / FORECAST PIPELINE", "VYAPARPULSE / OPEN CASE STUDY")} attach="material" />
         </mesh>
       </group>
 
       {/* Physical Minecraft Sign: [ EA FC & AI LAB / FOOTBALL & DATA INTELLIGENCE ] */}
-      <group position={[0, 2.0, 0.2]}>
+      <group position={[0, 3.75, -4.15]} rotation={[0, Math.PI, 0]}>
         <mesh castShadow>
           <boxGeometry args={[6.8, 1.0, 0.2]} />
           <primitive object={oakPlankMat} attach="material" />
         </mesh>
-        <mesh position={[0, 0, -0.11]}>
+        <mesh position={[0, 0, 0.11]}>
           <planeGeometry args={[6.6, 0.9]} />
           <primitive object={signMat} attach="material" />
         </mesh>
@@ -570,7 +618,7 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
         </mesh>
         <mesh position={[0, 1.65, 0]}>
           <boxGeometry args={[0.25, 0.25, 0.25]} />
-          <meshStandardMaterial color="#8b5cf6" emissive="#8b5cf6" emissiveIntensity={1.8} />
+          <meshStandardMaterial color={chromeEra.red} emissive={chromeEra.red} emissiveIntensity={1.8} />
         </mesh>
       </group>
 
@@ -592,7 +640,54 @@ export const AIMLLab: React.FC<AIMLLabProps> = ({
         </mesh>
         <mesh position={[0, 1.65, 0]}>
           <boxGeometry args={[0.25, 0.25, 0.25]} />
-          <meshStandardMaterial color="#06b6d4" emissive="#06b6d4" emissiveIntensity={1.8} />
+          <meshStandardMaterial color={chromeEra.red} emissive={chromeEra.red} emissiveIntensity={1.8} />
+        </mesh>
+      </group>
+
+      {/* Interactive SAKSHAM Applied AI / ML Station (Atrium Entrance) */}
+      <group
+        position={[0, 0, 4.0]}
+        onClick={(e) => {
+          e.stopPropagation();
+          worldSound.playInspectChime();
+          inspectProject("saksham");
+        }}
+      >
+        <mesh position={[0, 0.5, 0]} castShadow>
+          <boxGeometry args={[1.1, 1.0, 1.1]} />
+          <primitive object={stoneBrickMat} attach="material" />
+        </mesh>
+        <mesh position={[0, 1.25, 0]} rotation={[-0.2, 0, 0]} castShadow>
+          <boxGeometry args={[1.2, 0.7, 0.25]} />
+          <primitive object={monitorMat} attach="material" />
+        </mesh>
+        {/* Emerald Beacon Light */}
+        <mesh position={[0, 1.75, 0]}>
+          <boxGeometry args={[0.3, 0.3, 0.3]} />
+          <meshStandardMaterial color="#10b981" emissive="#10b981" emissiveIntensity={2.0} />
+        </mesh>
+      </group>
+
+      {/* Interactive IGNICT Applied AI / ML Research Bench (Sideline at x = 7.6) */}
+      <group
+        position={[7.6, 0, -6]}
+        onClick={(e) => {
+          e.stopPropagation();
+          worldSound.playInspectChime();
+          openStationModal("career_wall");
+        }}
+      >
+        <mesh position={[0, 1.8, 0]} castShadow>
+          <boxGeometry args={[1.4, 0.1, 3.6]} />
+          <meshStandardMaterial color="#1e1b4b" />
+        </mesh>
+        <mesh position={[0, 0.45, 0]} castShadow>
+          <boxGeometry args={[0.8, 0.4, 3.2]} />
+          <meshStandardMaterial color="#4338ca" />
+        </mesh>
+        <mesh position={[-0.1, 0.7, 0]} rotation={[-0.4, 0, 0]}>
+          <boxGeometry args={[0.35, 0.25, 0.04]} />
+          <primitive object={monitorMat} attach="material" />
         </mesh>
       </group>
     </group>

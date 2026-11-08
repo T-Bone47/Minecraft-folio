@@ -22,6 +22,7 @@ export const WorldCanvas: React.FC = () => {
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
       <Canvas
+        onCreated={({gl})=>{gl.domElement.addEventListener("webglcontextlost",()=>window.dispatchEvent(new Event("frontier-context-lost")),{once:true});}}
         shadows={quality.shadows}
         dpr={quality.dpr}
         gl={{

@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "Reduced-motion intro keeps decorative lights static",
+    "Walked through garage entrance",
+    "Walked through telemetry entrance",
+    "Walked through simulation entrance",
+    "Walked through operations entrance",
+    "Walked through aiml entrance",
+    "Walked through hq entrance",
+    "Long Explorer route completes all six facilities",
+    "Tab remains available while driving",
+    "Keyboard FOV, seat and configurable camera key work",
+    "Moving camera switch preserves physics; instrument speed matches state"
+  ],
+  "errors": [],
+  "date": "2026-11-08T12:30:39.384Z",
+  "passed": true
+}

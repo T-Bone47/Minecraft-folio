@@ -15,7 +15,12 @@ export const WorldBoot: React.FC = () => {
     // screenshot always has something visible to inspect first.
     if (typeof window === "undefined") return;
 
-    const existing = sessionStorage.getItem("asish_world_intro_seen");
+    let existing: string | null = null;
+    try {
+      existing = sessionStorage.getItem("asish_world_intro_seen");
+    } catch {
+      // Showing the intro is safe when session storage is unavailable.
+    }
     const introVisible = existing !== "true";
     setShouldShowProfileSpawn(introVisible);
 
@@ -28,7 +33,11 @@ export const WorldBoot: React.FC = () => {
 
   const handleEnterWorld = () => {
     if (typeof window !== "undefined") {
-      sessionStorage.setItem("asish_world_intro_seen", "true");
+      try {
+        sessionStorage.setItem("asish_world_intro_seen", "true");
+      } catch {
+        // Entering the world must not depend on browser storage access.
+      }
     }
     setShouldShowProfileSpawn(false);
     setTargetTransform([-12, 1.65, 4], [-12, 0.5, -8]);

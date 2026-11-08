@@ -1,0 +1,3 @@
+"use client";
+import { getVoxelMaterial,getVoxelSignMaterial } from "@/lib/voxelTextures";
+export function CarChromeDetails(){return <group name="asish-chrome-livery"><mesh position={[0,.39,1.85]}><boxGeometry args={[.45,.025,.55]}/><primitive attach="material" object={getVoxelMaterial("chrome_red")}/></mesh>{[-1,1].map(side=><group key={side}><mesh position={[side*1.025,.52,-.2]} rotation={[0,side*Math.PI/2,0]}><planeGeometry args={[.9,.24]}/><primitive attach="material" object={getVoxelSignMaterial("ASISH","RACING DIVISION")}/></mesh>{[-1.35,1.35].map(z=><mesh key={z} position={[side*.67,.32,z]} rotation={[0,0,side*.12]}><boxGeometry args={[.82,.045,.06]}/><primitive attach="material" object={getVoxelMaterial("chrome_graphite")}/></mesh>)}</group>)}</group>}

@@ -51,9 +51,10 @@ export const ProjectDirectory: React.FC<ProjectDirectoryProps> = ({
     const fac = getFacilityByProjectSlug(slug);
     if (fac) {
       focusLocation(fac.id);
+      const [sx, , sz] = fac.approachPosition;
       setTargetTransform(
-        [fac.coordinates[0], fac.coordinates[1] + 1.65, fac.coordinates[2] + 4],
-        fac.coordinates
+        [sx, fac.coordinates[1] + 1.65, sz],
+        fac.approachLookAt
       );
     }
     onClose();

@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-08T12:39:14.625Z",
+  "checks": [
+    "Storage denial still permits world entry and movement",
+    "Unmuted real driving schedules bounded Web Audio gain, including full-throttle engine gain",
+    "Unsupported WebGL avatar inspection falls back to the canonical portrait"
+  ],
+  "errors": [],
+  "gain": {
+    "count": 874,
+    "max": 0.45,
+    "min": 0.01,
+    "values": [
+      0.01,
+      0.18,
+      0.196,
+      0.36,
+      0.45
+    ]
+  },
+  "passed": true
+}

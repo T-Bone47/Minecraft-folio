@@ -1,5 +1,6 @@
 export const siteIdentity = {
   name: "ASISH OLIVER M",
+  productName: "ASISH: THE ENGINEERING FRONTIER",
   primaryRole: ["MOTORSPORT SOFTWARE ENGINEER", "AI / ML ENGINEER"],
   supportingStatement:
     "Building software, simulation, telemetry and intelligent systems for engineering problems.",
@@ -9,14 +10,6 @@ export const siteIdentity = {
     linkedin: "https://www.linkedin.com/in/asish-oliver-56b454324",
   },
 };
-
-/**
- * Canonical site origin.
- *
- * The single source of truth for absolute URLs: `metadataBase`, sitemap,
- * robots.txt and Open Graph tags all derive from this. Update it here only.
- */
-export const SITE_URL = "https://asish.engineering";
 
 export const seo = {
   title: "ASISH OLIVER M — Motorsport Software Engineer & AI/ML Engineer",

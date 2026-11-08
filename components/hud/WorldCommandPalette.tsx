@@ -47,9 +47,10 @@ export const WorldCommandPalette: React.FC = () => {
     const fac = getFacilityById(facId);
     if (fac) {
       focusLocation(fac.id);
+      const [sx, , sz] = fac.approachPosition;
       setTargetTransform(
-        [fac.coordinates[0], fac.coordinates[1] + 1.65, fac.coordinates[2] + 4],
-        fac.coordinates
+        [sx, fac.coordinates[1] + 1.65, sz],
+        fac.approachLookAt
       );
     }
     if (slug) {
@@ -103,6 +104,77 @@ export const WorldCommandPalette: React.FC = () => {
       action: () => travelTo("hq"),
     },
     {
+      command: "/plaza",
+      category: "NAVIGATION",
+      title: "CENTRAL ENGINEERING PLAZA",
+      description: "Focus spawn landmark obelisk & campus navigation compass",
+      action: () => {
+        focusLocation("plaza");
+        setTargetTransform([0, 1.65, 4], [0, 1.65, 0]);
+        setCommandPaletteOpen(false);
+      },
+    },
+    {
+      command: "/car-inspect",
+      category: "SYSTEMS",
+      title: "F1 VEHICLE INSPECTION",
+      description: "Open 7-component chassis & aerodynamic architecture breakdown",
+      action: () => {
+        setCommandPaletteOpen(false);
+        openStationModal("f1_car_inspect");
+      },
+    },
+    {
+      command: "/telemetry-explorer",
+      category: "SYSTEMS",
+      title: "F1 TELEMETRY SIGNAL EXPLORER",
+      description: "Interactive session comparison, speed/throttle/brake traces",
+      action: () => {
+        setCommandPaletteOpen(false);
+        openStationModal("telemetry_explorer");
+      },
+    },
+    {
+      command: "/pipeline-observatory",
+      category: "SYSTEMS",
+      title: "DATA PIPELINE OBSERVATORY",
+      description: "Inspect 6-stage distributed telemetry ingestion gantry",
+      action: () => {
+        setCommandPaletteOpen(false);
+        openStationModal("pipeline_observatory");
+      },
+    },
+    {
+      command: "/lap-solver",
+      category: "SYSTEMS",
+      title: "NUMERICAL LAP-TIME SOLVER",
+      description: "Interactive downforce, tyre compound, engine & grip simulation",
+      action: () => {
+        setCommandPaletteOpen(false);
+        openStationModal("simulation_runner");
+      },
+    },
+    {
+      command: "/ml-bench",
+      category: "SYSTEMS",
+      title: "ML EXPERIMENTATION BENCH",
+      description: "Evaluate models, confusion matrices & feature importance",
+      action: () => {
+        setCommandPaletteOpen(false);
+        openStationModal("ml_playground");
+      },
+    },
+    {
+      command: "/ignict-matcher",
+      category: "SYSTEMS",
+      title: "IGNICT OPPORTUNITY MATCHER",
+      description: "Adjust skill weights to compute candidate embedding cosine match",
+      action: () => {
+        setCommandPaletteOpen(false);
+        openStationModal("ignict_matcher");
+      },
+    },
+    {
       command: "/map",
       category: "NAVIGATION",
       title: "CARTOGRAPHER MAP",
@@ -145,8 +217,15 @@ export const WorldCommandPalette: React.FC = () => {
     {
       command: "/ea-fc",
       category: "PROJECTS",
-      title: "EA FC INTELLIGENCE",
+      title: "FOOTBALL INTELLIGENCE OS (EA FC)",
       description: "Inspect player vector embeddings & similarity engine",
+      action: () => travelTo("aiml", "ea-fc-intelligence"),
+    },
+    {
+      command: "/football-os",
+      category: "PROJECTS",
+      title: "FOOTBALL INTELLIGENCE OS",
+      description: "Inspect 128D latent representation space and tactical scouting",
       action: () => travelTo("aiml", "ea-fc-intelligence"),
     },
     {
@@ -155,6 +234,13 @@ export const WorldCommandPalette: React.FC = () => {
       title: "VYAPARPULSE",
       description: "Inspect Vosk voice ledger & XGBoost demand pipeline",
       action: () => travelTo("aiml", "vyaparpulse"),
+    },
+    {
+      command: "/saksham",
+      category: "PROJECTS",
+      title: "SAKSHAM",
+      description: "Inspect assistive intelligence & multi-modal ML pipeline",
+      action: () => travelTo("aiml", "saksham"),
     },
 
     // SYSTEMS
@@ -238,6 +324,19 @@ export const WorldCommandPalette: React.FC = () => {
       action: () => {
         setCommandPaletteOpen(false);
         router.push("/recruiter");
+      },
+    },
+    {
+      command: "/resume",
+      category: "PROFILE",
+      title: "DOWNLOAD RESUME (PDF)",
+      description: "Download Asish Oliver M's official verified engineering resume",
+      action: () => {
+        setCommandPaletteOpen(false);
+        const link = document.createElement("a");
+        link.href = "/Asish_Oliver_M_Resume.pdf";
+        link.download = "Asish_Oliver_M_Resume.pdf";
+        link.click();
       },
     },
     {

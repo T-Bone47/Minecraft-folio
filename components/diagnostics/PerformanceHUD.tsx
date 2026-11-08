@@ -6,7 +6,7 @@ import { useWorldStore } from "@/state/worldStore";
 import { useCameraStore } from "@/state/cameraStore";
 
 export const PerformanceHUD: React.FC = () => {
-  const { showPerformanceHUD, togglePerformanceHUD, renderStats, timeOfDay } =
+  const { showPerformanceHUD, togglePerformanceHUD, renderStats, timeOfDay, qualityTierOverride } =
     useSettingsStore();
   const { deviceTier, mode, activeLocation, playerPosition } = useWorldStore();
   const { cameraMode } = useCameraStore();
@@ -87,6 +87,7 @@ export const PerformanceHUD: React.FC = () => {
           <span className="text-[#a1a1aa]">TEXTURES:</span>
           <span className="text-[#38bdf8]">{renderStats.textures}</span>
         </div>
+        <div>TEXTURE ESTIMATE: {(renderStats.textureBytesEstimate / 1048576).toFixed(2)} MiB (RGBA+mips)</div>
         <div className="flex justify-between">
           <span className="text-[#a1a1aa]">ENVIRONMENT:</span>
           <span className="uppercase text-[#f59e0b] font-bold">{timeOfDay}</span>
@@ -97,7 +98,7 @@ export const PerformanceHUD: React.FC = () => {
         </div>
         <div className="flex justify-between">
           <span className="text-[#a1a1aa]">TIER:</span>
-          <span className="uppercase text-[#3b82f6]">{deviceTier}</span>
+          <span className="uppercase text-[#3b82f6]">{qualityTierOverride === "auto" ? deviceTier : qualityTierOverride}</span>
         </div>
         <div className="flex justify-between">
           <span className="text-[#a1a1aa]">WORLD MODE:</span>

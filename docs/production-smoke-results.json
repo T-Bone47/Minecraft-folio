@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "/",
+    "/world",
+    "/visit",
+    "/recruiter",
+    "/contact",
+    "/projects",
+    "/projects/live-f1-intelligence",
+    "/projects/racemind-ai",
+    "/Asish_Oliver_M_Resume.pdf",
+    "/og-image.png"
+  ],
+  "failures": [],
+  "browser": "Chrome/158.0.8127.18",
+  "indexing": "unconfigured or preview: noindex, no canonical",
+  "contacts": [
+    "mailto:dreamteamoliver@gmail.com",
+    "https://www.linkedin.com/in/asish-oliver-56b454324",
+    "https://github.com/T-Bone47",
+    "https://github.com/T-Bone47",
+    "https://www.linkedin.com/in/asish-oliver-56b454324",
+    "mailto:dreamteamoliver@gmail.com"
+  ],
+  "passed": true
+}

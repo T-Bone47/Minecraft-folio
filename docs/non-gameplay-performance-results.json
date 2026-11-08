@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-08T12:39:42.894Z",
+  "browser": "Chrome/158.0.8127.18",
+  "samples": [
+    {
+      "route": "/",
+      "width": 1280,
+      "lcp": 424,
+      "cls": 0.24513240327202312,
+      "longTasks": 0,
+      "fcp": 424,
+      "domReady": 288.8999999910593,
+      "load": 289.20000000298023,
+      "transferBytes": 26347,
+      "overflow": false
+    },
+    {
+      "route": "/recruiter",
+      "width": 1280,
+      "lcp": 144,
+      "cls": 0.25804288037015366,
+      "longTasks": 0,
+      "fcp": 144,
+      "domReady": 159.1000000089407,
+      "load": 159.5,
+      "transferBytes": 17154,
+      "overflow": false
+    },
+    {
+      "route": "/projects",
+      "width": 1280,
+      "lcp": 200,
+      "cls": 0.14376570353575793,
+      "longTasks": 0,
+      "fcp": 200,
+      "domReady": 225.40000000596046,
+      "load": 226,
+      "transferBytes": 28059,
+      "overflow": false
+    },
+    {
+      "route": "/contact",
+      "width": 1280,
+      "lcp": 124,
+      "cls": 0.07691266642927559,
+      "longTasks": 0,
+      "fcp": 124,
+      "domReady": 127.79999999701977,
+      "load": 128,
+      "transferBytes": 11793,
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "lcp": 204,
+      "cls": 0.15672241603726403,
+      "longTasks": 0,
+      "fcp": 204,
+      "domReady": 211.29999999701977,
+      "load": 211.5,
+      "transferBytes": 26347,
+      "overflow": false
+    },
+    {
+      "route": "/recruiter",
+      "width": 390,
+      "lcp": 136,
+      "cls": 0.056205390429228445,
+      "longTasks": 0,
+      "fcp": 136,
+      "domReady": 145.80000001192093,
+      "load": 146,
+      "transferBytes": 17154,
+      "overflow": false
+    },
+    {
+      "route": "/projects",
+      "width": 390,
+      "lcp": 164,
+      "cls": 0.15000885370232228,
+      "longTasks": 0,
+      "fcp": 164,
+      "domReady": 147.29999999701977,
+      "load": 148.09999999403954,
+      "transferBytes": 28059,
+      "overflow": false
+    },
+    {
+      "route": "/contact",
+      "width": 390,
+      "lcp": 128,
+      "cls": 0.07678635269498289,
+      "longTasks": 0,
+      "fcp": 128,
+      "domReady": 128.20000000298023,
+      "load": 128.29999999701977,
+      "transferBytes": 11793,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

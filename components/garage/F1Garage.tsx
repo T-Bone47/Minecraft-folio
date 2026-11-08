@@ -1,5 +1,8 @@
 "use client";
+import { chromeEra } from "@/data/chromeEra";
 
+
+import { ChromeGarageFitout } from "@/components/theme/ChromeCampusDetails";
 import React, { useRef, useMemo, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -24,20 +27,20 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
 
   // Register interactive stations in the garage
   useEffect(() => {
-    // 1. Single-Seater F1 Car
+    // 1. Single-Seater F1 Car — Test Drive or Chassis Inspection
     registerObject({
       id: "garage_f1_car",
       type: "vehicle",
-      label: "Original Voxel F1 Single-Seater",
-      sublabel: "Game-Agnostic Telemetry Bridge Platform",
-      actionPrompt: "[E] INSPECT F1 CHASSIS & RACEMIND-AI",
+      label: "Frontier-01 / modernised Chrome Era",
+      sublabel: "Inspect the chassis, then drive a timed engineering lap",
+      actionPrompt: "[E] INSPECT / DRIVE FRONTIER-01",
       position: [position[0], position[1] + 0.6, position[2]],
       boundsRadius: 5.5,
       projectSlug: "racemind-ai",
       facilityId: "garage",
       onInteract: () => {
         worldSound.playInspectChime();
-        inspectProject("racemind-ai");
+        openStationModal("f1_car_inspect");
       },
     });
 
@@ -75,10 +78,28 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
       },
     });
 
+    // 4. Team Operations & Race Manager Bridge Terminal
+    registerObject({
+      id: "garage_race_manager",
+      type: "terminal",
+      label: "F1 Race Manager Operations Bridge",
+      sublabel: "F1 Team Strategy & Simulation Game Architecture",
+      actionPrompt: "[E] INSPECT F1 RACE MANAGER",
+      position: [position[0] - 3.2, position[1] + 1.2, position[2] + 2.5],
+      boundsRadius: 4.5,
+      projectSlug: "f1-race-manager",
+      facilityId: "garage",
+      onInteract: () => {
+        worldSound.playInspectChime();
+        inspectProject("f1-race-manager");
+      },
+    });
+
     return () => {
       unregisterObject("garage_f1_car");
       unregisterObject("garage_strategy_board");
       unregisterObject("garage_ai_engineer");
+      unregisterObject("garage_race_manager");
     };
   }, [position, registerObject, unregisterObject, inspectProject, openStationModal]);
 
@@ -150,11 +171,11 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
     }
   });
 
-  const stoneBrickMat = useMemo(() => getVoxelMaterial("stone_bricks"), []);
-  const oakPlankMat = useMemo(() => getVoxelMaterial("oak_planks"), []);
+  const stoneBrickMat = useMemo(() => getVoxelMaterial("chrome_brushed"), []);
+  const oakPlankMat = useMemo(() => getVoxelMaterial("chrome_graphite"), []);
   const glassMat = useMemo(
     () =>
-      getVoxelMaterial("glass", {
+      getVoxelMaterial("chrome_glass", {
         transparent: true,
         opacity: 0.65,
       }),
@@ -162,8 +183,8 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
   );
   const glowstoneMat = useMemo(
     () =>
-      getVoxelMaterial("glowstone", {
-        emissive: new THREE.Color("#fab005"),
+      getVoxelMaterial("chrome_light", {
+        emissive: new THREE.Color(chromeEra.white),
         emissiveIntensity: 1.8,
       }),
     []
@@ -172,7 +193,7 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
   const redMat = useMemo(() => getVoxelMaterial("curb_red"), []);
   const monitorMat = useMemo(() => getVoxelMaterial("monitor_screen"), []);
   const signMat = useMemo(
-    () => getVoxelSignMaterial("RACE ENGINEERING GARAGE", "RACEMIND-AI"),
+    () => getVoxelSignMaterial("ASISH RACING DIVISION", "CHROME ERA / MODERNISED SIMULATOR"),
     []
   );
 
@@ -193,6 +214,7 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
         document.body.style.cursor = "default";
       }}
     >
+      <ChromeGarageFitout/>
       {/* 1. Garage Foundation (Stone Brick Floor) */}
       <mesh position={[0, 0.05, 0]} receiveShadow>
         <boxGeometry args={[14, 0.1, 16]} />
@@ -200,13 +222,13 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
       </mesh>
 
       {/* Pit Stop Box & Guide Line (Yellow & Red Voxel Markings) */}
-      <mesh position={[0, 0.11, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh position={[0, 0.55, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[1.0, 13]} />
-        <meshBasicMaterial color="#f59e0b" />
+        <meshBasicMaterial color={chromeEra.white} />
       </mesh>
-      <mesh position={[0, 0.115, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh position={[0, 0.56, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[3.2, 5.2]} />
-        <meshBasicMaterial color="#ef4444" opacity={0.35} transparent />
+        <meshBasicMaterial color="#D71D35" opacity={0.35} transparent />
       </mesh>
 
       {/* 2. Rear Wall (Block-built Stone Bricks) */}
@@ -257,10 +279,10 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
         [-4, 0, 4].map((z) => (
           <group key={`glow_${x}_${z}`} position={[x, 4.5, z]}>
             <mesh>
-              <boxGeometry args={[0.8, 0.8, 0.8]} />
+              <boxGeometry args={[2.8, 0.12, 1.1]} />
               <primitive object={glowstoneMat} attach="material" />
             </mesh>
-            <pointLight color="#ffe066" intensity={0.9} distance={10} />
+            <pointLight color={chromeEra.white} intensity={0.9} distance={10} />
           </group>
         ))
       )}
@@ -284,12 +306,12 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
         {/* Text banner plate */}
         <mesh position={[0, 0, 0.16]}>
           <planeGeometry args={[6.8, 0.9]} />
-          <meshBasicMaterial color="#1a1a1f" />
+          <primitive attach="material" object={signMat}/>
         </mesh>
       </group>
 
       {/* 8. Rear Race Engineer Strategy Workstation (Desk + Monitors) */}
-      <group position={[0, 0, -6.2]}>
+      <group position={[0, 0.5, -6.2]}>
         {/* Desk built of wood and stone */}
         <mesh position={[0, 0.8, 0]} castShadow receiveShadow>
           <boxGeometry args={[8.0, 0.2, 1.6]} />
@@ -320,7 +342,7 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
       </group>
 
       {/* 9. Tyre Warming Racks (Left Side) with Voxel Tyres */}
-      <group position={[-5.0, 0, -1.5]}>
+      <group position={[-5.0, 0.5, -1.5]}>
         {/* Wooden / metal rack structure */}
         <mesh position={[0, 1.2, 0]} castShadow>
           <boxGeometry args={[1.2, 2.4, 4.4]} />
@@ -343,7 +365,7 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
       </group>
 
       {/* 10. High-Pressure Air Tools & Diagnostics Trolley (Right Side) */}
-      <group position={[5.2, 0, -1.5]}>
+      <group position={[5.2, 0.5, -1.5]}>
         <mesh position={[0, 0.9, 0]} castShadow>
           <boxGeometry args={[1.1, 1.8, 2.6]} />
           <primitive object={stoneBrickMat} attach="material" />
@@ -358,11 +380,11 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
       </group>
 
       {/* 11. CENTRAL SINGLE-SEATER VOXEL F1 CAR */}
-      <VoxelF1Car position={[0, 0.12, 0]} rotation={[0, 0, 0]} scale={1.0} />
+      <VoxelF1Car position={[0, 0.55, 0]} rotation={[0, 0, 0]} scale={1.0} />
 
       {/* 12. Interactive Voxel AI Race Engineer Terminal Station (Right of the car) */}
       <group
-        position={[3.2, 0, 2.5]}
+        position={[3.2, 0.5, 2.5]}
         onClick={(e) => {
           e.stopPropagation();
           worldSound.playInspectChime();
@@ -386,17 +408,32 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
         </mesh>
       </group>
 
-      {/* 13. Physical Minecraft Sign: [ RACE ENGINEERING GARAGE / RACEMIND-AI ] */}
-      <group position={[0, 4.4, 7.8]}>
-        <mesh castShadow>
-          <boxGeometry args={[6.4, 1.0, 0.2]} />
-          <primitive object={oakPlankMat} attach="material" />
+      {/* 12b. Interactive F1 Race Manager Bridge Terminal (Left of the car) */}
+      <group
+        position={[-3.2, 0.5, 2.5]}
+        onClick={(e) => {
+          e.stopPropagation();
+          worldSound.playInspectChime();
+          inspectProject("f1-race-manager");
+        }}
+      >
+        {/* Pedestal block */}
+        <mesh position={[0, 0.5, 0]} castShadow>
+          <boxGeometry args={[0.8, 1.0, 0.8]} />
+          <primitive object={stoneBrickMat} attach="material" />
         </mesh>
-        <mesh position={[0, 0, 0.11]}>
-          <planeGeometry args={[6.2, 0.9]} />
-          <primitive object={signMat} attach="material" />
+        {/* Terminal screen block */}
+        <mesh position={[0, 1.2, 0]} rotation={[-0.2, 0.4, 0]} castShadow>
+          <boxGeometry args={[0.9, 0.6, 0.2]} />
+          <primitive object={monitorMat} attach="material" />
+        </mesh>
+        {/* Amber strategy indicator */}
+        <mesh position={[0, 1.6, 0]}>
+          <boxGeometry args={[0.25, 0.25, 0.25]} />
+          <meshStandardMaterial color="#f59e0b" emissive="#f59e0b" emissiveIntensity={1.8} />
         </mesh>
       </group>
+
     </group>
   );
 };

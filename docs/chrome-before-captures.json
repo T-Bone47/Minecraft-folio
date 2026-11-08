@@ -1,0 +1,24 @@
+{
+  "stage": "before",
+  "browser": "Chrome/158.0.8127.18",
+  "quality": "medium",
+  "captures": [
+    "landing",
+    "plaza",
+    "garage-exterior",
+    "garage-interior",
+    "hero-car",
+    "cockpit",
+    "circuit",
+    "telemetry",
+    "ai-lab",
+    "simulation",
+    "hq",
+    "sunset",
+    "night",
+    "recruiter",
+    "mobile"
+  ],
+  "errors": [],
+  "passed": true
+}

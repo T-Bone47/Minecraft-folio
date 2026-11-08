@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "Recruiter direct journey completes, pauses and cancels",
+    "Developer direct journey completes, pauses and cancels",
+    "AI/ML engineer direct journey completes, pauses and cancels",
+    "Motorsport engineer direct journey completes, pauses and cancels",
+    "Explorer direct journey completes, pauses and cancels",
+    "Every canonical project supports all three depths",
+    "Architecture trace, source links, evidence gap, gallery and guides",
+    "Mobile field guide fits with reduced motion",
+    "Recruiter physical tour reaches every waypoint",
+    "Developer physical tour reaches every waypoint",
+    "AI/ML engineer physical tour reaches every waypoint",
+    "Motorsport engineer physical tour reaches every waypoint",
+    "Explorer physical tour reaches every waypoint",
+    "No runtime exceptions"
+  ],
+  "errors": [],
+  "date": "2026-11-08T12:29:35.227Z",
+  "frames": {
+    "samples": 90,
+    "meanMs": 6.895555555489328,
+    "p95Ms": 7.099999999998545
+  },
+  "passed": true
+}

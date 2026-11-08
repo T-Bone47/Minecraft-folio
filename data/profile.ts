@@ -97,8 +97,8 @@ export const profileData: ProfileData = {
     { system: "AI / ML", status: "READY", bars: 10 },
   ],
   avatar: {
-    src: "/world/avatar/asish-oliver-avatar.png",
-    alt: "Voxel avatar representing Asish Oliver M",
+    src: "/world/avatar/asish-race-engineer-portrait.png",
+    alt: "ASISH Chrome Era race engineer with silver jacket, red trim and headset",
   },
   metadata: {
     discipline: "MOTORSPORT SOFTWARE · AI / ML",
@@ -106,3 +106,4 @@ export const profileData: ProfileData = {
     year: "2026",
   },
 };
+

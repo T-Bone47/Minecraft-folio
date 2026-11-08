@@ -53,9 +53,9 @@ const ATMOSPHERES: Record<TimeOfDay, AtmosphereProfile> = {
     // ground colour is deliberately light: it is what fills the undersides
     // of roofs and overhangs, which otherwise render as black voids.
     skyLightColor: "#bcd9ff",
-    groundLightColor: "#8ba36a",
+    groundLightColor: "#A3A7AA",
     hemisphereIntensity: 0.62,
-    bounceColor: "#8fbf62",
+    bounceColor: "#CCD1D5",
     bounceIntensity: 0.18,
     cloudColor: "#ffffff",
     cloudOpacity: 0.9,
@@ -90,7 +90,7 @@ const ATMOSPHERES: Record<TimeOfDay, AtmosphereProfile> = {
     sunIntensity: 0.42,
     skyLightColor: "#2b3f66",
     groundLightColor: "#1a2740",
-    hemisphereIntensity: 0.34,
+    hemisphereIntensity: 0.48,
     bounceColor: "#1e2b45",
     bounceIntensity: 0.1,
     cloudColor: "#1e293b",

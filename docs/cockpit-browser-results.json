@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-08T12:28:11.451Z",
+  "checks": [
+    "Walking changes player position",
+    "Perspective switching retains exploration",
+    "Map blocks locomotion",
+    "Garage inspection starts the Drive",
+    "Cockpit camera and steering respond to actual input",
+    "Keyboard-event-driven lap completes all gates and exits into telemetry debrief",
+    "Measured telemetry and four sector comparisons displayed; mission completed",
+    "Recorded replay plays and pauses with all control traces",
+    "No browser runtime errors"
+  ],
+  "errors": []
+}

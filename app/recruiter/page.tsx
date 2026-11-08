@@ -24,6 +24,7 @@ import {
   ShieldCheck,
   Layers,
   ChevronRight,
+  FileText,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -43,7 +44,7 @@ export default function RecruiterPage() {
       <div className="bg-[#18181c] border-b-2 border-[#101012] px-3 sm:px-4 py-1.5 font-mono text-[10px] text-zinc-400 flex flex-wrap items-center justify-between gap-2 shadow-inner">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 bg-emerald-400 border border-emerald-200 shadow-[0_0_6px_#34d399] shrink-0" />
-          <span className="font-pixel text-[9px] text-white mc-text-shadow">EXECUTIVE DOSSIER: ACCREDITED</span>
+          <span className="font-pixel text-[9px] text-white mc-text-shadow">ENGINEERING PROFILE: AUTHOR-SUPPLIED</span>
           <span className="text-zinc-600">|</span>
           <span className="text-zinc-300">ESTIMATED READING DURATION: 30 TO 60 SECONDS</span>
         </div>
@@ -103,6 +104,43 @@ export default function RecruiterPage() {
               <span className="text-zinc-500 block text-[9px] font-pixel uppercase">FLAGSHIP</span>
               <strong className="font-pixel text-xs text-sky-400 mc-text-shadow">1.06M+ Evts</strong>
             </div>
+          </div>
+
+          {/* Recruiter Primary Actions */}
+          <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-[#121214]">
+            <a
+              href="/Asish_Oliver_M_Resume.pdf"
+              download="Asish_Oliver_M_Resume.pdf"
+              className="mc-btn px-4 py-2 text-xs font-pixel flex items-center gap-2 text-white !bg-sky-700 hover:!bg-sky-600 border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)]"
+            >
+              <FileText className="w-4 h-4 text-sky-200" />
+              <span>DOWNLOAD RESUME (PDF)</span>
+            </a>
+            <a
+              href={`mailto:${siteIdentity.social.email}`}
+              className="mc-btn-emerald px-4 py-2 text-xs font-pixel flex items-center gap-2"
+            >
+              <Mail className="w-3.5 h-3.5 text-emerald-200" />
+              <span>CONTACT: {siteIdentity.social.email}</span>
+            </a>
+            <a
+              href={siteIdentity.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mc-btn-stone px-3 py-2 text-[10px] font-pixel flex items-center gap-1.5"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span>GITHUB</span>
+            </a>
+            <a
+              href={siteIdentity.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mc-btn-stone px-3 py-2 text-[10px] font-pixel flex items-center gap-1.5"
+            >
+              <Linkedin className="w-3.5 h-3.5 text-sky-400" />
+              <span>LINKEDIN</span>
+            </a>
           </div>
         </header>
 
@@ -276,6 +314,15 @@ export default function RecruiterPage() {
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <a
+              href="/Asish_Oliver_M_Resume.pdf"
+              download="Asish_Oliver_M_Resume.pdf"
+              className="mc-btn px-4 py-2.5 text-xs font-pixel flex items-center gap-2 text-white !bg-sky-700 hover:!bg-sky-600 border-sky-400"
+            >
+              <FileText className="w-4 h-4 text-sky-200" />
+              <span>DOWNLOAD RESUME (PDF)</span>
+            </a>
+
+            <a
               href={`mailto:${siteIdentity.social.email}`}
               className="mc-btn-emerald px-4 py-2.5 text-xs flex items-center gap-2"
             >
@@ -308,3 +355,4 @@ export default function RecruiterPage() {
     </div>
   );
 }
+

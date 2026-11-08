@@ -1,0 +1,16 @@
+.git/
+.next/
+node_modules/
+.env*
+!.env.example
+.vercel/
+docs/screenshots/
+docs/*.json
+*.log
+*.err
+
+# Unused legacy photo: do not publish until provenance/licensing is confirmed.
+public/world/spawn-mclaren-garage.jpg
+dev_stdout.txt
+dev_stderr.txt
+.freebuff/

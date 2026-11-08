@@ -1,5 +1,6 @@
 "use client";
 
+import { CarChromeDetails } from "./CarChromeDetails";
 import React, { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -20,9 +21,9 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
   const groupRef = useRef<THREE.Group>(null);
   const { reducedMotion } = useWorldStore();
 
-  const carbonMat = useMemo(() => getVoxelMaterial("carbon_f1"), []);
-  const papayaMat = useMemo(() => getVoxelMaterial("asish_orange"), []);
-  const cyanMat = useMemo(() => getVoxelMaterial("asish_cyan"), []);
+  const carbonMat = useMemo(() => getVoxelMaterial("chrome_carbon"), []);
+  const silverMat = useMemo(() => getVoxelMaterial("chrome_polished"), []);
+  const redMat = useMemo(() => getVoxelMaterial("chrome_red"), []);
   const whiteMat = useMemo(() => getVoxelMaterial("curb_white"), []);
   const tireMat = useMemo(() => getVoxelMaterial("tire_black"), []);
   const screenMat = useMemo(() => getVoxelMaterial("monitor_screen"), []);
@@ -37,6 +38,7 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
 
   return (
     <group ref={groupRef} position={position} rotation={rotation} scale={scale}>
+      <CarChromeDetails/>
       {/* 1. Carbon Floor / Underbody Plank */}
       <mesh position={[0, 0.15, 0]} castShadow receiveShadow>
         <boxGeometry args={[1.7, 0.1, 4.4]} />
@@ -53,17 +55,17 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
         {/* Upper flap element */}
         <mesh position={[0, 0.07, -0.08]} castShadow>
           <boxGeometry args={[2.3, 0.06, 0.3]} />
-          <primitive object={cyanMat} attach="material" />
+          <primitive object={redMat} attach="material" />
         </mesh>
         {/* Left vertical endplate */}
         <mesh position={[1.2, 0.12, 0]} castShadow>
           <boxGeometry args={[0.08, 0.32, 0.55]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
         {/* Right vertical endplate */}
         <mesh position={[-1.2, 0.12, 0]} castShadow>
           <boxGeometry args={[0.08, 0.32, 0.55]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
       </group>
 
@@ -71,21 +73,21 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
       {/* Front nose tip */}
       <mesh position={[0, 0.28, 1.85]} castShadow>
         <boxGeometry args={[0.42, 0.2, 0.6]} />
-        <primitive object={papayaMat} attach="material" />
+        <primitive object={silverMat} attach="material" />
       </mesh>
       {/* Mid nose with cyan aerodynamic stripe */}
       <mesh position={[0, 0.34, 1.35]} castShadow>
         <boxGeometry args={[0.54, 0.26, 0.7]} />
-        <primitive object={papayaMat} attach="material" />
+        <primitive object={silverMat} attach="material" />
       </mesh>
       <mesh position={[0, 0.48, 1.35]}>
         <boxGeometry args={[0.12, 0.02, 0.65]} />
-        <primitive object={cyanMat} attach="material" />
+        <primitive object={redMat} attach="material" />
       </mesh>
       {/* Front bulkhead */}
       <mesh position={[0, 0.42, 0.75]} castShadow>
         <boxGeometry args={[0.68, 0.34, 0.7]} />
-        <primitive object={papayaMat} attach="material" />
+        <primitive object={silverMat} attach="material" />
       </mesh>
 
       {/* 4. Cockpit & Driver Tub */}
@@ -109,12 +111,12 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
         {/* Center forward pillar */}
         <mesh position={[0, 0.02, 0.28]} castShadow>
           <boxGeometry args={[0.08, 0.26, 0.08]} />
-          <primitive object={cyanMat} attach="material" />
+          <primitive object={redMat} attach="material" />
         </mesh>
         {/* Top protective hoop */}
         <mesh position={[0, 0.14, 0.02]} castShadow>
           <boxGeometry args={[0.62, 0.08, 0.64]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
       </group>
 
@@ -122,7 +124,7 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
       {/* Airbox scoop */}
       <mesh position={[0, 0.76, -0.42]} castShadow>
         <boxGeometry args={[0.42, 0.38, 0.8]} />
-        <primitive object={papayaMat} attach="material" />
+        <primitive object={silverMat} attach="material" />
       </mesh>
       {/* Air intake aperture */}
       <mesh position={[0, 0.82, -0.02]}>
@@ -140,7 +142,7 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
       <group position={[0.64, 0.36, -0.2]}>
         <mesh castShadow receiveShadow>
           <boxGeometry args={[0.5, 0.36, 1.6]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
         {/* Front radiator intake cutout */}
         <mesh position={[0, 0.02, 0.78]}>
@@ -152,7 +154,7 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
       <group position={[-0.64, 0.36, -0.2]}>
         <mesh castShadow receiveShadow>
           <boxGeometry args={[0.5, 0.36, 1.6]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
         {/* Front radiator intake cutout */}
         <mesh position={[0, 0.02, 0.78]}>
@@ -171,12 +173,12 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
         {/* Main wing plane */}
         <mesh position={[0, 0.1, 0]} castShadow>
           <boxGeometry args={[1.65, 0.08, 0.4]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
         {/* DRS flap */}
         <mesh position={[0, 0.2, -0.05]} castShadow>
           <boxGeometry args={[1.6, 0.05, 0.28]} />
-          <primitive object={cyanMat} attach="material" />
+          <primitive object={redMat} attach="material" />
         </mesh>
         {/* Left endplate */}
         <mesh position={[0.82, 0.0, 0]} castShadow>
@@ -208,7 +210,7 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
         </mesh>
         <mesh position={[0.18, 0, 0]}>
           <boxGeometry args={[0.05, 0.28, 0.28]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
       </group>
 
@@ -220,7 +222,7 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
         </mesh>
         <mesh position={[-0.18, 0, 0]}>
           <boxGeometry args={[0.05, 0.28, 0.28]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
       </group>
 
@@ -232,7 +234,7 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
         </mesh>
         <mesh position={[0.22, 0, 0]}>
           <boxGeometry args={[0.05, 0.32, 0.32]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
       </group>
 
@@ -244,7 +246,7 @@ export const VoxelF1Car: React.FC<VoxelF1CarProps> = ({
         </mesh>
         <mesh position={[-0.22, 0, 0]}>
           <boxGeometry args={[0.05, 0.32, 0.32]} />
-          <primitive object={papayaMat} attach="material" />
+          <primitive object={silverMat} attach="material" />
         </mesh>
       </group>
 

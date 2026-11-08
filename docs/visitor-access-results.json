@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "Keyboard-accessible guide opens the actual System station",
+    "Dialog keyboard focus and Escape close",
+    "Resume and direct professional routes respond"
+  ],
+  "passed": true
+}

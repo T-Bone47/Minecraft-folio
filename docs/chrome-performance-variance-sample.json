@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-08T06:57:00.687Z",
+  "browser": "Chrome/158.0.8127.18",
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12450H",
+    "logicalCpus": 12,
+    "memoryGiB": 15.675926208496094,
+    "platform": "win32"
+  },
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "location": "Garage approach",
+  "samples": [
+    {
+      "preset": "LOW",
+      "count": 90,
+      "meanMs": 10.223333333333338,
+      "p95Ms": 20.800000000000182,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x000046A3) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "heapBytes": 27664570,
+      "stats": "ENGINEERING DIAGNOSTICS [F3]\n✕\nFPS:\n95\nFRAME TIME:\n10.6 ms\nDRAW CALLS:\n472\nTRIANGLES:\n91,602\nGEOMETRIES:\n332\nTEXTURES:\n48\nTEXTURE ESTIMATE: 13.53 MiB (RGBA+mips)\nENVIRONMENT:\nDAY\nFACILITY:\nGARAGE\nTIER:\nLOW\nWORLD MODE:\nEXPLORE\nPOSITION:\n[-12.0, 2.1, 4.0]"
+    },
+    {
+      "preset": "MED",
+      "count": 90,
+      "meanMs": 40.63444444441132,
+      "p95Ms": 27.80000000000109,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x000046A3) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "heapBytes": 37887402,
+      "stats": "ENGINEERING DIAGNOSTICS [F3]\n✕\nFPS:\n53\nFRAME TIME:\n19 ms\nDRAW CALLS:\n472\nTRIANGLES:\n91,602\nGEOMETRIES:\n736\nTEXTURES:\n49\nTEXTURE ESTIMATE: 13.53 MiB (RGBA+mips)\nENVIRONMENT:\nDAY\nFACILITY:\nGARAGE\nTIER:\nMEDIUM\nWORLD MODE:\nEXPLORE\nPOSITION:\n[-12.0, 2.1, 4.0]"
+    },
+    {
+      "preset": "HIGH",
+      "count": 90,
+      "meanMs": 21.161111111061434,
+      "p95Ms": 41.60000000000218,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x000046A3) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "heapBytes": 45057791,
+      "stats": "ENGINEERING DIAGNOSTICS [F3]\n✕\nFPS:\n45\nFRAME TIME:\n22 ms\nDRAW CALLS:\n471\nTRIANGLES:\n91,590\nGEOMETRIES:\n736\nTEXTURES:\n49\nTEXTURE ESTIMATE: 13.53 MiB (RGBA+mips)\nENVIRONMENT:\nDAY\nFACILITY:\nGARAGE\nTIER:\nHIGH\nWORLD MODE:\nEXPLORE\nPOSITION:\n[-12.0, 2.1, 4.0]"
+    }
+  ],
+  "errors": [],
+  "loadToHudMs": 932,
+  "passed": true
+}

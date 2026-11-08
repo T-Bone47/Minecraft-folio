@@ -1,4 +1,7 @@
 "use client";
+import { chromeEra } from "@/data/chromeEra";
+import { FacilityWalls } from "@/components/theme/FacilityWalls";
+
 
 import React, { useRef, useMemo, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -23,9 +26,9 @@ export const TeamOperationsHQ: React.FC<TeamOperationsHQProps> = ({
   // Register interactive operations station
   useEffect(() => {
     const terminalPos: [number, number, number] = [
-      position[0],
-      position[1] + 1.2,
-      position[2] + 6.6,
+      position[0] + 3.2,
+      position[1] + 1.7,
+      position[2],
     ];
 
     registerObject({
@@ -47,15 +50,15 @@ export const TeamOperationsHQ: React.FC<TeamOperationsHQProps> = ({
     return () => unregisterObject("operations_board");
   }, [position, registerObject, unregisterObject, inspectProject]);
 
-  const stoneBrickMat = useMemo(() => getVoxelMaterial("stone_bricks"), []);
-  const oakPlankMat = useMemo(() => getVoxelMaterial("oak_planks"), []);
+  const stoneBrickMat = useMemo(() => getVoxelMaterial("chrome_brushed"), []);
+  const oakPlankMat = useMemo(() => getVoxelMaterial("chrome_graphite"), []);
   const signMat = useMemo(
     () => getVoxelSignMaterial("TEAM OPERATIONS HQ", "F1 RACE MANAGER"),
     []
   );
   const glassMat = useMemo(
     () =>
-      getVoxelMaterial("glass", {
+      getVoxelMaterial("chrome_glass", {
         transparent: true,
         opacity: 0.65,
       }),
@@ -63,8 +66,8 @@ export const TeamOperationsHQ: React.FC<TeamOperationsHQProps> = ({
   );
   const glowstoneMat = useMemo(
     () =>
-      getVoxelMaterial("glowstone", {
-        emissive: new THREE.Color("#fab005"),
+      getVoxelMaterial("chrome_light", {
+        emissive: new THREE.Color(chromeEra.white),
         emissiveIntensity: 1.6,
       }),
     []
@@ -97,16 +100,13 @@ export const TeamOperationsHQ: React.FC<TeamOperationsHQProps> = ({
       }}
     >
       {/* 1. Stone Foundation (12x10 blocks) */}
-      <mesh position={[0, 0.25, 0]} receiveShadow>
+      <mesh position={[0, 0.28, 0]} receiveShadow>
         <boxGeometry args={[12, 0.5, 10]} />
         <primitive object={stoneBrickMat} attach="material" />
       </mesh>
 
       {/* 2. Lower Floor (Operations & Driver Management Hub) */}
-      <mesh position={[0, 2.0, 0]} castShadow receiveShadow>
-        <boxGeometry args={[11, 3.5, 9]} />
-        <primitive object={stoneBrickMat} attach="material" />
-      </mesh>
+      <FacilityWalls id="operations" height={3.3} />
 
       {/* Lower Glass Windows */}
       <mesh position={[0, 2.0, 4.55]} castShadow>
@@ -115,6 +115,7 @@ export const TeamOperationsHQ: React.FC<TeamOperationsHQProps> = ({
       </mesh>
 
       {/* 3. Mid-Level Balcony Slab (12x10) */}
+      <mesh position={[0, 3.7, 0]}><boxGeometry args={[4, .08, 3]} /><primitive object={glowstoneMat} attach="material" /></mesh>
       <mesh position={[0, 4.0, 0]} castShadow receiveShadow>
         <boxGeometry args={[12, 0.5, 10]} />
         <primitive object={stoneBrickMat} attach="material" />
@@ -200,7 +201,7 @@ export const TeamOperationsHQ: React.FC<TeamOperationsHQProps> = ({
       </group>
 
       {/* 7. Interactive Terminal Pedestal */}
-      <group position={[0, 0, 6.6]}>
+      <group position={[3.2, 0.5, 0]} rotation={[0, Math.PI, 0]}>
         <mesh position={[0, 0.5, 0]} castShadow>
           <boxGeometry args={[0.9, 1.0, 0.9]} />
           <primitive object={stoneBrickMat} attach="material" />
@@ -216,7 +217,7 @@ export const TeamOperationsHQ: React.FC<TeamOperationsHQProps> = ({
       </group>
 
       {/* 8. Physical Minecraft Sign: [ TEAM OPERATIONS HQ / F1 RACE MANAGER ] */}
-      <group position={[0, 2.0, 6.2]}>
+      <group position={[0, 3.2, -4.15]} rotation={[0, Math.PI, 0]}>
         <mesh castShadow>
           <boxGeometry args={[6.2, 1.0, 0.2]} />
           <primitive object={oakPlankMat} attach="material" />

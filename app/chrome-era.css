@@ -1,0 +1,27 @@
+/* Chrome Era semantic UI tokens. Terrain/data-channel colours remain independent. */
+:root{--bg-space:var(--chrome-carbon);--bg-surface:#20242B;--bg-card:var(--chrome-graphite);--border-subtle:#545B64;--border-accent:var(--chrome-red);--text-primary:var(--chrome-white);--accent-amber:var(--chrome-red);--accent-cyan:var(--chrome-silver)}
+body{background-color:var(--chrome-carbon)!important;color:var(--chrome-white)}
+.technical-grid-bg{background-image:linear-gradient(#c8cdd209 1px,transparent 1px),linear-gradient(90deg,#c8cdd209 1px,transparent 1px);background-size:32px 32px}
+.mc-panel-dark,.mc-gui-box{background:linear-gradient(145deg,#292d34ef,#171a20f5)!important;border-color:var(--chrome-metal)!important;color:var(--chrome-white);box-shadow:inset 2px 2px #e8ebed22,inset -2px -2px #05060888,0 5px 0 #080a0d}
+.mc-btn,.mc-btn-stone{background:linear-gradient(#454b54,#292d34)!important;border-color:#aab1b8 #11151b #11151b #aab1b8!important;color:var(--chrome-white)}
+.mc-btn-gold{background:linear-gradient(#d71d35,#a51125)!important;border-color:#f4b1ba #6c0a18 #6c0a18 #f4b1ba!important;color:var(--chrome-white)!important}
+.mc-btn:hover,.mc-btn-stone:hover{background:linear-gradient(#59616c,#353b44)!important}.mc-splash-text{color:var(--chrome-bright);text-shadow:2px 2px #750b19}
+[class~="text-[#ff8000]"],[class~="text-[#ffaa00]"],[class~="text-[#ff8800]"],[class~="text-[#00d2be]"]{color:var(--chrome-bright)!important}
+[class~="bg-[#ff8000]"],[class~="bg-[#ffaa00]"]{background-color:var(--chrome-red)!important}
+[class~="border-[#ff8000]"],[class~="border-[#00d2be]"]{border-color:var(--chrome-metal)!important}
+.font-pixel.text-yellow-300,.font-pixel.text-amber-300,.font-pixel.text-amber-400{color:var(--chrome-bright)}
+.frontier-station{background:linear-gradient(145deg,#292d34,#171a20);border-color:var(--chrome-metal);color:var(--chrome-white)}
+.frontier-station header{background:#20242b;border-color:var(--chrome-metal)}.frontier-station h2,.frontier-station h3,.visitor-content h3{color:var(--chrome-bright)}
+.frontier-station button,.frontier-station select,.frontier-actions a,.visitor-center button,.visitor-content button,.visitor-hud button{background:var(--chrome-graphite);border-color:var(--chrome-metal);color:var(--chrome-white)}
+.frontier-station button:hover,.frontier-actions a:hover{background:var(--chrome-deep-red)}.visitor-center button[aria-pressed=true],.visitor-content button[aria-pressed=true]{background:var(--chrome-deep-red);border-color:var(--chrome-silver)}
+.frontier-kicker{color:var(--chrome-silver)}.frontier-drive-progress,.cockpit-hud{background:#171a20ed;border-color:var(--chrome-metal);color:var(--chrome-white)}.cockpit-hud button{background:var(--chrome-graphite);border-color:var(--chrome-metal)}
+.frontier-nearby,.visitor-hud{background:#171a20ed;border-color:var(--chrome-metal)}.visitor-note{border-color:var(--chrome-red)}
+.visitor-center select,.frontier-audio,.frontier-audio-panel{background:var(--chrome-graphite);color:var(--chrome-white);border-color:var(--chrome-metal)}.frontier-station svg{background:#12161b}.frontier-station pre{background:#12161b}
+.frontier-touch button{background:#292d34e8;border-color:var(--chrome-silver);color:var(--chrome-white)}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--chrome-bright);outline-offset:3px}
+.mc-slot-active{box-shadow:0 0 0 2px var(--chrome-red),inset 2px 2px #e8ebed,inset -2px -2px #292d34!important}
+@media(prefers-reduced-motion:reduce){.mc-splash-text{animation:none}}
+
+.frontier-nearby strong{color:var(--chrome-bright)}.frontier-nearby button{background:var(--chrome-graphite);border-color:var(--chrome-metal);color:var(--chrome-white)}
+.chrome-interaction-prompt{position:fixed;left:50%;bottom:138px;transform:translateX(-50%);max-width:calc(100vw - 32px)}.chrome-interaction-prompt>button{padding:8px 14px}.chrome-interaction-prompt>button>div{font-size:10px}@media(max-width:640px){.chrome-interaction-prompt{bottom:138px;width:calc(100vw - 32px)}.chrome-interaction-prompt>button{width:100%}}
+.mc-sign{background:linear-gradient(145deg,var(--chrome-graphite),var(--chrome-carbon));border-color:var(--chrome-metal);color:var(--chrome-white)}

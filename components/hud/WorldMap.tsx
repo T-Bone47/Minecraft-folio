@@ -20,8 +20,8 @@ export const WorldMap: React.FC = () => {
 
   // Map world coordinate [-40, 40] to SVG viewBox [0, 400]
   const mapCoord = (x: number, z: number) => {
-    const svgX = ((x + 40) / 80) * 400;
-    const svgY = ((z + 40) / 80) * 400;
+    const svgX = ((x + 55) / 110) * 400;
+    const svgY = ((z + 55) / 110) * 400;
     return { x: svgX, y: svgY };
   };
 
@@ -40,9 +40,10 @@ export const WorldMap: React.FC = () => {
     const fac = facilities.find((f) => f.id === facId);
     if (fac) {
       focusLocation(fac.id);
+      const [sx, , sz] = fac.approachPosition;
       setTargetTransform(
-        [fac.coordinates[0], fac.coordinates[1] + 1.65, fac.coordinates[2] + 4],
-        fac.coordinates
+        [sx, fac.coordinates[1] + 1.65, sz],
+        fac.approachLookAt
       );
       setMinimapOpen(false);
     }
@@ -51,6 +52,7 @@ export const WorldMap: React.FC = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 font-silkscreen select-none">
       <div className="w-full max-w-4xl mc-panel-dark border-4 border-[#52525b] shadow-2xl p-5 md:p-7 relative">
+        <button className="mc-btn p-2 mb-2" onClick={() => { useWorldStore.getState().setMode("explore");setTargetTransform([-12,2.15,4],[-12,1.4,-8]);setMinimapOpen(false); }}>Return to spawn</button>
         {/* Header */}
         <div className="flex items-center justify-between border-b-2 border-zinc-700 pb-3 mb-4">
           <div className="flex items-center gap-2">

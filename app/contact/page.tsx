@@ -164,14 +164,14 @@ export default function ContactPage() {
 
         {/* Command Block Transmission Panel */}
         <section className="mc-command-block p-6 sm:p-8 space-y-4 font-mono shadow-[0_0_24px_rgba(157,113,184,0.3)]">
-          <div className="flex items-center justify-between border-b-2 border-[#140f1a] pb-3">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#140f1a] pb-3">
+            <div className="flex min-w-0 items-center gap-2">
               <span className="w-2.5 h-2.5 bg-[#9d71b8] border border-purple-300 shadow-[0_0_6px_#c084fc]" />
               <span className="font-pixel text-xs text-white mc-text-shadow">
                 COMMAND BLOCK // PROTOCOL TRANSMISSION
               </span>
             </div>
-            <span className="font-pixel text-[9px] text-purple-300 bg-purple-950/80 px-2 py-0.5 border border-purple-700 mc-text-shadow">
+            <span className="max-w-full break-all font-pixel text-[9px] text-purple-300 bg-purple-950/80 px-2 py-0.5 border border-purple-700 mc-text-shadow">
               COMMAND_BLOCK_IMPULSE
             </span>
           </div>

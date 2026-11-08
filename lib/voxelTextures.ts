@@ -1,3 +1,4 @@
+import { chromeEra, chromeSurfaces } from "@/data/chromeEra";
 import * as THREE from "three";
 
 // Cache generated canvas textures so they are created only once
@@ -39,6 +40,22 @@ export function getVoxelTexture(name: string): THREE.CanvasTexture {
   }
 
   let tex: THREE.CanvasTexture;
+
+  const surface = chromeSurfaces[name];
+  if (surface) {
+    const tex = createPixelCanvas((ctx,size)=>{
+      ctx.fillStyle=surface.base;ctx.fillRect(0,0,size,size);
+      for(let y=0;y<size;y++)for(let x=0;x<size;x++){
+        const grain=pseudoNoise(x,y,43);ctx.fillStyle=grain>.5?'rgba(255,255,255,.07)':'rgba(0,0,0,.06)';ctx.fillRect(x,y,1,1);
+        if(surface.pattern==='carbon'){ctx.fillStyle=(Math.floor(x/2)+Math.floor(y/2))%2?'#1D2229':'#11151B';ctx.fillRect(x,y,1,1);}
+      }
+      if(surface.pattern==='metal'){ctx.fillStyle='rgba(255,255,255,.16)';ctx.fillRect(1,1,size-2,1);ctx.fillRect(1,6,size-2,1);ctx.fillStyle='rgba(0,0,0,.22)';ctx.fillRect(0,size-1,size,1);ctx.fillRect(size-1,0,1,size);}
+      if(surface.pattern==='floor'){ctx.fillStyle='#434A52';ctx.fillRect(0,0,size,1);ctx.fillRect(0,0,1,size);ctx.fillStyle='#A6ADB3';ctx.fillRect(2,2,1,1);ctx.fillRect(size-3,size-3,1,1);}
+      if(surface.pattern==='light'){ctx.fillStyle=chromeEra.white;ctx.fillRect(1,1,size-2,size-2);}
+      if(surface.pattern==='glass'){ctx.fillStyle='#87939D';ctx.fillRect(0,0,size,1);ctx.fillRect(0,0,1,size);}
+    });
+    tex.colorSpace=THREE.SRGBColorSpace;textureCache.set(name,tex);return tex;
+  }
 
   switch (name) {
     case "grass_top":
@@ -626,6 +643,262 @@ export function getVoxelTexture(name: string): THREE.CanvasTexture {
       });
       break;
 
+    case "avatar_hair_dark":
+      tex = createPixelCanvas((ctx, size) => {
+        const hair = ["#17161c", "#211f27", "#2b2933", "#131217", "#32303c", "#1c1a21"];
+        for (let x = 0; x < size; x++) {
+          for (let y = 0; y < size; y++) {
+            const idx = Math.floor(pseudoNoise(x, y, 1085) * hair.length);
+            ctx.fillStyle = hair[idx]!;
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+        // Subtle highlight sweep across top
+        ctx.fillStyle = "rgba(100, 105, 125, 0.22)";
+        ctx.fillRect(2, 2, size - 4, 2);
+      });
+      break;
+
+    case "avatar_dev_face":
+      tex = createPixelCanvas((ctx, size) => {
+        const skin = ["#e7b894", "#dba987", "#f0c2a3", "#d49a78", "#e0b08c"];
+        for (let x = 0; x < size; x++) {
+          for (let y = 0; y < size; y++) {
+            const idx = Math.floor(pseudoNoise(x, y, 1070) * skin.length);
+            ctx.fillStyle = skin[idx]!;
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+        // Confident Eyebrows
+        ctx.fillStyle = "#1e1d24";
+        ctx.fillRect(3, 4, 4, 1);
+        ctx.fillRect(9, 4, 4, 1);
+        // Eyes: White sclera
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(3, 6, 4, 3);
+        ctx.fillRect(9, 6, 4, 3);
+        // Irises & Pupils
+        ctx.fillStyle = "#1a1612";
+        ctx.fillRect(5, 6, 2, 3);
+        ctx.fillRect(9, 6, 2, 3);
+        // Papaya orange iris reflex
+        ctx.fillStyle = "#ff7a00";
+        ctx.fillRect(6, 8, 1, 1);
+        ctx.fillRect(10, 8, 1, 1);
+        // Pupil catchlight
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(5, 6, 1, 1);
+        ctx.fillRect(9, 6, 1, 1);
+        // Nose shadow
+        ctx.fillStyle = "rgba(180, 110, 80, 0.45)";
+        ctx.fillRect(7, 9, 2, 2);
+        // Mouth smirk
+        ctx.fillStyle = "#8a5840";
+        ctx.fillRect(6, 12, 4, 1);
+        ctx.fillRect(9, 11, 1, 1);
+      });
+      break;
+
+    case "avatar_glasses":
+      tex = createPixelCanvas((ctx, size) => {
+        ctx.clearRect(0, 0, size, size);
+        // Black acetate frames
+        ctx.fillStyle = "#0c0d10";
+        // Left rim
+        ctx.fillRect(2, 4, 5, 1);
+        ctx.fillRect(2, 8, 5, 1);
+        ctx.fillRect(2, 4, 1, 5);
+        ctx.fillRect(6, 4, 1, 5);
+        // Right rim
+        ctx.fillRect(9, 4, 5, 1);
+        ctx.fillRect(9, 8, 5, 1);
+        ctx.fillRect(9, 4, 1, 5);
+        ctx.fillRect(13, 4, 1, 5);
+        // Bridge
+        ctx.fillRect(6, 5, 3, 1);
+        // Anti-reflective blue/cyan lens tint
+        ctx.fillStyle = "rgba(6, 182, 212, 0.4)";
+        ctx.fillRect(3, 5, 3, 3);
+        ctx.fillRect(10, 5, 3, 3);
+        // Glare highlight diagonal
+        ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+        ctx.fillRect(4, 5, 1, 1);
+        ctx.fillRect(11, 5, 1, 1);
+      });
+      break;
+
+    case "avatar_hoodie_dark":
+      tex = createPixelCanvas((ctx, size) => {
+        const hoodie = ["#18191d", "#22242a", "#141518", "#2a2d34", "#1d1f25"];
+        for (let x = 0; x < size; x++) {
+          for (let y = 0; y < size; y++) {
+            const idx = Math.floor(pseudoNoise(x, y, 1092) * hoodie.length);
+            ctx.fillStyle = hoodie[idx]!;
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+        // Subtle seams
+        ctx.fillStyle = "rgba(0,0,0,0.3)";
+        ctx.fillRect(0, size - 2, size, 2);
+      });
+      break;
+
+    case "avatar_hoodie_back_print":
+      tex = createPixelCanvas((ctx, size) => {
+        // Base hoodie fabric
+        const hoodie = ["#16171b", "#1f2126", "#121316", "#262830"];
+        for (let x = 0; x < size; x++) {
+          for (let y = 0; y < size; y++) {
+            const idx = Math.floor(pseudoNoise(x, y, 1095) * hoodie.length);
+            ctx.fillStyle = hoodie[idx]!;
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+        // Terminal window header bar
+        ctx.fillStyle = "#2c2f37";
+        ctx.fillRect(2, 2, size - 4, 2);
+        ctx.fillStyle = "#ff5555";
+        ctx.fillRect(3, 2, 1, 1);
+        ctx.fillStyle = "#C8CDD2";
+        ctx.fillRect(5, 2, 1, 1);
+        ctx.fillStyle = "#50fa7b";
+        ctx.fillRect(7, 2, 1, 1);
+
+        // Terminal prompt ">_" in glowing cyan
+        ctx.fillStyle = "#D71D35";
+        ctx.fillRect(3, 6, 1, 3);
+        ctx.fillRect(4, 7, 1, 1);
+        ctx.fillRect(6, 8, 3, 1); // cursor underscore
+
+        // "{ 47 }" developer logo in papaya orange
+        ctx.fillStyle = "#ff7a00";
+        // Left curly brace {
+        ctx.fillRect(3, 11, 2, 1);
+        ctx.fillRect(3, 12, 1, 1);
+        ctx.fillRect(2, 13, 1, 1);
+        ctx.fillRect(3, 14, 1, 1);
+        ctx.fillRect(3, 15, 2, 1);
+        // "47"
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(6, 11, 1, 3);
+        ctx.fillRect(7, 13, 2, 1);
+        ctx.fillRect(8, 11, 1, 5); // 4
+        ctx.fillRect(10, 11, 3, 1);
+        ctx.fillRect(12, 12, 1, 2);
+        ctx.fillRect(11, 14, 1, 2); // 7
+        // Right curly brace }
+        ctx.fillStyle = "#ff7a00";
+        ctx.fillRect(14, 11, 2, 1);
+        ctx.fillRect(14, 12, 1, 1);
+        ctx.fillRect(15, 13, 1, 1);
+        ctx.fillRect(14, 14, 1, 1);
+        ctx.fillRect(14, 15, 2, 1);
+      });
+      break;
+
+    case "avatar_backpack":
+      tex = createPixelCanvas((ctx, size) => {
+        // Carbon-weave tech fabric
+        for (let x = 0; x < size; x++) {
+          for (let y = 0; y < size; y++) {
+            const isWeave = (x + y) % 2 === 0;
+            ctx.fillStyle = isWeave ? "#1e2126" : "#131518";
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+        // Vertical utility webbing straps
+        ctx.fillStyle = "#0c0d10";
+        ctx.fillRect(3, 0, 2, size);
+        ctx.fillRect(11, 0, 2, size);
+        // Papaya carabiner clip
+        ctx.fillStyle = "#ff7a00";
+        ctx.fillRect(3, 10, 2, 2);
+      });
+      break;
+
+    case "avatar_backpack_glow":
+      tex = createPixelCanvas((ctx, size) => {
+        // Status LED bar background
+        ctx.fillStyle = "#081b26";
+        ctx.fillRect(0, 0, size, size);
+        // Active glowing cyan LED segments
+        ctx.fillStyle = "#D71D35";
+        ctx.fillRect(1, 2, 3, size - 4);
+        ctx.fillRect(5, 2, 3, size - 4);
+        ctx.fillRect(9, 2, 3, size - 4);
+        // Last segment dim
+        ctx.fillStyle = "#0369a1";
+        ctx.fillRect(13, 2, 2, size - 4);
+      });
+      break;
+
+    case "avatar_smartwatch":
+      tex = createPixelCanvas((ctx, size) => {
+        // Matte black chassis
+        ctx.fillStyle = "#0a0c0f";
+        ctx.fillRect(0, 0, size, size);
+        // AMOLED bezel
+        ctx.fillStyle = "#11141a";
+        ctx.fillRect(2, 2, size - 4, size - 4);
+        // Cyan telemetry waveform & digital clock
+        ctx.fillStyle = "#D71D35";
+        ctx.fillRect(3, 4, 3, 1);
+        ctx.fillRect(7, 4, 3, 1);
+        // Pulse line
+        ctx.fillRect(3, 8, 2, 1);
+        ctx.fillRect(5, 7, 1, 3);
+        ctx.fillRect(6, 6, 1, 4);
+        ctx.fillRect(7, 8, 2, 1);
+        ctx.fillRect(9, 9, 1, 2);
+        ctx.fillRect(10, 8, 3, 1);
+      });
+      break;
+
+    case "avatar_sneaker_sole":
+      tex = createPixelCanvas((ctx, size) => {
+        // Clean white chunky runner midsole
+        const white = ["#ffffff", "#f8fafc", "#f1f5f9", "#e2e8f0"];
+        for (let x = 0; x < size; x++) {
+          for (let y = 0; y < size; y++) {
+            const idx = Math.floor(pseudoNoise(x, y, 1105) * white.length);
+            ctx.fillStyle = white[idx]!;
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+        // Papaya orange air cushion pod in heel
+        ctx.fillStyle = "#ff7a00";
+        ctx.fillRect(1, 4, 5, 6);
+        ctx.fillStyle = "#ffa94d";
+        ctx.fillRect(2, 5, 3, 4);
+        // Bottom rubber grip tread
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(0, size - 3, size, 3);
+      });
+      break;
+
+    case "avatar_sneaker_upper":
+      tex = createPixelCanvas((ctx, size) => {
+        // Dark breathable tech mesh
+        const mesh = ["#181a1f", "#21242c", "#121417", "#2a2e38"];
+        for (let x = 0; x < size; x++) {
+          for (let y = 0; y < size; y++) {
+            const idx = Math.floor(pseudoNoise(x, y, 1110) * mesh.length);
+            ctx.fillStyle = mesh[idx]!;
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+        // Racing dynamic diagonal stripes
+        ctx.fillStyle = "#ff7a00";
+        ctx.fillRect(4, 2, 2, 4);
+        ctx.fillRect(5, 5, 2, 4);
+        // Cyan lace loops
+        ctx.fillStyle = "#D71D35";
+        ctx.fillRect(8, 2, 2, 1);
+        ctx.fillRect(8, 5, 2, 1);
+        ctx.fillRect(8, 8, 2, 1);
+      });
+      break;
+
     default:
       tex = createPixelCanvas((ctx, size) => {
         ctx.fillStyle = "#7a7a7a";
@@ -650,8 +923,10 @@ export function getVoxelMaterial(name: string, extraProps: THREE.MeshStandardMat
   const texture = getVoxelTexture(name);
   const mat = new THREE.MeshStandardMaterial({
     map: texture,
-    roughness: 0.9,
-    metalness: 0.1,
+    roughness: chromeSurfaces[name]?.roughness ?? 0.9,
+    metalness: chromeSurfaces[name]?.metalness ?? 0.1,
+    ...(name === "chrome_light" ? {emissive:new THREE.Color(chromeEra.white),emissiveIntensity:0.8}:{}),
+    ...(name === "chrome_glass" ? {transparent:true,opacity:0.4}:{}),
     ...extraProps,
   });
 
@@ -706,37 +981,16 @@ export function createVoxelSignTexture(title: string, subtitle: string): THREE.C
   const ctx = canvas.getContext("2d")!;
   ctx.imageSmoothingEnabled = false;
 
-  // Oak wood background
-  ctx.fillStyle = "#8a5f36";
-  ctx.fillRect(0, 0, 512, 128);
-  ctx.fillStyle = "#a17446";
-  ctx.fillRect(4, 4, 504, 120);
-
-  // Subtle wood grain lines
-  ctx.fillStyle = "#78502b";
-  ctx.fillRect(4, 32, 504, 2);
-  ctx.fillRect(4, 64, 504, 2);
-  ctx.fillRect(4, 96, 504, 2);
-
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-
-  // Drop shadow
-  ctx.fillStyle = "#2c1c0f";
-  ctx.font = "bold 26px monospace";
-  ctx.fillText(title, 258, 46);
-  ctx.font = "bold 17px monospace";
-  ctx.fillText(subtitle, 258, 86);
-
-  // Foreground text (warm parchment gold & white)
-  ctx.fillStyle = "#fff8db";
-  ctx.font = "bold 26px monospace";
-  ctx.fillText(title, 256, 44);
-  ctx.fillStyle = "#ffd580";
-  ctx.font = "bold 17px monospace";
-  ctx.fillText(subtitle, 256, 84);
+  ctx.fillStyle=chromeEra.carbon;ctx.fillRect(0,0,512,128);
+  ctx.fillStyle=chromeEra.metal;ctx.fillRect(3,3,506,122);
+  ctx.fillStyle=chromeEra.graphite;ctx.fillRect(6,6,500,116);
+  ctx.fillStyle=chromeEra.red;ctx.fillRect(8,8,7,112);
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillStyle=chromeEra.white;ctx.font='bold 25px monospace';ctx.fillText(title,264,44,470);
+  ctx.fillStyle=chromeEra.silver;ctx.font='bold 16px monospace';ctx.fillText(subtitle,264,84,470);
 
   const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
   texture.magFilter = THREE.NearestFilter;
   texture.minFilter = THREE.NearestFilter;
   textureCache.set(cacheKey, texture);
@@ -744,12 +998,17 @@ export function createVoxelSignTexture(title: string, subtitle: string): THREE.C
 }
 
 export function getVoxelSignMaterial(title: string, subtitle: string): THREE.MeshStandardMaterial {
+  const key = `sign:${title}:${subtitle}`;
+  const cached = materialCache.get(key);
+  if(cached) return cached;
   const tex = createVoxelSignTexture(title, subtitle);
-  return new THREE.MeshStandardMaterial({
+  const material = new THREE.MeshStandardMaterial({
     map: tex,
     roughness: 0.9,
     metalness: 0.05,
   });
+  materialCache.set(key, material);
+  return material;
 }
 
 

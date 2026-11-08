@@ -2,9 +2,10 @@
 
 import React, { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { profileData } from "@/data/profile";
 import { worldSound } from "@/lib/audio";
-import { X, ExternalLink, Mail, Github, Linkedin, MapPin, GraduationCap, Wrench, Briefcase } from "lucide-react";
+import { X, ExternalLink, Mail, Github, Linkedin, MapPin, GraduationCap, Wrench, Briefcase, FileText } from "lucide-react";
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -115,6 +116,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
           </div>
         </div>
 
+        <Link href="/avatar" className="inline-block mb-4 underline text-zinc-100">Inspect the ASISH Race Engineer in 3D →</Link>
         {/* Content Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
           {/* Left: Experience & Education */}
@@ -210,7 +212,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               <div className="font-silkscreen text-xs text-zinc-300 font-bold mb-2">
                 VERIFIED LINKS
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 <a
                   href={profileData.links.github}
                   target="_blank"
@@ -238,6 +240,15 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
                 >
                   <Mail className="w-4 h-4 text-emerald-400" />
                   <span>EMAIL</span>
+                </a>
+                <a
+                  href="/Asish_Oliver_M_Resume.pdf"
+                  download="Asish_Oliver_M_Resume.pdf"
+                  onClick={() => worldSound.playClick()}
+                  className="mc-btn p-2 text-center text-[10px] font-mono flex flex-col items-center justify-center gap-1 text-sky-300 hover:text-white !bg-sky-950/60 border-sky-600"
+                >
+                  <FileText className="w-4 h-4 text-sky-400" />
+                  <span>RESUME</span>
                 </a>
               </div>
             </div>

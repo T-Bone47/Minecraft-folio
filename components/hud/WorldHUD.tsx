@@ -1,5 +1,7 @@
 "use client";
 
+
+import { gameplayBlocked, typingTarget } from "@/lib/frontier/input";
 import React, { useEffect, useState, useCallback } from "react";
 import { useWorldStore } from "@/state/worldStore";
 import { useCameraStore } from "@/state/cameraStore";
@@ -8,6 +10,11 @@ import { facilities, getFacilityById } from "@/data/facilities";
 import { ProjectDirectory } from "./ProjectDirectory";
 import { StationModal } from "./StationModal";
 import { ProfileModal } from "../profile/ProfileModal";
+import { AdvancementToasts } from "./AdvancementToasts";
+import { AdvancementsModal } from "./AdvancementsModal";
+import { F1DrivingHUD } from "./F1DrivingHUD";
+import { DroneTourOverlay } from "./DroneTourOverlay";
+import { useAdvancementStore } from "@/state/advancementStore";
 import { worldSound } from "@/lib/audio";
 import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import {
@@ -23,6 +30,15 @@ import {
   Search,
   User,
   Gauge,
+  FileText,
+  Eye,
+  ChevronUp,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Zap,
+  Trophy,
+  Video,
 } from "lucide-react";
 
 
@@ -50,19 +66,32 @@ const HOTBAR_ITEMS: HotbarItem[] = [
 /** Eye height above the feet, matching the first-person controller. */
 const EYE_HEIGHT = 1.65;
 
+function PlayerCoordinatesDisplay() {
+  const playerPosition = useWorldStore((s) => s.playerPosition);
+  return (
+    <div className="text-zinc-400 font-mono text-[10px]">
+      XYZ: {playerPosition[0].toFixed(1)} / {playerPosition[1].toFixed(1)} /{" "}
+      {playerPosition[2].toFixed(1)}
+    </div>
+  );
+}
+
 export const WorldHUD: React.FC = () => {
-  const {
-    mode,
-    activeLocation,
-    nearbyTarget,
-    inspectProject,
-    closeInspection,
-    focusLocation,
-    audioEnabled,
-    toggleAudio,
-    playerPosition,
-    deviceTier,
-  } = useWorldStore();
+  const mode = useWorldStore((s) => s.mode);
+  const activeLocation = useWorldStore((s) => s.activeLocation);
+  const nearbyTarget = useWorldStore((s) => s.nearbyTarget);
+  const inspectProject = useWorldStore((s) => s.inspectProject);
+  const closeInspection = useWorldStore((s) => s.closeInspection);
+  const focusLocation = useWorldStore((s) => s.focusLocation);
+  const audioEnabled = useWorldStore((s) => s.audioEnabled);
+  const toggleAudio = useWorldStore((s) => s.toggleAudio);
+  const deviceTier = useWorldStore((s) => s.deviceTier);
+  const perspective = useWorldStore((s) => s.perspective);
+  const togglePerspective = useWorldStore((s) => s.togglePerspective);
+  const isDriving = useWorldStore((s) => s.isDriving);
+  const f1Telemetry = useWorldStore((s) => s.f1Telemetry);
+  const isDroneTourActive = useWorldStore((s) => s.isDroneTourActive);
+  const startDroneTour = useWorldStore((s) => s.startDroneTour);
   const { setTargetTransform } = useCameraStore();
   const {
     minimapOpen,
@@ -74,16 +103,22 @@ export const WorldHUD: React.FC = () => {
     togglePerformanceHUD,
     qualityTierOverride,
     setQualityTierOverride,
+    timeOfDay,
+    setTimeOfDay,
   } = useSettingsStore();
 
+  const unlockAdvancement = useAdvancementStore((s) => s.unlockAdvancement);
+  const openAdvancementsModal = useAdvancementStore((s) => s.openModal);
+
   const [activeSlot, setActiveSlot] = useState(0);
-  const [directoryOpen, setDirectoryOpen] = useState(false);
+  const { directoryOpen, setDirectoryOpen } = useSettingsStore();
   const [showSpawnObjective, setShowSpawnObjective] = useState(true);
 
   useEffect(() => {
+    unlockAdvancement("FIRST_FOOTPRINT");
     const timer = setTimeout(() => setShowSpawnObjective(false), 7000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [unlockAdvancement]);
 
   const currentFacility = activeLocation ? getFacilityById(activeLocation) : null;
   const activeQuality = resolveQualityProfile(qualityTierOverride, deviceTier);
@@ -92,6 +127,7 @@ export const WorldHUD: React.FC = () => {
   const selectSlot = useCallback(
     (index: number) => {
       setActiveSlot(index);
+      useWorldStore.getState().setActiveHotbarSlot(index);
       worldSound.playClick();
       const item = HOTBAR_ITEMS[index];
       if (!item) return;
@@ -108,20 +144,22 @@ export const WorldHUD: React.FC = () => {
       }
 
       if (item.facilityId) {
+        if (item.facilityId === "telemetry") unlockAdvancement("TELEMETRY_UPLINK");
+        if (item.facilityId === "simulation") unlockAdvancement("LAP_SOLVER");
+        if (item.facilityId === "operations") unlockAdvancement("PIT_STRATEGIST");
+        if (item.facilityId === "aiml") unlockAdvancement("AI_ARCHITECT");
+
         focusLocation(item.facilityId);
         const fac = getFacilityById(item.facilityId);
         if (fac) {
-          // Stand just outside the facility's frontage and look at it. The
-          // eye height comes from the terrain model so fast travel never
-          // drops the player inside a hill or below the ground.
-          const [fx, , fz] = fac.coordinates;
-          const approachZ = fz + 4;
-          const eyeY = getTerrainSurfaceY(fx, approachZ) + EYE_HEIGHT;
-          setTargetTransform([fx, eyeY, approachZ], fac.coordinates);
+          // Land at the facility's safe approach position clear of all walls and obstacles.
+          const [sx, , sz] = fac.approachPosition;
+          const eyeY = getTerrainSurfaceY(sx, sz) + EYE_HEIGHT;
+          setTargetTransform([sx, eyeY, sz], fac.approachLookAt);
         }
       }
     },
-    [focusLocation, setTargetTransform]
+    [focusLocation, setTargetTransform, unlockAdvancement, setDirectoryOpen]
   );
 
   const handleToggleAudio = () => {
@@ -133,6 +171,8 @@ export const WorldHUD: React.FC = () => {
   // Keyboard shortcuts (1-7 for hotbar, E for inspect, M for map, I for inventory, P for profile, etc.)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat || typingTarget(e.target) || useWorldStore.getState().isDriving) return;
+      if (gameplayBlocked() && !["Escape", "m", "M", "i", "I", "p", "P"].includes(e.key)) return;
       if (
         document.activeElement instanceof HTMLInputElement ||
         document.activeElement instanceof HTMLTextAreaElement
@@ -148,7 +188,9 @@ export const WorldHUD: React.FC = () => {
       }
 
       if (e.key === "e" || e.key === "E") {
-        if (nearbyTarget?.projectSlug) {
+        if (nearbyTarget?.action) {
+          nearbyTarget.action();
+        } else if (nearbyTarget?.projectSlug) {
           inspectProject(nearbyTarget.projectSlug);
         } else if (currentFacility?.projectSlug && mode !== "inspect") {
           inspectProject(currentFacility.projectSlug);
@@ -159,6 +201,13 @@ export const WorldHUD: React.FC = () => {
         setDirectoryOpen(!directoryOpen);
       } else if (e.key === "m" || e.key === "M") {
         setMinimapOpen(!minimapOpen);
+      } else if (e.key === "t" || e.key === "T") {
+        startDroneTour();
+      } else if (e.key === "l" || e.key === "L") {
+        openAdvancementsModal();
+      } else if (e.key === "n" || e.key === "N") {
+        const next = timeOfDay === "day" ? "sunset" : timeOfDay === "sunset" ? "night" : "day";
+        setTimeOfDay(next);
       } else if (e.key === "/" || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k")) {
         e.preventDefault();
         setCommandPaletteOpen(!commandPaletteOpen);
@@ -183,6 +232,7 @@ export const WorldHUD: React.FC = () => {
     currentFacility,
     mode,
     directoryOpen,
+    setDirectoryOpen,
     profileModalOpen,
     setProfileModalOpen,
     minimapOpen,
@@ -193,32 +243,40 @@ export const WorldHUD: React.FC = () => {
     setCommandPaletteOpen,
     togglePerformanceHUD,
     selectSlot,
+    startDroneTour,
+    openAdvancementsModal,
+    timeOfDay,
+    setTimeOfDay,
   ]);
 
   if (mode === "boot") return null;
+  if (isDriving) return <><F1DrivingHUD {...f1Telemetry} /><StationModal /></>;
 
   return (
     <>
       <div className="pointer-events-none fixed inset-0 z-30 flex flex-col justify-between p-3 md:p-5 select-none font-silkscreen text-xs">
-        {/* 1. Center Crosshair (classic Minecraft style) */}
-        {mode === "explore" && <div className="mc-crosshair" />}
+        {/* 1. Center Crosshair (classic Minecraft style in First-Person) */}
+        {mode === "explore" && perspective === "first-person" && (
+          <div className="mc-crosshair" />
+        )}
 
         {/* 2. TOP BAR */}
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-wrap items-start justify-between gap-2">
           {/* Top-Left: Minecraft F3-style Coordinates & Biome Readout */}
-          <div className="pointer-events-auto mc-panel-dark px-3.5 py-2.5 text-[11px] leading-relaxed text-zinc-300">
+          <div className="pointer-events-auto shrink-0 mc-panel-dark px-3.5 py-2.5 text-[11px] leading-relaxed text-zinc-300">
             <div className="flex items-center gap-2 mb-1">
               <span className="w-2 h-2 rounded-none bg-emerald-400 animate-pulse inline-block" />
               <span className="font-pixel text-[9px] text-amber-300 tracking-wider">
                 ASISH OLIVER M // WORLD
               </span>
             </div>
-            <div className="text-zinc-400 font-mono text-[10px]">
-              XYZ: {playerPosition[0].toFixed(1)} / {playerPosition[1].toFixed(1)} /{" "}
-              {playerPosition[2].toFixed(1)}
-            </div>
+            <PlayerCoordinatesDisplay />
             <div className="text-zinc-400 text-[10px]">
               Biome: <span className="text-emerald-300">Motorsport Island</span>
+            </div>
+            <div className="text-zinc-400 text-[10px]">
+              Camera:{" "}
+              <span className="text-amber-300 font-bold uppercase">{perspective}</span>
             </div>
             {currentFacility && (
               <div className="text-zinc-300 text-[10px]">
@@ -228,13 +286,66 @@ export const WorldHUD: React.FC = () => {
           </div>
 
           {/* Top-Right: Controls & Quick Nav Bar */}
-          <div className="pointer-events-auto hidden sm:flex flex-col items-end gap-1.5">
+          <div className="pointer-events-auto hidden sm:flex min-w-0 max-w-[65%] flex-col items-end gap-1.5">
             <div className="mc-panel-dark px-3 py-2 text-[10px] text-zinc-300 text-right">
-              <div>WASD : Move | SPACE : Jump</div>
+              <div>WASD : Move | SPACE : Jump | V : Perspective</div>
               <div>CLICK WORLD : Mouse Look | ESC : Unlock</div>
-              <div className="text-amber-400 mt-0.5">E : Inspect | I : Inventory</div>
+              <div className="text-amber-400 mt-0.5">E : Inspect | I : Inventory | M : Map</div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap justify-end items-center gap-2 max-w-[min(100%,700px)]">
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  togglePerspective();
+                }}
+                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-amber-300 hover:text-white"
+                title="Toggle First-Person / Third-Person (V)"
+              >
+                <Eye className="w-3 h-3 text-amber-400" />
+                <span>[V] {perspective === "first-person" ? "1ST" : "3RD"}</span>
+              </button>
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  startDroneTour();
+                }}
+                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-red-300 hover:text-white !bg-red-950/60 border-red-500/60"
+                title="45-Second Recruiter Drone Tour (T)"
+              >
+                <Video className="w-3 h-3 text-red-400" />
+                <span>[T] TOUR</span>
+              </button>
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  openAdvancementsModal();
+                }}
+                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-amber-300 hover:text-white !bg-amber-950/60 border-amber-500/60"
+                title="Engineering Advancements (L)"
+              >
+                <Trophy className="w-3 h-3 text-amber-400" />
+                <span>[L] AWARDS</span>
+              </button>
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  const next = timeOfDay === "day" ? "sunset" : timeOfDay === "sunset" ? "night" : "day";
+                  setTimeOfDay(next);
+                }}
+                className="mc-btn px-2 py-1 text-[9px] flex items-center gap-1 text-sky-200 hover:text-white"
+                title="Toggle Time of Day (N)"
+              >
+                <span>{timeOfDay === "day" ? "☀️ DAY" : timeOfDay === "sunset" ? "🌇 DUSK" : "🌙 NIGHT"}</span>
+              </button>
+              <a
+                href="/Asish_Oliver_M_Resume.pdf"
+                download="Asish_Oliver_M_Resume.pdf"
+                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-sky-300 hover:text-white !bg-sky-950/70 border-sky-500/60"
+                title="Download Resume (PDF)"
+              >
+                <FileText className="w-3 h-3 text-sky-400" />
+                <span>RESUME</span>
+              </a>
               <button
                 onClick={() => setProfileModalOpen(true)}
                 className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-amber-300 hover:text-white"
@@ -266,17 +377,7 @@ export const WorldHUD: React.FC = () => {
                 <Search className="w-3 h-3 text-emerald-300" />
                 <span>[⌘K] CMD</span>
               </button>
-              <button
-                onClick={handleToggleAudio}
-                className="mc-btn p-1 text-[9px]"
-                title={audioEnabled ? "Audio On" : "Audio Muted"}
-              >
-                {audioEnabled ? (
-                  <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
-                ) : (
-                  <VolumeX className="w-3.5 h-3.5 text-zinc-500" />
-                )}
-              </button>
+              
               {/* Manual render quality. The detected device tier is only a
                   guess, so visitors on capable hardware can override it. */}
               <div
@@ -326,7 +427,7 @@ export const WorldHUD: React.FC = () => {
         )}
 
         {nearbyTarget && mode === "explore" && (
-          <div className="self-center mb-8 pointer-events-auto animate-bounce">
+          <div className="chrome-interaction-prompt pointer-events-auto">
             <button
               onClick={() => nearbyTarget.action()}
               className="mc-panel-dark border-2 border-amber-400 px-5 py-3 text-center cursor-pointer hover:scale-105 transition-transform"
@@ -368,7 +469,7 @@ export const WorldHUD: React.FC = () => {
           </div>
 
           {/* The 8-Slot Minecraft Hotbar */}
-          <div className="pointer-events-auto flex items-center gap-1.5 p-1.5 bg-zinc-900/90 border-2 border-zinc-700 shadow-2xl">
+          <div className="frontier-hotbar pointer-events-auto flex items-center gap-1.5 p-1.5 bg-zinc-900/90 border-2 border-zinc-700 shadow-2xl">
             {HOTBAR_ITEMS.map((item, idx) => (
               <button
                 key={item.key}
@@ -395,6 +496,8 @@ export const WorldHUD: React.FC = () => {
             </span>
           </div>
         </div>
+
+
       </div>
 
       {/* Minecraft Project Inventory Directory Modal */}
@@ -411,6 +514,18 @@ export const WorldHUD: React.FC = () => {
         isOpen={profileModalOpen}
         onClose={() => setProfileModalOpen(false)}
       />
+
+      {/* F1 Driving Telemetry HUD Overlay (Track Test Drive Mode) */}
+      {isDriving && <F1DrivingHUD {...f1Telemetry} />}
+
+      {/* 45-Second Recruiter Drone Tour Broadcast Overlay */}
+      {isDroneTourActive && <DroneTourOverlay />}
+
+      {/* Minecraft Engineering Advancement Toast Toasts */}
+      <AdvancementToasts />
+
+      {/* Engineering Advancements Modal [L] */}
+      <AdvancementsModal />
     </>
   );
 };

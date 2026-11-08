@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
 import { projects } from "@/data/projects";
+import { canonicalUrl } from "@/lib/siteMetadata";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
 import { EngineeringIndex } from "@/components/work/EngineeringIndex";
@@ -19,6 +20,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: canonicalUrl("/projects") ? { canonical: canonicalUrl("/projects") } : undefined,
   title: "Canonical Systems & Projects — Asish Oliver M",
   description:
     "Explore the six canonical engineering systems: Live F1 Intelligence, F1 Lap-Time Simulator, RaceMind-AI, F1 Race Manager, EA FC Intelligence, and VyaparPulse.",
@@ -33,9 +35,9 @@ export default function WorkPage() {
       <div className="bg-[#18181c] border-b-2 border-[#101012] px-3 sm:px-4 py-1.5 font-mono text-[10px] text-zinc-400 flex flex-wrap items-center justify-between gap-2 shadow-inner">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 bg-emerald-400 border border-emerald-200 shadow-[0_0_6px_#34d399] shrink-0" />
-          <span className="font-pixel text-[9px] text-white mc-text-shadow">SYSTEMS INDEXED: 6 / 6</span>
+          <span className="font-pixel text-[9px] text-white mc-text-shadow">SYSTEMS INDEXED: {projects.length} / {projects.length}</span>
           <span className="text-zinc-600">|</span>
-          <span className="text-zinc-300">ALL SIX ENGINEERING SYSTEMS DOCUMENTED</span>
+          <span className="text-zinc-300">ALL CANONICAL ENGINEERING SYSTEMS DOCUMENTED</span>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/world" className="font-pixel text-[9px] text-yellow-400 hover:text-white mc-text-shadow flex items-center gap-1">
@@ -58,10 +60,10 @@ export default function WorkPage() {
           </h1>
 
           <div className="font-pixel text-xs sm:text-sm text-yellow-400 mc-text-shadow-gold mt-2 uppercase">
-            6 ENGINEERING SYSTEMS · TELEMETRY, SIMULATION & APPLIED AI
+            {projects.length} ENGINEERING SYSTEMS · TELEMETRY, SIMULATION & APPLIED AI
           </div>
 
-          <p className="text-xs sm:text-sm text-[#f5eedc] font-mono leading-relaxed mt-3 max-w-3xl">Six engineering systems spanning high-throughput telemetry pipelines, quasi-steady-state
+          <p className="text-xs sm:text-sm text-[#f5eedc] font-mono leading-relaxed mt-3 max-w-3xl">Canonical engineering systems spanning high-throughput telemetry pipelines, quasi-steady-state
               numerical lap simulation, AI virtual race engineering, and applied machine learning models.
               Every system prioritizes strict architectural boundary separation, mathematical verification, and
               decisive engineering utility. Metrics are labelled by evidence grade — nothing here is presented as

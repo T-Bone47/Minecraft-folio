@@ -1,4 +1,7 @@
 "use client";
+import { chromeEra } from "@/data/chromeEra";
+import { FacilityWalls } from "@/components/theme/FacilityWalls";
+
 
 import React, { useRef, useMemo, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -16,29 +19,41 @@ export const SimulationLab: React.FC<SimulationLabProps> = ({
   position = [22, 0, 8],
 }) => {
   const { inspectProject, activeProject, mode, reducedMotion } = useWorldStore();
-  const { registerObject, unregisterObject } = useInteractionRegistry();
+  const { registerObject, unregisterObject, openStationModal } = useInteractionRegistry();
   const groupRef = useRef<THREE.Group>(null);
   const ggTraceDotRef = useRef<THREE.Mesh>(null);
   const turbineRef = useRef<THREE.Group>(null);
 
   const [isActivated, setIsActivated] = useState(false);
 
-  // Register interactive terminal
+  // Register interactive terminal and solver station
   useEffect(() => {
-    const terminalPos: [number, number, number] = [
-      position[0],
-      position[1] + 1.2,
-      position[2] + 6.6,
-    ];
+    // 1. Interactive Numerical Solver Station
+    registerObject({
+      id: "simulation_runner",
+      type: "station",
+      label: "Vehicle Lap-Time Solver",
+      sublabel: "Quasi-Static Point-Mass Dynamics Parameter Matrix",
+      actionPrompt: "[E] RUN NUMERICAL LAP SOLVER",
+      position: [position[0] - 2.5, position[1] + 1.2, position[2] + 6.6],
+      boundsRadius: 7,
+      projectSlug: "f1-lap-time-simulator",
+      facilityId: "simulation",
+      onInteract: () => {
+        worldSound.playInspectChime();
+        openStationModal("simulation_runner");
+      },
+    });
 
+    // 2. Blueprint Case Study Terminal
     registerObject({
       id: "simulation_terminal",
       type: "terminal",
-      label: "Vehicle Simulation Solver Station",
-      sublabel: "Numerical Quasi-Static Point-Mass Lap Solver",
-      actionPrompt: "[E] RUN VEHICLE LAP SIMULATION",
-      position: terminalPos,
-      boundsRadius: 8,
+      label: "Simulation Systems Architecture",
+      sublabel: "Quasi-Static Formulation & G-G Friction Envelope",
+      actionPrompt: "[E] INSPECT SIMULATION BLUEPRINT",
+      position: [position[0] + 2.5, position[1] + 1.2, position[2] + 6.6],
+      boundsRadius: 7,
       projectSlug: "f1-lap-time-simulator",
       facilityId: "simulation",
       onInteract: () => {
@@ -47,18 +62,21 @@ export const SimulationLab: React.FC<SimulationLabProps> = ({
       },
     });
 
-    return () => unregisterObject("simulation_terminal");
-  }, [position, registerObject, unregisterObject, inspectProject]);
+    return () => {
+      unregisterObject("simulation_runner");
+      unregisterObject("simulation_terminal");
+    };
+  }, [position, registerObject, unregisterObject, openStationModal, inspectProject]);
 
-  const stoneBrickMat = useMemo(() => getVoxelMaterial("stone_bricks"), []);
-  const oakPlankMat = useMemo(() => getVoxelMaterial("oak_planks"), []);
+  const stoneBrickMat = useMemo(() => getVoxelMaterial("chrome_brushed"), []);
+  const oakPlankMat = useMemo(() => getVoxelMaterial("chrome_graphite"), []);
   const signMat = useMemo(
     () => getVoxelSignMaterial("SIMULATION LAB", "F1 LAP-TIME SIMULATOR"),
     []
   );
   const glassMat = useMemo(
     () =>
-      getVoxelMaterial("glass", {
+      getVoxelMaterial("chrome_glass", {
         transparent: true,
         opacity: 0.65,
       }),
@@ -66,8 +84,8 @@ export const SimulationLab: React.FC<SimulationLabProps> = ({
   );
   const glowstoneMat = useMemo(
     () =>
-      getVoxelMaterial("glowstone", {
-        emissive: new THREE.Color("#fab005"),
+      getVoxelMaterial("chrome_light", {
+        emissive: new THREE.Color(chromeEra.white),
         emissiveIntensity: 1.6,
       }),
     []
@@ -123,26 +141,23 @@ export const SimulationLab: React.FC<SimulationLabProps> = ({
       }}
     >
       {/* 1. Foundation Slab (12x10 blocks) */}
-      <mesh position={[0, 0.25, 0]} receiveShadow>
+      <mesh position={[0, 0.28, 0]} receiveShadow>
         <boxGeometry args={[12, 0.5, 10]} />
         <primitive object={stoneBrickMat} attach="material" />
       </mesh>
 
       {/* 2. Main Lab Structure Walls */}
-      <mesh position={[0, 2.5, 0]} castShadow receiveShadow>
-        <boxGeometry args={[11, 4.0, 9]} />
-        <primitive object={stoneBrickMat} attach="material" />
-      </mesh>
+      <FacilityWalls id="simulation" />
 
       {/* 3. Observation Glass Windows (Front & Sides) */}
-      <mesh position={[0, 2.6, 4.55]} castShadow>
-        <boxGeometry args={[8.0, 2.0, 0.2]} />
+      {[-3.7, 3.7].map(x => <mesh key={x} position={[x, 2.6, 5.05]} castShadow>
+        <boxGeometry args={[2.5, 2.0, 0.2]} />
         <primitive object={glassMat} attach="material" />
-      </mesh>
-      <mesh position={[-5.55, 2.6, 0]} castShadow>
-        <boxGeometry args={[0.2, 2.0, 6.0]} />
+      </mesh>)}
+      {[-2.7, 2.7].map(z => <mesh key={z} position={[-5.05, 2.6, z]} castShadow>
+        <boxGeometry args={[0.2, 2.0, 1.8]} />
         <primitive object={glassMat} attach="material" />
-      </mesh>
+      </mesh>)}
       <mesh position={[5.55, 2.6, 0]} castShadow>
         <boxGeometry args={[0.2, 2.0, 6.0]} />
         <primitive object={glassMat} attach="material" />
@@ -174,7 +189,7 @@ export const SimulationLab: React.FC<SimulationLabProps> = ({
       </group>
 
       {/* 5. G-G Friction Circle Visualization Display Wall (Interior / Front View) */}
-      <group position={[0, 2.6, 4.4]}>
+      <group position={[0, 2.6, -2.9]}>
         <mesh>
           <boxGeometry args={[5.2, 1.8, 0.1]} />
           <meshStandardMaterial color="#064e3b" roughness={0.8} />
@@ -214,7 +229,7 @@ export const SimulationLab: React.FC<SimulationLabProps> = ({
       ))}
 
       {/* 7. Physical Minecraft Sign: [ VEHICLE SIMULATION LAB / LAP-TIME SOLVER ] */}
-      <group position={[0, 2.0, 5.2]}>
+      <group position={[0, 3.85, 5.2]}>
         <mesh castShadow>
           <boxGeometry args={[6.0, 1.0, 0.2]} />
           <primitive object={oakPlankMat} attach="material" />

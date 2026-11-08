@@ -103,8 +103,8 @@ export const VoxelTerrain: React.FC<VoxelTerrainProps> = ({ quality }) => {
       roughness: 0.15,
       metalness: 0.35,
     });
-    const glowstone = getVoxelMaterial("glowstone", {
-      emissive: new THREE.Color("#fab005"),
+    const glowstone = getVoxelMaterial("chrome_light", {
+      emissive: new THREE.Color("#F4F3EF"),
       emissiveIntensity: 1.5,
     });
 
@@ -116,7 +116,7 @@ export const VoxelTerrain: React.FC<VoxelTerrainProps> = ({ quality }) => {
       leaves,
     };
 
-    return { map, water, glowstone, post: getVoxelMaterial("stone") };
+    return { map, water, glowstone, post: getVoxelMaterial("chrome_graphite") };
   }, []);
 
   return (
@@ -154,11 +154,11 @@ export const VoxelTerrain: React.FC<VoxelTerrainProps> = ({ quality }) => {
 };
 
 const LANTERNS: ReadonlyArray<readonly [number, number]> = [
-  [-12, 6],
-  [0, 12],
-  [14, -10],
+  [-15, 6],
+  [3, 12],
+  [18, -10],
   [18, 8],
-  [-22, -20],
+  [-22, -25],
 ];
 
 // ---------------------------------------------------------------------------

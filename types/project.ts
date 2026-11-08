@@ -29,6 +29,8 @@ export type ProjectDomain =
  * tell measured engineering results apart from demo material.
  */
 export type EvidenceLevel =
+  | "repository-reported"
+  | "unverified"
   | "verified"
   | "measured"
   | "tested"
@@ -88,6 +90,7 @@ export interface ProjectMedia {
 }
 
 export interface Project {
+  evidenceReview?: { checkedAt: string; status: string; summary: string };
   id: string;
   slug: string;
   title: string;

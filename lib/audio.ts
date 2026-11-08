@@ -1,19 +1,25 @@
+import { drivingSoundTargets } from "./frontier/audio";
 // Procedural Web Audio API Sound Generator for Asish Oliver M Engineering World
 // Completely autonomous with 0 external sound files, 0 network dependencies, and browser autoplay safety.
 
-class WorldSoundManager {
+export class WorldSoundManager {
   private ctx: AudioContext | null = null;
   private masterGain: GainNode | null = null;
   private windGain: GainNode | null = null;
   private engineGain: GainNode | null = null;
   private serverGain: GainNode | null = null;
   private isMuted: boolean = true;
+  private volume = 0.45;
   private isInitialized: boolean = false;
 
   constructor() {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("asish_world_audio_enabled");
-      this.isMuted = saved !== "true";
+      try {
+        const saved = localStorage.getItem("asish_world_audio_enabled");
+        this.isMuted = saved !== "true";
+      } catch {
+        this.isMuted = true;
+      }
     }
   }
 
@@ -26,7 +32,7 @@ class WorldSoundManager {
 
       this.ctx = new AudioCtx();
       this.masterGain = this.ctx.createGain();
-      this.masterGain.gain.setValueAtTime(this.isMuted ? 0 : 0.45, this.ctx.currentTime);
+      this.masterGain.gain.setValueAtTime(this.isMuted ? 0 : this.volume, this.ctx.currentTime);
       this.masterGain.connect(this.ctx.destination);
 
       // 1. Procedural Ambient Wind (Pink Noise Generator)
@@ -121,7 +127,11 @@ class WorldSoundManager {
   public setMuted(muted: boolean): void {
     this.isMuted = muted;
     if (typeof window !== "undefined") {
-      localStorage.setItem("asish_world_audio_enabled", muted ? "false" : "true");
+      try {
+        localStorage.setItem("asish_world_audio_enabled", muted ? "false" : "true");
+      } catch {
+        // Audio remains usable when the browser denies preference persistence.
+      }
     }
 
     if (!this.isInitialized && !muted) {
@@ -132,8 +142,16 @@ class WorldSoundManager {
       if (this.ctx.state === "suspended" && !muted) {
         this.ctx.resume();
       }
-      this.masterGain.gain.setTargetAtTime(muted ? 0 : 0.45, this.ctx.currentTime, 0.05);
+      this.masterGain.gain.setTargetAtTime(muted ? 0 : this.volume, this.ctx.currentTime, 0.05);
     }
+  }
+
+  public getVolume(): number { return this.volume; }
+
+  public setVolume(value: number): void {
+    if (!Number.isFinite(value)) return;
+    this.volume = Math.max(0, Math.min(1, value));
+    if (this.ctx && this.masterGain) this.masterGain.gain.setTargetAtTime(this.isMuted ? 0 : this.volume, this.ctx.currentTime, 0.05);
   }
 
   public getIsMuted(): boolean {
@@ -223,6 +241,30 @@ class WorldSoundManager {
     }
   }
 
+  public playBallKick(): void {
+    if (this.isMuted || !this.ctx || !this.masterGain) return;
+
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(140, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(38, this.ctx.currentTime + 0.12);
+
+      gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.14);
+
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start(this.ctx.currentTime);
+      osc.stop(this.ctx.currentTime + 0.15);
+    } catch {
+      // Ignored
+    }
+  }
+
   public playF1Rev(): void {
     if (this.isMuted || !this.ctx || !this.masterGain) return;
 
@@ -257,28 +299,174 @@ class WorldSoundManager {
     }
   }
 
-  public playBallKick(): void {
+  // Dynamic Driveable F1 Engine Audio Nodes
+  private driveOsc1: OscillatorNode | null = null;
+  private driveOsc2: OscillatorNode | null = null;
+  private driveFilter: BiquadFilterNode | null = null;
+  private driveGain: GainNode | null = null;
+  private squealGain: GainNode | null = null;
+  private squealSource: AudioBufferSourceNode | null = null;
+
+  public playAdvancementFanfare(): void {
+    if (this.isMuted || !this.ctx || !this.masterGain) return;
+
+    try {
+      // Authentic celebratory 4-note ascending arpeggio: G4 -> C5 -> E5 -> G5
+      const notes = [392.0, 523.25, 659.25, 783.99];
+      notes.forEach((freq, i) => {
+        const osc = this.ctx!.createOscillator();
+        const gain = this.ctx!.createGain();
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, this.ctx!.currentTime + i * 0.08);
+
+        const startTime = this.ctx!.currentTime + i * 0.08;
+        const noteDuration = i === notes.length - 1 ? 0.6 : 0.14;
+
+        gain.gain.setValueAtTime(0.22, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + noteDuration);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain!);
+
+        osc.start(startTime);
+        osc.stop(startTime + noteDuration + 0.02);
+      });
+    } catch {
+      // Ignored
+    }
+  }
+
+  public playFootstep(
+    kind: "grass" | "stone" | "metal" | "wood" | "asphalt" | "tarmac" = "grass",
+    isSprinting: boolean = false
+  ): void {
     if (this.isMuted || !this.ctx || !this.masterGain) return;
 
     try {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
 
-      // Deep leather boot thump: 140Hz rapid pitch drop to 35Hz
-      osc.type = "triangle";
-      osc.frequency.setValueAtTime(140, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(35, this.ctx.currentTime + 0.12);
+      const pitchMap: Record<string, number> = {
+        grass: 85,
+        stone: 130,
+        metal: 260,
+        wood: 110,
+        asphalt: 105,
+        tarmac: 105,
+      };
 
-      gain.gain.setValueAtTime(0.45, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.18);
+      osc.type = kind === "metal" ? "triangle" : "sine";
+      const baseFreq = (pitchMap[kind] || 90) + (isSprinting ? 20 : 0);
+      osc.frequency.setValueAtTime(baseFreq + Math.random() * 20 - 10, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(30, this.ctx.currentTime + 0.06);
+
+      gain.gain.setValueAtTime(isSprinting ? 0.18 : 0.12, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.06);
 
       osc.connect(gain);
       gain.connect(this.masterGain);
 
       osc.start(this.ctx.currentTime);
-      osc.stop(this.ctx.currentTime + 0.19);
+      osc.stop(this.ctx.currentTime + 0.065);
     } catch {
       // Ignored
+    }
+  }
+
+  public startDrivingEngine(): void {
+    if (this.isMuted || !this.ctx || !this.masterGain || this.driveOsc1) return;
+
+    try {
+      this.driveOsc1 = this.ctx.createOscillator();
+      this.driveOsc2 = this.ctx.createOscillator();
+      this.driveFilter = this.ctx.createBiquadFilter();
+      this.driveGain = this.ctx.createGain();
+
+      this.driveOsc1.type = "sawtooth";
+      this.driveOsc2.type = "triangle";
+
+      this.driveOsc1.frequency.setValueAtTime(70, this.ctx.currentTime); // idle ~3500 RPM equivalent
+      this.driveOsc2.frequency.setValueAtTime(140, this.ctx.currentTime);
+
+      this.driveFilter.type = "lowpass";
+      this.driveFilter.frequency.setValueAtTime(350, this.ctx.currentTime);
+
+      this.driveGain.gain.setValueAtTime(0.24, this.ctx.currentTime);
+
+      this.driveOsc1.connect(this.driveFilter);
+      this.driveOsc2.connect(this.driveFilter);
+      this.driveFilter.connect(this.driveGain);
+      this.driveGain.connect(this.masterGain);
+
+      this.driveOsc1.start(0);
+      this.driveOsc2.start(0);
+    } catch {
+      // Ignored
+    }
+  }
+
+  public updateDrivingEngine(speedRatio: number, throttle: number): void {
+    if (!this.ctx || !this.driveOsc1 || !this.driveOsc2 || !this.driveFilter || !this.driveGain) return;
+
+    try {
+      const sound = drivingSoundTargets(speedRatio, throttle);
+      const freq1 = sound.frequency;
+      const freq2 = freq1 * 2;
+
+      this.driveOsc1.frequency.setTargetAtTime(freq1, this.ctx.currentTime, 0.03);
+      this.driveOsc2.frequency.setTargetAtTime(freq2, this.ctx.currentTime, 0.03);
+
+      const filterCutoff = sound.cutoff;
+      this.driveFilter.frequency.setTargetAtTime(filterCutoff, this.ctx.currentTime, 0.03);
+
+      const targetGain = sound.gain;
+      this.driveGain.gain.setTargetAtTime(targetGain, this.ctx.currentTime, 0.04);
+    } catch {
+      // Ignored
+    }
+  }
+
+  public playGearShift(): void {
+    if (this.isMuted || !this.ctx || !this.masterGain) return;
+
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = "square";
+      osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.04);
+
+      gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start(this.ctx.currentTime);
+      osc.stop(this.ctx.currentTime + 0.045);
+    } catch {
+      // Ignored
+    }
+  }
+
+  public stopDrivingEngine(): void {
+    if (this.driveOsc1) {
+      try {
+        this.driveOsc1.stop();
+        this.driveOsc2?.stop();
+        this.driveOsc1.disconnect();
+        this.driveOsc2?.disconnect();
+        this.driveFilter?.disconnect();
+        this.driveGain?.disconnect();
+      } catch {
+        // Ignored
+      }
+      this.driveOsc1 = null;
+      this.driveOsc2 = null;
+      this.driveFilter = null;
+      this.driveGain = null;
     }
   }
 

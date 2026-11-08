@@ -1,26 +1,15 @@
+import { TRACK_RADIUS } from "@/lib/frontier/drive";
 export const WORLD_BOUNDS = {
-  minX: -40,
-  maxX: 40,
-  minZ: -40,
-  maxZ: 40,
-  size: 80,
+  minX: -55,
+  maxX: 55,
+  minZ: -55,
+  maxZ: 55,
+  size: 110,
   gridStep: 1,
 };
 
 // Circuit centerline curve waypoints (counter-clockwise loop)
-export const CIRCUIT_WAYPOINTS: [number, number, number][] = [
-  [-28, 0, -5],
-  [-25, 0, -18],
-  [-10, 0, -26],
-  [12, 0, -25],
-  [26, 0, -15],
-  [28, 0, 0],
-  [25, 0, 18],
-  [12, 0, 26],
-  [-8, 0, 25],
-  [-24, 0, 16],
-  [-28, 0, 2],
-];
+export const CIRCUIT_WAYPOINTS: [number, number, number][] = Array.from({length:96},(_,i)=>[-TRACK_RADIUS*Math.cos(i*Math.PI/48),0,TRACK_RADIUS*Math.sin(i*Math.PI/48)]);
 
 // Pit lane parallel to the start/finish straight
 export const PIT_LANE_WAYPOINTS: [number, number, number][] = [

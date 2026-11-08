@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "Keyboard volume changes the actual Web Audio master gain",
+    "Mute remains effective while changing volume",
+    "Opened audio controls fit the mobile viewport"
+  ],
+  "errors": [],
+  "enabled": {
+    "gain": 0.9722382426261902,
+    "state": "running",
+    "time": 0.38133333333333336,
+    "text": "Mute sound"
+  },
+  "muted": {
+    "gain": 0.008130542002618313,
+    "state": "running",
+    "time": 0.6613333333333333,
+    "text": "Enable sound"
+  },
+  "mobileBounds": {
+    "left": 78,
+    "right": 378,
+    "top": 664,
+    "bottom": 751,
+    "width": 390,
+    "height": 844
+  },
+  "passed": true
+}

@@ -1,3 +1,4 @@
+import { chromeEra } from "./chromeEra";
 import type { FacilityLocation } from "@/types/world";
 
 /**
@@ -16,9 +17,11 @@ export const facilities: FacilityLocation[] = [
     discipline: "Race Engineering & Telemetry Abstraction",
     projectSlug: "racemind-ai",
     coordinates: [-12, 0, -8],
+    approachPosition: [-12, 0, 3.5],
+    approachLookAt: [-12, 1.4, -8],
     cameraPosition: [-12, 3.2, 0],
     cameraTarget: [-12, 1.4, -8],
-    colorAccent: "#EF4444", // Racing Red
+    colorAccent: chromeEra.red, // Racing Red
     accentRgb: [0.937, 0.267, 0.267],
     description: "Pit-lane engineering facility housing the telemetry bridge, live strategy board, and original voxel single-seater F1 car.",
     features: [
@@ -44,9 +47,11 @@ export const facilities: FacilityLocation[] = [
     discipline: "Event Streaming & Real-Time Distributed Systems",
     projectSlug: "live-f1-intelligence",
     coordinates: [14, 0, -18],
+    approachPosition: [14, 0, -11.5],
+    approachLookAt: [14, 2.5, -18],
     cameraPosition: [14, 5.5, -9],
     cameraTarget: [14, 4.0, -18],
-    colorAccent: "#3B82F6", // Telemetry Cyan/Blue
+    colorAccent: chromeEra.red, // Telemetry Cyan/Blue
     accentRgb: [0.231, 0.510, 0.965],
     description: "Multilevel timing gantry and race control center ingesting canonical events across four live telemetry providers.",
     features: [
@@ -57,14 +62,15 @@ export const facilities: FacilityLocation[] = [
     ],
     pad: [8, 20, -24, -12],
     collision: [
-      {
-        minX: 10,
-        maxX: 18,
-        minZ: -22,
-        maxZ: -14,
-        // Race-control doorway on the track-facing (south) elevation.
-        doorways: [{ axis: "x", from: 13, to: 15 }],
-      },
+      // North perimeter wall
+      { minX: 10, maxX: 18, minZ: -22, maxZ: -21 },
+      // South perimeter wall with generous entrance doorway (x in [12.5, 15.5])
+      { minX: 10, maxX: 12.5, minZ: -15, maxZ: -14 },
+      { minX: 15.5, maxX: 18, minZ: -15, maxZ: -14 },
+      // West perimeter wall
+      { minX: 10, maxX: 11, minZ: -21, maxZ: -15 },
+      // East perimeter wall
+      { minX: 17, maxX: 18, minZ: -21, maxZ: -15 },
     ],
   },
   {
@@ -75,9 +81,11 @@ export const facilities: FacilityLocation[] = [
     discipline: "Applied Mathematics & Vehicle Dynamics",
     projectSlug: "f1-lap-time-simulator",
     coordinates: [22, 0, 8],
+    approachPosition: [22, 0, 16.5],
+    approachLookAt: [22, 2.0, 8],
     cameraPosition: [16, 4.5, 15],
     cameraTarget: [22, 2.2, 8],
-    colorAccent: "#10B981", // Aero Emerald
+    colorAccent: chromeEra.red, // Aero Emerald
     accentRgb: [0.063, 0.725, 0.506],
     description: "Vehicle performance research cell dedicated to solving lap times via friction circles, aero sensitivity, and grip envelopes.",
     features: [
@@ -88,14 +96,16 @@ export const facilities: FacilityLocation[] = [
     ],
     pad: [15, 29, 2, 14],
     collision: [
-      {
-        minX: 17,
-        maxX: 27,
-        minZ: 4,
-        maxZ: 12,
-        // Entrance on the footpath-facing (west) elevation.
-        doorways: [{ axis: "z", from: 7, to: 9 }],
-      },
+      // North perimeter wall
+      { minX: 17, maxX: 27, minZ: 4, maxZ: 5 },
+      // South perimeter wall with generous entrance doorway (x in [20, 24])
+      { minX: 17, maxX: 20, minZ: 12, maxZ: 13 },
+      { minX: 24, maxX: 27, minZ: 12, maxZ: 13 },
+      // East perimeter wall
+      { minX: 26, maxX: 27, minZ: 5, maxZ: 12 },
+      // West perimeter wall with entrance doorway (z in [6.5, 9.5])
+      { minX: 17, maxX: 18, minZ: 4, maxZ: 6.5 },
+      { minX: 17, maxX: 18, minZ: 9.5, maxZ: 12 },
     ],
   },
   {
@@ -106,9 +116,11 @@ export const facilities: FacilityLocation[] = [
     discipline: "Simulation Game Architecture & Strategic Modelling",
     projectSlug: "f1-race-manager",
     coordinates: [-12, 0, 14],
+    approachPosition: [-12, 0, 7.5],
+    approachLookAt: [-12, 2.0, 14],
     cameraPosition: [-4, 4.5, 20],
     cameraTarget: [-12, 2.0, 14],
-    colorAccent: "#F59E0B", // Strategy Amber
+    colorAccent: chromeEra.red, // Strategy Amber
     accentRgb: [0.961, 0.620, 0.043],
     description: "Strategic headquarters orchestrating race weekend operations, weather radar, tyre allocation, and team resource trees.",
     features: [
@@ -119,14 +131,15 @@ export const facilities: FacilityLocation[] = [
     ],
     pad: [-19, -5, 8, 20],
     collision: [
-      {
-        minX: -17,
-        maxX: -7,
-        minZ: 10,
-        maxZ: 18,
-        // South-facing entrance reached from the Garage footpath.
-        doorways: [{ axis: "x", from: -13, to: -11 }],
-      },
+      // North perimeter wall
+      { minX: -17, maxX: -7, minZ: 17, maxZ: 18 },
+      // South perimeter wall with entrance doorway (x in [-13.5, -10.5])
+      { minX: -17, maxX: -13.5, minZ: 10, maxZ: 11 },
+      { minX: -10.5, maxX: -7, minZ: 10, maxZ: 11 },
+      // West perimeter wall
+      { minX: -17, maxX: -16, minZ: 11, maxZ: 17 },
+      // East perimeter wall
+      { minX: -8, maxX: -7, minZ: 11, maxZ: 17 },
     ],
   },
   {
@@ -137,9 +150,11 @@ export const facilities: FacilityLocation[] = [
     discipline: "Machine Learning & Natural Language Pipelines",
     projectSlug: "ea-fc-intelligence",
     coordinates: [0, 0, 24],
+    approachPosition: [0, 0, 16.5],
+    approachLookAt: [0, 2.2, 24],
     cameraPosition: [0, 5.0, 15],
     cameraTarget: [0, 2.5, 24],
-    colorAccent: "#8B5CF6", // Neural Purple
+    colorAccent: chromeEra.red, // Neural Purple
     accentRgb: [0.545, 0.361, 0.965],
     description: "Twin-cluster AI facility housing the EA FC player intelligence matrices and VyaparPulse offline voice-to-forecast pipelines.",
     features: [
@@ -150,14 +165,15 @@ export const facilities: FacilityLocation[] = [
     ],
     pad: [-9, 9, 18, 30],
     collision: [
-      {
-        minX: -7,
-        maxX: 7,
-        minZ: 20,
-        maxZ: 28,
-        // Twin-wing entrance on the footpath-facing (north) elevation.
-        doorways: [{ axis: "x", from: -2, to: 2 }],
-      },
+      // South entrance wall with generous doorway (x in [-2.5, 2.5])
+      { minX: -7, maxX: -2.5, minZ: 20, maxZ: 21 },
+      { minX: 2.5, maxX: 7, minZ: 20, maxZ: 21 },
+      // North perimeter wall
+      { minX: -7, maxX: 7, minZ: 27, maxZ: 28 },
+      // West perimeter wall
+      { minX: -7, maxX: -6, minZ: 21, maxZ: 27 },
+      // East perimeter wall
+      { minX: 6, maxX: 7, minZ: 21, maxZ: 27 },
     ],
   },
   {
@@ -167,9 +183,11 @@ export const facilities: FacilityLocation[] = [
     tagline: "Engineering Trajectory, Systems Arsenal & Direct Contact",
     discipline: "Core Systems & Professional Trajectory",
     coordinates: [-26, 0, -22],
+    approachPosition: [-17, 0, -21],
+    approachLookAt: [-26, 2.5, -22],
     cameraPosition: [-18, 5.5, -14],
     cameraTarget: [-26, 3.0, -22],
-    colorAccent: "#06B6D4", // Engineering Cyan
+    colorAccent: chromeEra.red, // Engineering Cyan
     accentRgb: [0.024, 0.714, 0.831],
     description: "Central command monolith detailing professional engineering experience, system architecture principles, and communication terminals.",
     features: [
@@ -180,14 +198,15 @@ export const facilities: FacilityLocation[] = [
     ],
     pad: [-33, -19, -28, -14],
     collision: [
-      {
-        minX: -32,
-        maxX: -20,
-        minZ: -27,
-        maxZ: -15,
-        // East-facing entrance facing the campus footpath.
-        doorways: [{ axis: "z", from: -22, to: -20 }],
-      },
+      // North perimeter wall
+      { minX: -32, maxX: -20, minZ: -27, maxZ: -26 },
+      // South perimeter wall
+      { minX: -32, maxX: -20, minZ: -16, maxZ: -15 },
+      // West perimeter wall
+      { minX: -32, maxX: -31, minZ: -26, maxZ: -16 },
+      // East perimeter wall with entrance doorway (z in [-23.5, -18.5])
+      { minX: -21, maxX: -20, minZ: -26, maxZ: -23.5 },
+      { minX: -21, maxX: -20, minZ: -18.5, maxZ: -16 },
     ],
   },
 ];

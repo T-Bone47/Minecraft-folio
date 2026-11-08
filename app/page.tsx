@@ -28,6 +28,7 @@ import {
   Briefcase,
   Mail,
   Zap,
+  FileText,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -87,8 +88,8 @@ export default function HomePage() {
           <span className="text-zinc-300">TRICHY, TAMIL NADU, INDIA [10.7905° N, 78.7047° E]</span>
         </div>
         <div className="hidden sm:flex items-center gap-3">
-          <span>CANONICAL F1 PIPELINE</span>
-          <span className="font-pixel text-[9px] text-emerald-400 mc-text-shadow">100% ONLINE</span>
+          <span>PROJECT EVIDENCE</span>
+          <span className="font-pixel text-[9px] text-emerald-400 mc-text-shadow">AVAILABLE TO EXPLORE</span>
         </div>
       </div>
 
@@ -147,6 +148,16 @@ export default function HomePage() {
                 <Sparkles className="w-3.5 h-3.5 text-emerald-200 shrink-0" />
                 <span>RECRUITER (30s)</span>
               </Link>
+
+              <a
+                href="/Asish_Oliver_M_Resume.pdf"
+                download="Asish_Oliver_M_Resume.pdf"
+                className="mc-btn px-3.5 py-3 text-xs flex items-center gap-1.5 text-sky-300 hover:text-white !bg-sky-950/70 border-sky-500/80"
+                title="Download Asish Oliver M Resume (PDF)"
+              >
+                <FileText className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                <span>RESUME</span>
+              </a>
             </div>
           </div>
 
@@ -156,48 +167,33 @@ export default function HomePage() {
             <div className="flex items-center justify-between border-b-2 border-[#121214] pb-2">
               <span className="font-pixel text-[10px] text-yellow-400 mc-text-shadow flex items-center gap-1.5">
                 <Gauge className="w-3.5 h-3.5 text-[#ff8000]" />
-                <span>REDSTONE TELEMETRY</span>
+                <span>PLAYABLE ENGINEERING</span>
               </span>
               <span className="font-pixel text-[8px] text-amber-300 bg-amber-950/80 px-1.5 py-0.5 border border-amber-700 mc-text-shadow">
-                DEMO SESSION
+                LOCAL SIMULATIONS
               </span>
             </div>
 
             {/* Inset Slot: Speed Trap & Engine RPM */}
             <div className="grid grid-cols-2 gap-2">
               <div className="mc-slot-box p-2.5">
-                <div className="text-[9px] font-pixel text-zinc-400 uppercase">SPEED TRAP</div>
+                <div className="text-[9px] font-pixel text-zinc-400 uppercase">PHYSICS STEP</div>
                 <div className="font-pixel text-base sm:text-lg text-sky-400 mc-text-shadow mt-1">
-                  334.8 KM/H
+                  60 HZ
                 </div>
               </div>
               <div className="mc-slot-box p-2.5">
-                <div className="text-[9px] font-pixel text-zinc-400 uppercase">INTERNAL RPM</div>
+                <div className="text-[9px] font-pixel text-zinc-400 uppercase">FLAGSHIP MISSIONS</div>
                 <div className="font-pixel text-base sm:text-lg text-white mc-text-shadow mt-1">
-                  12,450 RPM
+                  3 EXPERIENCES
                 </div>
               </div>
             </div>
 
-            {/* Inset Slot: Throttle / Brake / Lateral G-Force */}
-            <div className="mc-slot-box p-3 space-y-2">
-              <div className="flex items-center justify-between text-[10px]">
-                <span className="font-pixel text-[9px] text-emerald-400 mc-text-shadow">THROTTLE (98%)</span>
-                {/* Minecraft XP-Style Green Bar */}
-                <div className="w-32 bg-black h-2.5 border border-[#3f3f46]">
-                  <div className="bg-emerald-400 h-full w-[98%] shadow-[inset_1px_1px_0_#86efac]" />
-                </div>
-              </div>
-              <div className="flex items-center justify-between text-[10px]">
-                <span className="font-pixel text-[9px] text-red-400 mc-text-shadow">BRAKE (0%)</span>
-                <div className="w-32 bg-black h-2.5 border border-[#3f3f46]">
-                  <div className="bg-red-500 h-full w-[0%]" />
-                </div>
-              </div>
-              <div className="flex items-center justify-between text-[10px] pt-1 border-t border-zinc-800">
-                <span className="text-zinc-400">LATERAL G-FORCE</span>
-                <span className="font-pixel text-[10px] text-[#00d2be] mc-text-shadow">4.62 G</span>
-              </div>
+            <div className="mc-slot-box p-3 space-y-3 text-xs font-mono text-zinc-200">
+              <p><strong className="text-white">4 ordered checkpoints</strong> · timed lap and recorded replay</p>
+              <p><strong className="text-white">7 pipeline faults</strong> · diagnosis, repair and validation</p>
+              <p><strong className="text-white">Held-out ML evaluation</strong> · seeded synthetic data and baselines</p>
             </div>
 
             {/* World Navigation Quick Link */}
@@ -241,7 +237,7 @@ export default function HomePage() {
               href="/work"
               className="font-pixel text-[10px] text-yellow-400 hover:text-white flex items-center gap-1 mc-text-shadow self-start sm:self-auto"
             >
-              <span>EXPLORE ALL 6 SYSTEMS</span>
+              <span>EXPLORE ALL {projects.length} SYSTEMS</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

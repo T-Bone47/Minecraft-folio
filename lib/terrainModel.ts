@@ -15,6 +15,7 @@
  *    volume can never drift apart.
  */
 
+import { TRACK_RADIUS, TRACK_HALF_WIDTH } from "@/lib/frontier/drive";
 import { facilities } from "@/data/facilities";
 
 // ---------------------------------------------------------------------------
@@ -22,13 +23,13 @@ import { facilities } from "@/data/facilities";
 // ---------------------------------------------------------------------------
 
 /** Half-width of the generated island, in blocks. */
-export const CAMPUS_HALF_EXTENT = 36;
+export const CAMPUS_HALF_EXTENT = 50;
 
 /** Radial cutoff beyond which no terrain is generated (rounded island edge). */
-export const CAMPUS_ISLAND_RADIUS = 42;
+export const CAMPUS_ISLAND_RADIUS = 52;
 
 /** The player is clamped inside this radius, keeping them off the cliff edge. */
-export const PLAYER_CLAMP_RADIUS = 35;
+export const PLAYER_CLAMP_RADIUS = 49;
 
 /** Island plane is walked on at this radius before the stepped hills begin. */
 export const HILL_START_RADIUS = 26;
@@ -82,7 +83,7 @@ export function isCircuitArea(x: number, z: number): boolean {
   const dx = x / CIRCUIT.radiusX;
   const dz = z / CIRCUIT.radiusZ;
   const r = Math.sqrt(dx * dx + dz * dz);
-  return r > CIRCUIT.inner && r < CIRCUIT.outer;
+  return (r > CIRCUIT.inner && r < CIRCUIT.outer) || Math.abs(Math.hypot(x, z) - TRACK_RADIUS) < TRACK_HALF_WIDTH + 4.5;
 }
 
 // ---------------------------------------------------------------------------
@@ -428,9 +429,56 @@ export function chunkKey(cx: number, cz: number): string {
 }
 
 /**
+ * If (x, z) intersects any solid collision box (e.g. from an unlucky spawn or
+ * fast-travel coordinate), depenetrate finds the minimum translation vector
+ * to gently push the player to the nearest non-colliding boundary.
+ */
+export function depenetrate(
+  x: number,
+  z: number,
+  radius: number
+): { x: number; z: number } {
+  let resolvedX = x;
+  let resolvedZ = z;
+
+  for (const box of COLLISION_BOXES) {
+    if (
+      resolvedX + radius <= box.minX ||
+      resolvedX - radius >= box.maxX ||
+      resolvedZ + radius <= box.minZ ||
+      resolvedZ - radius >= box.maxZ
+    ) {
+      continue;
+    }
+    if (isInsideDoorway(box, resolvedX, resolvedZ)) continue;
+
+    // Inside a solid volume. Calculate shortest push-out distances.
+    const distWest = Math.abs(resolvedX + radius - box.minX);
+    const distEast = Math.abs(box.maxX - (resolvedX - radius));
+    const distNorth = Math.abs(resolvedZ + radius - box.minZ);
+    const distSouth = Math.abs(box.maxZ - (resolvedZ - radius));
+
+    const minDist = Math.min(distWest, distEast, distNorth, distSouth);
+
+    if (minDist === distWest) {
+      resolvedX = box.minX - radius - 0.05;
+    } else if (minDist === distEast) {
+      resolvedX = box.maxX + radius + 0.05;
+    } else if (minDist === distNorth) {
+      resolvedZ = box.minZ - radius - 0.05;
+    } else {
+      resolvedZ = box.maxZ + radius + 0.05;
+    }
+  }
+
+  return { x: resolvedX, z: resolvedZ };
+}
+
+/**
  * Resolves a move against the campus collision volumes, returning the
  * accepted position on each axis independently so the player slides along
- * walls instead of sticking to them.
+ * walls instead of sticking to them. If the player is already penetrating a
+ * volume, it depenetrates them first so they can never become immobilized.
  */
 export function resolveMovement(
   fromX: number,
@@ -439,14 +487,16 @@ export function resolveMovement(
   deltaZ: number,
   radius: number
 ): { x: number; z: number } {
-  let x = fromX;
-  let z = fromZ;
+  // First ensure starting position is not embedded in a collider
+  const freed = depenetrate(fromX, fromZ, radius);
+  let x = freed.x;
+  let z = freed.z;
 
-  if (!collidesAt(x + deltaX, z, radius)) {
-    x += deltaX;
-  }
-  if (!collidesAt(x, z + deltaZ, radius)) {
-    z += deltaZ;
+  // Subdivide fast movement so a long frame cannot tunnel through a thin wall.
+  const steps = Math.max(1, Math.ceil(Math.hypot(deltaX, deltaZ) / 0.18));
+  for (let i = 0; i < steps; i++) {
+    if (!collidesAt(x + deltaX / steps, z, radius)) x += deltaX / steps;
+    if (!collidesAt(x, z + deltaZ / steps, radius)) z += deltaZ / steps;
   }
   return { x, z };
 }
