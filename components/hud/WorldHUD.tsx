@@ -14,6 +14,10 @@ import { AdvancementToasts } from "./AdvancementToasts";
 import { AdvancementsModal } from "./AdvancementsModal";
 import { F1DrivingHUD } from "./F1DrivingHUD";
 import { DroneTourOverlay } from "./DroneTourOverlay";
+import { RecruiterWalkthroughModal } from "@/components/frontier/RecruiterWalkthroughModal";
+import { DeveloperDeepDiveModal } from "@/components/frontier/DeveloperDeepDiveModal";
+import { useDigitalTwinStore } from "@/state/digitalTwinStore";
+import { useInteractionRegistry } from "@/state/interactionRegistry";
 import { useAdvancementStore } from "@/state/advancementStore";
 import { worldSound } from "@/lib/audio";
 import { getTerrainSurfaceY } from "@/lib/terrainModel";
@@ -39,6 +43,8 @@ import {
   Zap,
   Trophy,
   Video,
+  PlayCircle,
+  Code2,
 } from "lucide-react";
 
 
@@ -113,10 +119,19 @@ export const WorldHUD: React.FC = () => {
   const [activeSlot, setActiveSlot] = useState(0);
   const { directoryOpen, setDirectoryOpen } = useSettingsStore();
   const [showSpawnObjective, setShowSpawnObjective] = useState(true);
+  const [developerDeepDiveOpen, setDeveloperDeepDiveOpen] = useState(false);
+  const startRecruiterWalkthrough = useDigitalTwinStore((s) => s.startRecruiterWalkthrough);
+  const missionStep = useDigitalTwinStore((s) => s.missionStep);
 
   useEffect(() => {
     unlockAdvancement("FIRST_FOOTPRINT");
     const timer = setTimeout(() => setShowSpawnObjective(false), 7000);
+    if (typeof window !== "undefined") {
+      (window as unknown as { __openStationModal: (id: string | null) => void }).__openStationModal = (id: string | null) => {
+        useInteractionRegistry.getState().openStationModal(id);
+      };
+      (window as unknown as { __digitalTwin: typeof useDigitalTwinStore.getState }).__digitalTwin = useDigitalTwinStore.getState;
+    }
     return () => clearTimeout(timer);
   }, [unlockAdvancement]);
 
@@ -283,6 +298,22 @@ export const WorldHUD: React.FC = () => {
                 Facility: <span className="text-sky-300">{currentFacility.name}</span>
               </div>
             )}
+            {/* Living Digital Twin Guided Mission Objective */}
+            <div className="mt-1 pt-1 border-t border-zinc-800 text-[9px] flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-cyan-400 animate-pulse" />
+              <span className="text-zinc-400 uppercase">MISSION:</span>
+              <span className="text-cyan-300 font-bold truncate max-w-[160px]">
+                {missionStep === "DRIVE_OR_LOAD"
+                  ? "1. Drive or Load Lap"
+                  : missionStep === "INGEST_PIPELINE"
+                  ? "2. Telemetry Ingestion"
+                  : missionStep === "ANALYSE_FEATURES"
+                  ? "3. AI Feature Extraction"
+                  : missionStep === "ENGINEERING_DECISION"
+                  ? "4. What-If Decision"
+                  : "5. Frontier Twin Complete"}
+              </span>
+            </div>
           </div>
 
           {/* Top-Right: Controls & Quick Nav Bar */}
@@ -346,6 +377,28 @@ export const WorldHUD: React.FC = () => {
                 <FileText className="w-3 h-3 text-sky-400" />
                 <span>RESUME</span>
               </a>
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  startRecruiterWalkthrough();
+                }}
+                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-cyan-300 hover:text-white !bg-cyan-950/70 border-cyan-500/60 font-bold"
+                title="Recruiter Fast-Track Demonstration (2 Min)"
+              >
+                <PlayCircle className="w-3 h-3 text-cyan-400" />
+                <span>DEMO</span>
+              </button>
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  setDeveloperDeepDiveOpen(true);
+                }}
+                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-purple-300 hover:text-white !bg-purple-950/70 border-purple-500/60 font-bold"
+                title="Senior Developer Code & Architecture Inspection"
+              >
+                <Code2 className="w-3 h-3 text-purple-400" />
+                <span>CODE</span>
+              </button>
               <button
                 onClick={() => setProfileModalOpen(true)}
                 className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-amber-300 hover:text-white"
@@ -526,6 +579,15 @@ export const WorldHUD: React.FC = () => {
 
       {/* Engineering Advancements Modal [L] */}
       <AdvancementsModal />
+
+      {/* Recruiter Fast-Track Engineering Walkthrough Modal */}
+      <RecruiterWalkthroughModal />
+
+      {/* Senior Developer Technical Deep Dive Modal */}
+      <DeveloperDeepDiveModal
+        isOpen={developerDeepDiveOpen}
+        onClose={() => setDeveloperDeepDiveOpen(false)}
+      />
     </>
   );
 };

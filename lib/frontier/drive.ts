@@ -17,8 +17,10 @@ export interface TelemetrySample {
     brake: number;
     steering: number;
     lapProgress: number;
+    distance: number;
     sector: number;
     lapTime: number;
+    valid: boolean;
 }
 export interface DriveState { throttle: number; brake: number;
     x: number;
@@ -70,7 +72,7 @@ export function stepDrive(previous: DriveState, input: DriveInput, dt = FIXED_DT
                 s.completed = true;
         }
     }
-    return { state: s, sample: { timestamp: s.time, yaw:s.yaw, x: s.x, z: s.z, speed: s.speed, acceleration: dt ? (s.speed - previous.speed) / dt : 0, throttle: s.throttle, brake: s.brake, steering: s.steering, lapProgress: clamp(s.progress / (Math.PI * 2), 0, 1), sector: Math.min(4, s.nextGate), lapTime: s.time } };
+    return { state: s, sample: { timestamp: s.time, yaw:s.yaw, x: s.x, z: s.z, speed: s.speed, acceleration: dt ? (s.speed - previous.speed) / dt : 0, throttle: s.throttle, brake: s.brake, steering: s.steering, lapProgress: clamp(s.progress / (Math.PI * 2), 0, 1), distance: s.progress * TRACK_RADIUS, valid: s.collisions === 0, sector: Math.min(4, s.nextGate), lapTime: s.time } };
 }
 /** Feedback controller used to generate a reproducible, checkpoint-valid reference. */
 export function referenceInput(s: DriveState): DriveInput {

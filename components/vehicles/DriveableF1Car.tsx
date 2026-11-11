@@ -15,6 +15,8 @@ import { getVoxelMaterial } from "@/lib/voxelTextures";
 import { getTerrainSurfaceY, depenetrate } from "@/lib/terrainModel";
 import { gameplayBlocked, typingTarget, touchInput } from "@/lib/frontier/input";
 import { FIXED_DT, newDrive, stepDrive, type TelemetrySample } from "@/lib/frontier/drive";
+import { useDigitalTwinStore } from "@/state/digitalTwinStore";
+import { createLapRecord } from "@/lib/digitalTwin/telemetrySchema";
 
 export const DriveableF1Car: React.FC = () => {
  const isDriving=useWorldStore(s=>s.isDriving);
@@ -69,7 +71,7 @@ export const DriveableF1Car: React.FC = () => {
    const result=stepDrive(sim.current,input);sim.current=result.state;tick.current++;
    if(tick.current%6===0||result.state.completed){ if(samples.current.length<6000)samples.current.push(result.sample);useDriveStore.getState().publish(result.state);
     const kmh=Math.abs(result.state.speed)*3.6;useWorldStore.getState().setF1Telemetry({speedKmh:Math.round(kmh),rpm:0,gear:0,throttle:input.throttle,brake:input.brake});useWorldStore.getState().setPlayerPosition([result.state.x,2.15,result.state.z]);}
-   if(result.state.completed){useDriveStore.getState().finish({state:result.state,samples:[...samples.current],source:"visitor"});useMissionStore.getState().send("drive",{type:"objective",name:"lap"});exit();useInteractionRegistry.getState().openStationModal("drive_debrief");break;}
+   if(result.state.completed){const lapRecord = createLapRecord(result.state, [...samples.current], "visitor");useDriveStore.getState().finish({state:result.state,samples:[...samples.current],source:"visitor"});useDigitalTwinStore.getState().ingestCompletedLap(lapRecord);useMissionStore.getState().send("drive",{type:"objective",name:"lap"});exit();useInteractionRegistry.getState().openStationModal("drive_debrief");break;}
   }
   const s=sim.current;carGroupRef.current.position.set(s.x,0.58,s.z);carGroupRef.current.rotation.y=s.yaw;
   for(const wheel of [frontLeftWheelRef,frontRightWheelRef])if(wheel.current)wheel.current.rotation.y=s.steering;
