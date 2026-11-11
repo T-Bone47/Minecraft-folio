@@ -21,7 +21,7 @@ import { ThreeDiagnosticsTracker } from "../diagnostics/ThreeDiagnosticsTracker"
 import { DriveableF1Car } from "../vehicles/DriveableF1Car";
 import { DroneTourCamera } from "../camera/DroneTourCamera";
 import { DigitalTwinWorldReactivity } from "./DigitalTwinWorldReactivity";
-import { TrialsNPCGroup } from "../trials/TrialsNPCGroup";
+import { LivingNPCWorkforce } from "../npc/LivingNPCWorkforce";
 import { getFacilityById } from "@/data/facilities";
 import type { FacilityLocation } from "@/types/world";
 import type { QualityProfile } from "@/lib/renderQuality";
@@ -82,7 +82,7 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
       {/* 4b. Central Engineering Plaza Landmark & Directional Compass */}
       <CentralPlaza position={[0, 0, 0]} />
       <DigitalTwinWorldReactivity />
-      <TrialsNPCGroup />
+      <LivingNPCWorkforce />
 
       {/* 4c. Driveable Voxel F1 Car (Track Test Drive Mode) */}
       <DriveableF1Car />
@@ -98,7 +98,7 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
 
       {/* Signature voxel engineer avatar — present at spawn and near the garage. */}
       <VoxelEngineerAvatar
-        position={[-13, 0.5, -5]}
+        position={[-13, -100, -5]}
         rotation={[0, -0.35, 0]}
         scale={1}
         idlePose

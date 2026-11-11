@@ -18,6 +18,7 @@ import { RecruiterWalkthroughModal } from "@/components/frontier/RecruiterWalkth
 import { DeveloperDeepDiveModal } from "@/components/frontier/DeveloperDeepDiveModal";
 import { useDigitalTwinStore } from "@/state/digitalTwinStore";
 import { useTrialsStore } from "@/state/trialsStore";
+import { useNPCWorkforceStore } from "@/state/npcWorkforceStore";
 import { useInteractionRegistry } from "@/state/interactionRegistry";
 import { useAdvancementStore } from "@/state/advancementStore";
 import { worldSound } from "@/lib/audio";
@@ -133,6 +134,7 @@ export const WorldHUD: React.FC = () => {
       };
       (window as unknown as { __digitalTwin: typeof useDigitalTwinStore.getState }).__digitalTwin = useDigitalTwinStore.getState;
       (window as unknown as { __trials: typeof useTrialsStore.getState }).__trials = useTrialsStore.getState;
+      (window as unknown as { __npcWorkforce: typeof useNPCWorkforceStore.getState }).__npcWorkforce = useNPCWorkforceStore.getState;
     }
     return () => clearTimeout(timer);
   }, [unlockAdvancement]);

@@ -16,6 +16,8 @@ import { TrialInvestigationModal } from "@/components/trials/TrialInvestigationM
 import { EngineeringDebriefModal } from "@/components/trials/EngineeringDebriefModal";
 import { NPCDialogueModal } from "@/components/trials/NPCDialogueModal";
 import { useTrialsStore } from "@/state/trialsStore";
+import { WorkforceDialogueModal } from "@/components/npc/WorkforceDialogueModal";
+import { useNPCWorkforceStore } from "@/state/npcWorkforceStore";
 import { useMissionStore } from "@/state/missionStore";
 import { worldSound } from "@/lib/audio";
 import {
@@ -104,6 +106,24 @@ export const StationModal: React.FC = () => {
     return (
       <StationDialog title="Engineering Campus Staff" onClose={() => openStationModal(null)}>
         <NPCDialogueModal npcId={activeStationModal.slice(4)} onClose={() => openStationModal(null)} />
+      </StationDialog>
+    );
+  if (activeStationModal.startsWith("workforce_"))
+    return (
+      <StationDialog
+        title="Living Engineering Workforce"
+        onClose={() => {
+          openStationModal(null);
+          useNPCWorkforceStore.getState().dismissInteraction();
+        }}
+      >
+        <WorkforceDialogueModal
+          npcId={activeStationModal.slice(10)}
+          onClose={() => {
+            openStationModal(null);
+            useNPCWorkforceStore.getState().dismissInteraction();
+          }}
+        />
       </StationDialog>
     );
 
