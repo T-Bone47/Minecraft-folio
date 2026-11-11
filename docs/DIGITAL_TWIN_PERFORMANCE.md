@@ -40,3 +40,4 @@ In Three.js / React Three Fiber applications, per-frame heap allocations inside 
 ### 2.3 Memoized Analytical Derivations
 - Spatial distance interpolation and corner segmentation are computed strictly on-demand when a lap completes or what-if parameters change.
 - Replay scrubbing accesses pre-computed samples at $O(1)$ index lookup without physics re-simulation.
+

@@ -80,3 +80,4 @@ The Living Engineering Digital Twin connects the physical 3D facilities of Asish
 ### 3.5 Recruiter Fast Track & Developer Deep Dive (`components/frontier/`)
 - Recruiter Fast Track: 2-minute, 6-step guided walkthrough loading bundled benchmark data.
 - Developer Deep Dive: In-depth technical inspection of simulation equations, schema, and memory budgets.
+

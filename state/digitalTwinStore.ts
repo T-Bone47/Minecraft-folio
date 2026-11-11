@@ -110,7 +110,7 @@ export const useDigitalTwinStore = create<DigitalTwinState>((set, get) => ({
   recruiterWalkthrough: {
     active: false,
     step: 0,
-    totalSteps: 6,
+    totalSteps: 7,
   },
 
   ingestCompletedLap: (lap: LapRecord) => {
@@ -236,7 +236,7 @@ export const useDigitalTwinStore = create<DigitalTwinState>((set, get) => ({
       recruiterWalkthrough: {
         active: true,
         step: 0,
-        totalSteps: 6,
+        totalSteps: 7,
       },
     });
   },
@@ -276,3 +276,4 @@ export const useDigitalTwinStore = create<DigitalTwinState>((set, get) => ({
     });
   },
 }));
+

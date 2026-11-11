@@ -53,3 +53,4 @@ The engine assigns an engineering verdict:
 - **`APPROVED FOR STINT`**: Net predicted delta $< -0.25\text{ s}$ with acceptable stability margins.
 - **`MARGINAL GAIN`**: Net predicted delta between $-0.25\text{ s}$ and $+0.25\text{ s}$.
 - **`REJECTED (HIGH DEFICIT)`**: Net predicted delta $> +0.25\text{ s}$.
+

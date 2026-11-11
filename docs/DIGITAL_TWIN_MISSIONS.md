@@ -54,3 +54,4 @@ Full Technical Architecture & Production Credentials Unlocked
 3. `ANALYSE_FEATURES`: Visiting the AI/ML Lab and inspecting the engineered features advances to `ENGINEERING_DECISION`.
 4. `ENGINEERING_DECISION`: Selecting and applying any what-if scenario advances the mission to `CASE_STUDY_UNLOCKED`.
 5. `CASE_STUDY_UNLOCKED`: Awards the "Frontier Twin Architect" achievement and displays the complete architecture case study.
+

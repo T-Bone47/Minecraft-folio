@@ -72,3 +72,4 @@
 | `DT-6` | `dt-6-aiml-lab.png` | AI/ML Research Lab Telemetry Feature Extraction (5D Vector) |
 | `DT-7` | `dt-7-drive-debrief-replay.png` | Living Digital Twin Debrief: 2D Radar & Multi-Channel Replay |
 | `DT-8` | `dt-8-whatif-decision-centre.png` | Race Engineering What-If Decision Centre & Stint Trade-Offs |
+

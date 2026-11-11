@@ -17,6 +17,7 @@ import { DroneTourOverlay } from "./DroneTourOverlay";
 import { RecruiterWalkthroughModal } from "@/components/frontier/RecruiterWalkthroughModal";
 import { DeveloperDeepDiveModal } from "@/components/frontier/DeveloperDeepDiveModal";
 import { useDigitalTwinStore } from "@/state/digitalTwinStore";
+import { useTrialsStore } from "@/state/trialsStore";
 import { useInteractionRegistry } from "@/state/interactionRegistry";
 import { useAdvancementStore } from "@/state/advancementStore";
 import { worldSound } from "@/lib/audio";
@@ -131,6 +132,7 @@ export const WorldHUD: React.FC = () => {
         useInteractionRegistry.getState().openStationModal(id);
       };
       (window as unknown as { __digitalTwin: typeof useDigitalTwinStore.getState }).__digitalTwin = useDigitalTwinStore.getState;
+      (window as unknown as { __trials: typeof useTrialsStore.getState }).__trials = useTrialsStore.getState;
     }
     return () => clearTimeout(timer);
   }, [unlockAdvancement]);

@@ -21,6 +21,7 @@ import { ThreeDiagnosticsTracker } from "../diagnostics/ThreeDiagnosticsTracker"
 import { DriveableF1Car } from "../vehicles/DriveableF1Car";
 import { DroneTourCamera } from "../camera/DroneTourCamera";
 import { DigitalTwinWorldReactivity } from "./DigitalTwinWorldReactivity";
+import { TrialsNPCGroup } from "../trials/TrialsNPCGroup";
 import { getFacilityById } from "@/data/facilities";
 import type { FacilityLocation } from "@/types/world";
 import type { QualityProfile } from "@/lib/renderQuality";
@@ -81,6 +82,7 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
       {/* 4b. Central Engineering Plaza Landmark & Directional Compass */}
       <CentralPlaza position={[0, 0, 0]} />
       <DigitalTwinWorldReactivity />
+      <TrialsNPCGroup />
 
       {/* 4c. Driveable Voxel F1 Car (Track Test Drive Mode) */}
       <DriveableF1Car />

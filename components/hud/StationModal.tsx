@@ -11,6 +11,11 @@ import { StationDialog } from "@/components/frontier/StationDialog";
 import { PipelineStation } from "@/components/frontier/PipelineStation";
 import { ExperimentStation } from "@/components/frontier/ExperimentStation";
 import { DriveDebrief } from "@/components/frontier/DriveDebrief";
+import { TrialTerminalModal } from "@/components/trials/TrialTerminalModal";
+import { TrialInvestigationModal } from "@/components/trials/TrialInvestigationModal";
+import { EngineeringDebriefModal } from "@/components/trials/EngineeringDebriefModal";
+import { NPCDialogueModal } from "@/components/trials/NPCDialogueModal";
+import { useTrialsStore } from "@/state/trialsStore";
 import { useMissionStore } from "@/state/missionStore";
 import { worldSound } from "@/lib/audio";
 import {
@@ -77,6 +82,30 @@ export const StationModal: React.FC = () => {
   if (activeStationModal === "pipeline_observatory") return <StationDialog title="The System / Telemetry incident" onClose={() => openStationModal(null)}><PipelineStation /></StationDialog>;
   if (activeStationModal === "ml_playground") return <StationDialog title="The Experiment / AI laboratory" onClose={() => openStationModal(null)}><ExperimentStation /></StationDialog>;
   if (activeStationModal === "drive_debrief") return <StationDialog title="The Drive / Engineering debrief" onClose={() => openStationModal(null)}><DriveDebrief /></StationDialog>;
+  if (activeStationModal === "trials_terminal")
+    return (
+      <StationDialog title="Frontier Engineering Trials" onClose={() => { openStationModal(null); useTrialsStore.getState().closeTerminal(); }}>
+        <TrialTerminalModal onClose={() => { openStationModal(null); useTrialsStore.getState().closeTerminal(); }} />
+      </StationDialog>
+    );
+  if (activeStationModal === "trials_investigation")
+    return (
+      <StationDialog title="Trial Investigation Workbench" onClose={() => { openStationModal(null); useTrialsStore.getState().closeInvestigation(); }}>
+        <TrialInvestigationModal onClose={() => { openStationModal(null); useTrialsStore.getState().closeInvestigation(); }} />
+      </StationDialog>
+    );
+  if (activeStationModal === "trials_debrief")
+    return (
+      <StationDialog title="Engineering Debrief & Verification Report" onClose={() => { openStationModal(null); useTrialsStore.getState().closeDebrief(); }}>
+        <EngineeringDebriefModal onClose={() => { openStationModal(null); useTrialsStore.getState().closeDebrief(); }} />
+      </StationDialog>
+    );
+  if (activeStationModal.startsWith("npc_"))
+    return (
+      <StationDialog title="Engineering Campus Staff" onClose={() => openStationModal(null)}>
+        <NPCDialogueModal npcId={activeStationModal.slice(4)} onClose={() => openStationModal(null)} />
+      </StationDialog>
+    );
 
 
   const handleClose = () => {

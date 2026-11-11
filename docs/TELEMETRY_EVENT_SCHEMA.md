@@ -88,3 +88,4 @@ The system emits and observes typed digital twin pipeline events:
 | `VALIDATION_COMPLETED` | Schema type guard check | `{ passed: boolean, errorCount }` | Tower Stage 3 Rack |
 | `ANALYSIS_COMPLETED` | Distance delta solver finish | `{ overallRating, totalDelta }` | AI Lab, Debrief |
 | `ENGINEERING_DECISION_RECORDED` | What-if scenario evaluated | `{ scenarioName, predictedDelta }` | Garage Decision Centre |
+

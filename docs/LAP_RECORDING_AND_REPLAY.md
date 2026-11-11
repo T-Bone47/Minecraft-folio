@@ -67,3 +67,4 @@ Traces are rendered as SVG `<polyline>` elements over normalized lap progress $s
 - **Brake**: Red line ($0.0\text{ to }1.0$)
 - **Steering**: Cyan line ($-0.55\text{ to }+0.55\text{ rad}$)
 - **Playhead**: Vertical line at $x = s_i \cdot 600$
+

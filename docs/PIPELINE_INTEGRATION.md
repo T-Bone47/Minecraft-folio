@@ -64,3 +64,4 @@ STAGE 8: PRESENTATION (Cockpit HUD, Replay scrubbers, AI Lab, Decision Centre)
 - **Physical Conduits**: Dual fiber-optic conduits connect the Garage to the Telemetry Tower, and the Tower to the Simulation Lab and AI/ML Lab.
 - **Dynamic Light Pulses**: Upon completion or ingestion of a telemetry batch, an energetic cyan light pulse travels along the conduit network.
 - **Tower Beacon Reactions**: The beacon at the tower pinnacle scales dynamically with pulse frequency upon active telemetry ingestion.
+

@@ -39,3 +39,4 @@ The **Recruiter Fast Track ("VIEW ENGINEERING DEMONSTRATION")** solves this:
 - Time to first verified code link: $< 15\text{ seconds}$.
 - Time to complete full architectural walkthrough: $\approx 90\text{ seconds}$.
 - Zero broken links, zero fabricated telemetry claims, zero required logins.
+

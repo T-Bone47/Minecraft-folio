@@ -90,3 +90,4 @@ The track features 4 sequential gates at progress milestones $k \cdot \frac{\pi}
 - A lap is completed **only** when gates are crossed in strict order: $1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5$.
 - Reversing travel creates negative progress increments ($\Delta s < 0$), preventing reverse direction exploits.
 - Laps completed with collisions are recorded and inspectable in the debrief, but flagged as `valid: false`.
+

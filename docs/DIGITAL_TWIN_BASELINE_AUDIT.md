@@ -57,3 +57,4 @@ The Digital Twin initiative elevates these independent components into **one coh
 3. **Non-Destructive What-If Scenarios**: Engineering adjustments generate a separate `hypotheticalLap` with explicit assumptions; the measured `visitorLap` is never mutated.
 4. **Transparent Provenance**: All displayed telemetry explicitly labels its origin: `SIMULATOR-GENERATED TELEMETRY`, `BUNDLED REFERENCE LAP`, or `HYPOTHETICAL ENGINEERING SCENARIO`.
 5. **Zero Backend Requirement**: Fully client-side execution using TypedArrays and fast numerical solvers ensures instant Vercel edge deployment with zero cloud dependencies.
+

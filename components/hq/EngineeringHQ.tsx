@@ -228,10 +228,27 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
       },
     });
 
+    // 4. Frontier Engineering Trials Operations Terminal
+    registerObject({
+      id: "hq_trials_terminal",
+      type: "terminal",
+      label: "FRONTIER ENGINEERING TRIALS",
+      sublabel: "Solve operational challenges across Race, AI & Systems divisions",
+      actionPrompt: "[E] OPEN ENGINEERING TRIALS",
+      position: [position[0] - 1.5, position[1] + 1.5, position[2] + 4.5],
+      boundsRadius: 4.0,
+      facilityId: "hq",
+      onInteract: () => {
+        openStationModal("trials_terminal");
+        worldSound.playInspect();
+      },
+    });
+
     return () => {
       unregisterObject("facility_hq");
       unregisterObject("hq_career_wall");
       unregisterObject("hq_contact_terminal");
+      unregisterObject("hq_trials_terminal");
     };
   }, [position, registerObject, unregisterObject, focusLocation, openStationModal]);
 
@@ -342,6 +359,22 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
         </mesh>
         <mesh position={[0, 1.65, 0]}>
           <boxGeometry args={[0.25, 0.25, 0.25]} />
+          <primitive object={glowstoneMat} attach="material" />
+        </mesh>
+      </group>
+
+      {/* 8. Frontier Engineering Trials Operations Console */}
+      <group position={[-1.5, 0.5, 4.5]} rotation={[0, 0, 0]}>
+        <mesh position={[0, 0.5, 0]} castShadow>
+          <boxGeometry args={[1.0, 1.0, 0.8]} />
+          <primitive object={stoneBrickMat} attach="material" />
+        </mesh>
+        <mesh position={[0, 1.25, 0]} rotation={[0.2, 0, 0]} castShadow>
+          <boxGeometry args={[1.2, 0.75, 0.2]} />
+          <primitive object={monitorMat} attach="material" />
+        </mesh>
+        <mesh position={[0, 1.75, 0]}>
+          <boxGeometry args={[0.3, 0.15, 0.3]} />
           <primitive object={glowstoneMat} attach="material" />
         </mesh>
       </group>

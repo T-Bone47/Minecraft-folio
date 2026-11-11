@@ -243,3 +243,4 @@ export interface DigitalTwinEvent<T = unknown> {
   timestamp: number;
   payload: T;
 }
+

@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useDigitalTwinStore } from "@/state/digitalTwinStore";
+import { useTrialsStore } from "@/state/trialsStore";
 import {
   X,
   ChevronRight,
@@ -15,6 +16,7 @@ import {
   ExternalLink,
   Github,
   CheckCircle2,
+  Wrench,
 } from "lucide-react";
 
 export function RecruiterWalkthroughModal() {
@@ -226,6 +228,37 @@ export function RecruiterWalkthroughModal() {
           <div className="p-2.5 bg-emerald-950/40 border border-emerald-600/40 text-[11px] text-emerald-200">
             <strong>Contact:</strong> Asish Oliver M · Integrated M.Tech (CSE) @ VIT-AP · <a href="mailto:dreamteamoliver@gmail.com" className="underline">dreamteamoliver@gmail.com</a>
           </div>
+        </div>
+      ),
+    },
+    {
+      title: "7. Frontier Engineering Trials — Problem Solved",
+      subtitle: "Watch An Operational Engineering Incident Diagnosed & Solved",
+      icon: Wrench,
+      content: (
+        <div className="space-y-3">
+          <p className="leading-relaxed">
+            The <strong>Frontier Engineering Trials</strong> put visitors into real engineering incidents across Motorsport, AI/ML, and Systems Reliability:
+          </p>
+          <div className="p-3 bg-zinc-900/90 border border-zinc-700 space-y-2">
+            <div className="flex items-center justify-between">
+              <strong className="text-red-400 font-silkscreen text-[11px]">CASE: &quot;THE MISSING FOUR TENTHS&quot;</strong>
+              <span className="text-[10px] px-1.5 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-600 font-bold">VERIFIED (95%)</span>
+            </div>
+            <p className="text-[11px] text-zinc-300 leading-relaxed">
+              Diagnosed Turn 3 apex velocity deficit (-12.4 km/h) using spatial distance-aligned telemetry. Instructed 8m deeper trail-braking, projecting a 0.284s recovery.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              exitRecruiterWalkthrough();
+              useTrialsStore.getState().startTrial("race_performance_01");
+            }}
+            className="w-full py-2.5 font-silkscreen text-xs font-bold bg-red-600 hover:bg-red-500 text-white border border-red-500 flex items-center justify-center gap-2 transition-colors"
+          >
+            <span>LAUNCH INTERACTIVE TRIALS TERMINAL</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       ),
     },

@@ -74,3 +74,4 @@ Insights are deterministically derived from computed corner and sector deltas:
 - **Apex Deficits**: Triggers when apex speed is $> 10\text{ km/h}$ lower than reference.
 - **Early/Late Braking**: Flags when braking begins $> 8\text{ m}$ earlier than reference.
 - **Throttle Delay**: Flags hesitant power delivery on corner exit.
+
