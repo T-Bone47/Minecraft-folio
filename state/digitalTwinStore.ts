@@ -29,6 +29,8 @@ import {
   type EngineeringScenarioConfig,
 } from "@/lib/digitalTwin/decisionEngine";
 import { generateReference } from "@/lib/frontier/drive";
+import { globalTraceRecorder } from "@/lib/xray/traceRecorder";
+import { useXRayStore } from "@/state/xrayStore";
 
 export type MissionStep =
   | "DRIVE_OR_LOAD"
@@ -114,7 +116,165 @@ export const useDigitalTwinStore = create<DigitalTwinState>((set, get) => ({
   },
 
   ingestCompletedLap: (lap: LapRecord) => {
+    // 1. Trace Vehicle Simulation
+    globalTraceRecorder.startTrace("motorsport", "Simulator Lap Ingestion & Analysis");
+    globalTraceRecorder.startSpan({
+      spanId: "span_veh_sim",
+      name: "Vehicle Physics Simulation",
+      facilityId: "garage",
+      subsystem: "motorsport",
+      inputSummary: { lapTime: lap.state.time, collisions: lap.state.collisions },
+      provenance: lap.source === "visitor" ? "SIMULATOR_TELEMETRY" : "DETERMINISTIC_REPLAY",
+      sourceRef: {
+        repo: "T-Bone47/Minecraft-folio",
+        file: "components/vehicles/DriveableF1Car.tsx",
+        symbol: "stepDrive",
+        testFile: "tests/digital-twin.test.ts",
+      },
+    });
+    globalTraceRecorder.endSpan({
+      spanId: "span_veh_sim",
+      outputSummary: { finalSpeedKmh: Math.round(Math.abs(lap.state.speed) * 3.6), gatesPassed: lap.state.nextGate - 1 },
+    });
+
+    // 2. Trace Sample Acquisition
+    globalTraceRecorder.startSpan({
+      spanId: "span_telem_acquire",
+      parentSpanId: "span_veh_sim",
+      name: "Telemetry Batch Acquisition",
+      facilityId: "garage",
+      subsystem: "telemetry_pipeline",
+      inputSummary: { totalSamples: lap.samples.length, source: lap.source },
+      sourceRef: {
+        repo: "T-Bone47/Minecraft-folio",
+        file: "lib/digitalTwin/telemetrySchema.ts",
+        symbol: "createLapRecord",
+        testFile: "tests/digital-twin.test.ts",
+      },
+    });
+    globalTraceRecorder.endSpan({
+      spanId: "span_telem_acquire",
+      outputSummary: { byteEstimate: lap.samples.length * 32, sessionId: lap.sessionId },
+    });
+
+    // 3. Trace Schema Validation
+    globalTraceRecorder.startSpan({
+      spanId: "span_schema_val",
+      parentSpanId: "span_telem_acquire",
+      name: "Schema & Monotonicity Validation",
+      facilityId: "telemetry",
+      subsystem: "telemetry_pipeline",
+      inputSummary: { schemaVersion: "1.0.0", checks: "bounds,monotonicity,vectors" },
+      sourceRef: {
+        repo: "T-Bone47/Minecraft-folio",
+        file: "lib/digitalTwin/telemetrySchema.ts",
+        symbol: "validateTelemetrySample",
+        testFile: "tests/digital-twin.test.ts",
+      },
+    });
+    const validCount = lap.samples.filter(s => s.valid).length;
+    globalTraceRecorder.endSpan({
+      spanId: "span_schema_val",
+      outputSummary: { validSamples: validCount, rejectedSamples: lap.samples.length - validCount },
+    });
+
+    // 4. Trace Spatial Normalisation
+    globalTraceRecorder.startSpan({
+      spanId: "span_coord_norm",
+      parentSpanId: "span_schema_val",
+      name: "Spatial Track Normalisation",
+      facilityId: "telemetry",
+      subsystem: "telemetry_pipeline",
+      inputSummary: { circuitRadiusM: 45, trackLengthM: 282.74 },
+      sourceRef: {
+        repo: "T-Bone47/Minecraft-folio",
+        file: "lib/digitalTwin/analysis.ts",
+        symbol: "interpolateSampleAtProgress",
+        testFile: "tests/digital-twin.test.ts",
+      },
+    });
+    globalTraceRecorder.endSpan({
+      spanId: "span_coord_norm",
+      outputSummary: { normalizedProgressRange: "0.0 -> 1.0" },
+    });
+
+    // 5. Trace Distance-Aligned Delta-T Solver
+    globalTraceRecorder.startSpan({
+      spanId: "span_spatial_align",
+      parentSpanId: "span_coord_norm",
+      name: "Distance-Aligned Delta-T Solver",
+      facilityId: "simulation",
+      subsystem: "simulation_solver",
+      inputSummary: { visitorLapTime: lap.state.time, refLapTime: get().referenceLap.state.time },
+      sourceRef: {
+        repo: "T-Bone47/Minecraft-folio",
+        file: "lib/digitalTwin/analysis.ts",
+        symbol: "performCompleteLapAnalysis",
+        testFile: "tests/digital-twin.test.ts",
+      },
+    });
+
     const analysis = performCompleteLapAnalysis(lap, get().referenceLap);
+
+    globalTraceRecorder.endSpan({
+      spanId: "span_spatial_align",
+      outputSummary: {
+        totalDeltaS: analysis.totalDeltaS,
+        sectorDeltas: analysis.sectors.map(s => s.deltaS),
+        overallRating: analysis.overallRating,
+      },
+    });
+
+    // 6. Trace Corner Apex Analysis
+    globalTraceRecorder.startSpan({
+      spanId: "span_corner_diag",
+      parentSpanId: "span_spatial_align",
+      name: "Corner Apex Speed Analysis",
+      facilityId: "aiml",
+      subsystem: "aiml_evaluation",
+      inputSummary: { cornersTotal: analysis.corners.length },
+      sourceRef: {
+        repo: "T-Bone47/Minecraft-folio",
+        file: "lib/digitalTwin/analysis.ts",
+        symbol: "analyzeCorners",
+        testFile: "tests/digital-twin.test.ts",
+      },
+    });
+    globalTraceRecorder.endSpan({
+      spanId: "span_corner_diag",
+      outputSummary: {
+        corners: analysis.corners.map(c => `${c.name}: ${c.apexSpeedKmh}km/h`),
+      },
+    });
+
+    // 7. Trace Strategic Coaching Generation
+    globalTraceRecorder.startSpan({
+      spanId: "span_insights_gen",
+      parentSpanId: "span_corner_diag",
+      name: "Engineering Strategy Generation",
+      facilityId: "operations",
+      subsystem: "systems_reliability",
+      inputSummary: { actionableDeficits: analysis.insights.length },
+      sourceRef: {
+        repo: "T-Bone47/Minecraft-folio",
+        file: "lib/digitalTwin/analysis.ts",
+        symbol: "generateActionableInsights",
+        testFile: "tests/digital-twin.test.ts",
+      },
+    });
+    globalTraceRecorder.endSpan({
+      spanId: "span_insights_gen",
+      outputSummary: {
+        insightsCount: analysis.insights.length,
+        primaryRecommendation: analysis.insights[0]?.recommendation ?? "Maintain consistent trajectory",
+      },
+    });
+
+    // Ingest trace into XRay Store
+    const liveTrace = globalTraceRecorder.getTraceRecord(
+      lap.source === "visitor" ? "Live Simulator Driving Trace" : "Deterministic Reference Lap Trace"
+    );
+    useXRayStore.getState().ingestLiveTrace(liveTrace);
 
     set({
       recordedLap: lap,

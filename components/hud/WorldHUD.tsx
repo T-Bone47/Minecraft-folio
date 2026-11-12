@@ -16,6 +16,8 @@ import { F1DrivingHUD } from "./F1DrivingHUD";
 import { DroneTourOverlay } from "./DroneTourOverlay";
 import { RecruiterWalkthroughModal } from "@/components/frontier/RecruiterWalkthroughModal";
 import { DeveloperDeepDiveModal } from "@/components/frontier/DeveloperDeepDiveModal";
+import { XRayHUD } from "../xray/XRayHUD";
+import { XRayModal } from "../xray/XRayModal";
 import { useDigitalTwinStore } from "@/state/digitalTwinStore";
 import { useTrialsStore } from "@/state/trialsStore";
 import { useNPCWorkforceStore } from "@/state/npcWorkforceStore";
@@ -604,6 +606,10 @@ export const WorldHUD: React.FC = () => {
         isOpen={developerDeepDiveOpen}
         onClose={() => setDeveloperDeepDiveOpen(false)}
       />
+
+      {/* Frontier X-Ray Reality Engine HUD & Modal */}
+      <XRayHUD />
+      <XRayModal />
     </>
   );
 };

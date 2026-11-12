@@ -22,6 +22,7 @@ import { DriveableF1Car } from "../vehicles/DriveableF1Car";
 import { DroneTourCamera } from "../camera/DroneTourCamera";
 import { DigitalTwinWorldReactivity } from "./DigitalTwinWorldReactivity";
 import { LivingNPCWorkforce } from "../npc/LivingNPCWorkforce";
+import { XRayWorldOverlay } from "../xray/XRayWorldOverlay";
 import { getFacilityById } from "@/data/facilities";
 import type { FacilityLocation } from "@/types/world";
 import type { QualityProfile } from "@/lib/renderQuality";
@@ -83,6 +84,7 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
       <CentralPlaza position={[0, 0, 0]} />
       <DigitalTwinWorldReactivity />
       <LivingNPCWorkforce />
+      <XRayWorldOverlay />
 
       {/* 4c. Driveable Voxel F1 Car (Track Test Drive Mode) */}
       <DriveableF1Car />

@@ -9,6 +9,7 @@ import { useInteractionRegistry } from "@/state/interactionRegistry";
 import { projects } from "@/data/projects";
 import { facilities, getFacilityById } from "@/data/facilities";
 import { navigationController } from "@/lib/frontierDirector/navigationController";
+import { useXRayStore } from "@/state/xrayStore";
 import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import { Terminal, X, ChevronRight } from "lucide-react";
 
@@ -167,6 +168,46 @@ export const WorldCommandPalette: React.FC = () => {
       action: () => {
         setCommandPaletteOpen(false);
         navigationController.executeTransition({ action: "START_SHOWCASE", experienceId: "systems" });
+      },
+    },
+    {
+      command: "/xray",
+      category: "DIRECTOR",
+      title: "SYSTEM X-RAY CONDUITS [X]",
+      description: "Toggle 3D holographic data pipelines, laser conduits and facility beacons",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useXRayStore.getState().toggleXRay();
+      },
+    },
+    {
+      command: "/reality",
+      category: "DIRECTOR",
+      title: "FRONTIER REALITY ENGINE",
+      description: "Inspect causal execution DAG, monotonic timeline, and live telemetry spans",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useXRayStore.getState().openModal("graph");
+      },
+    },
+    {
+      command: "/time-machine",
+      category: "DIRECTOR",
+      title: "ENGINEERING TIME MACHINE",
+      description: "Audit verified historical incident commits, diffs, and root cause analyses",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useXRayStore.getState().openModal("timemachine");
+      },
+    },
+    {
+      command: "/push-to-prove",
+      category: "DIRECTOR",
+      title: "PUSH-TO-PROVE ALGORITHM LAB",
+      description: "Run live in-browser mathematical algorithms across Motorsport, AI/ML, and Systems",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useXRayStore.getState().openModal("lab");
       },
     },
     {

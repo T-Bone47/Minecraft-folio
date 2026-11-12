@@ -2,6 +2,7 @@ import { useWorldStore } from "@/state/worldStore";
 import { useSettingsStore } from "@/state/settingsStore";
 import { useInteractionRegistry } from "@/state/interactionRegistry";
 import { useAdvancementStore } from "@/state/advancementStore";
+import { useXRayStore } from "@/state/xrayStore";
 import { navigationController } from "@/lib/frontierDirector/navigationController";
 
 export function gameplayBlocked() {
@@ -17,6 +18,7 @@ export function gameplayBlocked() {
         s.profileModalOpen ||
         s.directoryOpen ||
         useAdvancementStore.getState().isModalOpen ||
+        useXRayStore.getState().isModalOpen ||
         !!useInteractionRegistry.getState().activeStationModal
     );
 }
