@@ -1,0 +1,54 @@
+[
+  {
+    "name": "/experience Hub Loaded",
+    "status": "PASS"
+  },
+  {
+    "name": "/experience/motorsport 2D Fallback",
+    "status": "PASS"
+  },
+  {
+    "name": "/experience/ai-ml 2D Fallback",
+    "status": "PASS"
+  },
+  {
+    "name": "/experience/systems 2D Fallback",
+    "status": "PASS"
+  },
+  {
+    "name": "Evidence Layer 1: Problem",
+    "status": "PASS"
+  },
+  {
+    "name": "Evidence Layer 3: Algorithm",
+    "status": "PASS"
+  },
+  {
+    "name": "Evidence Layer 4: Evidence",
+    "status": "PASS"
+  },
+  {
+    "name": "3D Campus Director Launcher Rendered",
+    "status": "PASS"
+  },
+  {
+    "name": "Experience Selection Modal Opened",
+    "status": "PASS"
+  },
+  {
+    "name": "Showcase Playback Started",
+    "status": "PASS"
+  },
+  {
+    "name": "Engineering Proof Inspector Opened in 3D",
+    "status": "PASS"
+  },
+  {
+    "name": "Proof Inspector Layer Switch (Key 3)",
+    "status": "PASS"
+  },
+  {
+    "name": "Modal Dismissal via Escape",
+    "status": "PASS"
+  }
+]

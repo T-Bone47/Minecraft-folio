@@ -8,13 +8,14 @@ import { useCameraStore } from "@/state/cameraStore";
 import { useInteractionRegistry } from "@/state/interactionRegistry";
 import { projects } from "@/data/projects";
 import { facilities, getFacilityById } from "@/data/facilities";
+import { navigationController } from "@/lib/frontierDirector/navigationController";
 import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import { Terminal, X, ChevronRight } from "lucide-react";
 
 
 interface CommandItem {
   command: string;
-  category: "NAVIGATION" | "PROJECTS" | "SYSTEMS" | "PROFILE";
+  category: "NAVIGATION" | "PROJECTS" | "SYSTEMS" | "PROFILE" | "DIRECTOR";
   title: string;
   description: string;
   action: () => void;
@@ -116,6 +117,56 @@ export const WorldCommandPalette: React.FC = () => {
         focusLocation("plaza");
         setTargetTransform([0, 1.65, 4], [0, 1.65, 0]);
         setCommandPaletteOpen(false);
+      },
+    },
+    {
+      command: "/director",
+      category: "DIRECTOR",
+      title: "FRONTIER DIRECTOR 2.0",
+      description: "Open professional showcase selection (Motorsport, AI/ML, Systems)",
+      action: () => {
+        setCommandPaletteOpen(false);
+        navigationController.setExperienceModalOpen(true);
+      },
+    },
+    {
+      command: "/proof",
+      category: "DIRECTOR",
+      title: "ENGINEERING PROOF MODE",
+      description: "Inspect 6-layer technical audit, test proofs, and source links",
+      action: () => {
+        setCommandPaletteOpen(false);
+        navigationController.executeTransition({ action: "OPEN_EVIDENCE" });
+      },
+    },
+    {
+      command: "/motorsport",
+      category: "DIRECTOR",
+      title: "SHOWCASE: MOTORSPORT ENGINEERING",
+      description: "60-second guided vehicle simulation and distance-domain telemetry demo",
+      action: () => {
+        setCommandPaletteOpen(false);
+        navigationController.executeTransition({ action: "START_SHOWCASE", experienceId: "motorsport" });
+      },
+    },
+    {
+      command: "/ai-ml",
+      category: "DIRECTOR",
+      title: "SHOWCASE: AI & MACHINE LEARNING",
+      description: "60-second guided chronological evaluation and conformal prediction demo",
+      action: () => {
+        setCommandPaletteOpen(false);
+        navigationController.executeTransition({ action: "START_SHOWCASE", experienceId: "ai-ml" });
+      },
+    },
+    {
+      command: "/systems",
+      category: "DIRECTOR",
+      title: "SHOWCASE: SOFTWARE SYSTEMS",
+      description: "60-second guided distributed streaming and fault tolerance demo",
+      action: () => {
+        setCommandPaletteOpen(false);
+        navigationController.executeTransition({ action: "START_SHOWCASE", experienceId: "systems" });
       },
     },
     {

@@ -20,6 +20,11 @@ import { WorldMap } from "../hud/WorldMap";
 import { WorldCommandPalette } from "../hud/WorldCommandPalette";
 import { PerformanceHUD } from "../diagnostics/PerformanceHUD";
 import { WorldFallback } from "./WorldFallback";
+import { FrontierDirectorLauncher } from "../director/FrontierDirectorLauncher";
+import { ExperienceSelectionModal } from "../director/ExperienceSelectionModal";
+import { EngineeringProofInspector } from "../director/EngineeringProofInspector";
+import { CinematicPresentationEngine } from "../director/CinematicPresentationEngine";
+import { navigationController } from "@/lib/frontierDirector/navigationController";
 
 // Dynamic import of the 3D Canvas with ssr disabled to protect the server bundle
 const WorldCanvas = dynamic(
@@ -51,6 +56,32 @@ const EngineeringWorldContent: React.FC = () => {
       if (prefersReducedMotion()) {
         setReducedMotion(true);
       }
+    }
+
+    // Synchronize Frontier Director URL parameters on cold load
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const exp = params.get("experience");
+      const mode = params.get("mode");
+      const layer = params.get("layer");
+      const step = params.get("step");
+      if (exp === "motorsport" || exp === "ai-ml" || exp === "systems") {
+        if (mode === "showcase") {
+          navigationController.executeTransition({
+            action: "START_SHOWCASE",
+            experienceId: exp,
+            stepIndex: step ? parseInt(step, 10) : 0,
+          });
+        } else if (mode === "proof") {
+          navigationController.executeTransition({
+            action: "OPEN_EVIDENCE",
+            experienceId: exp,
+            evidenceLayer: (layer as any) || "problem",
+          });
+        }
+      }
+    } catch (e) {
+      console.warn("URL param sync error:", e);
     }
     return ()=>window.removeEventListener("frontier-context-lost",lost);
   }, [setDeviceTier, setReducedMotion]);
@@ -90,6 +121,12 @@ const EngineeringWorldContent: React.FC = () => {
 
       {/* F3 Telemetry / Diagnostics Overlay */}
       <PerformanceHUD />
+
+      {/* Frontier Director 2.0 Overlays */}
+      <FrontierDirectorLauncher />
+      <ExperienceSelectionModal />
+      <EngineeringProofInspector />
+      <CinematicPresentationEngine />
     </main>
   );
 };
