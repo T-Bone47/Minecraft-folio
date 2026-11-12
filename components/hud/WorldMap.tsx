@@ -7,6 +7,7 @@ import { useWorldStore } from "@/state/worldStore";
 import { useCameraStore } from "@/state/cameraStore";
 import { facilities } from "@/data/facilities";
 import { CIRCUIT_WAYPOINTS } from "@/data/world";
+import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import { X, Navigation, ExternalLink, Compass } from "lucide-react";
 
 export const WorldMap: React.FC = () => {
@@ -39,13 +40,16 @@ export const WorldMap: React.FC = () => {
   const handleTeleport = (facId: string) => {
     const fac = facilities.find((f) => f.id === facId);
     if (fac) {
+      useWorldStore.getState().stopDroneTour();
       focusLocation(fac.id);
       const [sx, , sz] = fac.approachPosition;
+      const eyeY = getTerrainSurfaceY(sx, sz) + 1.65;
       setTargetTransform(
-        [sx, fac.coordinates[1] + 1.65, sz],
+        [sx, eyeY, sz],
         fac.approachLookAt
       );
       setMinimapOpen(false);
+      if (typeof document !== "undefined") (document.activeElement as HTMLElement)?.blur();
     }
   };
 

@@ -147,7 +147,9 @@ export const WorldHUD: React.FC = () => {
     (index: number) => {
       setActiveSlot(index);
       useWorldStore.getState().setActiveHotbarSlot(index);
+      useWorldStore.getState().stopDroneTour();
       worldSound.playClick();
+      if (typeof document !== "undefined") (document.activeElement as HTMLElement)?.blur();
       const item = HOTBAR_ITEMS[index];
       if (!item) return;
 
@@ -321,41 +323,105 @@ export const WorldHUD: React.FC = () => {
           </div>
 
           {/* Top-Right: Controls & Quick Nav Bar */}
-          <div className="pointer-events-auto hidden sm:flex min-w-0 max-w-[65%] flex-col items-end gap-1.5">
-            <div className="mc-panel-dark px-3 py-2 text-[10px] text-zinc-300 text-right">
-              <div>WASD : Move | SPACE : Jump | V : Perspective</div>
-              <div>CLICK WORLD : Mouse Look | ESC : Unlock</div>
-              <div className="text-amber-400 mt-0.5">E : Inspect | I : Inventory | M : Map</div>
+          <div className="pointer-events-auto hidden sm:flex min-w-0 max-w-[70%] flex-col items-end gap-1.5">
+            {/* Primary Action Ribbon: Recruiter Fast-Track & Engineering Highlights */}
+            <div className="flex flex-wrap justify-end items-center gap-1.5">
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  startRecruiterWalkthrough();
+                }}
+                className="mc-btn px-3 py-1.5 text-[10px] flex items-center gap-1.5 text-cyan-300 hover:text-white !bg-cyan-950/80 border-cyan-400 font-bold shadow-md shadow-cyan-950/50"
+                title="Recruiter Fast-Track Demonstration (2 Min)"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                <PlayCircle className="w-3.5 h-3.5 text-cyan-400" />
+                <span>DEMO</span>
+              </button>
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  setDeveloperDeepDiveOpen(true);
+                }}
+                className="mc-btn px-3 py-1.5 text-[10px] flex items-center gap-1.5 text-purple-300 hover:text-white !bg-purple-950/80 border-purple-400 font-bold"
+                title="Senior Developer Code & Architecture Inspection"
+              >
+                <Code2 className="w-3.5 h-3.5 text-purple-400" />
+                <span>CODE</span>
+              </button>
+              <a
+                href="/Asish_Oliver_M_Resume.pdf"
+                download="Asish_Oliver_M_Resume.pdf"
+                className="mc-btn px-2.5 py-1.5 text-[10px] flex items-center gap-1.5 text-sky-300 hover:text-white !bg-sky-950/80 border-sky-400 font-bold"
+                title="Download Official Resume (PDF)"
+              >
+                <FileText className="w-3.5 h-3.5 text-sky-400" />
+                <span>RESUME</span>
+              </a>
+              <button
+                onClick={() => {
+                  worldSound.playClick();
+                  startDroneTour();
+                }}
+                className="mc-btn px-2.5 py-1.5 text-[10px] flex items-center gap-1.5 text-red-300 hover:text-white !bg-red-950/80 border-red-400 font-bold"
+                title="45-Second Recruiter Drone Tour (T)"
+              >
+                <Video className="w-3.5 h-3.5 text-red-400" />
+                <span>[T] TOUR</span>
+              </button>
             </div>
-            <div className="flex flex-wrap justify-end items-center gap-2 max-w-[min(100%,700px)]">
+
+            {/* Secondary Navigation Row: Campus Facilities & Modals */}
+            <div className="flex flex-wrap justify-end items-center gap-1">
               <button
                 onClick={() => {
                   worldSound.playClick();
                   togglePerspective();
                 }}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-amber-300 hover:text-white"
+                className="mc-btn px-2 py-1 text-[9px] flex items-center gap-1 text-amber-300 hover:text-white"
                 title="Toggle First-Person / Third-Person (V)"
               >
                 <Eye className="w-3 h-3 text-amber-400" />
                 <span>[V] {perspective === "first-person" ? "1ST" : "3RD"}</span>
               </button>
               <button
-                onClick={() => {
-                  worldSound.playClick();
-                  startDroneTour();
-                }}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-red-300 hover:text-white !bg-red-950/60 border-red-500/60"
-                title="45-Second Recruiter Drone Tour (T)"
+                onClick={() => setProfileModalOpen(true)}
+                className="mc-btn px-2 py-1 text-[9px] flex items-center gap-1 text-amber-300 hover:text-white"
+                title="Personal Profile (P)"
               >
-                <Video className="w-3 h-3 text-red-400" />
-                <span>[T] TOUR</span>
+                <User className="w-3 h-3 text-amber-300" />
+                <span>[P] PROFILE</span>
+              </button>
+              <button
+                onClick={() => setDirectoryOpen(true)}
+                className="mc-btn px-2 py-1 text-[9px] flex items-center gap-1 text-zinc-300 hover:text-white"
+                title="Project Inventory (I)"
+              >
+                <Layers className="w-3 h-3 text-amber-300" />
+                <span>[I] PROJECTS</span>
+              </button>
+              <button
+                onClick={() => setMinimapOpen(!minimapOpen)}
+                className="mc-btn px-2 py-1 text-[9px] flex items-center gap-1 text-zinc-300 hover:text-white"
+                title="Toggle Campus Map (M)"
+              >
+                <MapIcon className="w-3 h-3 text-sky-300" />
+                <span>[M] MAP</span>
+              </button>
+              <button
+                onClick={() => setCommandPaletteOpen(!commandPaletteOpen)}
+                className="mc-btn px-2 py-1 text-[9px] flex items-center gap-1 text-zinc-300 hover:text-white"
+                title="Command palette ( / or Ctrl+K )"
+              >
+                <Search className="w-3 h-3 text-emerald-300" />
+                <span>[⌘K] CMD</span>
               </button>
               <button
                 onClick={() => {
                   worldSound.playClick();
                   openAdvancementsModal();
                 }}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-amber-300 hover:text-white !bg-amber-950/60 border-amber-500/60"
+                className="mc-btn px-2 py-1 text-[9px] flex items-center gap-1 text-amber-300 hover:text-white !bg-amber-950/60 border-amber-500/60"
                 title="Engineering Advancements (L)"
               >
                 <Trophy className="w-3 h-3 text-amber-400" />
@@ -372,73 +438,19 @@ export const WorldHUD: React.FC = () => {
               >
                 <span>{timeOfDay === "day" ? "☀️ DAY" : timeOfDay === "sunset" ? "🌇 DUSK" : "🌙 NIGHT"}</span>
               </button>
-              <a
-                href="/Asish_Oliver_M_Resume.pdf"
-                download="Asish_Oliver_M_Resume.pdf"
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-sky-300 hover:text-white !bg-sky-950/70 border-sky-500/60"
-                title="Download Resume (PDF)"
-              >
-                <FileText className="w-3 h-3 text-sky-400" />
-                <span>RESUME</span>
-              </a>
-              <button
-                onClick={() => {
-                  worldSound.playClick();
-                  startRecruiterWalkthrough();
-                }}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-cyan-300 hover:text-white !bg-cyan-950/70 border-cyan-500/60 font-bold"
-                title="Recruiter Fast-Track Demonstration (2 Min)"
-              >
-                <PlayCircle className="w-3 h-3 text-cyan-400" />
-                <span>DEMO</span>
-              </button>
-              <button
-                onClick={() => {
-                  worldSound.playClick();
-                  setDeveloperDeepDiveOpen(true);
-                }}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-purple-300 hover:text-white !bg-purple-950/70 border-purple-500/60 font-bold"
-                title="Senior Developer Code & Architecture Inspection"
-              >
-                <Code2 className="w-3 h-3 text-purple-400" />
-                <span>CODE</span>
-              </button>
-              <button
-                onClick={() => setProfileModalOpen(true)}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5 text-amber-300 hover:text-white"
-                title="Personal Profile (P)"
-              >
-                <User className="w-3 h-3 text-amber-300" />
-                <span>[P] PROFILE</span>
-              </button>
-              <button
-                onClick={() => setDirectoryOpen(true)}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5"
-                title="Project Inventory (I)"
-              >
-                <Layers className="w-3 h-3 text-amber-300" />
-                <span>[I] PROJECTS</span>
-              </button>
-              <button
-                onClick={() => setMinimapOpen(!minimapOpen)}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5"
-              >
-                <MapIcon className="w-3 h-3 text-sky-300" />
-                <span>[M] MAP</span>
-              </button>
-              <button
-                onClick={() => setCommandPaletteOpen(!commandPaletteOpen)}
-                className="mc-btn px-2.5 py-1 text-[9px] flex items-center gap-1.5"
-                title="Command palette ( / or Ctrl+K )"
-              >
-                <Search className="w-3 h-3 text-emerald-300" />
-                <span>[⌘K] CMD</span>
-              </button>
-              
-              {/* Manual render quality. The detected device tier is only a
-                  guess, so visitors on capable hardware can override it. */}
+            </div>
+
+            {/* Tertiary Controls Strip & Diagnostics */}
+            <div className="flex flex-wrap justify-end items-center gap-1.5 text-[9px] font-mono">
+              <div className="mc-panel-dark px-2 py-0.5 text-zinc-400 flex items-center gap-1.5">
+                <span>WASD: Move</span>
+                <span>•</span>
+                <span>Space: Jump</span>
+                <span>•</span>
+                <span className="text-amber-400">E: Inspect</span>
+              </div>
               <div
-                className="mc-btn px-1.5 py-1 flex items-center gap-1"
+                className="mc-btn px-1.5 py-0.5 flex items-center gap-1"
                 title={`Render quality — active: ${activeQuality.label}`}
               >
                 <Gauge className="w-3 h-3 text-purple-300" />
@@ -448,7 +460,7 @@ export const WorldHUD: React.FC = () => {
                     onClick={() => setQualityTierOverride(option.value)}
                     className={`px-1 text-[8px] leading-none ${
                       qualityTierOverride === option.value
-                        ? "text-purple-300 underline"
+                        ? "text-purple-300 font-bold underline"
                         : "text-zinc-500 hover:text-zinc-300"
                     }`}
                   >
@@ -458,10 +470,10 @@ export const WorldHUD: React.FC = () => {
               </div>
               <button
                 onClick={togglePerformanceHUD}
-                className="mc-btn px-2 py-1 text-[9px] flex items-center gap-1"
-                title="Telemetry Debug (F3)"
+                className="mc-btn px-1.5 py-0.5 text-[8px] flex items-center gap-1 text-zinc-400 hover:text-zinc-200"
+                title="Toggle Performance HUD (F3)"
               >
-                <Activity className="w-3 h-3" />
+                <Activity className="w-2.5 h-2.5 text-emerald-400" />
                 <span>[F3]</span>
               </button>
             </div>

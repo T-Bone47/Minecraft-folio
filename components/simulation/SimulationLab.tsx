@@ -122,23 +122,10 @@ export const SimulationLab: React.FC<SimulationLabProps> = ({
     }
   });
 
-  const handleClick = (e: { stopPropagation: () => void }) => {
-    e.stopPropagation();
-    worldSound.playInspectChime();
-    inspectProject("f1-lap-time-simulator");
-  };
-
   return (
     <group
       ref={groupRef}
       position={position}
-      onClick={handleClick}
-      onPointerOver={() => {
-        document.body.style.cursor = "pointer";
-      }}
-      onPointerOut={() => {
-        document.body.style.cursor = "default";
-      }}
     >
       {/* 1. Foundation Slab (12x10 blocks) */}
       <mesh position={[0, 0.28, 0]} receiveShadow>
@@ -248,8 +235,23 @@ export const SimulationLab: React.FC<SimulationLabProps> = ({
         </mesh>
       </group>
 
-      {/* 8. Interactive Terminal Pedestal */}
-      <group position={[0, 0, 6.6]}>
+      {/* 8. Interactive Terminal Pedestals (Left: Numerical Solver, Right: Case Study) */}
+      <group position={[-2.5, 0, 6.6]}>
+        <mesh position={[0, 0.5, 0]} castShadow>
+          <boxGeometry args={[0.9, 1.0, 0.9]} />
+          <primitive object={stoneBrickMat} attach="material" />
+        </mesh>
+        <mesh position={[0, 1.2, 0]} rotation={[-0.2, 0, 0]} castShadow>
+          <boxGeometry args={[1.0, 0.65, 0.2]} />
+          <primitive object={monitorMat} attach="material" />
+        </mesh>
+        <mesh position={[0, 1.65, 0]}>
+          <boxGeometry args={[0.25, 0.25, 0.25]} />
+          <primitive object={glowstoneMat} attach="material" />
+        </mesh>
+      </group>
+
+      <group position={[2.5, 0, 6.6]}>
         <mesh position={[0, 0.5, 0]} castShadow>
           <boxGeometry args={[0.9, 1.0, 0.9]} />
           <primitive object={stoneBrickMat} attach="material" />

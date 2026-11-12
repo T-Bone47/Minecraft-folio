@@ -91,13 +91,6 @@ export const TeamOperationsHQ: React.FC<TeamOperationsHQProps> = ({
     <group
       ref={groupRef}
       position={position}
-      onClick={handleClick}
-      onPointerOver={() => {
-        document.body.style.cursor = "pointer";
-      }}
-      onPointerOut={() => {
-        document.body.style.cursor = "default";
-      }}
     >
       {/* 1. Stone Foundation (12x10 blocks) */}
       <mesh position={[0, 0.28, 0]} receiveShadow>

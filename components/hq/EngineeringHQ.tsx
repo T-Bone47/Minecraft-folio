@@ -261,13 +261,6 @@ export const EngineeringHQ: React.FC<EngineeringHQProps> = ({
     <group
       ref={groupRef}
       position={position}
-      onClick={handleClick}
-      onPointerOver={() => {
-        document.body.style.cursor = "pointer";
-      }}
-      onPointerOut={() => {
-        document.body.style.cursor = "default";
-      }}
     >
       {/* 1. Monolith Foundation (14x12 blocks) */}
       <mesh position={[0, 0.28, 1]} receiveShadow>

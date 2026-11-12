@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import { facilities, getFacilityByProjectSlug } from "@/data/facilities";
+import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import { useWorldStore } from "@/state/worldStore";
 import { useCameraStore } from "@/state/cameraStore";
 import { X, ExternalLink, Compass, CheckCircle2, Search } from "lucide-react";
@@ -50,14 +51,17 @@ export const ProjectDirectory: React.FC<ProjectDirectoryProps> = ({
   const handleFocusProject = (slug: string) => {
     const fac = getFacilityByProjectSlug(slug);
     if (fac) {
+      useWorldStore.getState().stopDroneTour();
       focusLocation(fac.id);
       const [sx, , sz] = fac.approachPosition;
+      const eyeY = getTerrainSurfaceY(sx, sz) + 1.65;
       setTargetTransform(
-        [sx, fac.coordinates[1] + 1.65, sz],
+        [sx, eyeY, sz],
         fac.approachLookAt
       );
     }
     onClose();
+    if (typeof document !== "undefined") (document.activeElement as HTMLElement)?.blur();
   };
 
   return (

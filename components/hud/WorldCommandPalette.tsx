@@ -8,6 +8,7 @@ import { useCameraStore } from "@/state/cameraStore";
 import { useInteractionRegistry } from "@/state/interactionRegistry";
 import { projects } from "@/data/projects";
 import { facilities, getFacilityById } from "@/data/facilities";
+import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import { Terminal, X, ChevronRight } from "lucide-react";
 
 
@@ -46,10 +47,12 @@ export const WorldCommandPalette: React.FC = () => {
   const travelTo = (facId: string, slug?: string) => {
     const fac = getFacilityById(facId);
     if (fac) {
+      useWorldStore.getState().stopDroneTour();
       focusLocation(fac.id);
       const [sx, , sz] = fac.approachPosition;
+      const eyeY = getTerrainSurfaceY(sx, sz) + 1.65;
       setTargetTransform(
-        [sx, fac.coordinates[1] + 1.65, sz],
+        [sx, eyeY, sz],
         fac.approachLookAt
       );
     }
@@ -57,6 +60,7 @@ export const WorldCommandPalette: React.FC = () => {
       inspectProject(slug);
     }
     setCommandPaletteOpen(false);
+    if (typeof document !== "undefined") (document.activeElement as HTMLElement)?.blur();
   };
 
   const commands: CommandItem[] = [

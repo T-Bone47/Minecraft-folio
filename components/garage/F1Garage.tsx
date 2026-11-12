@@ -206,13 +206,6 @@ export const F1Garage: React.FC<F1GarageProps> = ({ position = [-12, 0, -8] }) =
     <group
       ref={groupRef}
       position={position}
-      onClick={handleClick}
-      onPointerOver={() => {
-        document.body.style.cursor = "pointer";
-      }}
-      onPointerOut={() => {
-        document.body.style.cursor = "default";
-      }}
     >
       <ChromeGarageFitout/>
       {/* 1. Garage Foundation (Stone Brick Floor) */}

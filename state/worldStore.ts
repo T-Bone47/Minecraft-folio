@@ -87,12 +87,12 @@ export const useWorldStore = create<WorldState>((set) => ({
     })),
 
   focusLocation: (id) => {
-    const facility = getFacilityById(id);
     set({
       activeLocation: id,
       mode: "explore",
-      activeProject: facility?.projectSlug || null,
+      activeProject: null,
       isDriving: false,
+      isDroneTourActive: false,
     });
   },
 

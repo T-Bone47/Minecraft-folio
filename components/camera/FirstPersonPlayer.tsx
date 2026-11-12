@@ -88,8 +88,12 @@ export const FirstPersonPlayer: React.FC = () => {
         const saved = sessionStorage.getItem("asish_world_player_state");
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (parsed && typeof parsed.x === "number") {
-            playerPos.current.set(parsed.x, parsed.y, parsed.z);
+          if (parsed && typeof parsed.x === "number" && typeof parsed.z === "number") {
+            const freed = depenetrate(parsed.x, parsed.z, PLAYER_RADIUS);
+            const groundY = getTerrainSurfaceY(freed.x, freed.z);
+            playerPos.current.set(freed.x, groundY, freed.z);
+            velocity.current.set(0, 0, 0);
+            isGrounded.current = true;
             if (typeof parsed.yaw === "number") {
               yaw.current = parsed.yaw;
               avatarYaw.current = parsed.yaw + Math.PI;
@@ -302,6 +306,7 @@ export const FirstPersonPlayer: React.FC = () => {
         freed.z
       );
       velocity.current.set(0, 0, 0);
+      isGrounded.current = true;
 
       // Orient camera and avatar toward targetLookAt
       const lookDirX = targetLookAt[0] - targetPosition[0];

@@ -208,13 +208,6 @@ export const TelemetryTower: React.FC<TelemetryTowerProps> = ({
   return (
     <group
       position={position}
-      onClick={handleClick}
-      onPointerOver={() => {
-        document.body.style.cursor = "pointer";
-      }}
-      onPointerOut={() => {
-        document.body.style.cursor = "default";
-      }}
     >
       {/* 1. Stone Brick Foundation (10x10 blocks) */}
       <mesh position={[0, 0.28, 0]} receiveShadow>
