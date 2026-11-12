@@ -49,3 +49,4 @@ Each incident provides:
 - **Root Cause**: Normalisation assumed strictly monotonic timestamps and non-null sample metadata without an explicit validation and re-sequencing stage.
 - **Fix**: Implemented 8-stage pipeline with strict validation, monotonic sorting, missing distance interpolation, and invariant tests.
 - **Verification**: `node scripts/qa-stations.mjs` (7/7 pipeline tests pass).
+

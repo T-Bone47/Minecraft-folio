@@ -87,3 +87,4 @@ export function buildExecutionGraph(trace: TraceRecord): ExecutionGraph {
     traceId: trace.traceId,
   };
 }
+

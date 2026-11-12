@@ -214,3 +214,4 @@ export const TraceTimelineView: React.FC = () => {
     </div>
   );
 };
+

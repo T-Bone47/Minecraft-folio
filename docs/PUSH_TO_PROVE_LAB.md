@@ -48,3 +48,4 @@ All experiments are:
   2. Runs 8-stage verification pipeline enforcing strict monotonic sequencing:
      $$t_{k} > t_{k-1} \quad \forall k \ge 1$$
   3. When auto-repair is active: drops malformed frames, deduplicates timestamps, and re-sequences packets, proving fault tolerance and recovery.
+

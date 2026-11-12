@@ -57,3 +57,4 @@ Prior to branching `feat/frontier-xray-engine`, the release-candidate branch `co
    - Every piece of data must declare its provenance: `ACTUAL_RECORDED_EXECUTION`, `DETERMINISTIC_REPLAY`, `SIMULATOR_TELEMETRY`, `BUNDLED_TEST_FIXTURE`, or `VERIFIED_HISTORICAL_DEFECT`.
 4. **2D Accessible Fallback:**
    - Direct web routes (`/engineering/xray`, `/engineering/history`, `/engineering/lab`) must provide the full technical substance without requiring WebGL or 3D navigation.
+

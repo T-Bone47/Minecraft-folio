@@ -113,3 +113,4 @@ flowchart TD
 | 3D Conduits Draw Calls | <= 5 calls | 2 instanced line/mesh calls |
 | Timeline Scrub Latency | < 16.6 ms (60 FPS) | < 2 ms |
 | Mobile & 2D Compatibility | 100% accessible | Yes (`/engineering/*` routes) |
+
