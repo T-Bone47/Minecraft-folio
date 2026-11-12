@@ -270,3 +270,4 @@ export const VyaparPulseDemoView: React.FC = () => {
     </div>
   );
 };
+

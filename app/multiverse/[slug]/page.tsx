@@ -158,3 +158,4 @@ export default async function MultiverseProjectPage({ params }: PageProps) {
     </div>
   );
 }
+

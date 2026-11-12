@@ -251,3 +251,4 @@ export interface VyaparPulseDemoState {
   reconciledCount: number;
   inventoryForecast: VyaparDemandForecastPoint[];
 }
+

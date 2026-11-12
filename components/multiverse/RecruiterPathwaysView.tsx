@@ -127,3 +127,4 @@ export const RecruiterPathwaysView: React.FC = () => {
     </div>
   );
 };
+

@@ -492,3 +492,4 @@ export const getMultiverseProjectById = (id: MultiverseProjectId): MultiversePro
 
 export const getMultiverseProjectBySlug = (slug: string): MultiverseProject | undefined =>
   multiverseProjects.find((p) => p.slug === slug);
+

@@ -234,3 +234,4 @@ export const SentinelDemoView: React.FC = () => {
     </div>
   );
 };
+

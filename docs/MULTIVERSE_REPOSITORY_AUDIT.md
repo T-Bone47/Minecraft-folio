@@ -99,3 +99,4 @@ To preserve absolute technical integrity during technical recruiter reviews and 
 2. **Deep Linking to Code**: Every metric, formula, and architecture block must provide an anchor link directly to GitHub repository source lines.
 3. **Dual Perspective Support**: Every portal must serve both Technical Recruiters (fast-track metrics and business impact) and Senior Developers (algorithms, constraints, edge cases).
 4. **Resilient 2D Fallback**: All four portals and their complete technical proofs must be fully accessible via standard Next.js 2D routes (`/multiverse/*`) without requiring WebGL or hardware acceleration.
+

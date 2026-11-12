@@ -82,3 +82,4 @@ Every project includes role-specific screening guides:
 - **AI / Machine Learning**: Feature engineering, time-series split validity, drift detection, loss functions.
 - **Motorsport Engineering**: Dynamic vehicle limits, spatial resampling, undercut strategy trees.
 - **Full-Stack & Offline**: Local-first sync queues, on-device audio, responsive canvas plots, accessibility.
+

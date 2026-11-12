@@ -74,3 +74,4 @@
   - `vyaparpulse/ledger/double_entry.py`
   - `vyaparpulse/sync/offline_queue.py`
   - `vyaparpulse/forecasting/demand_model.py`
+

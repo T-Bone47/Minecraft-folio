@@ -42,3 +42,4 @@ Enforcing non-repudiation across regulatory audits.
 ### 2.4 VyaparPulse AI — Double-Entry Invariant & XGBoost Demand
 $$\sum_{i=1}^{N} \text{Debit}_i - \sum_{j=1}^{M} \text{Credit}_j = 0, \quad \hat{D}_{t+k} = \sum_{m=1}^{M} w_{q(x_t)}$$
 Enforcing strict zero-imbalance accounting durability while projecting 7-day inventory replenishment.
+
