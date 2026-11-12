@@ -25,6 +25,7 @@ import { ExperienceSelectionModal } from "../director/ExperienceSelectionModal";
 import { EngineeringProofInspector } from "../director/EngineeringProofInspector";
 import { CinematicPresentationEngine } from "../director/CinematicPresentationEngine";
 import { navigationController } from "@/lib/frontierDirector/navigationController";
+import { useRoleForgeStore } from "@/state/roleforgeStore";
 
 // Dynamic import of the 3D Canvas with ssr disabled to protect the server bundle
 const WorldCanvas = dynamic(
@@ -79,6 +80,15 @@ const EngineeringWorldContent: React.FC = () => {
             evidenceLayer: (layer as any) || "problem",
           });
         }
+      }
+
+      const roleforgeParam = params.get("roleforge");
+      const presetParam = params.get("preset");
+      if (roleforgeParam) {
+        if (presetParam) {
+          useRoleForgeStore.getState().selectPreset(presetParam);
+        }
+        useRoleForgeStore.getState().openTerminal(roleforgeParam === "preset" ? "review" : "presets");
       }
     } catch (e) {
       console.warn("URL param sync error:", e);

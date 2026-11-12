@@ -215,3 +215,4 @@ test("Multiverse store opens and closes portals with clean state transitions", (
   s = useMultiverseStore.getState();
   assert.equal(s.activePortalId, null);
 });
+

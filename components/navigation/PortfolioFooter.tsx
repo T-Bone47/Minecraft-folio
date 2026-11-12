@@ -72,6 +72,12 @@ export const PortfolioFooter: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/roleforge" className="mc-item-chip px-2.5 py-1 text-[11px] block text-cyan-400 hover:text-cyan-300 border-cyan-900/60 transition-colors flex items-center justify-between">
+                  <span>&gt; RoleForge Proof Compiler</span>
+                  <Sparkles className="w-3 h-3 text-cyan-400" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/world" className="mc-item-chip px-2.5 py-1 text-[11px] block text-yellow-300 hover:text-white border-amber-900/60 transition-colors flex items-center justify-between">
                   <span>&gt; 3D Engineering World</span>
                   <ArrowUpRight className="w-3 h-3" />

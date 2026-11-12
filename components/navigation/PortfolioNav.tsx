@@ -16,6 +16,7 @@ import {
   Sparkles,
   FileText,
   Globe,
+  Target,
 } from "lucide-react";
 
 export const PortfolioNav: React.FC = () => {
@@ -26,6 +27,7 @@ export const PortfolioNav: React.FC = () => {
     { href: "/visit", label: "FIELD GUIDE", icon: Box },
     { href: "/", label: "HOME", icon: Terminal },
     { href: "/multiverse", label: "MULTIVERSE", icon: Globe },
+    { href: "/roleforge", label: "ROLEFORGE", icon: Target },
     { href: "/work", label: "SYSTEMS & WORK", icon: Cpu },
     { href: "/experience", label: "EXPERIENCE", icon: Activity },
     { href: "/about", label: "ABOUT", icon: User },

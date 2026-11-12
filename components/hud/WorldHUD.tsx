@@ -20,6 +20,8 @@ import { XRayHUD } from "../xray/XRayHUD";
 import { XRayModal } from "../xray/XRayModal";
 import { MultiverseHUD } from "../multiverse/MultiverseHUD";
 import { MultiverseModal } from "../multiverse/MultiverseModal";
+import { RoleForgeHUD } from "../roleforge/RoleForgeHUD";
+import { RoleForgeTerminal } from "../roleforge/RoleForgeTerminal";
 import { useDigitalTwinStore } from "@/state/digitalTwinStore";
 import { useTrialsStore } from "@/state/trialsStore";
 import { useNPCWorkforceStore } from "@/state/npcWorkforceStore";
@@ -616,6 +618,10 @@ export const WorldHUD: React.FC = () => {
       {/* Frontier Multiverse Connected Portals HUD & Modal */}
       <MultiverseHUD />
       <MultiverseModal />
+
+      {/* Frontier RoleForge Living Proof Compiler HUD & Modal */}
+      <RoleForgeHUD />
+      <RoleForgeTerminal />
     </>
   );
 };

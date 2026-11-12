@@ -11,6 +11,7 @@ import { facilities, getFacilityById } from "@/data/facilities";
 import { navigationController } from "@/lib/frontierDirector/navigationController";
 import { useXRayStore } from "@/state/xrayStore";
 import { useMultiverseStore } from "@/state/multiverseStore";
+import { useRoleForgeStore } from "@/state/roleforgeStore";
 import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import { Terminal, X, ChevronRight } from "lucide-react";
 
@@ -209,6 +210,71 @@ export const WorldCommandPalette: React.FC = () => {
       action: () => {
         setCommandPaletteOpen(false);
         useXRayStore.getState().openModal("lab");
+      },
+    },
+    {
+      command: "/roleforge",
+      category: "DIRECTOR",
+      title: "FRONTIER ROLEFORGE [R]",
+      description: "Compile technical job specs into verified evidence graphs and adaptive 3D missions",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useRoleForgeStore.getState().openTerminal("presets");
+      },
+    },
+    {
+      command: "/role-motorsport",
+      category: "DIRECTOR",
+      title: "ROLE: MOTORSPORT SOFTWARE ENGINEER",
+      description: "Load F1 telemetry, pit window decision engine, and UDP socket evidence",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useRoleForgeStore.getState().selectPreset("motorsport");
+        useRoleForgeStore.getState().openTerminal("review");
+      },
+    },
+    {
+      command: "/role-backend",
+      category: "DIRECTOR",
+      title: "ROLE: BACKEND & DISTRIBUTED SYSTEMS",
+      description: "Load TimescaleDB, FastAPI, and WebSocket real-time event evidence",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useRoleForgeStore.getState().selectPreset("backend");
+        useRoleForgeStore.getState().openTerminal("review");
+      },
+    },
+    {
+      command: "/role-aiml",
+      category: "DIRECTOR",
+      title: "ROLE: AI / MACHINE LEARNING ENGINEER",
+      description: "Load non-leakage time-series models and NIST AI RMF governance evidence",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useRoleForgeStore.getState().selectPreset("aiml");
+        useRoleForgeStore.getState().openTerminal("review");
+      },
+    },
+    {
+      command: "/role-data",
+      category: "DIRECTOR",
+      title: "ROLE: DATA SYSTEMS & PIPELINE ENGINEER",
+      description: "Load 2,650 Hz streaming ingestion and spatial distance-domain evidence",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useRoleForgeStore.getState().selectPreset("data-engineer");
+        useRoleForgeStore.getState().openTerminal("review");
+      },
+    },
+    {
+      command: "/role-fullstack",
+      category: "DIRECTOR",
+      title: "ROLE: FULL-STACK & OFFLINE-FIRST ENGINEER",
+      description: "Load React 19, Next.js App Router, and offline SQLite WAL evidence",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useRoleForgeStore.getState().selectPreset("full-stack");
+        useRoleForgeStore.getState().openTerminal("review");
       },
     },
     {

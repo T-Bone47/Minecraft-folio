@@ -16,6 +16,8 @@ import { TeamOperationsHQ } from "../operations/TeamOperationsHQ";
 import { AIMLLab } from "../aiml/AIMLLab";
 import { EngineeringHQ } from "../hq/EngineeringHQ";
 import { ProjectLaunchBay } from "../multiverse/ProjectLaunchBay";
+import { WorldMissionHighlights } from "../roleforge/WorldMissionHighlights";
+import { RoleForgeKiosk } from "../roleforge/RoleForgeKiosk";
 import { CentralPlaza } from "./CentralPlaza";
 import { BlockHighlight } from "./BlockHighlight";
 import { ThreeDiagnosticsTracker } from "../diagnostics/ThreeDiagnosticsTracker";
@@ -83,6 +85,8 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
 
       {/* 4b. Central Engineering Plaza Landmark & Directional Compass */}
       <CentralPlaza position={[0, 0, 0]} />
+      <RoleForgeKiosk position={[4, 0, -4]} rotationY={-Math.PI / 4} />
+      <WorldMissionHighlights />
       <ProjectLaunchBay position={[0, 0, -32]} />
       <DigitalTwinWorldReactivity />
       <LivingNPCWorkforce />
