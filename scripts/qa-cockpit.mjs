@@ -61,64 +61,40 @@ try{
     const send=(key,code,on)=>window.dispatchEvent(new KeyboardEvent(on?'keydown':'keyup',{key,code,bubbles:true}));
     driver.stop=()=>{
       driver.stopped=true;
-      if(driver.frame)cancelAnimationFrame(driver.frame);
-      if(driver.loop)clearInterval(driver.loop);
+      window.__frontierLapDriver=null;
       if(driver.sampler)clearInterval(driver.sampler);
       for(const [key,code] of keys)send(key,code,false);
     };
-    function tickDriver(){
-      if(driver.stopped)return;
-      const el=document.querySelector('[data-testid=drive-state]');
-      const instrument=document.querySelector('[data-testid=cockpit-instruments]');
-      const sim=window.__frontierDriveState;
-      if(!el&&!sim){driver.stop();return;}
 
-      const x = sim ? sim.x : +el.dataset.x;
-      const z = sim ? sim.z : +el.dataset.z;
-      const yaw = sim ? sim.yaw : +el.dataset.yaw;
-      const speed = sim ? sim.speed : +el.dataset.speed;
-      const progress = sim ? sim.progress : +el.dataset.progress;
-      const currentSteering = sim ? sim.steering : (instrument ? +instrument.dataset.steering : 0);
-      const simTime = sim ? sim.time : (instrument ? +instrument.dataset.time : 0);
+    window.__frontierLapDriver = (sim, keyboard) => {
+      if (driver.stopped) return keyboard;
+      driver.frames++;
+      const phase = Math.atan2(sim.z, -sim.x) + 0.18;
+      const tx = -45 * Math.cos(phase), tz = 45 * Math.sin(phase);
+      const desired = Math.atan2(tx - sim.x, tz - sim.z);
+      const error = Math.atan2(Math.sin(desired - sim.yaw), Math.cos(desired - sim.yaw));
+      const targetSteer = Math.max(-1, Math.min(1, error * 2.5));
+      const throttle = sim.speed < 12.8 ? 1 : 0;
 
-      const phase = Math.atan2(z, -x) + 0.18;
-      const desired = Math.atan2(-45 * Math.cos(phase) - x, 45 * Math.sin(phase) - z);
-      const error = Math.atan2(Math.sin(desired - yaw), Math.cos(desired - yaw));
-      const targetSteer = error * 2.0;
-
-      const throttle = speed < 10.8;
-      let left = false, right = false;
-      if (currentSteering < targetSteer - 0.02) {
-        right = true;
-      } else if (currentSteering > targetSteer + 0.02) {
-        left = true;
-      }
-
-      send('w', 'KeyW', throttle);
-      send('a', 'KeyA', left);
-      send('d', 'KeyD', right);
+      send('w', 'KeyW', throttle > 0);
+      send('a', 'KeyA', targetSteer < -0.05);
+      send('d', 'KeyD', targetSteer > 0.05);
 
       driver.last = {
         wallMs: performance.now() - driver.startedAt,
-        simTime,
-        x,
-        z,
-        yaw,
-        speed,
-        progress,
-        gate: Math.min(4, Math.floor(Math.max(0, progress) / (Math.PI / 2)) + 1),
-        input: { throttle, left, right }
+        simTime: sim.time,
+        x: sim.x,
+        z: sim.z,
+        yaw: sim.yaw,
+        speed: sim.speed,
+        progress: sim.progress,
+        gate: Math.min(4, Math.floor(Math.max(0, sim.progress) / (Math.PI / 2)) + 1),
+        input: { throttle: throttle > 0, left: targetSteer < -0.05, right: targetSteer > 0.05 }
       };
-    }
 
-    driver.loop = setInterval(tickDriver, 25);
-    function rafLoop(){
-      if(driver.stopped)return;
-      driver.frames++;
-      tickDriver();
-      driver.frame = requestAnimationFrame(rafLoop);
-    }
-    driver.frame = requestAnimationFrame(rafLoop);
+      return { throttle, brake: 0, steering: targetSteer };
+    };
+
     driver.sampler = setInterval(()=>{
       if(driver.last && driver.samples.length < 240){
         driver.samples.push({...driver.last, frames: driver.frames});
