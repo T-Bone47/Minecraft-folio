@@ -18,6 +18,8 @@ import { RecruiterWalkthroughModal } from "@/components/frontier/RecruiterWalkth
 import { DeveloperDeepDiveModal } from "@/components/frontier/DeveloperDeepDiveModal";
 import { XRayHUD } from "../xray/XRayHUD";
 import { XRayModal } from "../xray/XRayModal";
+import { MultiverseHUD } from "../multiverse/MultiverseHUD";
+import { MultiverseModal } from "../multiverse/MultiverseModal";
 import { useDigitalTwinStore } from "@/state/digitalTwinStore";
 import { useTrialsStore } from "@/state/trialsStore";
 import { useNPCWorkforceStore } from "@/state/npcWorkforceStore";
@@ -610,6 +612,10 @@ export const WorldHUD: React.FC = () => {
       {/* Frontier X-Ray Reality Engine HUD & Modal */}
       <XRayHUD />
       <XRayModal />
+
+      {/* Frontier Multiverse Connected Portals HUD & Modal */}
+      <MultiverseHUD />
+      <MultiverseModal />
     </>
   );
 };

@@ -15,14 +15,17 @@ import {
   X,
   Sparkles,
   FileText,
+  Globe,
 } from "lucide-react";
 
 export const PortfolioNav: React.FC = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const navLinks = [{ href: "/visit", label: "FIELD GUIDE", icon: Box },
+  const navLinks = [
+    { href: "/visit", label: "FIELD GUIDE", icon: Box },
     { href: "/", label: "HOME", icon: Terminal },
+    { href: "/multiverse", label: "MULTIVERSE", icon: Globe },
     { href: "/work", label: "SYSTEMS & WORK", icon: Cpu },
     { href: "/experience", label: "EXPERIENCE", icon: Activity },
     { href: "/about", label: "ABOUT", icon: User },

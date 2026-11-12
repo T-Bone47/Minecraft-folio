@@ -15,6 +15,7 @@ import { SimulationLab } from "../simulation/SimulationLab";
 import { TeamOperationsHQ } from "../operations/TeamOperationsHQ";
 import { AIMLLab } from "../aiml/AIMLLab";
 import { EngineeringHQ } from "../hq/EngineeringHQ";
+import { ProjectLaunchBay } from "../multiverse/ProjectLaunchBay";
 import { CentralPlaza } from "./CentralPlaza";
 import { BlockHighlight } from "./BlockHighlight";
 import { ThreeDiagnosticsTracker } from "../diagnostics/ThreeDiagnosticsTracker";
@@ -82,6 +83,7 @@ export const WorldScene: React.FC<WorldSceneProps> = ({ quality }) => {
 
       {/* 4b. Central Engineering Plaza Landmark & Directional Compass */}
       <CentralPlaza position={[0, 0, 0]} />
+      <ProjectLaunchBay position={[0, 0, -32]} />
       <DigitalTwinWorldReactivity />
       <LivingNPCWorkforce />
       <XRayWorldOverlay />

@@ -10,6 +10,7 @@ import { projects } from "@/data/projects";
 import { facilities, getFacilityById } from "@/data/facilities";
 import { navigationController } from "@/lib/frontierDirector/navigationController";
 import { useXRayStore } from "@/state/xrayStore";
+import { useMultiverseStore } from "@/state/multiverseStore";
 import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import { Terminal, X, ChevronRight } from "lucide-react";
 
@@ -208,6 +209,66 @@ export const WorldCommandPalette: React.FC = () => {
       action: () => {
         setCommandPaletteOpen(false);
         useXRayStore.getState().openModal("lab");
+      },
+    },
+    {
+      command: "/multiverse",
+      category: "DIRECTOR",
+      title: "FRONTIER MULTIVERSE [M]",
+      description: "Access 4 connected production software systems and interactive portals",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useMultiverseStore.getState().openPortal("racemind", "demo");
+      },
+    },
+    {
+      command: "/launch-bay",
+      category: "NAVIGATION",
+      title: "PROJECT LAUNCH BAY",
+      description: "Teleport to dimensional portal chamber (FAC-06 / PLB)",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useWorldStore.getState().setPlayerPosition([0, 1.65, -23]);
+      },
+    },
+    {
+      command: "/portal-racemind",
+      category: "DIRECTOR",
+      title: "PORTAL: RACEMIND AI",
+      description: "Open Race Engineering Decision Room & pit strategy tree solver",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useMultiverseStore.getState().openPortal("racemind", "demo");
+      },
+    },
+    {
+      command: "/portal-livef1",
+      category: "DIRECTOR",
+      title: "PORTAL: LIVE F1 INTELLIGENCE",
+      description: "Open Race Control Centre & 1,067,193 canonical events replay",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useMultiverseStore.getState().openPortal("live-f1", "demo");
+      },
+    },
+    {
+      command: "/portal-sentinel",
+      category: "DIRECTOR",
+      title: "PORTAL: SENTINEL AI",
+      description: "Open Trust & Risk Operations Centre & cryptographic GRC audit",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useMultiverseStore.getState().openPortal("sentinel", "demo");
+      },
+    },
+    {
+      command: "/portal-vyaparpulse",
+      category: "DIRECTOR",
+      title: "PORTAL: VYAPARPULSE AI",
+      description: "Open Intelligent Merchant Lab & offline-first ledger forecasting",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useMultiverseStore.getState().openPortal("vyaparpulse", "demo");
       },
     },
     {
