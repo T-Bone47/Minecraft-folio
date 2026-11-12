@@ -425,7 +425,11 @@ export const FirstPersonPlayer: React.FC = () => {
     pitch.current = Math.max(-1.1, Math.min(1.1, pitch.current - touchInput.lookY));
     touchInput.lookX = touchInput.lookY = 0;
     // 2. EXPLORATION MODE: Real Playable Player Controller
-    const dt = Math.min(delta, 0.1);
+    // Clamp frame delta to 0.35s and substep up to 0.08s steps so low-framerate software rasterization
+    // maintains 1:1 physics speed with wall-clock time without tunneling.
+    const totalDt = Math.min(delta, 0.35);
+    const subSteps = Math.max(1, Math.ceil(totalDt / 0.08));
+    const dt = totalDt / subSteps;
 
     // Camera directional vectors
     const forward = new THREE.Vector3(-Math.sin(yaw.current), 0, -Math.cos(yaw.current));
@@ -444,7 +448,7 @@ export const FirstPersonPlayer: React.FC = () => {
       // Rotate avatar smoothly to face direction of motion in third-person
       const targetAvatarYaw = Math.atan2(moveDir.x, moveDir.z);
       const turn = Math.atan2(Math.sin(targetAvatarYaw-avatarYaw.current), Math.cos(targetAvatarYaw-avatarYaw.current));
-      avatarYaw.current += turn * (1-Math.exp(-18*dt));
+      avatarYaw.current += turn * (1-Math.exp(-18*totalDt));
     }
 
     const currentSpeed = (keys.current.sprint || touchInput.sprint) ? SPRINT_SPEED : WALK_SPEED;
@@ -454,72 +458,74 @@ export const FirstPersonPlayer: React.FC = () => {
     isMoving.current = hasInput;
     isSprinting.current = (keys.current.sprint || touchInput.sprint) && hasInput;
 
-    // Instantaneous, crisp, snappy Minecraft-style ground acceleration & braking
-    const accelFactor = 1 - Math.exp(-(isGrounded.current ? 22 : 7) * dt);
-    velocity.current.x = THREE.MathUtils.lerp(velocity.current.x, targetVelX, accelFactor);
-    velocity.current.z = THREE.MathUtils.lerp(velocity.current.z, targetVelZ, accelFactor);
+    for (let step = 0; step < subSteps; step++) {
+      // Instantaneous, crisp, snappy Minecraft-style ground acceleration & braking
+      const accelFactor = 1 - Math.exp(-(isGrounded.current ? 22 : 7) * dt);
+      velocity.current.x = THREE.MathUtils.lerp(velocity.current.x, targetVelX, accelFactor);
+      velocity.current.z = THREE.MathUtils.lerp(velocity.current.z, targetVelZ, accelFactor);
 
-    // Jump & Gravity
-    if (isGrounded.current && (keys.current.jump || touchInput.jump)) {
-      velocity.current.y = JUMP_VELOCITY;
-      isGrounded.current = false;
-      worldSound.playClick();
-    } else if (!isGrounded.current) {
-      velocity.current.y += GRAVITY * dt;
-    }
-
-    // Resolve horizontal movement with sliding collision against perimeter walls
-    const resolved = resolveMovement(
-      playerPos.current.x,
-      playerPos.current.z,
-      velocity.current.x * dt,
-      velocity.current.z * dt,
-      PLAYER_RADIUS
-    );
-
-    // Footstep audio synthesis based on ground surface & speed
-    const deltaMoveX = resolved.x - playerPos.current.x;
-    const deltaMoveZ = resolved.z - playerPos.current.z;
-    const distMoved = Math.hypot(deltaMoveX, deltaMoveZ);
-    if (distMoved > 0.001 && isGrounded.current) {
-      stepDistance.current += distMoved;
-      const stepInterval = isSprinting.current ? 1.55 : 1.22;
-      if (stepDistance.current >= stepInterval) {
-        stepDistance.current = 0;
-        let surface: "grass" | "stone" | "metal" | "tarmac" = "grass";
-        if (isCircuitArea(resolved.x, resolved.z)) {
-          surface = "tarmac";
-        } else if (isPathArea(resolved.x, resolved.z)) {
-          surface = "stone";
-        }
-        worldSound.playFootstep(surface, isSprinting.current);
+      // Jump & Gravity
+      if (isGrounded.current && (keys.current.jump || touchInput.jump)) {
+        velocity.current.y = JUMP_VELOCITY;
+        isGrounded.current = false;
+        worldSound.playClick();
+      } else if (!isGrounded.current) {
+        velocity.current.y += GRAVITY * dt;
       }
-    }
 
-    playerPos.current.x = resolved.x;
-    playerPos.current.z = resolved.z;
+      // Resolve horizontal movement with sliding collision against perimeter walls
+      const resolved = resolveMovement(
+        playerPos.current.x,
+        playerPos.current.z,
+        velocity.current.x * dt,
+        velocity.current.z * dt,
+        PLAYER_RADIUS
+      );
 
-    // Island boundary clamp
-    const distCenter = Math.hypot(playerPos.current.x, playerPos.current.z);
-    if (distCenter > PLAYER_CLAMP_RADIUS) {
-      const angle = Math.atan2(playerPos.current.z, playerPos.current.x);
-      playerPos.current.x = Math.cos(angle) * PLAYER_CLAMP_RADIUS;
-      playerPos.current.z = Math.sin(angle) * PLAYER_CLAMP_RADIUS;
-    }
+      // Footstep audio synthesis based on ground surface & speed
+      const deltaMoveX = resolved.x - playerPos.current.x;
+      const deltaMoveZ = resolved.z - playerPos.current.z;
+      const distMoved = Math.hypot(deltaMoveX, deltaMoveZ);
+      if (distMoved > 0.001 && isGrounded.current) {
+        stepDistance.current += distMoved;
+        const stepInterval = isSprinting.current ? 1.55 : 1.22;
+        if (stepDistance.current >= stepInterval) {
+          stepDistance.current = 0;
+          let surface: "grass" | "stone" | "metal" | "tarmac" = "grass";
+          if (isCircuitArea(resolved.x, resolved.z)) {
+            surface = "tarmac";
+          } else if (isPathArea(resolved.x, resolved.z)) {
+            surface = "stone";
+          }
+          worldSound.playFootstep(surface, isSprinting.current);
+        }
+      }
 
-    // Vertical physics & ground snapping
-    const groundTargetY = getTerrainSurfaceY(playerPos.current.x, playerPos.current.z);
-    playerPos.current.y += velocity.current.y * dt;
+      playerPos.current.x = resolved.x;
+      playerPos.current.z = resolved.z;
 
-    if (playerPos.current.y <= groundTargetY) {
-      const rise = groundTargetY - playerPos.current.y;
-      playerPos.current.y = groundTargetY;
-      velocity.current.y = 0;
-      isGrounded.current = true;
-      // Auto-step: snap up small curbs / single blocks without a jump
-      if (rise > 0.01 && rise <= MAX_STEP_HEIGHT) velocity.current.y = 0;
-    } else {
-      isGrounded.current = false;
+      // Island boundary clamp
+      const distCenter = Math.hypot(playerPos.current.x, playerPos.current.z);
+      if (distCenter > PLAYER_CLAMP_RADIUS) {
+        const angle = Math.atan2(playerPos.current.z, playerPos.current.x);
+        playerPos.current.x = Math.cos(angle) * PLAYER_CLAMP_RADIUS;
+        playerPos.current.z = Math.sin(angle) * PLAYER_CLAMP_RADIUS;
+      }
+
+      // Vertical physics & ground snapping
+      const groundTargetY = getTerrainSurfaceY(playerPos.current.x, playerPos.current.z);
+      playerPos.current.y += velocity.current.y * dt;
+
+      if (playerPos.current.y <= groundTargetY) {
+        const rise = groundTargetY - playerPos.current.y;
+        playerPos.current.y = groundTargetY;
+        velocity.current.y = 0;
+        isGrounded.current = true;
+        // Auto-step: snap up small curbs / single blocks without a jump
+        if (rise > 0.01 && rise <= MAX_STEP_HEIGHT) velocity.current.y = 0;
+      } else {
+        isGrounded.current = false;
+      }
     }
 
     // 3. CAMERA PERSPECTIVE POSITIONING & AIM

@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-12T08:26:54.961Z",
+  "date": "2026-11-12T08:56:11.069Z",
   "checks": [
     "Storage denial still permits world entry and movement",
     "Unmuted real driving schedules bounded Web Audio gain, including full-throttle engine gain",
@@ -7,7 +7,7 @@
   ],
   "errors": [],
   "gain": {
-    "count": 860,
+    "count": 845,
     "max": 0.45,
     "min": 0.01,
     "values": [
