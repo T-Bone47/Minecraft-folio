@@ -29,6 +29,7 @@ export async function launchBrowser(options = {}) {
     ? ['--use-gl=angle', '--use-angle=swiftshader-webgl', '--enable-unsafe-swiftshader', '--disable-dev-shm-usage']
     : [];
   return puppeteer.launch({
+    protocolTimeout: 300_000,
     ...options,
     executablePath: browserExecutable(),
     headless: true,
