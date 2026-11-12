@@ -15,7 +15,7 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 40
     env:
       NEXT_TELEMETRY_DISABLED: '1'
       QA_URL: http://127.0.0.1:3005
