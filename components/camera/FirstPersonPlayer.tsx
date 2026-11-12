@@ -143,6 +143,7 @@ export const FirstPersonPlayer: React.FC = () => {
     jump: false,
     sprint: false,
   });
+  const jumpRequested = useRef(false);
 
   const isPointerLocked = useRef(false);
 
@@ -229,6 +230,7 @@ export const FirstPersonPlayer: React.FC = () => {
           break;
         case "Space":
           keys.current.jump = true;
+          jumpRequested.current = true;
           break;
         case "ShiftLeft":
         case "ShiftRight":
@@ -465,11 +467,14 @@ export const FirstPersonPlayer: React.FC = () => {
       velocity.current.z = THREE.MathUtils.lerp(velocity.current.z, targetVelZ, accelFactor);
 
       // Jump & Gravity
-      if (isGrounded.current && (keys.current.jump || touchInput.jump)) {
+      const shouldJump = isGrounded.current && (jumpRequested.current || keys.current.jump || touchInput.jump);
+      if (shouldJump) {
+        jumpRequested.current = false;
         velocity.current.y = JUMP_VELOCITY;
         isGrounded.current = false;
         worldSound.playClick();
       } else if (!isGrounded.current) {
+        jumpRequested.current = false;
         velocity.current.y += GRAVITY * dt;
       }
 
@@ -568,7 +573,7 @@ export const FirstPersonPlayer: React.FC = () => {
 
     // Publish player position for HUD and minimap when moving or periodically
     hudClock.current += delta;
-    if (hudClock.current >= 0.15) {
+    if (hudClock.current >= 0.15 || !isGrounded.current) {
       hudClock.current = 0;
       setPlayerPosition([
         playerPos.current.x,

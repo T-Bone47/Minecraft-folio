@@ -6,15 +6,15 @@
   ],
   "errors": [],
   "enabled": {
-    "gain": 0.9500845074653625,
+    "gain": 1,
     "state": "running",
-    "time": 0.352,
+    "time": 0,
     "text": "Mute sound"
   },
   "muted": {
-    "gain": 0.009578796103596687,
+    "gain": 0.009676177054643631,
     "state": "running",
-    "time": 0.672,
+    "time": 0.192,
     "text": "Enable sound"
   },
   "mobileBounds": {
