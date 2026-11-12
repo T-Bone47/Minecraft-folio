@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { LapReplay } from "./LapReplay";
 import { useDriveStore } from "@/state/driveStore";
+import { useMissionStore } from "@/state/missionStore";
 import { useDigitalTwinStore } from "@/state/digitalTwinStore";
 import { performCompleteLapAnalysis } from "@/lib/digitalTwin/analysis";
 import { createLapRecord } from "@/lib/digitalTwin/telemetrySchema";
@@ -12,6 +13,7 @@ import { Download, Sliders, CheckCircle2, AlertTriangle, ArrowRight, Activity, G
 
 export function DriveDebrief() {
   const storeLastLap = useDriveStore((s) => s.lastLap);
+  const driveProgress = useMissionStore((s) => s.progress.drive);
   const {
     referenceLap,
     recordedLap,
@@ -365,6 +367,17 @@ export function DriveDebrief() {
       {/* 7. Action Buttons & Mission Progression */}
       <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-zinc-800">
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => useMissionStore.getState().send("drive", { type: "objective", name: "review" })}
+            className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-black font-bold flex items-center gap-1.5 transition-colors"
+          >
+            <CheckCircle2 className="w-3.5 h-3.5" />
+            <span>Review comparison</span>
+          </button>
+          <div className="flex items-center gap-2 text-[11px] text-zinc-400 border border-zinc-800 bg-zinc-900/60 px-2 py-1">
+            <span>{activeLap.samples.length} recorded samples · mission:</span>
+            <span className="font-bold text-emerald-400">{driveProgress.status}</span>
+          </div>
           <button
             onClick={exportLapJson}
             className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-bold flex items-center gap-1.5 transition-colors"

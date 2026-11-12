@@ -63,12 +63,12 @@ export const DriveableF1Car: React.FC = () => {
   if(!isDriving||!carGroupRef.current)return;
   if(useDriveStore.getState().exitRequested){exit();return;}
   if(gameplayBlocked()){clearKeys();accumulator.current=0;if(document.pointerLockElement)document.exitPointerLock();return;}
-  accumulator.current+=Math.min(delta,0.1);
-  while(accumulator.current>=FIXED_DT){
+  accumulator.current+=Math.min(delta,0.35); let steps=0;
+  while(accumulator.current>=FIXED_DT&&steps<25){ steps++;
    accumulator.current-=FIXED_DT;
    const forward=keys.current.forward||touchInput.forward,backward=keys.current.backward||touchInput.backward;
    const input={throttle:forward?1:backward&&sim.current.speed<=0.2?-1:0,brake:keys.current.handbrake||touchInput.jump?1:backward&&sim.current.speed>0.2?1:0,steering:(keys.current.right||touchInput.right?1:0)-(keys.current.left||touchInput.left?1:0)};
-   const result=stepDrive(sim.current,input);sim.current=result.state;tick.current++;
+   const result=stepDrive(sim.current,input);sim.current=result.state;tick.current++; if(typeof window!=="undefined")(window as any).__frontierDriveState=result.state;
    if(tick.current%6===0||result.state.completed){ if(samples.current.length<6000)samples.current.push(result.sample);useDriveStore.getState().publish(result.state);
     const kmh=Math.abs(result.state.speed)*3.6;useWorldStore.getState().setF1Telemetry({speedKmh:Math.round(kmh),rpm:0,gear:0,throttle:input.throttle,brake:input.brake});useWorldStore.getState().setPlayerPosition([result.state.x,2.15,result.state.z]);}
    if(result.state.completed){const lapRecord = createLapRecord(result.state, [...samples.current], "visitor");useDriveStore.getState().finish({state:result.state,samples:[...samples.current],source:"visitor"});useDigitalTwinStore.getState().ingestCompletedLap(lapRecord);useMissionStore.getState().send("drive",{type:"objective",name:"lap"});exit();useInteractionRegistry.getState().openStationModal("drive_debrief");break;}

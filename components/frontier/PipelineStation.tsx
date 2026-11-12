@@ -107,7 +107,7 @@ export const DIGITAL_TWIN_STAGES = [
 ];
 
 export function PipelineStation() {
-  const [activeTab, setActiveTab] = useState<"digital_twin" | "diagnostics">("digital_twin");
+  const [activeTab, setActiveTab] = useState<"digital_twin" | "diagnostics">("diagnostics");
   const [digitalTwinStageIdx, setDigitalTwinStageIdx] = useState<number>(0);
 
   // Diagnostic incident state

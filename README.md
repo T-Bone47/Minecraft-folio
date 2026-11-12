@@ -4,7 +4,7 @@
 
 An explorable voxel engineering campus by **Asish Oliver M**, Integrated M.Tech Computer Science & Engineering student at VIT-AP. Visitors can participate in local software, AI/ML and motorsport demonstrations, then inspect their methods and source evidence.
 
-**Status:** local release candidate. No public live demo has been published from this checkout. Vercel is the selected host; initial deployment requires owner approval. See [production readiness](docs/PRODUCTION_READINESS.md).
+**Status:** Release Candidate (branch `codex/release-candidate-2026-11-08`). A verified Vercel Preview is deployed for testing at `https://asish-engineering-world-ndsv9d263-t-bone47s-projects.vercel.app`. Production release remains gated pending final owner review and approval. See [production readiness](docs/PRODUCTION_READINESS.md).
 
 ## Playable engineering
 
@@ -76,7 +76,8 @@ Scripts currently use Windows Chrome at `C:/Program Files/Google/Chrome/Applicat
 
 ## Hosting and release
 
-Vercel is selected. No project has been linked or deployed from this checkout. Vercel classifies a new project's first deployment as production, even with a preview target; obtain explicit approval before that step. [Deployment and rollback runbook](docs/DEPLOYMENT_RUNBOOK.md). Feature freeze follows the five-audience verification; new ideas belong in the [post-launch backlog](docs/POST_LAUNCH_BACKLOG.md).
+- **Vercel Preview Deployment:** Active and publicly verified at `https://asish-engineering-world-ndsv9d263-t-bone47s-projects.vercel.app` (branch `codex/release-candidate-2026-11-08`). All routes and 3D experiences serve HTTP 200 without authentication blocks.
+- **Production Release:** Formal production promotion (`asish-engineering-world.vercel.app` or custom domain) remains unmerged and undeployed until explicit owner sign-off. See [deployment runbook](docs/DEPLOYMENT_RUNBOOK.md) for pre-release gates and rollback procedures. Feature freeze follows five-audience verification; future items belong in the [post-launch backlog](docs/POST_LAUNCH_BACKLOG.md).
 
 ## Licensing and asset provenance
 

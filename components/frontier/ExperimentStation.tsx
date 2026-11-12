@@ -23,7 +23,7 @@ let cached: {
 } | null = null;
 
 export function ExperimentStation() {
-  const [activeTab, setActiveTab] = useState<"feature_extraction" | "ml_models">("feature_extraction");
+  const [activeTab, setActiveTab] = useState<"feature_extraction" | "ml_models">("ml_models");
 
   // Digital Twin state
   const { recordedLap, referenceLap, missionStep, advanceMissionStep } = useDigitalTwinStore();

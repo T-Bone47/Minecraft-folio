@@ -56,30 +56,75 @@ try{
   },{timeout:15000});
   pass('Cockpit camera and steering respond to actual input');
   await page.evaluate(()=>{
-    const driver=window.__frontierLapQA={startedAt:performance.now(),frames:0,last:null,samples:[],lastState:'',stopped:false};
+    const driver=window.__frontierLapQA={startedAt:performance.now(),frames:0,last:null,samples:[],stopped:false};
     const keys=[['w','KeyW'],['a','KeyA'],['d','KeyD']];
     const send=(key,code,on)=>window.dispatchEvent(new KeyboardEvent(on?'keydown':'keyup',{key,code,bubbles:true}));
-    driver.stop=()=>{driver.stopped=true;cancelAnimationFrame(driver.frame);clearInterval(driver.sampler);for(const [key,code] of keys)send(key,code,false);};
-    function frame(){
+    driver.stop=()=>{
+      driver.stopped=true;
+      if(driver.frame)cancelAnimationFrame(driver.frame);
+      if(driver.loop)clearInterval(driver.loop);
+      if(driver.sampler)clearInterval(driver.sampler);
+      for(const [key,code] of keys)send(key,code,false);
+    };
+    function tickDriver(){
+      if(driver.stopped)return;
+      const el=document.querySelector('[data-testid=drive-state]');
+      const instrument=document.querySelector('[data-testid=cockpit-instruments]');
+      const sim=window.__frontierDriveState;
+      if(!el&&!sim){driver.stop();return;}
+
+      const x = sim ? sim.x : +el.dataset.x;
+      const z = sim ? sim.z : +el.dataset.z;
+      const yaw = sim ? sim.yaw : +el.dataset.yaw;
+      const speed = sim ? sim.speed : +el.dataset.speed;
+      const progress = sim ? sim.progress : +el.dataset.progress;
+      const currentSteering = sim ? sim.steering : (instrument ? +instrument.dataset.steering : 0);
+      const simTime = sim ? sim.time : (instrument ? +instrument.dataset.time : 0);
+
+      const phase = Math.atan2(z, -x) + 0.18;
+      const desired = Math.atan2(-45 * Math.cos(phase) - x, 45 * Math.sin(phase) - z);
+      const error = Math.atan2(Math.sin(desired - yaw), Math.cos(desired - yaw));
+      const targetSteer = error * 2.0;
+
+      const throttle = speed < 10.8;
+      let left = false, right = false;
+      if (currentSteering < targetSteer - 0.02) {
+        right = true;
+      } else if (currentSteering > targetSteer + 0.02) {
+        left = true;
+      }
+
+      send('w', 'KeyW', throttle);
+      send('a', 'KeyA', left);
+      send('d', 'KeyD', right);
+
+      driver.last = {
+        wallMs: performance.now() - driver.startedAt,
+        simTime,
+        x,
+        z,
+        yaw,
+        speed,
+        progress,
+        gate: Math.min(4, Math.floor(Math.max(0, progress) / (Math.PI / 2)) + 1),
+        input: { throttle, left, right }
+      };
+    }
+
+    driver.loop = setInterval(tickDriver, 25);
+    function rafLoop(){
       if(driver.stopped)return;
       driver.frames++;
-      const el=document.querySelector('[data-testid=drive-state]');
-      if(!el){driver.stop();return;}
-      const s=el.dataset,x=+s.x,z=+s.z,yaw=+s.yaw,speed=+s.speed,progress=+s.progress;
-      const simTime=+document.querySelector('[data-testid=cockpit-instruments]').dataset.time;
-      const stateKey=[x,z,yaw,speed,progress,simTime].join(':');
-      if(stateKey!==driver.lastState){
-        driver.lastState=stateKey;
-        const phase=Math.atan2(z,-x)+.18,desired=Math.atan2(-45*Math.cos(phase)-x,45*Math.sin(phase)-z);
-        const error=Math.atan2(Math.sin(desired-yaw),Math.cos(desired-yaw));
-        const input={throttle:speed<8,left:error<-.07,right:error>.07};
-        send('w','KeyW',input.throttle);send('a','KeyA',input.left);send('d','KeyD',input.right);
-        driver.last={wallMs:performance.now()-driver.startedAt,simTime,x,z,yaw,speed,progress,gate:Math.min(4,Math.floor(Math.max(0,progress)/(Math.PI/2))+1),input};
-      }
-      driver.frame=requestAnimationFrame(frame);
+      tickDriver();
+      driver.frame = requestAnimationFrame(rafLoop);
     }
-    driver.sampler=setInterval(()=>{if(driver.last&&driver.samples.length<240){driver.samples.push({...driver.last,frames:driver.frames});if(driver.samples.length%5===0)console.log('LAP_QA',JSON.stringify(driver.samples.at(-1)));}},1000);
-    driver.frame=requestAnimationFrame(frame);
+    driver.frame = requestAnimationFrame(rafLoop);
+    driver.sampler = setInterval(()=>{
+      if(driver.last && driver.samples.length < 240){
+        driver.samples.push({...driver.last, frames: driver.frames});
+        if(driver.samples.length % 5 === 0) console.log('LAP_QA', JSON.stringify(driver.samples.at(-1)));
+      }
+    }, 1000);
   });
   await page.waitForFunction(()=>document.body.innerText.includes('LAP VALIDATED'),{timeout:180000});
   report.driver=await driverEvidence();

@@ -299,7 +299,7 @@ export function LapReplay({ lap, referenceLap }: LapReplayProps) {
             className="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 text-black font-bold flex items-center gap-1.5 transition-colors"
           >
             {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-            <span>{playing ? "PAUSE" : "PLAY"}</span>
+            <span>{playing ? "Pause replay" : "Play replay"}</span>
           </button>
           <button
             onClick={handleRestart}
@@ -332,7 +332,7 @@ export function LapReplay({ lap, referenceLap }: LapReplayProps) {
             value={index}
             onChange={(e) => handleSeek(parseInt(e.target.value, 10))}
             className="w-full accent-cyan-400 cursor-pointer"
-            aria-label="Seek Telemetry Replay"
+            aria-label="Replay time"
           />
           <span className="text-[10px] text-zinc-400 min-w-14 text-right">
             {index + 1} / {samples.length}
