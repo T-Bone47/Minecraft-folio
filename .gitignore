@@ -18,3 +18,6 @@ Thumbs.db
 dev_stdout.txt
 dev_stderr.txt
 public/world/spawn-mclaren-garage.jpg
+
+.vercel
+.env*
