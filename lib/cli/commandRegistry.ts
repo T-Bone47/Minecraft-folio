@@ -6,6 +6,11 @@ import { getGhostLapReference } from "../digitalTwin/ghostLapEngine";
 import { CHAOS_SCENARIOS, evaluateChaosState } from "../chaos/chaosEngine";
 import { DOSSIER_PROFILES } from "../dossier/dossierData";
 import { DossierTrackId } from "../dossier/types";
+import {
+  CANONICAL_STRATEGY_PLANS,
+  MONZA_DEFAULT_ENVIRONMENT,
+  runMonteCarloRaceSimulation,
+} from "../strategy/monteCarloStrategyEngine";
 import { SILICON_CIRCUITS } from "../silicon/circuitRegistry";
 
 export function parseCLIInput(input: string): { commandName: string; args: string[]; flags: Record<string, string | boolean> } {
@@ -231,6 +236,44 @@ export const CLI_COMMANDS: Record<string, CLICommandDefinition> = {
           `TOTAL DOWNFORCE@250  : ${sim.totalDownforceAt250N} N (~${Math.round(sim.totalDownforceAt250N / 9.81)} kg)`,
           "",
           "Tip: Run 'goto /garage' to manually adjust wing angles and suspension heave rates.",
+        ].join("\n"),
+      };
+    },
+  },
+
+  strategy: {
+    name: "strategy",
+    aliases: ["pit", "undercut"],
+    description: "Run Monte Carlo race strategy simulator for 53 laps at Monza",
+    usage: "strategy [--plan 1_stop|2_stop] [--temp 38]",
+    examples: ["strategy", "strategy --plan 1_stop", "strategy --plan 2_stop"],
+    category: "motorsport",
+    execute: (ctx) => {
+      const planKey = String(ctx.flags.plan || "1_stop").toLowerCase();
+      const plan = CANONICAL_STRATEGY_PLANS.find(p => p.id.includes(planKey)) || CANONICAL_STRATEGY_PLANS[0];
+      const temp = ctx.flags.temp ? parseFloat(String(ctx.flags.temp)) : 38.0;
+      const env = { ...MONZA_DEFAULT_ENVIRONMENT, trackTempCelsius: temp };
+      const sim = runMonteCarloRaceSimulation(plan, env, 150);
+
+      return {
+        status: "success",
+        output: [
+          `[MONTE CARLO RACE STRATEGY OPTIMIZER — 53 LAPS AT MONZA]`,
+          `PLAN SELECTED        : ${sim.strategyName}`,
+          `PIT STOPS            : ${sim.pitStopsCount} Pit Stop(s)`,
+          `TRACK TEMPERATURE    : ${temp}°C Asphalt`,
+          "",
+          `SIMULATION RESULTS (150 STOCHASTIC RUNS):`,
+          `  MEAN TOTAL TIME    : ${Math.floor(sim.stochasticMeanTimeSec / 60)}m ${(sim.stochasticMeanTimeSec % 60).toFixed(0)}s`,
+          `  VARIANCE (STDEV)   : ±${sim.stochasticStdDevSec}s`,
+          `  BEST CASE (VSC)    : ${Math.floor(sim.stochasticBestTimeSec / 60)}m ${(sim.stochasticBestTimeSec % 60).toFixed(0)}s`,
+          `  WORST CASE (DIRTY) : ${Math.floor(sim.stochasticWorstTimeSec / 60)}m ${(sim.stochasticWorstTimeSec % 60).toFixed(0)}s`,
+          `  WIN PROBABILITY    : ${sim.winProbabilityPct}%`,
+          "",
+          `STINT SCHEDULE:`,
+          ...plan.stints.map(s => `  Laps ${String(s.startLap).padStart(2)}-${String(s.endLap).padEnd(2)} : ${s.compound.toUpperCase()} compound`),
+          "",
+          "Tip: Run 'goto /strategy' to view the 53-lap multi-compound SVG pace evolution chart.",
         ].join("\n"),
       };
     },

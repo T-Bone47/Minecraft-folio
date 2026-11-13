@@ -23,6 +23,7 @@ import {
   Film,
   Zap,
   Wrench,
+  Flame,
 } from "lucide-react";
 
 export const PortfolioNav: React.FC = () => {
@@ -70,6 +71,7 @@ export const PortfolioNav: React.FC = () => {
   const moreMenuItems = [
     { href: "/cli", label: "QUAKE CLI SHELL (~)", icon: Terminal, desc: "Interactive Unix & voxel terminal with auto-complete" },
     { href: "/garage", label: "F1 GARAGE & SETUP", icon: Wrench, desc: "Aero wing angles, ground effect rake & lap simulation" },
+    { href: "/strategy", label: "RACE STRATEGY SIM", icon: Flame, desc: "Monte Carlo 53-lap tire degradation & pit stop optimizer" },
     { href: "/telemetry", label: "FASTF1 OVERLAY", icon: Activity, desc: "Real F1 GPS telemetry overlay & ghost lap" },
     { href: "/chaos", label: "CHAOS STRESS LAB", icon: Zap, desc: "10,000 eps burst & fault injection lab" },
     { href: "/dossier", label: "HIRING DOSSIER", icon: FileText, desc: "1-Click hiring committee 2-page briefing (PDF)" },

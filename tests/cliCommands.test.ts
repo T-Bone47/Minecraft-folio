@@ -41,6 +41,14 @@ test("CLI: garage command computes top speed and downforce", async () => {
   assert.ok(typeof result.output === "string" && result.output.includes("TOTAL DOWNFORCE@250"));
 });
 
+test("CLI: strategy command runs Monte Carlo race strategy simulation", async () => {
+  const result = await executeCLICommand("strategy --plan 1_stop");
+  assert.strictEqual(result.status, "success");
+  assert.ok(typeof result.output === "string" && result.output.includes("MONTE CARLO RACE STRATEGY"));
+  assert.ok(typeof result.output === "string" && result.output.includes("MEAN TOTAL TIME"));
+  assert.ok(typeof result.output === "string" && result.output.includes("WIN PROBABILITY"));
+});
+
 test("CLI: chaos command evaluates 10k eps burst and memory invariant", async () => {
   const result = await executeCLICommand("chaos --scenario silverstone-surge");
   assert.strictEqual(result.status, "success");
