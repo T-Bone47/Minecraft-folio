@@ -54,3 +54,4 @@ export interface SiliconCircuit {
   physicalEquation: string;
   latencyBudgetMicroseconds: number;
 }
+

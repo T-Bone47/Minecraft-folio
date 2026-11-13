@@ -53,3 +53,4 @@ The dossier is engineered with print-optimized CSS (`@media print`) and vector s
 2. **Real-Time Distributed Systems (`?track=systems`):** Focuses on 10,000+ events/sec burst tolerance, zero memory drift, and ring-buffer bounds.
 3. **Applied AI/ML Systems (`?track=aiml`):** Focuses on zero lookahead leakage, Monte Carlo simulations, and counterfactual defense.
 4. **Staff Systems Architect (`?track=architect`):** Focuses on full-stack architecture, Next.js 15 App Router, Three.js WebGL, and zero layout shift.
+

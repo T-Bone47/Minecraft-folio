@@ -400,3 +400,4 @@ export const VoxelSiliconInspector: React.FC = () => {
     </div>
   );
 };
+

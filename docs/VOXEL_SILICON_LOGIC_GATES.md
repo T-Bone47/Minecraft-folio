@@ -62,3 +62,4 @@ In high-consequence motorsport and telemetry systems, critical safety interlocks
 | **ECU Latency Budget** | $5\,\mu\text{s} \text{ to } 50\,\mu\text{s}$ | Sub-millisecond execution loop |
 | **Physics Synchronicity** | 60 Hz Monotonic | Decoupled from browser render ticks |
 | **Test Verification** | 100% truth table consistency | Validated in `tests/siliconLogic.test.ts` |
+

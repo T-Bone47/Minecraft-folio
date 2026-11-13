@@ -65,3 +65,4 @@ export interface CandidateDossierManifest {
   activeTrack: DossierTrackId;
   tracks: Record<DossierTrackId, DossierTrackProfile>;
 }
+
