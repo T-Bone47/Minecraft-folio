@@ -132,3 +132,4 @@ export function buildDefenseTraceSpans(result: DefenseExecutionResult): TraceSpa
 
   return spans;
 }
+

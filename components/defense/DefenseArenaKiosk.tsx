@@ -81,3 +81,4 @@ export const DefenseArenaKiosk: React.FC<DefenseArenaKioskProps> = ({
     </group>
   );
 };
+

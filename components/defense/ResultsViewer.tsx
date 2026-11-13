@@ -238,3 +238,4 @@ export const ResultsViewer: React.FC<ResultsViewerProps> = ({ result }) => {
     </div>
   );
 };
+

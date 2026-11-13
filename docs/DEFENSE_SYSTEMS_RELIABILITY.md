@@ -27,3 +27,4 @@ In 20-car live Formula 1 broadcasts, over 2,650 packets/sec stream across distri
 - **Baseline (Sliding Window, 10% faults)**: Sustains 2,450 events/sec, $P_{99} = 12.8$ms, 0 duplicates, 0 sequence reversals.
 - **Strict Barrier (25% faults)**: $P_{99}$ spikes to $34.2$ms due to head-of-line blocking, triggering `INV_BOUNDED_LATENCY` failure.
 - **Drop Late**: Minimizes latency ($P_{99} = 4.8$ms), but introduces sequence data loss under packet jitter.
+

@@ -133,3 +133,4 @@ export const ParameterControls: React.FC<ParameterControlsProps> = ({ track }) =
     </div>
   );
 };
+

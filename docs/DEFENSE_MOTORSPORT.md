@@ -26,3 +26,4 @@ $$\Delta T(s) = \int_{0}^{s} \left( \frac{1}{v_1(u)} - \frac{1}{v_2(u)} \right) 
 - **Monotone PCHIP**: Shape-preserving cubic Hermite interpolation. Eliminates Runge oscillations near abrupt braking zones and guarantees monotonic elapsed time progress.
 - **Natural Cubic Spline**: Smooth $C^2$ second derivative, but prone to overshoot near $-5.2$G deceleration points.
 - **Piecewise Linear**: Fast $O(N)$ execution, but derivative discontinuities introduce artificial acceleration spikes.
+

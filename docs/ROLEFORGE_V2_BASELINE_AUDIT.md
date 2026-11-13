@@ -57,3 +57,4 @@ During Phase 0, a live inspection of canonical GitHub repositories was conducted
 - **Facilities Invariant**: Exactly 6 canonical facilities in `data/facilities.ts` (`garage`, `telemetry`, `simulation`, `operations`, `aiml`, `hq`).
 - **Static Pages Pre-rendered**: 66 routes via Next.js 15 App Router SSG.
 - **Port Allocation**: Port 3005 free and verified for QA daemon.
+

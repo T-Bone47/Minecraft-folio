@@ -29,3 +29,4 @@ $$\text{PercentChange} = \frac{\Delta \text{Metric}}{\text{Metric}_{\text{baseli
 - **`invariantsBroken`**: Invariants that passed in baseline but failed under counterfactual stress.
 - **`invariantsResolved`**: Invariants that failed in a naive configuration but were fixed by applying architectural mitigations.
 - **`conclusion`**: Causal diagnosis explaining the exact distributed systems, physics, or mathematical reason for the transition.
+

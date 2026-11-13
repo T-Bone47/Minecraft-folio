@@ -127,3 +127,4 @@ test("Defense Arena — Frontier X-Ray Bridge generates causal trace spans", () 
   assert.strictEqual(root.name, "defense.experiment.motorsport-lap-delta");
   assert.strictEqual(root.provenance, "ACTUAL_RECORDED_EXECUTION");
 });
+

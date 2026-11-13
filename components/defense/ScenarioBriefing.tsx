@@ -153,3 +153,4 @@ export const ScenarioBriefing: React.FC<ScenarioBriefingProps> = ({ track }) => 
     </div>
   );
 };
+

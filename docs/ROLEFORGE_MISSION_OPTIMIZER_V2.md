@@ -53,3 +53,4 @@ Every compiled mission produces an `optimizationAudit` containing:
 - `slackSeconds`: Unused time budget ($B - T_{\text{actual}} \ge 0$).
 - `routingDistanceMeters`: Total physical walking path length across campus.
 - `stepDecisions`: Per-step audit detailing why each candidate was selected (marginal gain, requirements unlocked) or excluded (budget ceiling, duplicate coverage).
+

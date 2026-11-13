@@ -185,3 +185,4 @@ export const CounterfactualComparisonView: React.FC<CounterfactualComparisonView
     </div>
   );
 };
+

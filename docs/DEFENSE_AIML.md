@@ -31,3 +31,4 @@ Applying standard random cross-validation (e.g., `train_test_split(shuffle=True)
 
 ### 3. Engineering Conclusion
 A senior ML engineering defense requires rejecting vanity metrics in favor of methodologically sound temporal holdouts. The $84.2\%$ generalized accuracy on unseen race laps represents true operational capability.
+

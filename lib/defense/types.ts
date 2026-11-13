@@ -107,3 +107,4 @@ export interface TechnicalReviewSection {
   honestBoundaries: string[];
   sourceCodePermalink: string;
 }
+

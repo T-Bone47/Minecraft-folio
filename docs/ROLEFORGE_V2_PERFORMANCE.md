@@ -34,3 +34,4 @@
 #### Spatial Lap Delta Solver:
 - 531 spatial distance bins ($ds = 10$m, $L = 5,303$m): $< 0.5$ ms.
 - Monotone PCHIP cubic Hermite evaluation: $O(N)$ linear complexity.
+

@@ -54,3 +54,4 @@ The engine outputs a canonical manifest at:
 `docs/roleforge-evidence-integrity.json`
 
 This file is version-controlled and checked by CI during automated testing.
+

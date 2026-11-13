@@ -43,3 +43,4 @@ The arena runs on a dual-execution state model:
 2. **Counterfactual Run**: Visitor modifies parameters (fault rate, step size, split strategy) to test specific failure modes.
 3. **Differential Engine**: Computes exact $\Delta$ for throughput, latency, apex error, and generalization gap, identifying which invariants were broken or recovered.
 4. **Frontier X-Ray Bridge**: Pushes execution stages into high-resolution monotonic trace spans with genuine Git permalinks.
+

@@ -41,3 +41,4 @@
 | `ev-vyapar-nlp` | vyaparpulse | `6500f73` | `voice-agent/agent.py` | `pytest backend/tests` | Hinglish slang dictionary coverage | 1.00 |
 | `ev-world-frontend` | world | `10d2f63` | `app/roleforge/page.tsx` | `npm test` | Client-side bundle size bounds | 1.00 |
 | `ev-world-threejs` | world | `10d2f63` | `components/world/WorldScene.tsx` | `npm test` | WebGL context limits on low-end devices | 1.00 |
+

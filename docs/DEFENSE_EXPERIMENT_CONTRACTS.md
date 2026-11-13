@@ -44,3 +44,4 @@ Every Defense Experiment is governed by formal engineering invariants that repre
 - **`INV_GENERALIZATION_GAP` (Severity: CRITICAL)**
   - *Condition*: $|\text{Accuracy}_{\text{train}} - \text{Accuracy}_{\text{test}}| \le 0.10$ (10%).
   - *Failure mode*: Severe overfitting caused by non-causal lookahead features.
+

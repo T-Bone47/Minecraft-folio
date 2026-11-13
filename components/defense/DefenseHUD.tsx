@@ -67,3 +67,4 @@ export function DefenseHUD() {
     </div>
   );
 }
+
