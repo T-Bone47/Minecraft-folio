@@ -32,9 +32,12 @@ export function sanitizeJobDescriptionText(rawText: string): string {
   // Normalize Unicode spaces and linebreaks
   text = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
   text = text.replace(/[\u200B-\u200D\uFEFF]/g, "");
+  text = text.replace(/[ \t]+/g, " ");
 
   return text.trim();
 }
+
+export const sanitizeJobText = sanitizeJobDescriptionText;
 
 /**
  * Checks whether a mention of a keyword is negated in the immediate context.
@@ -114,7 +117,7 @@ export function parseJobDescription(rawText: string): ParsedRequirementCandidate
 
     for (const skill of CANONICAL_SKILL_TAXONOMY) {
       // 1. Check aliases and keywords
-      const searchTerms = [skill.name, ...skill.aliases];
+      const searchTerms = [skill.name, ...skill.aliases, ...skill.keywords];
 
       let matchedTerm: string | null = null;
       for (const term of searchTerms) {

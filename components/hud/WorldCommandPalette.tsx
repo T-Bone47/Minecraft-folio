@@ -12,6 +12,7 @@ import { navigationController } from "@/lib/frontierDirector/navigationControlle
 import { useXRayStore } from "@/state/xrayStore";
 import { useMultiverseStore } from "@/state/multiverseStore";
 import { useRoleForgeStore } from "@/state/roleforgeStore";
+import { useDefenseStore } from "@/state/defenseStore";
 import { getTerrainSurfaceY } from "@/lib/terrainModel";
 import { Terminal, X, ChevronRight } from "lucide-react";
 
@@ -220,6 +221,48 @@ export const WorldCommandPalette: React.FC = () => {
       action: () => {
         setCommandPaletteOpen(false);
         useRoleForgeStore.getState().openTerminal("presets");
+      },
+    },
+    {
+      command: "/defense",
+      category: "DIRECTOR",
+      title: "ENGINEERING DEFENSE ARENA [D]",
+      description: "Challenge and verify engineering capabilities under live fault injection and invariant audits",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useDefenseStore.getState().openArena("systems-reliability", "briefing");
+      },
+    },
+    {
+      command: "/counterfactual",
+      category: "DIRECTOR",
+      title: "COUNTERFACTUAL ENGINEERING LAB",
+      description: "Stress test system invariants across baseline vs alternative parameter configurations",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useDefenseStore.getState().openArena("systems-reliability", "lab");
+      },
+    },
+    {
+      command: "/review",
+      category: "DIRECTOR",
+      title: "SENIOR TECHNICAL REVIEW BOARD",
+      description: "Staff+ architecture reviews: constraints, decisions, assumptions, and limitations",
+      action: () => {
+        setCommandPaletteOpen(false);
+        useDefenseStore.getState().openArena("systems-reliability", "review");
+      },
+    },
+    {
+      command: "/passport",
+      category: "DIRECTOR",
+      title: "EVIDENCE PASSPORT",
+      description: "Executive printable dossier of verified Git commits, invariants, and boundaries",
+      action: () => {
+        setCommandPaletteOpen(false);
+        if (typeof window !== "undefined") {
+          window.location.href = "/roleforge/passport";
+        }
       },
     },
     {

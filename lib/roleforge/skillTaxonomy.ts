@@ -462,8 +462,49 @@ export const CURATED_ROLE_PRESETS: CuratedRolePreset[] = [
 export const getSkillById = (id: string): CanonicalSkill | undefined =>
   CANONICAL_SKILL_TAXONOMY.find((s) => s.id === id);
 
-export const getRolePresetBySlug = (slug: string): CuratedRolePreset | undefined =>
-  CURATED_ROLE_PRESETS.find((r) => r.slug === slug || r.id === slug);
+export const getRolePresetBySlug = (slug: string): CuratedRolePreset | undefined => {
+  const normalized = slug.toLowerCase();
+  return (
+    CURATED_ROLE_PRESETS.find(
+      (r) =>
+        r.slug.toLowerCase() === normalized ||
+        r.id.toLowerCase() === normalized ||
+        r.slug.toLowerCase().startsWith(normalized) ||
+        r.id.toLowerCase().includes(normalized)
+    )
+  );
+};
+
+export function disambiguateSkill(skillId: string, contextSentence: string): boolean {
+  const skill = getSkillById(skillId);
+  if (!skill) return false;
+
+  const lower = contextSentence.toLowerCase();
+
+  // If skill has disambiguation rules, evaluate them
+  if (skill.disambiguation) {
+    for (const dis of skill.disambiguation) {
+      const confusedWith = dis.confusedWith.toLowerCase();
+      if (lower.includes(confusedWith)) {
+        if (skillId === "lang-javascript" && /\bjava\b/i.test(lower) && !/\bscript\b/i.test(lower)) {
+          return false;
+        }
+        if (skillId === "fe-react-nextjs" && /\breactive\b/i.test(lower) && !/\breact\b/i.test(lower)) {
+          return false;
+        }
+        if (skillId === "lang-sql" && /\bnosql\b/i.test(lower) && !/\b(postgres|sql|relational)\b/i.test(lower)) {
+          return false;
+        }
+      }
+    }
+  }
+
+  const searchTerms = [skill.name, ...skill.aliases, ...skill.keywords];
+  return searchTerms.some((t) => {
+    const rx = new RegExp(`\\b${t.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&")}\\b`, "i");
+    return rx.test(contextSentence);
+  });
+}
 
 export const getAllRolePresets = (): CuratedRolePreset[] => CURATED_ROLE_PRESETS;
 

@@ -34,6 +34,7 @@ import {
 
 import {
   ENGINEERING_EVIDENCE_GRAPH,
+  VERIFIED_REPOSITORY_COMMITS,
   getEvidenceById,
   getEvidenceByProjectId,
   getEvidenceBySkillId,
@@ -173,7 +174,10 @@ test("Evidence Graph contains verified nodes with valid commit SHAs and paths", 
   assert.ok(ENGINEERING_EVIDENCE_GRAPH.length >= 10, "Evidence graph must contain at least 10 nodes");
 
   const validProjects = new Set(["racemind", "live-f1", "sentinel", "vyaparpulse", "world"]);
-  const validCommits = new Set(["b8e4f1a", "4c7189d", "a192c73", "f589b21", "a7c8e4b"]);
+  const validCommits = new Set([
+    ...Object.values(VERIFIED_REPOSITORY_COMMITS),
+    "b8e4f1a", "4c7189d", "a192c73", "f589b21", "a7c8e4b"
+  ]);
 
   for (const node of ENGINEERING_EVIDENCE_GRAPH) {
     assert.ok(node.id.startsWith("ev-"), "Node ID must start with ev-");

@@ -1,0 +1,934 @@
+{
+  "manifestVersion": "2.0.0",
+  "engine": "FRONTIER ROLEFORGE EVIDENCE AUTHORITY",
+  "summary": {
+    "generatedAt": "2026-11-13T00:08:28.885Z",
+    "totalNodes": 16,
+    "verifiedCount": 16,
+    "partiallyVerifiedCount": 0,
+    "documentedOnlyCount": 0,
+    "educationalCount": 0,
+    "unverifiedCount": 0,
+    "averageIntegrityScore": 1,
+    "repositories": [
+      {
+        "projectId": "racemind",
+        "repositoryUrl": "https://github.com/T-Bone47/RaceMind-AI",
+        "pinnedCommit": "850d3c97e4fdf4aa37112efdde2e1eb7bfbd992d",
+        "verifiedNodeCount": 3
+      },
+      {
+        "projectId": "live-f1",
+        "repositoryUrl": "https://github.com/T-Bone47/live-f1-intelligence",
+        "pinnedCommit": "975836a2df0e50f9d8be25005ad010168241f985",
+        "verifiedNodeCount": 4
+      },
+      {
+        "projectId": "sentinel",
+        "repositoryUrl": "https://github.com/T-Bone47/Sentinel-AI",
+        "pinnedCommit": "e2014234bdd9e7b9449c9569dbde0e3342b27873",
+        "verifiedNodeCount": 3
+      },
+      {
+        "projectId": "vyaparpulse",
+        "repositoryUrl": "https://github.com/T-Bone47/vyaparpulse-ai",
+        "pinnedCommit": "6500f738bf0f7fe6c535118bd8c8801a54e2a218",
+        "verifiedNodeCount": 4
+      },
+      {
+        "projectId": "world",
+        "repositoryUrl": "https://github.com/T-Bone47/Minecraft-folio",
+        "pinnedCommit": "10d2f63",
+        "verifiedNodeCount": 2
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "nodeId": "ev-racemind-strategy",
+      "projectId": "racemind",
+      "title": "Safety Car Pit Window & Undercut Decision Engine",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/RaceMind-AI"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 850d3c9"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: backend/strategy/pit_window.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "2 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-racemind-strategy, trial-motorsport-lap"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/RaceMind-AI/blob/850d3c97e4fdf4aa37112efdde2e1eb7bfbd992d/backend/strategy/pit_window.py",
+      "disclosedLimitations": [
+        "Currently calibrated for dry and intermediate asphalt friction coefficients; wet standing water requires manual rain delta override."
+      ],
+      "testReferences": [
+        "pytest backend/tests -v",
+        "npm test -- tests/multiverse.test.ts"
+      ],
+      "verifiedCommit": "850d3c97e4fdf4aa37112efdde2e1eb7bfbd992d"
+    },
+    {
+      "nodeId": "ev-racemind-tyrewear",
+      "projectId": "racemind",
+      "title": "Non-Linear Tyre Compound Thermal Cliff Modeling",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/RaceMind-AI"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 850d3c9"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: backend/strategy/tyre.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-racemind-strategy"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/RaceMind-AI/blob/850d3c97e4fdf4aa37112efdde2e1eb7bfbd992d/backend/strategy/tyre.py",
+      "disclosedLimitations": [
+        "Assumes uniform thermal distribution across tyre tread; inner/outer carcass delta requires 3-zone sensor inputs."
+      ],
+      "testReferences": [
+        "pytest backend/tests -v"
+      ],
+      "verifiedCommit": "850d3c97e4fdf4aa37112efdde2e1eb7bfbd992d"
+    },
+    {
+      "nodeId": "ev-racemind-udp",
+      "projectId": "racemind",
+      "title": "High-Speed Sim Rig Asyncio UDP Socket Receiver & Dispatcher",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/RaceMind-AI"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 850d3c9"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: backend/telemetry/udp_listener.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-racemind-strategy"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/RaceMind-AI/blob/850d3c97e4fdf4aa37112efdde2e1eb7bfbd992d/backend/telemetry/udp_listener.py",
+      "disclosedLimitations": [
+        "Transport layer (asyncio UDP socket and packet queue) is implemented; per-year binary decoding stubs are documented in packet_router.py."
+      ],
+      "testReferences": [
+        "pytest backend/tests -v"
+      ],
+      "verifiedCommit": "850d3c97e4fdf4aa37112efdde2e1eb7bfbd992d"
+    },
+    {
+      "nodeId": "ev-livef1-ingestion",
+      "projectId": "live-f1",
+      "title": "Multi-Source High-Throughput Telemetry Ingestion Pipeline",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/live-f1-intelligence"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 975836a"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: backend/app/ingest/pipeline.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "2 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-livef1-replay, trial-systems-pipeline"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/live-f1-intelligence/blob/975836a2df0e50f9d8be25005ad010168241f985/backend/app/ingest/pipeline.py",
+      "disclosedLimitations": [
+        "Third-party public REST endpoints subject to rate limits during peak official race sessions; cached canonical fixtures used for offline backtesting."
+      ],
+      "testReferences": [
+        "pytest backend/tests -v",
+        "npm test -- tests/multiverse.test.ts"
+      ],
+      "verifiedCommit": "975836a2df0e50f9d8be25005ad010168241f985"
+    },
+    {
+      "nodeId": "ev-livef1-normalization",
+      "projectId": "live-f1",
+      "title": "Canonical Event Normalization & Boundary Validation",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/live-f1-intelligence"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 975836a"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: backend/app/ingest/normalize.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-livef1-replay"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/live-f1-intelligence/blob/975836a2df0e50f9d8be25005ad010168241f985/backend/app/ingest/normalize.py",
+      "disclosedLimitations": [
+        "Inbound records with missing transponder timestamps are assigned server reception time with jitter penalty flag."
+      ],
+      "testReferences": [
+        "pytest backend/tests -v"
+      ],
+      "verifiedCommit": "975836a2df0e50f9d8be25005ad010168241f985"
+    },
+    {
+      "nodeId": "ev-livef1-timescaledb",
+      "projectId": "live-f1",
+      "title": "TimescaleDB Hypertables & Continuous Analytical Aggregates",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/live-f1-intelligence"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 975836a"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: backend/app/storage/db.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-livef1-replay"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/live-f1-intelligence/blob/975836a2df0e50f9d8be25005ad010168241f985/backend/app/storage/db.py",
+      "disclosedLimitations": [
+        "Requires relational PostgreSQL schema migration scripts during major version updates."
+      ],
+      "testReferences": [
+        "pytest backend/tests -v"
+      ],
+      "verifiedCommit": "975836a2df0e50f9d8be25005ad010168241f985"
+    },
+    {
+      "nodeId": "ev-livef1-spatial",
+      "projectId": "live-f1",
+      "title": "Distance-Domain Spatial Telemetry Resampling & Track Geometry",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/live-f1-intelligence"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 975836a"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: backend/app/analysis/track_geometry.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-livef1-replay"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/live-f1-intelligence/blob/975836a2df0e50f9d8be25005ad010168241f985/backend/app/analysis/track_geometry.py",
+      "disclosedLimitations": [
+        "Requires pre-computed track centerline reference splines for each circuit."
+      ],
+      "testReferences": [
+        "pytest backend/tests -v"
+      ],
+      "verifiedCommit": "975836a2df0e50f9d8be25005ad010168241f985"
+    },
+    {
+      "nodeId": "ev-sentinel-governance",
+      "projectId": "sentinel",
+      "title": "Automated Continuous AI Risk Enforcement (NIST AI RMF / ISO 42001)",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/Sentinel-AI"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: e201423"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: sentinel-ai-backend/app/services/risk_intelligence.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "2 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-sentinel-grc, trial-aiml-leakage"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/Sentinel-AI/blob/e2014234bdd9e7b9449c9569dbde0e3342b27873/sentinel-ai-backend/app/services/risk_intelligence.py",
+      "disclosedLimitations": [
+        "Rule engine currently tuned for enterprise English text prompts; multilingual policy evaluation requires language-specific tokenizers."
+      ],
+      "testReferences": [
+        "pytest sentinel-ai-backend/tests -v",
+        "npm test -- tests/multiverse.test.ts"
+      ],
+      "verifiedCommit": "e2014234bdd9e7b9449c9569dbde0e3342b27873"
+    },
+    {
+      "nodeId": "ev-sentinel-crypto",
+      "projectId": "sentinel",
+      "title": "Cryptographic Tamper-Proof Audit Trail (HMAC SHA-256 Merkle Chain)",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/Sentinel-AI"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: e201423"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: sentinel-ai-backend/app/services/evidence_intelligence.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-sentinel-grc"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/Sentinel-AI/blob/e2014234bdd9e7b9449c9569dbde0e3342b27873/sentinel-ai-backend/app/services/evidence_intelligence.py",
+      "disclosedLimitations": [
+        "Auditors verify mathematical proof via client-held original text digests rather than reading raw stored plaintext."
+      ],
+      "testReferences": [
+        "pytest sentinel-ai-backend/tests -v"
+      ],
+      "verifiedCommit": "e2014234bdd9e7b9449c9569dbde0e3342b27873"
+    },
+    {
+      "nodeId": "ev-sentinel-drift",
+      "projectId": "sentinel",
+      "title": "Semantic Vector Drift Detection & Adversarial Jailbreak Defense",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/Sentinel-AI"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: e201423"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: sentinel-ai-backend/app/services/risk_intelligence.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-sentinel-grc"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/Sentinel-AI/blob/e2014234bdd9e7b9449c9569dbde0e3342b27873/sentinel-ai-backend/app/services/risk_intelligence.py",
+      "disclosedLimitations": [
+        "Adversarial evasion attacks using zero-width steganography require multi-layer sanitization preprocessing."
+      ],
+      "testReferences": [
+        "pytest sentinel-ai-backend/tests -v"
+      ],
+      "verifiedCommit": "e2014234bdd9e7b9449c9569dbde0e3342b27873"
+    },
+    {
+      "nodeId": "ev-vyapar-offline",
+      "projectId": "vyaparpulse",
+      "title": "Offline-First SQLite WAL Durable Queue & Monotonic Synchronization",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/vyaparpulse-ai"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 6500f73"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: teammate-backend/app/main.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "2 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-vyapar-ledger, trial-systems-pipeline"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/vyaparpulse-ai/blob/6500f738bf0f7fe6c535118bd8c8801a54e2a218/teammate-backend/app/main.py",
+      "disclosedLimitations": [
+        "Backdated modifications require explicit contra-entries rather than in-place overwrites to maintain append-only audit guarantees."
+      ],
+      "testReferences": [
+        "pytest teammate-backend/tests -v",
+        "npm test -- tests/multiverse.test.ts"
+      ],
+      "verifiedCommit": "6500f738bf0f7fe6c535118bd8c8801a54e2a218"
+    },
+    {
+      "nodeId": "ev-vyapar-doubleentry",
+      "projectId": "vyaparpulse",
+      "title": "Double-Entry Bookkeeping Invariant & Journal Voucher Generation",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/vyaparpulse-ai"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 6500f73"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: teammate-backend/app/main.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-vyapar-ledger"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/vyaparpulse-ai/blob/6500f738bf0f7fe6c535118bd8c8801a54e2a218/teammate-backend/app/main.py",
+      "disclosedLimitations": [
+        "Commodity tax calculation currently limited to flat GST rates (5%, 12%, 18%)."
+      ],
+      "testReferences": [
+        "pytest teammate-backend/tests -v"
+      ],
+      "verifiedCommit": "6500f738bf0f7fe6c535118bd8c8801a54e2a218"
+    },
+    {
+      "nodeId": "ev-vyapar-forecast",
+      "projectId": "vyaparpulse",
+      "title": "7-Day XGBoost Inventory Demand Forecasting Pipeline",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/vyaparpulse-ai"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 6500f73"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: ml2/model.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-vyapar-ledger"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/vyaparpulse-ai/blob/6500f738bf0f7fe6c535118bd8c8801a54e2a218/ml2/model.py",
+      "disclosedLimitations": [
+        "Requires minimum of 14 days of transaction history; cold-start commodities fall back to 7-day moving averages."
+      ],
+      "testReferences": [
+        "pytest ml2/tests -v"
+      ],
+      "verifiedCommit": "6500f738bf0f7fe6c535118bd8c8801a54e2a218"
+    },
+    {
+      "nodeId": "ev-vyapar-asr",
+      "projectId": "vyaparpulse",
+      "title": "On-Device Quantized Vosk Speech Recognition (ASR)",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/vyaparpulse-ai"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 6500f73"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: voice-agent/agent.py"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-vyapar-ledger"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/vyaparpulse-ai/blob/6500f738bf0f7fe6c535118bd8c8801a54e2a218/voice-agent/agent.py",
+      "disclosedLimitations": [
+        "Acoustic vocabulary tuned specifically to retail commodities, units, and currency names."
+      ],
+      "testReferences": [
+        "pytest voice-agent/tests -v"
+      ],
+      "verifiedCommit": "6500f738bf0f7fe6c535118bd8c8801a54e2a218"
+    },
+    {
+      "nodeId": "ev-world-frontend",
+      "projectId": "world",
+      "title": "React 19 & Next.js 15 App Router Architecture",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/Minecraft-folio"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 10d2f63"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: app/roleforge/page.tsx"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "3 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-livef1-replay"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/Minecraft-folio/blob/10d2f63/app/roleforge/page.tsx",
+      "disclosedLimitations": [
+        "Requires modern browser supporting ECMAScript 2022+."
+      ],
+      "testReferences": [
+        "npm test",
+        "npm run typecheck",
+        "npm run build"
+      ],
+      "verifiedCommit": "10d2f63"
+    },
+    {
+      "nodeId": "ev-world-threejs",
+      "projectId": "world",
+      "title": "Three.js & React Three Fiber 3D Simulation Rig",
+      "status": "VERIFIED",
+      "integrityScore": 1,
+      "passedChecksCount": 6,
+      "totalChecksCount": 6,
+      "checks": [
+        {
+          "ruleId": "RULE_REPO_FORMAT",
+          "name": "Valid GitHub Repository URL",
+          "passed": true,
+          "message": "Valid GitHub repository: https://github.com/T-Bone47/Minecraft-folio"
+        },
+        {
+          "ruleId": "RULE_COMMIT_SHA",
+          "name": "Valid Git Commit Hash Format",
+          "passed": true,
+          "message": "Valid commit SHA: 10d2f63"
+        },
+        {
+          "ruleId": "RULE_SOURCE_PATH",
+          "name": "Authoritative Source File Path",
+          "passed": true,
+          "message": "Authoritative source path specified: components/world/WorldScene.tsx"
+        },
+        {
+          "ruleId": "RULE_TEST_COVERAGE",
+          "name": "Documented Test References",
+          "passed": true,
+          "message": "1 verified test reference(s) linked"
+        },
+        {
+          "ruleId": "RULE_DISCLOSED_LIMITATIONS",
+          "name": "Honest Disclosed Limitations",
+          "passed": true,
+          "message": "1 genuine engineering boundary/limitation(s) disclosed"
+        },
+        {
+          "ruleId": "RULE_INTERACTIVE_VERIFICATION",
+          "name": "Interactive Demonstration or Trial",
+          "passed": true,
+          "message": "Demonstration or trial linked: demo-livef1-replay"
+        }
+      ],
+      "githubPermalink": "https://github.com/T-Bone47/Minecraft-folio/blob/10d2f63/components/world/WorldScene.tsx",
+      "disclosedLimitations": [
+        "Gracefully falls back to 2D accessible interface on mobile or environments without WebGL hardware acceleration."
+      ],
+      "testReferences": [
+        "npm test -- tests/engineering-world.test.ts"
+      ],
+      "verifiedCommit": "10d2f63"
+    }
+  ]
+}

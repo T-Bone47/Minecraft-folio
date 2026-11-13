@@ -46,21 +46,33 @@ export default function RoleForgeHubPage() {
 
           <div className="flex flex-wrap items-center gap-3 mt-6">
             <Link
-              href="/?roleforge=open"
+              href="/roleforge/defense"
+              className="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(220,38,38,0.3)]"
+            >
+              <span>🛡️</span>
+              <span>ENTER DEFENSE ARENA 2.0</span>
+            </Link>
+            <Link
+              href="/roleforge/passport"
               className="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(34,211,238,0.3)]"
             >
-              <span>🚀</span>
-              <span>LAUNCH IN 3D WORLD [KEY R]</span>
+              <span>📑</span>
+              <span>EVIDENCE PASSPORT</span>
             </Link>
-            <a
-              href="https://github.com/T-Bone47"
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/?roleforge=open"
               className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs font-mono font-bold flex items-center gap-2 border border-zinc-800 transition-colors"
             >
-              <GitBranch className="w-4 h-4 text-cyan-400" />
-              <span>AUDIT GIT REPOSITORIES</span>
-            </a>
+              <span>🚀</span>
+              <span>3D WORLD TERMINAL [R]</span>
+            </Link>
+            <Link
+              href="/roleforge/review"
+              className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs font-mono font-bold flex items-center gap-2 border border-zinc-800 transition-colors"
+            >
+              <FileCheck className="w-4 h-4 text-cyan-400" />
+              <span>TECH REVIEW BOARD</span>
+            </Link>
           </div>
         </div>
 

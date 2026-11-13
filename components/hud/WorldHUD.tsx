@@ -22,6 +22,8 @@ import { MultiverseHUD } from "../multiverse/MultiverseHUD";
 import { MultiverseModal } from "../multiverse/MultiverseModal";
 import { RoleForgeHUD } from "../roleforge/RoleForgeHUD";
 import { RoleForgeTerminal } from "../roleforge/RoleForgeTerminal";
+import { DefenseHUD } from "../defense/DefenseHUD";
+import { DefenseArenaModal } from "../defense/DefenseArenaModal";
 import { useDigitalTwinStore } from "@/state/digitalTwinStore";
 import { useTrialsStore } from "@/state/trialsStore";
 import { useNPCWorkforceStore } from "@/state/npcWorkforceStore";
@@ -622,6 +624,10 @@ export const WorldHUD: React.FC = () => {
       {/* Frontier RoleForge Living Proof Compiler HUD & Modal */}
       <RoleForgeHUD />
       <RoleForgeTerminal />
+
+      {/* Frontier RoleForge 2.0 Engineering Defense Arena HUD & Modal */}
+      <DefenseHUD />
+      <DefenseArenaModal />
     </>
   );
 };

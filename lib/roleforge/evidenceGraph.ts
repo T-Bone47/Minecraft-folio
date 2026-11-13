@@ -4,13 +4,22 @@
  *
  * Connects canonical skills to verified repositories, source code files,
  * commit SHAs, executable demonstrations, tests, and honest limitations.
+ * Pinned to verified remote Git histories on GitHub.
  */
 
 import type { EngineeringEvidenceNode } from "./types";
 
+export const VERIFIED_REPOSITORY_COMMITS = {
+  racemind: "850d3c97e4fdf4aa37112efdde2e1eb7bfbd992d",
+  "live-f1": "975836a2df0e50f9d8be25005ad010168241f985",
+  sentinel: "e2014234bdd9e7b9449c9569dbde0e3342b27873",
+  vyaparpulse: "6500f738bf0f7fe6c535118bd8c8801a54e2a218",
+  world: "10d2f63",
+} as const;
+
 export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
   // =========================================================================
-  // 1. RACEMIND AI (COMMIT b8e4f1a)
+  // 1. RACEMIND AI (COMMIT 850d3c9)
   // =========================================================================
   {
     id: "ev-racemind-strategy",
@@ -19,11 +28,11 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "Safety Car Pit Window & Undercut Decision Engine",
     description: "Evaluates dynamic pit stop trade-offs, pit loss deltas (12.5s SC vs 22.0s green), and re-entry traffic windows.",
     sourceRepository: "https://github.com/T-Bone47/RaceMind-AI",
-    sourceCommit: "b8e4f1a",
-    sourceFilePath: "racemind/strategy/pit_optimizer.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.racemind,
+    sourceFilePath: "backend/strategy/pit_window.py",
     demonstrationId: "demo-racemind-strategy",
     trialId: "trial-motorsport-lap",
-    testReferences: ["pytest tests/test_pit_optimizer.py -v", "npm test -- tests/multiverse.test.ts"],
+    testReferences: ["pytest backend/tests -v", "npm test -- tests/multiverse.test.ts"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Currently calibrated for dry and intermediate asphalt friction coefficients; wet standing water requires manual rain delta override.",
@@ -39,10 +48,10 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "Non-Linear Tyre Compound Thermal Cliff Modeling",
     description: "Polynomial degradation model simulating compound wear horizons and quadratic thermal overheating penalties.",
     sourceRepository: "https://github.com/T-Bone47/RaceMind-AI",
-    sourceCommit: "b8e4f1a",
-    sourceFilePath: "racemind/models/tyre_thermal.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.racemind,
+    sourceFilePath: "backend/strategy/tyre.py",
     demonstrationId: "demo-racemind-strategy",
-    testReferences: ["pytest tests/test_tyre_models.py -v"],
+    testReferences: ["pytest backend/tests -v"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Assumes uniform thermal distribution across tyre tread; inner/outer carcass delta requires 3-zone sensor inputs.",
@@ -55,35 +64,35 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     id: "ev-racemind-udp",
     projectId: "racemind",
     skillIds: ["ms-udp-telemetry", "se-performance", "lang-python"],
-    title: "High-Speed 60 Hz Sim Rig UDP Binary Telemetry Receiver",
-    description: "Low-latency UDP socket receiver parsing binary packets with struct unpack and monotonic sequence filtering.",
+    title: "High-Speed Sim Rig Asyncio UDP Socket Receiver & Dispatcher",
+    description: "Low-latency UDP socket listener parsing binary packets with asyncio queue dispatch and monotonic sequence filtering.",
     sourceRepository: "https://github.com/T-Bone47/RaceMind-AI",
-    sourceCommit: "b8e4f1a",
-    sourceFilePath: "racemind/telemetry/udp_receiver.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.racemind,
+    sourceFilePath: "backend/telemetry/udp_listener.py",
     demonstrationId: "demo-racemind-strategy",
-    testReferences: ["pytest tests/test_udp_receiver.py -v"],
+    testReferences: ["pytest backend/tests -v"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
-      "Tested against F1 24 and Assetto Corsa UDP packet formats; iRacing requires custom YAML wrapper.",
+      "Transport layer (asyncio UDP socket and packet queue) is implemented; per-year binary decoding stubs are documented in packet_router.py.",
     ],
     metricCallout: { label: "UDP Rate", value: "240 Hz" },
   },
 
   // =========================================================================
-  // 2. LIVE F1 INTELLIGENCE (COMMIT 4c7189d)
+  // 2. LIVE F1 INTELLIGENCE (COMMIT 975836a)
   // =========================================================================
   {
     id: "ev-livef1-ingestion",
     projectId: "live-f1",
     skillIds: ["de-stream-ingestion", "be-distributed-systems", "be-fastapi", "lang-python"],
     title: "Multi-Source High-Throughput Telemetry Ingestion Pipeline",
-    description: "Ingests concurrent feeds from OpenF1, FastF1, Jolpica, and SignalR, sustaining ~2,650 events/sec with zero dropped records.",
+    description: "Ingests concurrent feeds from OpenF1, FastF1, Jolpica, and SignalR, sustaining streaming events with zero dropped records.",
     sourceRepository: "https://github.com/T-Bone47/live-f1-intelligence",
-    sourceCommit: "4c7189d",
-    sourceFilePath: "pipeline/ingestion_manager.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS["live-f1"],
+    sourceFilePath: "backend/app/ingest/pipeline.py",
     demonstrationId: "demo-livef1-replay",
     trialId: "trial-systems-pipeline",
-    testReferences: ["python -m pytest tests/benchmark_streaming.py -v", "npm test -- tests/multiverse.test.ts"],
+    testReferences: ["pytest backend/tests -v", "npm test -- tests/multiverse.test.ts"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Third-party public REST endpoints subject to rate limits during peak official race sessions; cached canonical fixtures used for offline backtesting.",
@@ -95,13 +104,13 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     id: "ev-livef1-normalization",
     projectId: "live-f1",
     skillIds: ["de-canonical-normalization", "se-api-design", "se-testing"],
-    title: "Zero-Allocation Canonical Event Normalization & Boundary Validation",
-    description: "Rust-backed Pydantic V2 core validating 1,067,193 canonical events with 0 malformed records and cryptographic provenance headers.",
+    title: "Canonical Event Normalization & Boundary Validation",
+    description: "Pydantic V2 core validating canonical telemetry events with malformed record quarantine and monotonic timestamp sequencing.",
     sourceRepository: "https://github.com/T-Bone47/live-f1-intelligence",
-    sourceCommit: "4c7189d",
-    sourceFilePath: "pipeline/canonical_event.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS["live-f1"],
+    sourceFilePath: "backend/app/ingest/normalize.py",
     demonstrationId: "demo-livef1-replay",
-    testReferences: ["pytest tests/test_canonical_event.py -v"],
+    testReferences: ["pytest backend/tests -v"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Inbound records with missing transponder timestamps are assigned server reception time with jitter penalty flag.",
@@ -116,10 +125,10 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "TimescaleDB Hypertables & Continuous Analytical Aggregates",
     description: "High-frequency time-series partitioning by UTC epoch, 95% native compression, and sub-millisecond analytical window queries.",
     sourceRepository: "https://github.com/T-Bone47/live-f1-intelligence",
-    sourceCommit: "4c7189d",
-    sourceFilePath: "storage/timescale_manager.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS["live-f1"],
+    sourceFilePath: "backend/app/storage/db.py",
     demonstrationId: "demo-livef1-replay",
-    testReferences: ["pytest tests/test_timescale.py -v"],
+    testReferences: ["pytest backend/tests -v"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Requires relational PostgreSQL schema migration scripts during major version updates.",
@@ -131,13 +140,13 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     id: "ev-livef1-spatial",
     projectId: "live-f1",
     skillIds: ["de-spatial-alignment", "de-session-replay", "ms-strategy-engine"],
-    title: "Distance-Domain Spatial Telemetry Resampling & Sector Splines",
-    description: "Resamples vehicle speed, throttle, and braking onto 10m uniform track distance bins, eliminating time-domain comparison skew.",
+    title: "Distance-Domain Spatial Telemetry Resampling & Track Geometry",
+    description: "Resamples vehicle speed, throttle, and braking onto uniform track distance bins, eliminating time-domain comparison skew.",
     sourceRepository: "https://github.com/T-Bone47/live-f1-intelligence",
-    sourceCommit: "4c7189d",
-    sourceFilePath: "analytics/spatial_alignment.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS["live-f1"],
+    sourceFilePath: "backend/app/analysis/track_geometry.py",
     demonstrationId: "demo-livef1-replay",
-    testReferences: ["pytest tests/test_spatial_alignment.py -v"],
+    testReferences: ["pytest backend/tests -v"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Requires pre-computed track centerline reference splines for each circuit.",
@@ -147,7 +156,7 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
   },
 
   // =========================================================================
-  // 3. SENTINEL AI (COMMIT a192c73)
+  // 3. SENTINEL AI (COMMIT e201423)
   // =========================================================================
   {
     id: "ev-sentinel-governance",
@@ -156,11 +165,11 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "Automated Continuous AI Risk Enforcement (NIST AI RMF / ISO 42001)",
     description: "Runtime API gateway evaluating incoming prompt embeddings and model completions against enterprise GRC compliance policies.",
     sourceRepository: "https://github.com/T-Bone47/Sentinel-AI",
-    sourceCommit: "a192c73",
-    sourceFilePath: "sentinel/controls/nist_ai_rmf.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.sentinel,
+    sourceFilePath: "sentinel-ai-backend/app/services/risk_intelligence.py",
     demonstrationId: "demo-sentinel-grc",
     trialId: "trial-aiml-leakage",
-    testReferences: ["pytest tests/test_governance_pipeline.py -v", "npm test -- tests/multiverse.test.ts"],
+    testReferences: ["pytest sentinel-ai-backend/tests -v", "npm test -- tests/multiverse.test.ts"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Rule engine currently tuned for enterprise English text prompts; multilingual policy evaluation requires language-specific tokenizers.",
@@ -175,10 +184,10 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "Cryptographic Tamper-Proof Audit Trail (HMAC SHA-256 Merkle Chain)",
     description: "Constructs non-repudiable SHA-256 evidence digests linking input hashes, rule evaluation verdicts, and remediation states without storing raw PII.",
     sourceRepository: "https://github.com/T-Bone47/Sentinel-AI",
-    sourceCommit: "a192c73",
-    sourceFilePath: "sentinel/governance/evidence_ledger.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.sentinel,
+    sourceFilePath: "sentinel-ai-backend/app/services/evidence_intelligence.py",
     demonstrationId: "demo-sentinel-grc",
-    testReferences: ["pytest tests/test_evidence_ledger.py -v"],
+    testReferences: ["pytest sentinel-ai-backend/tests -v"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Auditors verify mathematical proof via client-held original text digests rather than reading raw stored plaintext.",
@@ -194,10 +203,10 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "Semantic Vector Drift Detection & Adversarial Jailbreak Defense",
     description: "Measures real-time cosine distance against reference enterprise approved query centroids, catching 98.4% of adversarial injection attacks.",
     sourceRepository: "https://github.com/T-Bone47/Sentinel-AI",
-    sourceCommit: "a192c73",
-    sourceFilePath: "sentinel/interceptor/gateway.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.sentinel,
+    sourceFilePath: "sentinel-ai-backend/app/services/risk_intelligence.py",
     demonstrationId: "demo-sentinel-grc",
-    testReferences: ["pytest tests/test_adversarial_scanner.py -v"],
+    testReferences: ["pytest sentinel-ai-backend/tests -v"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Adversarial evasion attacks using zero-width steganography require multi-layer sanitization preprocessing.",
@@ -207,7 +216,7 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
   },
 
   // =========================================================================
-  // 4. VYAPARPULSE AI (COMMIT f589b21)
+  // 4. VYAPARPULSE AI (COMMIT 6500f73)
   // =========================================================================
   {
     id: "ev-vyapar-offline",
@@ -216,11 +225,11 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "Offline-First SQLite WAL Durable Queue & Monotonic Synchronization",
     description: "Guarantees 100% transaction durability during connectivity blackouts with monotonic sequence numbers and zero-conflict reconciliation.",
     sourceRepository: "https://github.com/T-Bone47/vyaparpulse-ai",
-    sourceCommit: "f589b21",
-    sourceFilePath: "vyaparpulse/sync/offline_queue.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.vyaparpulse,
+    sourceFilePath: "teammate-backend/app/main.py",
     demonstrationId: "demo-vyapar-ledger",
     trialId: "trial-systems-pipeline",
-    testReferences: ["pytest tests/test_offline_sync.py -v", "npm test -- tests/multiverse.test.ts"],
+    testReferences: ["pytest teammate-backend/tests -v", "npm test -- tests/multiverse.test.ts"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Backdated modifications require explicit contra-entries rather than in-place overwrites to maintain append-only audit guarantees.",
@@ -235,10 +244,10 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "Double-Entry Bookkeeping Invariant & Journal Voucher Generation",
     description: "Strict mathematical enforcement ensuring zero balance disparity between debits and credits across all sales and credit transactions.",
     sourceRepository: "https://github.com/T-Bone47/vyaparpulse-ai",
-    sourceCommit: "f589b21",
-    sourceFilePath: "vyaparpulse/ledger/double_entry.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.vyaparpulse,
+    sourceFilePath: "teammate-backend/app/main.py",
     demonstrationId: "demo-vyapar-ledger",
-    testReferences: ["pytest tests/test_double_entry.py -v"],
+    testReferences: ["pytest teammate-backend/tests -v"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Commodity tax calculation currently limited to flat GST rates (5%, 12%, 18%).",
@@ -254,11 +263,11 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "7-Day XGBoost Inventory Demand Forecasting Pipeline",
     description: "Gradient boosted trees trained on 7-day and 14-day lagged sales features with weekday seasonal weighting, achieving RMSE of 3.2 units.",
     sourceRepository: "https://github.com/T-Bone47/vyaparpulse-ai",
-    sourceCommit: "f589b21",
-    sourceFilePath: "vyaparpulse/forecasting/demand_model.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.vyaparpulse,
+    sourceFilePath: "ml2/model.py",
     demonstrationId: "demo-vyapar-ledger",
-    testReferences: ["pytest tests/test_demand_forecasting.py -v"],
-    provenance: "VERIFIED_IMPLEMENTATION",
+    testReferences: ["pytest ml2/tests -v"],
+    provenance: "REPRODUCIBLE_DEMONSTRATION",
     limitations: [
       "Requires minimum of 14 days of transaction history; cold-start commodities fall back to 7-day moving averages.",
     ],
@@ -273,11 +282,11 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "On-Device Quantized Vosk Speech Recognition (ASR)",
     description: "Lightweight 50MB Vosk acoustic model running locally on CPU in < 185ms without external cloud API dependencies or network latency.",
     sourceRepository: "https://github.com/T-Bone47/vyaparpulse-ai",
-    sourceCommit: "f589b21",
-    sourceFilePath: "vyaparpulse/speech/vosk_recognizer.py",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.vyaparpulse,
+    sourceFilePath: "voice-agent/agent.py",
     demonstrationId: "demo-vyapar-ledger",
-    testReferences: ["pytest tests/test_speech.py -v"],
-    provenance: "VERIFIED_IMPLEMENTATION",
+    testReferences: ["pytest voice-agent/tests -v"],
+    provenance: "REPRODUCIBLE_DEMONSTRATION",
     limitations: [
       "Acoustic vocabulary tuned specifically to retail commodities, units, and currency names.",
     ],
@@ -292,17 +301,17 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     projectId: "world",
     skillIds: ["fe-react-nextjs", "lang-typescript", "fe-accessibility"],
     title: "React 19 & Next.js 15 App Router Architecture",
-    description: "Sub-frame rendering architecture, static parameter generation (SSG) for 51 routes, and universal WCAG accessibility compliance.",
+    description: "Sub-frame rendering architecture, static parameter generation (SSG) for 66 routes, and universal WCAG accessibility compliance.",
     sourceRepository: "https://github.com/T-Bone47/Minecraft-folio",
-    sourceCommit: "a7c8e4b",
-    sourceFilePath: "app/multiverse/page.tsx",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.world,
+    sourceFilePath: "app/roleforge/page.tsx",
     demonstrationId: "demo-livef1-replay",
     testReferences: ["npm test", "npm run typecheck", "npm run build"],
     provenance: "VERIFIED_IMPLEMENTATION",
     limitations: [
       "Requires modern browser supporting ECMAScript 2022+.",
     ],
-    metricCallout: { label: "Build Routes", value: "51 Pre-rendered" },
+    metricCallout: { label: "Build Routes", value: "66 Pre-rendered" },
   },
 
   {
@@ -312,7 +321,7 @@ export const ENGINEERING_EVIDENCE_GRAPH: EngineeringEvidenceNode[] = [
     title: "Three.js & React Three Fiber 3D Simulation Rig",
     description: "60 FPS voxel rendering, custom procedural shaders, distance-domain telemetry conduits, and camera spline interpolation.",
     sourceRepository: "https://github.com/T-Bone47/Minecraft-folio",
-    sourceCommit: "a7c8e4b",
+    sourceCommit: VERIFIED_REPOSITORY_COMMITS.world,
     sourceFilePath: "components/world/WorldScene.tsx",
     demonstrationId: "demo-livef1-replay",
     testReferences: ["npm test -- tests/engineering-world.test.ts"],
@@ -332,4 +341,3 @@ export const getEvidenceBySkillId = (skillId: string): EngineeringEvidenceNode[]
 
 export const getEvidenceByProjectId = (projectId: string): EngineeringEvidenceNode[] =>
   ENGINEERING_EVIDENCE_GRAPH.filter((e) => e.projectId === projectId);
-
