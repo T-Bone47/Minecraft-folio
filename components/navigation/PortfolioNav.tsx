@@ -66,6 +66,8 @@ export const PortfolioNav: React.FC = () => {
 
   // More menu items
   const moreMenuItems = [
+    { href: "/dossier", label: "HIRING DOSSIER", icon: FileText, desc: "1-Click hiring committee 2-page briefing (PDF)" },
+    { href: "/silicon", label: "VOXEL SILICON", icon: Cpu, desc: "Redstone-to-silicon logic gates & vehicle ALU" },
     { href: "/proofcast", label: "PROOFCAST", icon: Film, desc: "Interactive 60s engineering documentary" },
     { href: "/forge", label: "SYSTEMS FORGE", icon: Cpu, desc: "Executable software architecture builder" },
     { href: "/observatory", label: "LIVE PULSE", icon: Activity, desc: "5-repository GitHub observatory" },
@@ -175,7 +177,15 @@ export const PortfolioNav: React.FC = () => {
                   );
                 })}
 
-                <div className="pt-1.5 border-t border-zinc-800">
+                <div className="pt-1.5 border-t border-zinc-800 space-y-1">
+                  <Link
+                    href="/dossier"
+                    onClick={() => setMoreOpen(false)}
+                    className="flex items-center gap-2 p-2 border border-yellow-800/60 hover:bg-yellow-950/60 transition-colors text-yellow-200 hover:text-white"
+                  >
+                    <FileText className="w-4 h-4 text-yellow-400 shrink-0" />
+                    <span className="font-pixel text-[11px]">1-CLICK HIRING DOSSIER (PDF)</span>
+                  </Link>
                   <a
                     href="/Asish_Oliver_M_Resume.pdf"
                     download="Asish_Oliver_M_Resume.pdf"

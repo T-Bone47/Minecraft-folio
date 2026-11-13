@@ -102,6 +102,13 @@ export default function RecruiterPage() {
 
           {/* Recruiter Primary Actions */}
           <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-[#121214]">
+            <Link
+              href="/dossier"
+              className="voxel-btn voxel-btn-gold px-4 py-2 text-xs font-pixel flex items-center gap-2 shadow-[0_0_16px_rgba(234,179,8,0.35)]"
+            >
+              <FileText className="w-4 h-4 text-black" />
+              <span>EXPORT HIRING COMMITTEE DOSSIER (2-PAGE PDF)</span>
+            </Link>
             <a
               href="/Asish_Oliver_M_Resume.pdf"
               download="Asish_Oliver_M_Resume.pdf"
