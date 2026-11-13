@@ -71,3 +71,4 @@ components/ui/voxel/
 - **Props:**
   - `variant`: `"telemetry" | "terminal" | "amber"`
 - **Key Behavior:** Flat black or dark slate inset display with subtle CRT scanline gradient overlay, preserving maximum font legibility for high-frequency numerical data.
+

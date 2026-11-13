@@ -50,3 +50,4 @@ export function VoxelTabs<T extends string = string>({
     </div>
   );
 }
+

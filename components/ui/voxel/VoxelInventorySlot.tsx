@@ -52,3 +52,4 @@ export const VoxelInventorySlot: React.FC<VoxelInventorySlotProps> = ({
     </button>
   );
 };
+

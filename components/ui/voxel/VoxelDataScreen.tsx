@@ -16,3 +16,4 @@ export const VoxelDataScreen: React.FC<VoxelDataScreenProps> = ({
     </div>
   );
 };
+

@@ -57,3 +57,4 @@ The Frontier Voxel Design System eliminates all three hazards by engineering **8
 - **Visual Description:** High-strength woven carbon-fiber chassis pattern (`#191B20`) with alternating micro-squares (`#22262E`, `#13151A`).
 - **Resolution:** 8x8 pixel repeat pattern.
 - **Primary Use:** Motorsport chassis views, F1 lap analysis panels, command decks.
+

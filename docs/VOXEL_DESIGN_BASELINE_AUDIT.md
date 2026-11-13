@@ -86,3 +86,4 @@ Every page, terminal, modal, card, and button must feel like an authentic indust
    - Homepage (`/`) & Canonical Work Archive (`/work`)
    - Systems Forge (`/forge`), ProofCast (`/proofcast`), Live Pulse (`/observatory`)
    - 3D In-World HUD alignment
+

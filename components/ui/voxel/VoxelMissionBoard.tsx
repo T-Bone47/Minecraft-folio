@@ -86,3 +86,4 @@ export const VoxelMissionBoard: React.FC<VoxelMissionBoardProps> = ({
     </div>
   );
 };
+

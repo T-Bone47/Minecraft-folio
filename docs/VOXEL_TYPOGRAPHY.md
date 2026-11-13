@@ -40,3 +40,4 @@ When long paragraphs must be displayed within heavily textured panels, the text 
 - `.voxel-panel-inset`: Deepslate inner surface with subtle dark inner shadow.
 
 This guarantees **WCAG 2.2 AA compliance (>= 4.5:1 contrast)** at all viewport sizes.
+

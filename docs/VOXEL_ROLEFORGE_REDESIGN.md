@@ -32,3 +32,4 @@ Frontier RoleForge compiles tailored engineering missions and evidence briefs fr
      - Track 3: AI/ML Leakage (temporal lookahead, synthetic baseline overfitting).
 3. **Engineering Evidence Passport**:
    - Hard-edged pixel-bordered document displaying cryptographic Git commit SHAs, reproducible test verification commands, and formal rubric scores.
+

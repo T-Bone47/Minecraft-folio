@@ -56,3 +56,4 @@ Authentic Minecraft mechanical surfaces use directional light reflection (top/le
 | `--vx-font-silkscreen` | `'Silkscreen', monospace` | Compact tags, coordinate numbers, pinouts |
 | `--vx-grid-base` | `4px` | Fundamental micro-grid unit |
 | `--vx-grid-slot` | `40px` | Standard inventory socket dimension (36px + 4px border) |
+

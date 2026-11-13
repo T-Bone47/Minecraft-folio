@@ -52,3 +52,4 @@ export const VoxelWorkbench: React.FC<VoxelWorkbenchProps> = ({
     </div>
   );
 };
+

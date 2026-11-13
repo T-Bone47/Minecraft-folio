@@ -89,3 +89,4 @@ The design system provides a complete primitive suite designed for accessible, k
 - **WCAG 2.2 Level AA Compliance**: All text elements maintain a minimum 4.5:1 contrast ratio against their immediate background. High-density data readouts use dedicated `.voxel-data-screen` surfaces rather than noisy raw textures.
 - **Keyboard Navigation**: All interactive elements (`VoxelButton`, `VoxelTabs`, `VoxelInventorySlot`) have prominent 2px focus rings (`focus-visible:ring-2 focus-visible:ring-amber-400`).
 - **60 FPS Performance**: Layout shifts are strictly zero (`CLS: 0.00`). Button active depression uses hardware-accelerated CSS `transform` instead of margin/padding mutations.
+

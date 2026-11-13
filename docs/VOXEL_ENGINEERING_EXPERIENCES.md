@@ -35,3 +35,4 @@ The Engineering Proof Inspector provides exhaustive, unassailable evidence acros
 4. **Layer 4: Test Proofs & Benchmarks**: Real measured execution times, automated test results, memory footprints.
 5. **Layer 5: Trade-offs & Alternatives**: Chosen approaches with technical justification vs alternatives rejected.
 6. **Layer 6: Audited Source Files**: Verified Git commits, line-numbered source file links, and local verification commands.
+
