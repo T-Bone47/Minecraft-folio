@@ -5,6 +5,7 @@ import { projects } from "@/data/projects";
 import { canonicalUrl } from "@/lib/siteMetadata";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
+import { RedstoneStatusBar } from "@/components/navigation/RedstoneStatusBar";
 import { EngineeringIndex } from "@/components/work/EngineeringIndex";
 import {
   Cpu,
@@ -32,20 +33,13 @@ export default function WorkPage() {
       <PortfolioNav />
 
       {/* Redstone Status Bar */}
-      <div className="bg-[#18181c] border-b-2 border-[#101012] px-3 sm:px-4 py-1.5 font-mono text-[10px] text-zinc-400 flex flex-wrap items-center justify-between gap-2 shadow-inner">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 bg-emerald-400 border border-emerald-200 shadow-[0_0_6px_#34d399] shrink-0" />
-          <span className="font-pixel text-[9px] text-white mc-text-shadow">SYSTEMS INDEXED: {projects.length} / {projects.length}</span>
-          <span className="text-zinc-600">|</span>
-          <span className="text-zinc-300">ALL CANONICAL ENGINEERING SYSTEMS DOCUMENTED</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <Link href="/world" className="font-pixel text-[9px] text-yellow-400 hover:text-white mc-text-shadow flex items-center gap-1">
-            <span>ENTER 3D CAMPUS</span>
-            <ChevronRight className="w-3 h-3" />
-          </Link>
-        </div>
-      </div>
+      <RedstoneStatusBar
+        status={`SYSTEMS INDEXED: ${projects.length} / ${projects.length}`}
+        location="ALL CANONICAL ENGINEERING SYSTEMS DOCUMENTED"
+        badgeText="WORLD"
+        badgeLabel="ENTER 3D CAMPUS"
+        badgeHref="/world"
+      />
 
       <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-12">
         {/* Page Header as Minecraft Oak / Iron Banner */}

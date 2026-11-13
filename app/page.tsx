@@ -5,6 +5,7 @@ import { projects } from "@/data/projects";
 import { experience, education } from "@/data/experience";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
+import { RedstoneStatusBar } from "@/components/navigation/RedstoneStatusBar";
 import {
   Terminal,
   Activity,
@@ -78,130 +79,145 @@ export default function HomePage() {
       {/* Global Navigation Styled as Minecraft Hotbar */}
       <PortfolioNav />
 
-      {/* 1. MINECRAFT SYSTEM BOOT / REDSTONE STATUS BAR */}
-      <div className="bg-[#18181c] border-b-2 border-[#101012] px-3 sm:px-4 py-1.5 font-mono text-[10px] text-zinc-400 flex flex-wrap items-center justify-between gap-2 shadow-inner">
-        <div className="flex items-center gap-2">
-          {/* Animated Redstone Lamp Pixel */}
-          <span className="w-2 h-2 bg-emerald-400 border border-emerald-200 shadow-[0_0_6px_#34d399] shrink-0" />
-          <span className="font-pixel text-[9px] text-white mc-text-shadow">SYSTEM BOOT: COMPLETE</span>
-          <span className="text-zinc-600">|</span>
-          <span className="text-zinc-300">TRICHY, TAMIL NADU, INDIA [10.7905° N, 78.7047° E]</span>
-        </div>
-        <div className="hidden sm:flex items-center gap-3">
-          <span>PROJECT EVIDENCE</span>
-          <span className="font-pixel text-[9px] text-emerald-400 mc-text-shadow">AVAILABLE TO EXPLORE</span>
-        </div>
-      </div>
+      {/* 1. MINECRAFT SYSTEM BOOT / REDSTONE STATUS BAR — Resilient 1-row telemetry */}
+      <RedstoneStatusBar
+        status="SYSTEM BOOT: OK"
+        location="TRICHY, INDIA [10.7905° N, 78.7047° E]"
+        badgeText="ENGINEERING PROOF"
+        badgeLabel="VERIFIED & LIVE"
+      />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-14 space-y-16 sm:space-y-24">
         {/* 2. HERO SECTION: AUTHENTIC MINECRAFT MOTORSPORT TERMINAL */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Hero Left: Identity & Minecraft Typography (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
-            {/* Minecraft Item Badge */}
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#ff8000]/20 border-2 border-[#ff8000] shadow-[2px_2px_0_#000] text-[10px] font-pixel text-[#ff8000] mc-text-shadow uppercase">
-              <span>🏎️</span>
-              <span>MOTORSPORT SOFTWARE & AI SYSTEMS</span>
-            </div>
-
-            {/* Giant Minecraft Pixel Title */}
+            {/* Giant Minecraft Pixel Title — Unbroken single-line typography */}
             <div>
-              <h1 className="font-pixel text-3xl sm:text-5xl md:text-6xl text-white mc-text-shadow tracking-wider uppercase leading-none drop-shadow-[4px_4px_0_#000000]">
+              <h1 className="font-pixel text-xl sm:text-2xl md:text-3xl lg:text-[32px] xl:text-[38px] text-white mc-text-shadow uppercase tracking-tight leading-tight whitespace-nowrap drop-shadow-[3px_3px_0_#000000]">
                 {siteIdentity.name}
               </h1>
 
-              <div className="font-pixel text-xs sm:text-sm text-[#00d2be] mc-text-shadow tracking-wide mt-3 uppercase flex items-center gap-2">
+              <div className="font-pixel text-[11px] sm:text-xs text-[#00d2be] mc-text-shadow tracking-wide mt-3 uppercase flex items-center gap-2">
+                <Gauge className="w-3.5 h-3.5 text-[#ff8000] shrink-0" />
                 <span>MOTORSPORT SOFTWARE</span>
-                <span className="text-yellow-400">•</span>
+                <span className="text-zinc-500">•</span>
                 <span>AI / ML SYSTEMS</span>
               </div>
             </div>
 
             {/* Legible Technical Bio */}
-            <p className="text-xs sm:text-sm text-zinc-300 font-mono leading-relaxed max-w-xl bg-black/40 p-3 border-l-2 border-[#ff8000]">
+            <p className="text-xs sm:text-sm text-zinc-300 font-mono leading-relaxed max-w-xl bg-black/40 p-3.5 border-l-2 border-[#ff8000] shadow-sm">
               {siteIdentity.supportingStatement} Specializing in real-time telemetry pipelines, physics-based vehicle lap simulation, predictive race strategy, and machine learning models for high-consequence engineering decisions.
             </p>
 
-            {/* Minecraft 3D Beveled Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Link
-                href="/world"
-                className="mc-btn-gold px-5 py-3 text-xs flex items-center gap-2.5 shadow-[0_0_16px_rgba(255,128,0,0.5)]"
-              >
-                <Box className="w-4 h-4 text-white shrink-0" />
-                <span>ENTER 3D WORLD</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+            {/* Structured CTAs — Intentional 2-Tier Hierarchy */}
+            <div className="space-y-2.5 pt-2">
+              {/* Primary Exploration Row */}
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/world"
+                  className="mc-btn-gold h-10 px-5 text-xs flex items-center gap-2.5 shadow-[0_0_16px_rgba(255,128,0,0.4)] shrink-0"
+                >
+                  <Box className="w-4 h-4 text-white shrink-0" />
+                  <span>ENTER 3D WORLD</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
 
-              <Link
-                href="/work"
-                className="mc-btn-stone px-4 py-3 text-xs flex items-center gap-2"
-              >
-                <Cpu className="w-4 h-4 text-sky-400 shrink-0" />
-                <span>CANONICAL SYSTEMS</span>
-              </Link>
+                <Link
+                  href="/work"
+                  className="mc-btn-stone h-10 px-4 text-xs flex items-center gap-2 shrink-0 text-yellow-300 hover:text-white"
+                >
+                  <Cpu className="w-4 h-4 text-sky-400 shrink-0" />
+                  <span>CANONICAL SYSTEMS</span>
+                </Link>
+              </div>
 
-              <Link
-                href="/recruiter"
-                className="mc-btn-emerald px-3.5 py-3 text-xs flex items-center gap-1.5"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-emerald-200 shrink-0" />
-                <span>RECRUITER (30s)</span>
-              </Link>
+              {/* Fast-Track & Recruiter Credentials Row */}
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/recruiter"
+                  className="mc-btn-emerald h-9 px-3.5 text-xs flex items-center gap-2 shrink-0"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-200 shrink-0" />
+                  <span>RECRUITER PASS (30s)</span>
+                </Link>
 
-              <a
-                href="/Asish_Oliver_M_Resume.pdf"
-                download="Asish_Oliver_M_Resume.pdf"
-                className="mc-btn px-3.5 py-3 text-xs flex items-center gap-1.5 text-sky-300 hover:text-white !bg-sky-950/70 border-sky-500/80"
-                title="Download Asish Oliver M Resume (PDF)"
-              >
-                <FileText className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                <span>RESUME</span>
-              </a>
+                <a
+                  href="/Asish_Oliver_M_Resume.pdf"
+                  download="Asish_Oliver_M_Resume.pdf"
+                  className="mc-btn h-9 px-3.5 text-xs flex items-center gap-2 shrink-0 text-sky-200 hover:text-white !bg-sky-950/80 border-sky-500/80"
+                  title="Download Asish Oliver M Resume (PDF)"
+                >
+                  <FileText className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                  <span>DOWNLOAD RESUME (PDF)</span>
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Hero Right: Minecraft Redstone Instrumentation Telemetry Box (5 cols) */}
-          <div className="lg:col-span-5 mc-gui-box p-4 sm:p-5 space-y-3 font-mono">
+          {/* Hero Right: Redstone Instrumentation Telemetry Console (5 cols) — Integrated, No Card-in-Card */}
+          <div className="lg:col-span-5 mc-gui-box p-5 space-y-4 font-mono shadow-2xl">
             {/* Box Header */}
-            <div className="flex items-center justify-between border-b-2 border-[#121214] pb-2">
-              <span className="font-pixel text-[10px] text-yellow-400 mc-text-shadow flex items-center gap-1.5">
-                <Gauge className="w-3.5 h-3.5 text-[#ff8000]" />
+            <div className="flex items-center justify-between border-b-2 border-[#121214] pb-2.5">
+              <span className="font-pixel text-[10px] text-yellow-400 mc-text-shadow flex items-center gap-2">
+                <Gauge className="w-4 h-4 text-[#ff8000]" />
                 <span>PLAYABLE ENGINEERING</span>
               </span>
-              <span className="font-pixel text-[8px] text-amber-300 bg-amber-950/80 px-1.5 py-0.5 border border-amber-700 mc-text-shadow">
-                LOCAL SIMULATIONS
+              <span className="font-pixel text-[8px] text-emerald-300 bg-emerald-950/80 px-2 py-0.5 border border-emerald-700 mc-text-shadow">
+                60 HZ LIVE
               </span>
             </div>
 
-            {/* Inset Slot: Speed Trap & Engine RPM */}
-            <div className="grid grid-cols-2 gap-2">
-              <div className="mc-slot-box p-2.5">
-                <div className="text-[9px] font-pixel text-zinc-400 uppercase">PHYSICS STEP</div>
+            {/* Integrated Metrics Surface */}
+            <div className="grid grid-cols-2 gap-3 bg-[#121214] border border-[#27272a] p-3 shadow-inner">
+              <div>
+                <div className="text-[9px] font-pixel text-zinc-400 uppercase">PHYSICS ENGINE</div>
                 <div className="font-pixel text-base sm:text-lg text-sky-400 mc-text-shadow mt-1">
                   60 HZ
                 </div>
+                <div className="text-[10px] text-zinc-500 font-mono mt-0.5">Quasi-steady solver</div>
               </div>
-              <div className="mc-slot-box p-2.5">
-                <div className="text-[9px] font-pixel text-zinc-400 uppercase">FLAGSHIP MISSIONS</div>
+              <div>
+                <div className="text-[9px] font-pixel text-zinc-400 uppercase">EXPERIENCES</div>
                 <div className="font-pixel text-base sm:text-lg text-white mc-text-shadow mt-1">
-                  3 EXPERIENCES
+                  3 PLAYABLE
+                </div>
+                <div className="text-[10px] text-zinc-500 font-mono mt-0.5">Motorsport · ML · Telemetry</div>
+              </div>
+            </div>
+
+            {/* Interactive Scenarios Directory */}
+            <div className="space-y-2 text-xs font-mono">
+              <div className="flex items-start gap-2.5 p-2 bg-black/30 border border-zinc-800/80">
+                <span className="w-2 h-2 rounded-full bg-[#ff8000] shadow-[0_0_6px_#ff8000] mt-1.5 shrink-0" />
+                <div>
+                  <div className="font-pixel text-[9px] text-white mc-text-shadow">4-Checkpoint Lap Simulator</div>
+                  <div className="text-[11px] text-zinc-400">Timed circuit run, friction-circle limits, recorded replay</div>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5 p-2 bg-black/30 border border-zinc-800/80">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] mt-1.5 shrink-0" />
+                <div>
+                  <div className="font-pixel text-[9px] text-white mc-text-shadow">7 Pipeline Fault Diagnostics</div>
+                  <div className="text-[11px] text-zinc-400">Stream desync, CRC errors, live packet recovery</div>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5 p-2 bg-black/30 border border-zinc-800/80">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#22d3ee] mt-1.5 shrink-0" />
+                <div>
+                  <div className="font-pixel text-[9px] text-white mc-text-shadow">Held-Out ML Evaluation</div>
+                  <div className="text-[11px] text-zinc-400">16,228 player embeddings &amp; offline speech parsing</div>
                 </div>
               </div>
             </div>
 
-            <div className="mc-slot-box p-3 space-y-3 text-xs font-mono text-zinc-200">
-              <p><strong className="text-white">4 ordered checkpoints</strong> · timed lap and recorded replay</p>
-              <p><strong className="text-white">7 pipeline faults</strong> · diagnosis, repair and validation</p>
-              <p><strong className="text-white">Held-out ML evaluation</strong> · seeded synthetic data and baselines</p>
-            </div>
-
             {/* World Navigation Quick Link */}
-            <div className="mc-slot-box p-2 flex items-center justify-between text-[10px]">
-              <span className="text-zinc-400">CAMPUS: 6 FACILITIES</span>
-              <Link href="/world" className="text-[#ff8000] hover:text-white font-pixel text-[9px] flex items-center gap-1 mc-text-shadow">
-                <span>VIEW WORLD MAP</span>
-                <ChevronRight className="w-3 h-3" />
+            <div className="pt-2 border-t border-zinc-800 flex items-center justify-between text-[10px]">
+              <span className="text-zinc-400 font-mono">6 INTERACTIVE FACILITIES</span>
+              <Link href="/world" className="text-[#ff8000] hover:text-white font-pixel text-[9px] flex items-center gap-1 mc-text-shadow transition-colors">
+                <span>LAUNCH 3D WORLD</span>
+                <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -243,30 +259,30 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {projects.map((proj, idx) => (
+            {projects.map((proj) => (
               <div
                 key={proj.id}
                 className="mc-gui-box p-6 sm:p-7 flex flex-col justify-between hover:border-[#ff8000] transition-all group"
               >
                 <div className="space-y-3">
                   {/* Card Header */}
-                  <div className="flex items-center justify-between text-[10px] font-mono border-b border-zinc-800 pb-2">
-                    <span className="font-pixel text-[9px] text-[#ff8000] mc-text-shadow">
-                      SYS-0{idx + 1} {"//"} {proj.facility}
+                  <div className="flex items-center justify-between text-xs font-mono border-b border-zinc-800 pb-2">
+                    <span className="font-pixel text-[11px] text-[#ff8000] mc-text-shadow">
+                      SYSTEM SPEC // {proj.facility}
                     </span>
-                    <span className="font-pixel text-[8px] text-emerald-400 mc-text-shadow flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3" />
+                    <span className="font-pixel text-[11px] text-emerald-400 mc-text-shadow flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
                       {proj.status.toUpperCase()}
                     </span>
                   </div>
 
                   {/* Project Title in Minecraft Pixel Typography */}
-                  <h3 className="font-pixel text-base sm:text-lg text-white group-hover:text-yellow-300 mc-text-shadow transition-colors">
+                  <h3 className="font-pixel text-base sm:text-lg text-white group-hover:text-yellow-300 mc-text-shadow transition-colors text-balance">
                     {proj.title}
                   </h3>
 
                   {proj.isGame && (
-                    <div className="text-[8px] font-pixel text-amber-300 bg-amber-950/80 px-2 py-0.5 border border-amber-700 mc-text-shadow inline-block">
+                    <div className="text-[11px] font-pixel text-amber-300 bg-amber-950/80 px-2 py-0.5 border border-amber-700 mc-text-shadow inline-block">
                       F1 STRATEGY SIMULATION GAME [GAME — IN DEV]
                     </div>
                   )}
@@ -279,15 +295,15 @@ export default function HomePage() {
                     {proj.description}
                   </p>
 
-                  {/* Inset Slot Verified Metrics */}
+                  {/* Verified Metrics Surface */}
                   {proj.metrics && proj.metrics.length > 0 && (
-                    <div className="mc-slot-box p-2.5 grid grid-cols-2 gap-2 font-mono my-2">
+                    <div className="bg-[#121214] border border-zinc-800 p-3 grid grid-cols-2 gap-2.5 font-mono my-2 shadow-inner">
                       {proj.metrics.slice(0, 4).map((m, i) => (
                         <div key={i}>
-                          <div className="font-pixel text-[11px] text-white mc-text-shadow">
+                          <div className="font-pixel text-xs text-white mc-text-shadow">
                             {m.value}
                           </div>
-                          <div className="text-[9px] text-zinc-400 uppercase mt-0.5">
+                          <div className="text-[11px] text-zinc-400 uppercase mt-0.5">
                             {m.label}
                           </div>
                         </div>
@@ -300,7 +316,7 @@ export default function HomePage() {
                     {proj.technologies.slice(0, 6).map((tech) => (
                       <span
                         key={tech}
-                        className="mc-slot-box px-2 py-0.5 text-[9px] font-mono text-zinc-300"
+                        className="bg-black/50 border border-zinc-700/80 px-2.5 py-1 text-[11px] font-mono text-zinc-200"
                       >
                         {tech}
                       </span>
@@ -308,10 +324,10 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Minecraft 3D Action Button */}
+                {/* Action Button */}
                 <Link
                   href={`/work/${proj.slug}`}
-                  className="mc-btn-stone mt-5 w-full py-2.5 px-3 flex items-center justify-between text-yellow-300 hover:text-white"
+                  className="mc-btn-stone mt-5 w-full py-2.5 px-3 flex items-center justify-between text-yellow-300 hover:text-white text-xs"
                 >
                   <span>INSPECT 10-STEP CASE STUDY</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -354,11 +370,11 @@ export default function HomePage() {
         {/* 6. AI / MACHINE LEARNING AS AN APPLIED TOOL */}
         <section className="mc-gui-box p-6 sm:p-8 space-y-6">
           <div>
-            <div className="font-pixel text-[10px] uppercase text-emerald-400 mc-text-shadow mb-1 flex items-center gap-2">
+            <div className="font-pixel text-[11px] uppercase text-emerald-400 mc-text-shadow mb-1 flex items-center gap-2">
               <Brain className="w-4 h-4 text-emerald-400" />
-              <span>AI / ML AS AN APPLIED TOOL</span>
+              <span>APPLIED MACHINE LEARNING</span>
             </div>
-            <h2 className="font-pixel text-lg sm:text-xl text-white mc-text-shadow">
+            <h2 className="font-pixel text-lg sm:text-xl text-white mc-text-shadow text-balance">
               Applied Intelligence vs Buzzwords
             </h2>
             <p className="text-xs text-zinc-300 font-mono mt-2 leading-relaxed max-w-2xl">
@@ -368,11 +384,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* EA FC Intelligence */}
-            <div className="mc-slot-box p-4 space-y-2">
-              <div className="font-pixel text-[9px] text-[#00d2be] mc-text-shadow uppercase">
-                01. SPORTS PLAYER EMBEDDINGS
+            <div className="bg-[#121214] border border-zinc-800 p-5 space-y-3 shadow-inner">
+              <div className="font-pixel text-[11px] text-[#00d2be] mc-text-shadow uppercase">
+                SPORTS PLAYER EMBEDDINGS
               </div>
-              <h4 className="font-pixel text-xs text-white mc-text-shadow">
+              <h4 className="font-pixel text-xs sm:text-sm text-white mc-text-shadow">
                 EA FC Intelligence Pipeline
               </h4>
               <p className="text-xs text-zinc-300 font-mono leading-relaxed">
@@ -383,16 +399,16 @@ export default function HomePage() {
                 className="text-xs font-mono text-yellow-400 hover:underline flex items-center gap-1 font-bold pt-1"
               >
                 <span>Read Vector Embedding Architecture</span>
-                <ChevronRight className="w-3 h-3" />
+                <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
             {/* VyaparPulse */}
-            <div className="mc-slot-box p-4 space-y-2">
-              <div className="font-pixel text-[9px] text-amber-400 mc-text-shadow uppercase">
-                02. VOICE PARSING & REVENUE FORECASTS
+            <div className="bg-[#121214] border border-zinc-800 p-5 space-y-3 shadow-inner">
+              <div className="font-pixel text-[11px] text-amber-400 mc-text-shadow uppercase">
+                VOICE PARSING &amp; REVENUE FORECASTS
               </div>
-              <h4 className="font-pixel text-xs text-white mc-text-shadow">
+              <h4 className="font-pixel text-xs sm:text-sm text-white mc-text-shadow">
                 VyaparPulse (Smart India Hackathon)
               </h4>
               <p className="text-xs text-zinc-300 font-mono leading-relaxed">
@@ -402,8 +418,8 @@ export default function HomePage() {
                 href="/work/vyaparpulse"
                 className="text-xs font-mono text-yellow-400 hover:underline flex items-center gap-1 font-bold pt-1"
               >
-                <span>Read Speech & Forecasting Architecture</span>
-                <ChevronRight className="w-3 h-3" />
+                <span>Read Speech &amp; Forecasting Architecture</span>
+                <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>

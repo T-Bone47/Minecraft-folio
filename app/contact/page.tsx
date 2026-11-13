@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { siteIdentity } from "@/data/site";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
+import { RedstoneStatusBar } from "@/components/navigation/RedstoneStatusBar";
 import {
   Mail,
   Github,
@@ -32,17 +33,12 @@ export default function ContactPage() {
       <PortfolioNav />
 
       {/* Redstone Status Bar */}
-      <div className="bg-[#18181c] border-b-2 border-[#101012] px-3 sm:px-4 py-1.5 font-mono text-[10px] text-zinc-400 flex flex-wrap items-center justify-between gap-2 shadow-inner">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 bg-emerald-400 border border-emerald-200 shadow-[0_0_6px_#34d399] shrink-0" />
-          <span className="font-pixel text-[9px] text-white mc-text-shadow">REDSTONE TRANSMITTER: ACTIVE</span>
-          <span className="text-zinc-600">|</span>
-          <span className="text-zinc-300">TRICHY, TAMIL NADU, INDIA [10.7905° N, 78.7047° E]</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="font-pixel text-[9px] text-emerald-400 mc-text-shadow">RESPONSE SLA: &lt; 24 HOURS</span>
-        </div>
-      </div>
+      <RedstoneStatusBar
+        status="REDSTONE TRANSMITTER: ACTIVE"
+        location="TRICHY, TAMIL NADU, INDIA [10.7905° N, 78.7047° E]"
+        badgeText="SLA"
+        badgeLabel="RESPONSE < 24 HOURS"
+      />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-12">
         {/* Header as Minecraft Oak Sign */}

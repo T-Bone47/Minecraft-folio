@@ -14,6 +14,8 @@ import {
   GitBranch,
   FileCheck,
   CheckCircle2,
+  Shield,
+  FileText,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -49,14 +51,14 @@ export default function RoleForgeHubPage() {
               href="/roleforge/defense"
               className="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(220,38,38,0.3)]"
             >
-              <span>🛡️</span>
+              <Shield className="w-4 h-4 text-white" />
               <span>ENTER DEFENSE ARENA 2.0</span>
             </Link>
             <Link
               href="/roleforge/passport"
               className="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(34,211,238,0.3)]"
             >
-              <span>📑</span>
+              <FileText className="w-4 h-4 text-black" />
               <span>EVIDENCE PASSPORT</span>
             </Link>
             <Link

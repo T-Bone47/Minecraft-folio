@@ -44,20 +44,20 @@ export default function ExperiencePage() {
     <div className="min-h-screen bg-[#0d0f12] text-[#f4f4f5] font-sans selection:bg-[#D71D35] selection:text-white">
       <PortfolioNav />
 
-      {/* Status Bar */}
-      <div className="bg-[#18181c] border-b border-[#252830] px-3 sm:px-6 py-2 font-mono text-[11px] text-zinc-400 flex flex-wrap items-center justify-between gap-2 shadow-inner">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] shrink-0" />
-          <span className="font-mono text-zinc-200 font-bold uppercase tracking-wider">
-            FRONTIER DIRECTOR 2.0 // SHOWCASE REGISTRY
+      {/* Status Bar — Resilient single-row layout */}
+      <div className="bg-[#18181c] border-b border-[#252830] px-4 sm:px-6 py-2 font-mono text-[11px] text-zinc-400 flex items-center justify-between gap-3 shadow-inner overflow-hidden">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] shrink-0 animate-pulse" />
+          <span className="font-mono text-zinc-200 font-bold uppercase tracking-wider shrink-0">
+            FRONTIER DIRECTOR 2.0
           </span>
-          <span className="text-zinc-600">|</span>
-          <span className="text-zinc-400">VERIFIED CODE · REPRODUCIBLE BENCHMARKS</span>
+          <span className="text-zinc-600 shrink-0">|</span>
+          <span className="text-zinc-400 truncate">VERIFIED CODE · REPRODUCIBLE BENCHMARKS</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="shrink-0 flex items-center gap-3">
           <Link
             href="/recruiter"
-            className="font-mono text-emerald-400 hover:text-white flex items-center gap-1 transition-colors"
+            className="font-mono text-emerald-400 hover:text-white flex items-center gap-1 transition-colors whitespace-nowrap text-[10px]"
           >
             <span>RECRUITER 30s SUMMARY</span>
             <ChevronRight className="w-3.5 h-3.5" />
