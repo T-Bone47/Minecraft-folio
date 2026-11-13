@@ -118,7 +118,7 @@ export function RaceStrategySimulator() {
               RACE STRATEGY & TIRE DEGRADATION OPTIMIZER
             </h1>
             <p className="text-sm text-zinc-300 mt-1 max-w-3xl leading-relaxed">
-              Stochastic pit-stop decision engine modeling non-linear tire degradation cliffs ($\Delta t_{\text{deg}} = \alpha \cdot l^\beta$), fuel weight burn-off ($-0.033\,\text{s/kg}$), and Virtual Safety Car exploitation across 300 Monte Carlo race iterations.
+              Stochastic pit-stop decision engine modeling non-linear tire degradation cliffs, fuel weight burn-off (-0.033 s/kg), and Virtual Safety Car exploitation across 300 Monte Carlo race iterations.
             </p>
           </div>
 

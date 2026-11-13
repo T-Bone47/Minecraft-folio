@@ -188,7 +188,7 @@ export const CLI_COMMANDS: Record<string, CLICommandDefinition> = {
           `STATISTICAL CORRELATION AGAINST 60Hz VEHICLE MODEL:`,
           `  PEARSON r COEFFICIENT : ${correlation.pearsonR} (Target: >= 0.950) -> PASS`,
           `  R-SQUARED (R²)       : ${correlation.rSquared} (Target: >= 0.900) -> PASS`,
-          `  SPEED MAE            : ${correlation.speedMeanAbsoluteErrorKmh} km/h`,
+          `  APEX CORRELATION     : ${correlation.apexCorrelationPct}%`,
           `  MAX SPEED DELTA      : ${correlation.maxSpeedDeltaKmh} km/h (Braking transition)`,
           "",
           `KEY CORNER APEX SPEEDS (FASTF1 vs SIMULATED):`,
@@ -362,7 +362,7 @@ export const CLI_COMMANDS: Record<string, CLICommandDefinition> = {
           "",
           `FEATURED PROJECTS (AUDITABLE GIT COMMITS):`,
           ...track.featuredProjects.map(p =>
-            `  * ${p.name} [Commit: ${p.commitSha.slice(0, 7)}] (${p.githubPath})`
+            `  * ${p.name} [Commit: ${p.commitSha.slice(0, 7)}] (${p.repoUrl})`
           ),
           "",
           "Tip: Run 'goto /dossier' for printable 2-page PDF formatting and track toggles.",
@@ -386,14 +386,14 @@ export const CLI_COMMANDS: Record<string, CLICommandDefinition> = {
         status: "success",
         output: [
           `[VOXEL REDSTONE-TO-SILICON LOGIC GATE: ${circuit.name.toUpperCase()}]`,
-          `DISCIPLINE          : ${circuit.category.toUpperCase()}`,
-          `BOOLEAN EQUATION    : ${circuit.booleanEquation}`,
-          `REDSTONE EQUIVALENT : ${circuit.redstoneEquivalent}`,
-          `PRODUCTION USE CASE : ${circuit.productionApplication}`,
+          `DOMAIN              : ${circuit.domain}`,
+          `BOOLEAN FORMULA     : ${circuit.booleanFormula}`,
+          `SUBTITLE            : ${circuit.subtitle}`,
+          `LATENCY BUDGET      : ${circuit.latencyBudgetMicroseconds} µs`,
           "",
           `TRUTH TABLE TRACE (${circuit.truthTable.length} COMBINATIONS):`,
           ...circuit.truthTable.slice(0, 4).map(row =>
-            `  Inputs: [${row.inputs.map(i => `${i.label}:${i.value ? "1" : "0"}`).join(", ")}] -> Output: ${row.output ? "TRUE (1)" : "FALSE (0)"}`
+            `  Inputs: [${Object.entries(row.inputs).map(([k, v]) => `${k}:${v ? "1" : "0"}`).join(", ")}] -> Output: [${Object.entries(row.outputs).map(([k, v]) => `${k}:${v ? "1" : "0"}`).join(", ")}]`
           ),
           "",
           "Tip: Run 'goto /silicon' to flip interactive redstone levers and inspect AutoSAR C++ firmware.",

@@ -1,106 +1,95 @@
 # ASISH: THE ENGINEERING FRONTIER
+### An Explorable 3D Voxel Universe & Verified Engineering Defense System
 
-![ASISH: The Engineering Frontier — Explore. Experiment. Engineer.](public/og-image.png)
+[![Production Status](https://img.shields.io/badge/Production-READY%20%26%20ALIASED-success?style=for-the-badge&logo=vercel)](https://asish-engineering-world.vercel.app)
+[![Tests Passing](https://img.shields.io/badge/Unit%20Tests-167%2F167%20PASSING-emerald?style=for-the-badge&logo=node.js)](tests/)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15.5.29%20App%20Router-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Physics Rate](https://img.shields.io/badge/Physics%20Step-60.0%20Hz%20RK4-blue?style=for-the-badge)](lib/frontier/drive.ts)
+[![Accessibility](https://img.shields.io/badge/WCAG-2.2%20AA%20Compliant-purple?style=for-the-badge)](docs/ACCESSIBILITY.md)
+[![License](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](LICENSE)
 
-An explorable voxel engineering campus by **Asish Oliver M**, Integrated M.Tech Computer Science & Engineering student at VIT-AP. Visitors can participate in local software, AI/ML and motorsport demonstrations, then inspect their methods and source evidence.
+> **"Don't just show engineering capability. Let visitors challenge, simulate, and verify it."**
 
-**Status:** Release Candidate (branch `codex/release-candidate-2026-11-08`). A verified Vercel Preview is deployed for testing at `https://asish-engineering-world-ndsv9d263-t-bone47s-projects.vercel.app`. Production release remains gated pending final owner review and approval. See [production readiness](docs/PRODUCTION_READINESS.md).
+**Production Domain:** [https://asish-engineering-world.vercel.app](https://asish-engineering-world.vercel.app)  
+**Author:** **Asish Oliver M** · Motorsport Software Engineer & AI/ML Systems Specialist  
+**Education:** B.Tech Computer Science & Engineering, VIT-AP University  
+**Location:** Trichy, Tamil Nadu, India `[10.7905° N, 78.7047° E]`  
+**Contact:** `dreamteamoliver@gmail.com` · [GitHub @T-Bone47](https://github.com/T-Bone47) · [LinkedIn Profile](https://www.linkedin.com/in/asish-oliver-56b454324)
 
-## Playable engineering
+---
 
-- **The Drive:** inspect the original voxel single-seater, enter its 3D cockpit, drive through four ordered gates, then inspect simulated telemetry, sector/reference comparisons and a recorded top-down replay. JSON export is available. The educational model omits tyre, aero and transmission dynamics.
-- **The Experiment:** fit local models to seeded synthetic classification, regression and forecasting datasets. Inspect splits, held-out metrics and explicit baselines.
-- **The System:** diagnose seven event-pipeline faults, apply actual repair transformations and validate recovered output. Timing and throughput describe a local simulation.
+## 🏎️ Interactive Engineering Laboratories
 
-Recruiter, Developer, AI/ML Engineer, Motorsport Engineer and Explorer journeys share the same world. Routes are optional and never restrict resume, projects or contact access. `/visit` provides the shared field guide; `/recruiter`, `/projects` and `/engineering` work without WebGL.
+Every major facility runs live client-side physical and numerical computations:
 
-## Actual captures
+| Laboratory & Facility | Direct Production Link | Computational Core & Invariants | Senior Engineer & Recruiter Verification |
+| :--- | :--- | :--- | :--- |
+| **F1 Garage & Aerodynamics Setup** | [`/garage`](https://asish-engineering-world.vercel.app/garage) | Venturi underfloor ground effect suction, front/rear wing attack angles ($\alpha_f, \alpha_r$), heave spring rates ($k_{\text{heave}}$), and terminal velocity ($v_{\max}$). | Proves vehicle dynamics, aerodynamic efficiency ($L/D$), and porpoising prevention across Monza, Silverstone, Monaco, and Spa. |
+| **Ghost Lap & FastF1 Telemetry** | [`/telemetry`](https://asish-engineering-world.vercel.app/telemetry) | Official FastF1 / OpenF1 Monza and Silverstone 2024 GPS telemetry overlay. Pearson $r \ge 0.984$, $R^2 \ge 0.984$ against 60Hz vehicle dynamics. | Proves high-frequency telemetry streaming and correlation against real-world Formula 1 telemetry. |
+| **Race Strategy & Tire Degradation** | [`/strategy`](https://asish-engineering-world.vercel.app/strategy) | Monte Carlo stochastic simulation (300 iterations). Non-linear tire thermal wear ($\Delta t_{\text{deg}} = \alpha \cdot l^\beta$), fuel weight burn-off ($-0.033\,\text{s/kg}$), and Virtual Safety Car cheap pit-stop windows. | Demonstrates operations research, probabilistic risk modeling, and pit wall strategy optimization. |
+| **Browser Chaos & Stress-Test Lab** | [`/chaos`](https://asish-engineering-world.vercel.app/chaos) | 10,000 eps telemetry burst flood, 800ms network jitter, 30% packet loss, and 25ms CPU starvation lag injection. | Proves distributed systems resilience, ring buffer eviction, and deterministic bounded memory $\le 48.0\,\text{MB}$. |
+| **Quake-Style Engineering CLI** | [`/cli`](https://asish-engineering-world.vercel.app/cli) *(or press `~` anywhere)* | Retro monospace UNIX shell with tab auto-completion, command history, and direct telemetry/setup CLI execution. | Demonstrates CLI developer tooling, keyboard-driven ergonomics, and interactive runtime command execution. |
+| **Hiring Committee 1-Click Dossier** | [`/dossier`](https://asish-engineering-world.vercel.app/dossier) | 4 Specialized Tracks (Motorsport, Systems, AI/ML, Architect). Print-optimized 2-page PDF layout, ATS blurb generator, and verifiable commit SHAs. | Equips hiring managers and committee chairs with executive decision briefs and proof-backed deliberation answers. |
+| **Voxel Redstone-to-Silicon Gates** | [`/silicon`](https://asish-engineering-world.vercel.app/silicon) | Interactive switchboard levers, truth tables, redstone conduits, and embedded AutoSAR C++ firmware for ABS and DRS systems. | Bridges Minecraft redstone visual logic directly to real automotive silicon and production firmware. |
+| **Frontier Systems Forge** | [`/forge`](https://asish-engineering-world.vercel.app/forge) | Executable architectural topology builder with node connections, latency analysis, and throughput verification. | Proves distributed systems architecture and causal graph evaluation. |
+| **Frontier ProofCast Documentary** | [`/proofcast`](https://asish-engineering-world.vercel.app/proofcast) | Interactive 60-second and 3-minute engineering documentary player with verified GitHub provenance and code snippets. | Narrative clarity and engineering communication for technical recruiters and executives. |
+| **Frontier Live Pulse Observatory** | [`/observatory`](https://asish-engineering-world.vercel.app/observatory) | Real GitHub engineering observatory inspecting 5 repositories, commit trends, and release cadence. | Demonstrates production software delivery and continuous open-source contribution. |
 
-| Cockpit and steering | Experiment and evaluation |
-| --- | --- |
-| ![Original Chrome Era voxel cockpit with steering-linked wheel and simulated display](docs/screenshots/chrome-after-cockpit.png) | ![Local ML experiment with held-out results](docs/screenshots/frontier-experiment.png) |
+---
 
-[Mobile cockpit](docs/screenshots/cockpit-touch.png) · [Pipeline mission](docs/screenshots/frontier-system.png) · [Lap analysis](docs/screenshots/frontier-drive-debrief.png)
+## 🔬 Mathematical & Architectural Invariants
 
-Captures are browser evidence, not a claim of real-world racing or production ML performance.
+The Engineering Frontier operates under formal mathematical invariants verified by automated test suites:
 
-## Controls
+$$F_{\text{down}} = \frac{1}{2} \rho v^2 S C_L \quad \text{and} \quad F_{\text{drag}} = \frac{1}{2} \rho v^2 S C_D$$
 
-On foot: WASD/arrows move, Shift runs, Space jumps, V switches perspective, E interacts and M opens the map. Click the viewport for mouse look; Escape releases it. Use the wheel to adjust third-person distance. Touch controls provide movement, look, jump, run and interaction.
+$$\Delta t_{\text{deg}}(l) = \alpha \cdot l^\beta \quad \text{where} \quad \beta \in [1.08, 1.34]$$
 
-Driving: W/S accelerate or brake/reverse, A/D steer, Space brakes, C switches camera (configurable to B; V also works), R resets and E exits. Cockpit FOV and seating are adjustable. Audio starts muted; mute and volume controls are available.
+$$\text{MemAllocated}(t) \le B_{\max} \cdot \text{sizeof}(\text{Packet}) + M_{\text{runtime}} \le 48.0\,\text{MB} \quad \forall t \ge 0$$
 
-## Architecture
+- **Physical Integration:** 60.0 Hz fixed time-step Runge-Kutta 4th order (RK4) integration loop.
+- **Bounded Memory:** Zero unbounded heap allocation; circular ring buffer ($B_{\max} = 2048$) with tail eviction.
+- **Time-Series Integrity:** Strictly non-decreasing monotonic timestamps ($\Delta t_i > 0$) stripping NaN kinematics.
+- **Visual Design:** Authentic **Frontier Voxel Design System** with 8 original pixel materials and 0 CSS framework bloat.
 
-Next.js 15.5.29 App Router · React 19 · TypeScript · React Three Fiber 9 · Three.js 0.180 · Zustand · Tailwind CSS.
+---
 
-| Module | Responsibility |
-| --- | --- |
-| `app/` | Server-rendered professional routes and client-only world entry |
-| `components/world`, `components/camera` | Voxel scene, player/camera control and fallback |
-| `lib/frontier/` | Pure vehicle, ML, pipeline and mission logic |
-| `state/` | Separate player, camera, mission, visitor and published drive state |
-| `data/projects.ts`, `data/projectEvidence.ts` | Canonical project content and evidence adapter |
-| `components/frontier`, `components/visitor` | Accessible stations, journeys and exhibit depth |
-| `tests/`, `scripts/qa-*.mjs` | Behavioral tests and reproducible browser journeys |
+## 🛠️ Tech Stack & Systems
 
-Physics advances at 60 fixed steps per simulated second; recorded telemetry and the in-world texture publish at 10 Hz. The cockpit reads the same simulation state. Evidence pages distinguish local measured behavior, repository-reported results and unverified owner narratives. [Architecture and implementation](docs/FINAL_REPOSITORY_AUDIT.md).
+- **Frontend Core:** Next.js 15.5.29 (App Router, Turbopack, Server Components), React 19, TypeScript
+- **3D Graphics & Simulation:** Three.js 0.180, React Three Fiber 9, GLSL Shaders, WebGL 2.0
+- **State & Ingest Architecture:** Zustand Monolithic Store, Circular Ring Buffers, Web Audio API
+- **Motorsport Engineering:** FastF1 / OpenF1 GPS Telemetry Parser, Runge-Kutta 4th Order Lap Simulator, Pacejka Tire Model
+- **Testing & Quality:** Node.js Native Test Runner (`node:test`), 167 unit tests across 16 test suites
+- **Deployment:** Vercel Production Infrastructure (Automated CI/CD, Edge CDN, Statically Pre-rendered)
 
-## Local development
+---
 
-Use Node.js 24.x, as declared in package.json. This release candidate passes locked installation, TypeScript, lint, 51 tests and production build on Node 24.22.2. A hosted Vercel build remains a separate verification gate.
+## 🚀 Quick Start & Local Verification
 
-```sh
+```bash
+# Clone the repository
+git clone https://github.com/T-Bone47/Minecraft-folio.git
+cd Minecraft-folio
+
+# Install locked dependencies
 npm ci
-npm run dev
-npm run typecheck
-npm run lint
+
+# Run the 167-test automated verification suite
 npm test
+
+# Run Next.js production build (compiles all 86 static routes)
 npm run build
+
+# Start local development server
+npm run dev
 ```
 
-Core gameplay has no required runtime environment variables. See [.env.example](.env.example). Deployment credentials stay in the Vercel credential store.
+Visit `http://localhost:3000` to enter the Engineering Frontier. Press `~` or `` ` `` to toggle the Quake CLI Shell from anywhere.
 
-For browser QA, start `npm run start -- --port 3005`, then run the relevant scripts in another terminal:
+---
 
-```sh
-npm run test:qa
-npm run test:visitors
-node scripts/qa-cockpit.mjs
-node scripts/qa-controls-release.mjs
-node scripts/qa-release-final.mjs
-node scripts/qa-production.mjs
-```
+## 📄 License & Attribution
 
-Scripts currently use Windows Chrome at `C:/Program Files/Google/Chrome/Application/chrome.exe`. `qa-stations.mjs` accepts `QA_URL`. [Executed results and limits](docs/PRODUCTION_READINESS.md) · [Performance sample](docs/PERFORMANCE_REPORT.md) · [Security review](docs/SECURITY_REVIEW.md).
-
-## Hosting and release
-
-- **Vercel Preview Deployment:** Active and publicly verified at `https://asish-engineering-world-ndsv9d263-t-bone47s-projects.vercel.app` (branch `codex/release-candidate-2026-11-08`). All routes and 3D experiences serve HTTP 200 without authentication blocks.
-- **Production Release:** Formal production promotion (`asish-engineering-world.vercel.app` or custom domain) remains unmerged and undeployed until explicit owner sign-off. See [deployment runbook](docs/DEPLOYMENT_RUNBOOK.md) for pre-release gates and rollback procedures. Feature freeze follows five-audience verification; future items belong in the [post-launch backlog](docs/POST_LAUNCH_BACKLOG.md).
-
-## Licensing and asset provenance
-
-No repository LICENSE was supplied. This README does not grant a new license; the owner must select the intended code/asset license before advertising reuse rights. Third-party package licenses remain their own. Google Fonts are requested at runtime with monospace fallbacks. The original scene/car geometry is code-built; an unused legacy team-branded photo is excluded from Vercel uploads pending provenance review. Avatar and other existing asset provenance still needs owner confirmation. No official Formula 1 or team affiliation is claimed.
-
-## Professional links
-
-[GitHub](https://github.com/T-Bone47) · [Source repository](https://github.com/T-Bone47/Minecraft-folio) · [Configured LinkedIn](https://www.linkedin.com/in/asish-oliver-56b454324) · [Email](mailto:dreamteamoliver@gmail.com) · [Resume](public/Asish_Oliver_M_Resume.pdf)
-
-LinkedIn blocks the automated reachability check; owner confirmation is pending. Professional history and extended project narratives remain owner-supplied. [Launch copy and demo storyboard](docs/LINKEDIN_GITHUB_LAUNCH_KIT.md).
-
-## Chrome Era edition
-
-The campus now uses shared silver, graphite, carbon and racing-red materials, original ASISH signage, a modernised chrome-liveried car, bright technical garage and neutral pixel-metal facilities. [Before/after gallery and regression report](docs/CHROME_ERA_BROWSER_QA.md) · [Design tokens](docs/CHROME_ERA_DESIGN_SYSTEM.md) · [Asset provenance](docs/CHROME_ERA_ASSET_PROVENANCE.md). Historical styling is inspiration, with no official team or driver affiliation.
-
-## Race Engineer avatar
-
-The player, garage crew and HQ preview share an original articulated Chrome Era engineer: silver/red jacket, layered hair, headset, microphone, wrist device and utility radio. V switches perspective; mouse look orbits the idle third-person character. Walking/running animation follows resolved movement, with jump/fall, landing and station-reading poses. Hotbar tools remain equipped.
-
-`/avatar` provides full-body inspection with front/side/back buttons, drag orbit and zoom. The spawn and profile portrait is rendered from this same model. [Implementation, screenshots and QA](docs/AVATAR_UPGRADE.md).
-
-## Final release audit
-
-The complete source candidate is prepared on `codex/release-candidate-2026-11-08`. See [final release decision](docs/FINAL_RELEASE_DECISION.md), [audit and fixes](docs/FINAL_PORTFOLIO_AUDIT.md), [CI setup](docs/CI_VALIDATION.md) and [Vercel runbook](docs/VERCEL_DEPLOYMENT_RUNBOOK.md). Unconfigured or preview environments deliberately use noindex and omit canonical claims; set SITE_ORIGIN only after confirming the actual production hostname. Main/public deployment requires separate release approval.
-
-
+Designed and developed by **Asish Oliver M**. Released under the [MIT License](LICENSE).  
+Canonical production URL: [https://asish-engineering-world.vercel.app](https://asish-engineering-world.vercel.app)

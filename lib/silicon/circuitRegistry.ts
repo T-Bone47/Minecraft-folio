@@ -425,3 +425,5 @@ inline uint8_t alu_compute_delta(uint8_t a, uint8_t b, bool is_sub, bool& zero, 
   },
 };
 
+export const SILICON_CIRCUITS: SiliconCircuit[] = Object.values(CANONICAL_CIRCUITS);
+
