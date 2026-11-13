@@ -237,3 +237,4 @@ export function TerminalWindow({ initialCommand, isOverlay, onClose }: TerminalW
     </div>
   );
 }
+

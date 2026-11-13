@@ -79,7 +79,7 @@ ${profile.hiringCommitteeRationale.recommendedLevel}
   };
 
   return (
-    <div className="space-y-8 font-mono print:space-y-0 print:p-0">
+    <div className="space-y-8 font-mono print:space-y-0 print:p-0 min-w-0 max-w-full overflow-x-hidden">
       {/* 1. TOP INTERACTION CONTROLS (HIDDEN IN PRINT) */}
       <div className="print:hidden bg-[#18191E] border-4 border-[#262A31] p-4 sm:p-6 shadow-[0_6px_0_#0D0E12] space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-2 border-[#262A31] pb-4">
@@ -159,33 +159,33 @@ ${profile.hiringCommitteeRationale.recommendedLevel}
         {/* ========================================================= */}
         {/* PAGE 1: EXECUTIVE BRIEFING & PRODUCTION COMPETENCE       */}
         {/* ========================================================= */}
-        <div className="dossier-page page-1 bg-[#101115] border-4 border-[#262A31] p-6 sm:p-8 space-y-6 shadow-2xl print:bg-white print:text-black print:border-2 print:border-black print:shadow-none print:p-6 print:m-0 print:min-h-screen">
+        <div className="dossier-page page-1 bg-[#101115] border-4 border-[#262A31] p-4 sm:p-8 space-y-6 shadow-2xl print:bg-white print:text-black print:border-2 print:border-black print:shadow-none print:p-6 print:m-0 print:min-h-screen min-w-0 max-w-full">
           {/* Header Bar */}
-          <div className="flex items-start justify-between border-b-2 border-[#262A31] print:border-black pb-4">
-            <div>
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b-2 border-[#262A31] print:border-black pb-4">
+            <div className="min-w-0">
               <div className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-black text-[#00d2be] border border-[#00d2be] print:border-black print:text-black print:bg-transparent font-pixel text-[9px] uppercase">
-                <FileCheck className="w-3 h-3 text-[#00d2be] print:text-black" />
-                <span>CONFIDENTIAL CANDIDATE DOSSIER • {manifest.dossierVersion}</span>
+                <FileCheck className="w-3 h-3 text-[#00d2be] print:text-black shrink-0" />
+                <span className="truncate">CONFIDENTIAL CANDIDATE DOSSIER • {manifest.dossierVersion}</span>
               </div>
-              <h2 className="font-pixel text-2xl sm:text-3xl text-white print:text-black uppercase tracking-wide mt-2">
+              <h2 className="font-pixel text-2xl sm:text-3xl text-white print:text-black uppercase tracking-wide mt-2 break-words">
                 {manifest.candidateName}
               </h2>
-              <div className="font-pixel text-xs text-yellow-400 print:text-black uppercase mt-0.5">
+              <div className="font-pixel text-xs text-yellow-400 print:text-black uppercase mt-0.5 break-words">
                 {profile.title}
               </div>
-              <div className="text-[11px] text-zinc-400 print:text-zinc-700 mt-1">
+              <div className="text-[11px] text-zinc-400 print:text-zinc-700 mt-1 break-words">
                 {manifest.degree} — {manifest.institution} • {manifest.location}
               </div>
             </div>
 
-            <div className="text-right text-[10px] space-y-1">
+            <div className="text-left sm:text-right text-[10px] space-y-1 min-w-0 shrink-0">
               <div className="font-pixel text-[9px] text-emerald-400 print:text-black uppercase">
                 AUTHORITATIVE STATUS: VERIFIED
               </div>
-              <div className="text-zinc-400 print:text-black">
+              <div className="text-zinc-400 print:text-black break-all">
                 GitHub: <span className="text-[#00d2be] print:text-black underline">{manifest.githubProfile}</span>
               </div>
-              <div className="text-zinc-400 print:text-black">
+              <div className="text-zinc-400 print:text-black break-all">
                 Canonical: <span className="text-zinc-300 print:text-black">{manifest.canonicalOrigin}</span>
               </div>
               <div className="text-zinc-500 print:text-zinc-600 text-[9px]">
@@ -240,15 +240,15 @@ ${profile.hiringCommitteeRationale.recommendedLevel}
                   key={p.id}
                   className="bg-[#15161A] print:bg-white border border-[#2B2E37] print:border-black p-3 space-y-1.5"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <span className="font-pixel text-xs text-white print:text-black uppercase">{p.name}</span>
-                      <span className="text-[9px] font-pixel text-sky-400 print:text-black px-1.5 py-0.2 bg-sky-950/60 print:bg-zinc-200 border border-sky-600 print:border-black">
+                      <span className="text-[9px] font-pixel text-sky-400 print:text-black px-1.5 py-0.2 bg-sky-950/60 print:bg-zinc-200 border border-sky-600 print:border-black shrink-0">
                         {p.evidenceLayerCount}-LAYER EVIDENCE
                       </span>
                     </div>
-                    <span className="text-[9px] font-mono text-zinc-400 print:text-black flex items-center gap-1">
-                      <GitCommit className="w-3 h-3 text-[#ff8000] print:text-black" />
+                    <span className="text-[9px] font-mono text-zinc-400 print:text-black flex items-center gap-1 shrink-0">
+                      <GitCommit className="w-3 h-3 text-[#ff8000] print:text-black shrink-0" />
                       SHA: <code>{p.commitSha}</code>
                     </span>
                   </div>
@@ -310,18 +310,18 @@ ${profile.hiringCommitteeRationale.recommendedLevel}
           </div>
 
           {/* Page 1 Footer */}
-          <div className="flex items-center justify-between pt-2 border-t border-[#262A31] print:border-black text-[9px] text-zinc-500 print:text-zinc-600">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 pt-2 border-t border-[#262A31] print:border-black text-[9px] text-zinc-500 print:text-zinc-600">
             <span>ASISH OLIVER M — HIRING COMMITTEE DOSSIER (PAGE 1 OF 2)</span>
-            <span>VERIFICATION CANONICAL: ASISH-ENGINEERING-WORLD.VERCEL.APP</span>
+            <span className="break-all">VERIFICATION CANONICAL: ASISH-ENGINEERING-WORLD.VERCEL.APP</span>
           </div>
         </div>
 
         {/* ========================================================= */}
         {/* PAGE 2: ARCHITECTURAL DEFENSE & COMMITTEE RATIONALE      */}
         {/* ========================================================= */}
-        <div className="dossier-page page-2 bg-[#101115] border-4 border-[#262A31] p-6 sm:p-8 space-y-6 shadow-2xl print:bg-white print:text-black print:border-2 print:border-black print:shadow-none print:p-6 print:m-0 print:min-h-screen print:break-before-page">
+        <div className="dossier-page page-2 bg-[#101115] border-4 border-[#262A31] p-4 sm:p-8 space-y-6 shadow-2xl print:bg-white print:text-black print:border-2 print:border-black print:shadow-none print:p-6 print:m-0 print:min-h-screen print:break-before-page min-w-0 max-w-full">
           {/* Header Bar */}
-          <div className="flex items-start justify-between border-b-2 border-[#262A31] print:border-black pb-3">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 border-b-2 border-[#262A31] print:border-black pb-3">
             <div>
               <span className="font-pixel text-[9px] text-sky-400 print:text-black uppercase tracking-wider block">
                 PART II: MATHEMATICAL INVARIANTS & COMMITTEE EVALUATION
@@ -330,7 +330,7 @@ ${profile.hiringCommitteeRationale.recommendedLevel}
                 ARCHITECTURAL DEFENSE EVIDENCE
               </h3>
             </div>
-            <div className="text-right text-[10px] text-zinc-400 print:text-black">
+            <div className="text-left sm:text-right text-[10px] text-zinc-400 print:text-black shrink-0">
               CANDIDATE: <span className="font-pixel text-white print:text-black">{manifest.candidateName}</span>
             </div>
           </div>
@@ -344,28 +344,28 @@ ${profile.hiringCommitteeRationale.recommendedLevel}
               {profile.architecturalInvariants.map((inv, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#15161A] print:bg-zinc-50 border border-[#2B2E37] print:border-black p-3.5 space-y-2"
+                  className="bg-[#15161A] print:bg-zinc-50 border border-[#2B2E37] print:border-black p-3.5 space-y-2 min-w-0"
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap items-center justify-between gap-1">
                     <span className="font-pixel text-xs text-white print:text-black uppercase">
                       {idx + 1}. {inv.name}
                     </span>
-                    <span className="text-[9px] font-pixel text-emerald-400 print:text-black">
+                    <span className="text-[9px] font-pixel text-emerald-400 print:text-black shrink-0">
                       [{inv.domain.toUpperCase()}]
                     </span>
                   </div>
 
-                  <div className="bg-[#090A0D] print:bg-white border border-[#22242B] print:border-zinc-400 p-2 text-center text-xs font-mono text-yellow-300 print:text-black">
-                    <code>{inv.formulationLatex}</code>
+                  <div className="bg-[#090A0D] print:bg-white border border-[#22242B] print:border-zinc-400 p-2 text-center text-xs font-mono text-yellow-300 print:text-black overflow-x-auto max-w-full">
+                    <code className="break-all whitespace-pre-wrap">{inv.formulationLatex}</code>
                   </div>
 
                   <p className="text-[11px] text-zinc-300 print:text-black leading-snug">
                     {inv.explanation}
                   </p>
 
-                  <div className="flex items-center justify-between text-[9px] text-zinc-500 print:text-zinc-600 pt-1 border-t border-[#22242B] print:border-zinc-300">
-                    <span>Verified in: <code>{inv.testSuite}</code></span>
-                    <span>Source: <code>{inv.codeLocation}</code></span>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[9px] text-zinc-500 print:text-zinc-600 pt-1 border-t border-[#22242B] print:border-zinc-300">
+                    <span className="break-all">Verified in: <code>{inv.testSuite}</code></span>
+                    <span className="break-all">Source: <code>{inv.codeLocation}</code></span>
                   </div>
                 </div>
               ))}
@@ -441,7 +441,7 @@ ${profile.hiringCommitteeRationale.recommendedLevel}
           </div>
 
           {/* Page 2 Footer */}
-          <div className="flex items-center justify-between pt-2 border-t border-[#262A31] print:border-black text-[9px] text-zinc-500 print:text-zinc-600">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 pt-2 border-t border-[#262A31] print:border-black text-[9px] text-zinc-500 print:text-zinc-600">
             <span>ASISH OLIVER M — HIRING COMMITTEE DOSSIER (PAGE 2 OF 2)</span>
             <span>END OF EXECUTIVE BRIEFING</span>
           </div>

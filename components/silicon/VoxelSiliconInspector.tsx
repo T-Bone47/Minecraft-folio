@@ -63,7 +63,7 @@ export const VoxelSiliconInspector: React.FC = () => {
   });
 
   return (
-    <div className="space-y-6 font-mono">
+    <div className="space-y-6 font-mono w-full max-w-full overflow-x-hidden">
       {/* 1. TOP HEADER & CIRCUIT SWITCHER */}
       <div className="bg-[#18191E] border-4 border-[#262A31] p-4 sm:p-6 shadow-[0_6px_0_#0D0E12] space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-[#262A31] pb-4">
@@ -81,14 +81,14 @@ export const VoxelSiliconInspector: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="bg-[#101115] border border-[#2B2E37] px-3 py-1.5 text-right">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="bg-[#101115] border border-[#2B2E37] px-3 py-1.5 text-left sm:text-right">
               <span className="text-zinc-500 block text-[9px] font-pixel uppercase">LATENCY BUDGET</span>
               <span className="font-pixel text-xs text-yellow-400">
                 {circuit.latencyBudgetMicroseconds} µs (Real-Time)
               </span>
             </div>
-            <div className="bg-[#101115] border border-[#2B2E37] px-3 py-1.5 text-right">
+            <div className="bg-[#101115] border border-[#2B2E37] px-3 py-1.5 text-left sm:text-right">
               <span className="text-zinc-500 block text-[9px] font-pixel uppercase">PHYSICS CLOCK</span>
               <span className="font-pixel text-xs text-[#00d2be]">60 Hz Monotonic</span>
             </div>
@@ -120,11 +120,11 @@ export const VoxelSiliconInspector: React.FC = () => {
       </div>
 
       {/* 2. MAIN INTERACTIVE TEST BENCH */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-w-0 max-w-full">
         {/* ========================================================= */}
         {/* LEFT: LEVER SWITCHBOARD (4 COLS)                          */}
         {/* ========================================================= */}
-        <div className="lg:col-span-4 bg-[#141519] border-4 border-[#262A31] p-4 sm:p-5 space-y-4 shadow-[0_4px_0_#0D0E12]">
+        <div className="lg:col-span-4 bg-[#141519] border-4 border-[#262A31] p-4 sm:p-5 space-y-4 shadow-[0_4px_0_#0D0E12] min-w-0 max-w-full">
           <div className="flex items-center justify-between border-b-2 border-[#262A31] pb-2">
             <span className="font-pixel text-xs text-white uppercase flex items-center gap-2">
               <Radio className="w-4 h-4 text-red-500" />
@@ -182,40 +182,40 @@ export const VoxelSiliconInspector: React.FC = () => {
         {/* ========================================================= */}
         {/* CENTER: SCHEMATIC & OUTPUT LAMPS (8 COLS)                 */}
         {/* ========================================================= */}
-        <div className="lg:col-span-8 space-y-6">
+        <div className="lg:col-span-8 space-y-6 min-w-0 max-w-full">
           {/* SCHEMATIC VISUALIZER */}
-          <div className="bg-[#101115] border-4 border-[#262A31] p-4 sm:p-5 space-y-4 shadow-[0_4px_0_#0D0E12]">
+          <div className="bg-[#101115] border-4 border-[#262A31] p-4 sm:p-5 space-y-4 shadow-[0_4px_0_#0D0E12] min-w-0">
             <div className="flex items-center justify-between border-b-2 border-[#262A31] pb-2">
               <span className="font-pixel text-xs text-white uppercase flex items-center gap-2">
-                <Zap className="w-4 h-4 text-yellow-400" />
+                <Zap className="w-4 h-4 text-yellow-400 shrink-0" />
                 <span>REDSTONE CONDUIT & SILICON GATE TOPOLOGY</span>
               </span>
-              <span className="font-pixel text-[9px] text-[#00d2be]">
+              <span className="font-pixel text-[9px] text-[#00d2be] shrink-0">
                 EQUIVALENCE: 100% GROUNDED
               </span>
             </div>
 
             {/* Redstone Dust & Components Flow Matrix */}
-            <div className="bg-[#090A0D] border-2 border-[#22242B] p-4 space-y-4 relative overflow-hidden">
+            <div className="bg-[#090A0D] border-2 border-[#22242B] p-4 space-y-4 relative overflow-hidden min-w-0">
               <div className="text-[10px] text-zinc-400">
                 ACTIVE CIRCUIT: <strong className="text-white">{circuit.name}</strong>
               </div>
 
               {/* Dynamic Components Row */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
                 {circuit.redstoneComponents.map((comp) => {
                   return (
                     <div
                       key={comp.id}
-                      className="bg-[#15161A] border border-[#2B2E37] p-2.5 space-y-1 hover:border-zinc-500 transition-colors"
+                      className="bg-[#15161A] border border-[#2B2E37] p-2.5 space-y-1 hover:border-zinc-500 transition-colors min-w-0"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-pixel text-[9px] text-yellow-400 uppercase">{comp.label}</span>
-                        <span className="text-[8px] font-pixel px-1 bg-zinc-800 text-zinc-300">
+                        <span className="font-pixel text-[9px] text-yellow-400 uppercase truncate">{comp.label}</span>
+                        <span className="text-[8px] font-pixel px-1 bg-zinc-800 text-zinc-300 shrink-0">
                           {comp.siliconGate}
                         </span>
                       </div>
-                      <div className="text-[10px] text-zinc-300">{comp.redstoneEquivalent}</div>
+                      <div className="text-[10px] text-zinc-300 break-words">{comp.redstoneEquivalent}</div>
                       <div className="text-[9px] text-zinc-500 leading-tight">Role: {comp.role}</div>
                     </div>
                   );
@@ -223,11 +223,11 @@ export const VoxelSiliconInspector: React.FC = () => {
               </div>
 
               {/* Formula & Boolean Equation */}
-              <div className="bg-[#141519] border border-[#2B2E37] p-3 text-center space-y-1">
+              <div className="bg-[#141519] border border-[#2B2E37] p-3 text-center space-y-1 overflow-x-auto max-w-full">
                 <span className="font-pixel text-[9px] text-zinc-400 uppercase block">
                   BOOLEAN LOGIC EQUATION
                 </span>
-                <div className="font-mono text-sm text-[#00d2be] font-bold">
+                <div className="font-mono text-xs sm:text-sm text-[#00d2be] font-bold break-all">
                   <code>{circuit.booleanFormula}</code>
                 </div>
               </div>
@@ -283,8 +283,8 @@ export const VoxelSiliconInspector: React.FC = () => {
           </div>
 
           {/* LOWER TABS: TRUTH TABLE / ECU FIRMWARE / MATH */}
-          <div className="bg-[#141519] border-4 border-[#262A31] p-4 sm:p-5 space-y-4 shadow-[0_4px_0_#0D0E12]">
-            <div className="flex items-center gap-2 border-b-2 border-[#262A31] pb-2">
+          <div className="bg-[#141519] border-4 border-[#262A31] p-4 sm:p-5 space-y-4 shadow-[0_4px_0_#0D0E12] min-w-0 max-w-full">
+            <div className="flex flex-wrap items-center gap-2 border-b-2 border-[#262A31] pb-2">
               {[
                 { id: "truth", label: "LIVE TRUTH TABLE", icon: Activity },
                 { id: "code", label: "ECU C++ FIRMWARE", icon: Code2 },
@@ -301,7 +301,7 @@ export const VoxelSiliconInspector: React.FC = () => {
                         : "bg-[#101115] border-[#22242B] text-zinc-400 hover:text-white"
                     }`}
                   >
-                    <Icon className="w-3.5 h-3.5" />
+                    <Icon className="w-3.5 h-3.5 shrink-0" />
                     <span>{tab.label}</span>
                   </button>
                 );
@@ -310,8 +310,8 @@ export const VoxelSiliconInspector: React.FC = () => {
 
             {/* TAB 1: TRUTH TABLE */}
             {activeTab === "truth" && (
-              <div className="space-y-2 overflow-x-auto">
-                <table className="w-full text-left text-[11px] border-collapse">
+              <div className="space-y-2 overflow-x-auto max-w-full">
+                <table className="w-full text-left text-[11px] border-collapse min-w-[360px]">
                   <thead>
                     <tr className="border-b border-[#2B2E37] text-zinc-400 font-pixel text-[9px]">
                       <th className="p-2">ROW</th>
@@ -383,7 +383,7 @@ export const VoxelSiliconInspector: React.FC = () => {
                 <span className="font-pixel text-xs text-white uppercase block">
                   PHYSICAL VEHICLE KINEMATICS & DERIVATION
                 </span>
-                <div className="bg-[#141519] border border-[#2B2E37] p-3 text-center text-sm font-mono text-yellow-300">
+                <div className="bg-[#141519] border border-[#2B2E37] p-3 text-center text-xs sm:text-sm font-mono text-yellow-300 overflow-x-auto max-w-full break-all">
                   <code>{circuit.physicalEquation}</code>
                 </div>
                 <p className="text-zinc-400 leading-relaxed text-[11px]">

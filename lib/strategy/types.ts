@@ -51,3 +51,4 @@ export interface StrategyEnvironment {
   trackTempCelsius: number; // 25°C - 50°C
   safetyCarProbabilityPerLap: number; // e.g. 0.025
 }
+

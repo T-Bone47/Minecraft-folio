@@ -14,3 +14,4 @@ export default function GaragePage() {
     </main>
   );
 }
+

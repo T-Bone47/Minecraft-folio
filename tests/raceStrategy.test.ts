@@ -58,3 +58,4 @@ test("Race Strategy: Monte Carlo simulation produces deterministic statistical d
     assert.strictEqual(summary.pitStopsCount, strategy.stints.length - 1);
   }
 });
+

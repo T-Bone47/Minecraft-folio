@@ -122,3 +122,4 @@ export function simulateStrategyLaps(
 
   return result;
 }
+

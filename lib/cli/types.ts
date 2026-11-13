@@ -30,3 +30,4 @@ export interface CLITerminalLine {
   content: string;
   timestamp: string;
 }
+

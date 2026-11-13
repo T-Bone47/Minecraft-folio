@@ -31,7 +31,7 @@ export default async function DossierPage(props: {
         />
       </div>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 print:p-0 print:m-0 print:max-w-none">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 print:p-0 print:m-0 print:max-w-none min-w-0 max-w-full overflow-x-hidden">
         <HiringCommitteeDossierView initialTrack={track} />
       </main>
 
