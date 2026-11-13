@@ -30,6 +30,7 @@ import {
   Mail,
   Zap,
   FileText,
+  Film,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -152,6 +153,33 @@ export default function HomePage() {
                   <FileText className="w-3.5 h-3.5 text-sky-400 shrink-0" />
                   <span>DOWNLOAD RESUME (PDF)</span>
                 </a>
+              </div>
+
+              {/* Frontier Evolution Flagship Row */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <Link
+                  href="/proofcast"
+                  className="mc-btn-stone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 text-red-300 hover:text-white border-red-800/80 hover:border-red-500 bg-red-950/30 shrink-0"
+                >
+                  <Film className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                  <span>WATCH PROOFCAST (60s)</span>
+                </Link>
+
+                <Link
+                  href="/forge"
+                  className="mc-btn-stone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 text-emerald-300 hover:text-white border-emerald-800/80 hover:border-emerald-500 bg-emerald-950/30 shrink-0"
+                >
+                  <Cpu className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <span>SYSTEMS FORGE</span>
+                </Link>
+
+                <Link
+                  href="/observatory"
+                  className="mc-btn-stone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 text-sky-300 hover:text-white border-sky-800/80 hover:border-sky-500 bg-sky-950/30 shrink-0"
+                >
+                  <Activity className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                  <span>LIVE PULSE</span>
+                </Link>
               </div>
             </div>
           </div>

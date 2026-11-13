@@ -20,6 +20,7 @@ import {
   ChevronDown,
   Shield,
   Compass,
+  Film,
 } from "lucide-react";
 
 export const PortfolioNav: React.FC = () => {
@@ -65,6 +66,9 @@ export const PortfolioNav: React.FC = () => {
 
   // More menu items
   const moreMenuItems = [
+    { href: "/proofcast", label: "PROOFCAST", icon: Film, desc: "Interactive 60s engineering documentary" },
+    { href: "/forge", label: "SYSTEMS FORGE", icon: Cpu, desc: "Executable software architecture builder" },
+    { href: "/observatory", label: "LIVE PULSE", icon: Activity, desc: "5-repository GitHub observatory" },
     { href: "/", label: "HOME OVERVIEW", icon: Terminal, desc: "Portfolio summary & story" },
     { href: "/roleforge?tab=defense", label: "DEFENSE ARENA", icon: Shield, desc: "Challenge engineering claims" },
     { href: "/visit", label: "FIELD GUIDE", icon: Compass, desc: "3D campus visitor guide" },
@@ -230,6 +234,9 @@ export const PortfolioNav: React.FC = () => {
           <div className="grid grid-cols-2 gap-2">
             {[
               { href: "/", label: "HOME", icon: Terminal },
+              { href: "/proofcast", label: "PROOFCAST", icon: Film },
+              { href: "/forge", label: "FORGE", icon: Cpu },
+              { href: "/observatory", label: "LIVE PULSE", icon: Activity },
               { href: "/work", label: "SYSTEMS", icon: Cpu },
               { href: "/multiverse", label: "MULTIVERSE", icon: Globe },
               { href: "/roleforge", label: "ROLEFORGE", icon: Target },

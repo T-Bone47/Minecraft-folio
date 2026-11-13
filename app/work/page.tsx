@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  alternates: canonicalUrl("/projects") ? { canonical: canonicalUrl("/projects") } : undefined,
+  alternates: canonicalUrl("/work") ? { canonical: canonicalUrl("/work") } : undefined,
   title: "Canonical Systems & Projects — Asish Oliver M",
   description:
     "Explore the six canonical engineering systems: Live F1 Intelligence, F1 Lap-Time Simulator, RaceMind-AI, F1 Race Manager, EA FC Intelligence, and VyaparPulse.",
