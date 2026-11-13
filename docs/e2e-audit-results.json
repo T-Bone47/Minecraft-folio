@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-13T15:52:26.562Z",
+  "timestamp": "2026-11-13T16:05:49.423Z",
   "targetUrl": "https://asish-engineering-world.vercel.app",
   "totalChecks": 36,
-  "passedChecks": 34,
-  "failedChecks": 2,
+  "passedChecks": 36,
+  "failedChecks": 0,
   "routesAudited": [
     {
       "checkId": "/ [desktop 1440x900]",
@@ -152,11 +152,11 @@
       "checkId": "/dossier [mobile 390x844]",
       "route": "/dossier",
       "viewport": "mobile",
-      "status": "FAIL",
+      "status": "PASS",
       "httpStatus": 200,
       "consoleErrors": [],
       "pageErrors": [],
-      "hasOverflow": true,
+      "hasOverflow": false,
       "cls": 0
     },
     {
@@ -174,11 +174,11 @@
       "checkId": "/silicon [mobile 390x844]",
       "route": "/silicon",
       "viewport": "mobile",
-      "status": "FAIL",
+      "status": "PASS",
       "httpStatus": 200,
       "consoleErrors": [],
       "pageErrors": [],
-      "hasOverflow": true,
+      "hasOverflow": false,
       "cls": 0
     },
     {
