@@ -1,6 +1,6 @@
 /**
  * ASISH: THE ENGINEERING FRONTIER — FRONTIER ROLEFORGE
- * 2D Embedded Operations Console Client View
+ * Voxel Engineering Skill Forge Client View
  */
 
 "use client";
@@ -13,15 +13,16 @@ import { RequirementReview } from "@/components/roleforge/RequirementReview";
 import { EvidenceMatchView } from "@/components/roleforge/EvidenceMatchView";
 import { MissionDirector } from "@/components/roleforge/MissionDirector";
 import { EngineeringEvidenceBrief } from "@/components/roleforge/EngineeringEvidenceBrief";
+import { VoxelTabs, VoxelStatusLamp } from "@/components/ui/voxel";
 import type { VisitorTimeBudget } from "@/lib/roleforge/types";
 
-const TABS: { id: RoleForgeTab; label: string; icon: string }[] = [
-  { id: "presets", label: "CURATED ROLES", icon: "📋" },
-  { id: "custom", label: "PASTE JOB SPEC", icon: "📝" },
-  { id: "review", label: "REQUIREMENTS", icon: "⚙️" },
-  { id: "matches", label: "EVIDENCE GRAPH", icon: "🔗" },
-  { id: "mission", label: "CAMPUS MISSION", icon: "🎯" },
-  { id: "brief", label: "EXECUTIVE BRIEF", icon: "📑" },
+const TABS: { id: RoleForgeTab; label: string }[] = [
+  { id: "presets", label: "CURATED ROLES" },
+  { id: "custom", label: "PASTE JOB SPEC" },
+  { id: "review", label: "REQUIREMENTS" },
+  { id: "matches", label: "EVIDENCE GRAPH" },
+  { id: "mission", label: "CAMPUS MISSION" },
+  { id: "brief", label: "EXECUTIVE BRIEF" },
 ];
 
 const BUDGETS: { id: VisitorTimeBudget; label: string }[] = [
@@ -33,38 +34,41 @@ const BUDGETS: { id: VisitorTimeBudget; label: string }[] = [
 export const RoleForgeClientView: React.FC = () => {
   const {
     activeTab,
-    openTerminal,
+    setActiveTab,
     currentBudget,
     setBudget,
     compiledMission,
   } = useRoleForgeStore();
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-[#14171d]">
       {/* Console Sub-Header with Budget Selector */}
-      <div className="bg-[#12151b] border-b border-zinc-800 p-4 px-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div>
-          <div className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest">
-            INTERACTIVE OPERATIONS CONSOLE
-          </div>
-          <div className="text-sm font-bold font-mono text-white">
-            Active Role Target: <span className="text-cyan-300">{compiledMission?.roleTitle || "Unset"}</span>
+      <div className="bg-[#181d24] border-b-2 border-[#242b36] p-4 px-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <VoxelStatusLamp tone="cyan" pulse />
+          <div>
+            <div className="font-pixel text-[8px] text-amber-400 uppercase tracking-widest">
+              ROLE COMPILER ACTIVE
+            </div>
+            <div className="text-xs font-mono font-bold text-white mt-0.5">
+              Target: <span className="text-cyan-300">{compiledMission?.roleTitle || "Unset (Select Preset or Paste Spec)"}</span>
+            </div>
           </div>
         </div>
 
-        {/* Time Budget Selector */}
+        {/* Time Budget Selector — Voxel Inset Slot Matrix */}
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-mono text-zinc-400 uppercase">Visitor Budget:</span>
-          <div className="flex items-center gap-1 bg-black/60 p-1 rounded border border-zinc-800">
+          <span className="font-pixel text-[8px] text-zinc-400 uppercase">BUDGET:</span>
+          <div className="flex items-center gap-1 bg-[#101216] p-1 border-2 border-[#2b3340]">
             {BUDGETS.map((b) => (
               <button
                 key={b.id}
                 type="button"
                 onClick={() => setBudget(b.id)}
-                className={`text-[10px] font-mono px-2.5 py-1 rounded transition-colors ${
+                className={`text-[9px] font-pixel px-2.5 py-1 transition-all ${
                   currentBudget === b.id
-                    ? "bg-cyan-500 text-black font-bold shadow-[0_0_8px_rgba(34,211,238,0.3)]"
-                    : "text-zinc-400 hover:text-white"
+                    ? "bg-[#d96200] text-white border border-[#ffab40] shadow-sm mc-text-shadow"
+                    : "text-zinc-400 hover:text-white hover:bg-[#202630]"
                 }`}
               >
                 {b.label}
@@ -74,30 +78,17 @@ export const RoleForgeClientView: React.FC = () => {
         </div>
       </div>
 
-      {/* Tabs Bar */}
-      <div className="bg-[#0f1217] border-b border-zinc-800/80 px-4 sm:px-6 flex items-center gap-1 overflow-x-auto">
-        {TABS.map((tab) => {
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => openTerminal(tab.id)}
-              className={`py-3 px-3.5 text-xs font-mono whitespace-nowrap transition-all border-b-2 flex items-center gap-1.5 ${
-                isActive
-                  ? "border-cyan-400 text-cyan-300 font-bold bg-cyan-950/20"
-                  : "border-transparent text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/40"
-              }`}
-            >
-              <span>{tab.icon}</span>
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
+      {/* Mechanical Tabs Bar */}
+      <div className="bg-[#12141a] border-b-2 border-[#242b36] p-2 overflow-x-auto">
+        <VoxelTabs
+          tabs={TABS}
+          activeTab={activeTab}
+          onChange={(tabId) => setActiveTab(tabId)}
+        />
       </div>
 
-      {/* Tab Content Panel */}
-      <div className="p-4 sm:p-6 bg-gradient-to-b from-[#0d0f12] to-[#0a0b0d]">
+      {/* Tab Panels */}
+      <div className="p-4 sm:p-6 min-h-[460px] bg-[#14171d]">
         {activeTab === "presets" && <RoleSelector />}
         {activeTab === "custom" && <JobDescriptionInput />}
         {activeTab === "review" && <RequirementReview />}
@@ -108,4 +99,3 @@ export const RoleForgeClientView: React.FC = () => {
     </div>
   );
 };
-

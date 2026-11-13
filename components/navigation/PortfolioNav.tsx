@@ -160,7 +160,7 @@ export const PortfolioNav: React.FC = () => {
                       key={item.href}
                       href={item.href}
                       onClick={() => setMoreOpen(false)}
-                      className="block p-2 rounded hover:bg-[#2a2a30] transition-colors group"
+                      className="block p-2 border border-transparent hover:border-zinc-700 hover:bg-[#2a2a30] transition-colors group"
                     >
                       <div className="flex items-center gap-2">
                         <Icon className="w-4 h-4 text-[#ff8000] shrink-0" />
@@ -180,7 +180,7 @@ export const PortfolioNav: React.FC = () => {
                     href="/Asish_Oliver_M_Resume.pdf"
                     download="Asish_Oliver_M_Resume.pdf"
                     onClick={() => setMoreOpen(false)}
-                    className="flex items-center gap-2 p-2 rounded hover:bg-sky-950/60 transition-colors text-sky-200 hover:text-white"
+                    className="flex items-center gap-2 p-2 border border-sky-800/60 hover:bg-sky-950/60 transition-colors text-sky-200 hover:text-white"
                   >
                     <FileText className="w-4 h-4 text-sky-400 shrink-0" />
                     <span className="font-pixel text-[11px]">DOWNLOAD RESUME (PDF)</span>

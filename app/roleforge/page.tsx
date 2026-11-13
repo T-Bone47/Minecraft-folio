@@ -2,9 +2,20 @@ import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
+import { RedstoneStatusBar } from "@/components/navigation/RedstoneStatusBar";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
 import { CURATED_ROLE_PRESETS } from "@/lib/roleforge/skillTaxonomy";
 import { RoleForgeClientView } from "./RoleForgeClientView";
+import {
+  VoxelPanel,
+  VoxelButton,
+  VoxelCard,
+  VoxelStatusLamp,
+  VoxelBadge,
+  VoxelWrenchIcon,
+  VoxelShieldIcon,
+  VoxelAiChipIcon,
+} from "@/components/ui/voxel";
 import {
   Target,
   ShieldCheck,
@@ -13,7 +24,6 @@ import {
   ArrowRight,
   GitBranch,
   FileCheck,
-  CheckCircle2,
   Shield,
   FileText,
 } from "lucide-react";
@@ -26,110 +36,131 @@ export const metadata: Metadata = {
 
 export default function RoleForgeHubPage() {
   return (
-    <div className="min-h-screen bg-[#08090b] text-zinc-100 flex flex-col font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen technical-grid-bg text-zinc-100 flex flex-col font-sans selection:bg-[#ff8000] selection:text-white">
       <PortfolioNav />
+      <RedstoneStatusBar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* 1. Hero Section */}
-        <div className="max-w-4xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider mb-4">
-            <Target className="w-3.5 h-3.5" />
-            <span>FRONTIER ROLEFORGE • LIVING PROOF COMPILER</span>
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-10">
+        {/* 1. Voxel Workbench Hero Panel */}
+        <section aria-labelledby="roleforge-hero-title">
+          <VoxelPanel
+            variant="iron"
+            title="ENGINEERING SKILL FORGE // LIVING PROOF COMPILER"
+            icon={<VoxelWrenchIcon size={16} />}
+            headerActions={
+              <VoxelStatusLamp tone="cyan" label="COMPILER READY" pulse />
+            }
+          >
+            <div className="max-w-4xl space-y-4">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#121418] border border-[#3f4756] font-mono text-[10px] text-cyan-400 uppercase tracking-widest">
+                <Target className="w-3.5 h-3.5 text-cyan-400" />
+                <span>FRONTIER ROLEFORGE • EVIDENCE COMPILATION WORKBENCH</span>
+              </div>
+
+              <h1
+                id="roleforge-hero-title"
+                className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-retro text-white tracking-tight uppercase"
+              >
+                YOUR ROLE. MY ENGINEERING. <span className="text-amber-400">REAL PROOF.</span>
+              </h1>
+
+              <p className="text-xs sm:text-sm font-mono text-zinc-300 leading-relaxed max-w-3xl">
+                Select a curated discipline or paste your team&apos;s exact technical job description.
+                RoleForge deterministically extracts canonical requirements, categorizes verified evidence across public code repositories, and compiles an adaptive 3D campus mission tailored to your time budget.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <VoxelButton
+                  variant="red"
+                  href="/roleforge/defense"
+                  icon={<Shield className="w-3.5 h-3.5" />}
+                >
+                  ENTER DEFENSE ARENA 2.0
+                </VoxelButton>
+
+                <VoxelButton
+                  variant="cyan"
+                  href="/roleforge/passport"
+                  icon={<FileText className="w-3.5 h-3.5" />}
+                >
+                  EVIDENCE PASSPORT
+                </VoxelButton>
+
+                <VoxelButton
+                  variant="gold"
+                  href="/world"
+                  icon={<span>🚀</span>}
+                >
+                  3D WORLD TERMINAL [R]
+                </VoxelButton>
+
+                <VoxelButton
+                  variant="stone"
+                  href="/roleforge/review"
+                  icon={<FileCheck className="w-3.5 h-3.5 text-cyan-400" />}
+                >
+                  TECH REVIEW BOARD
+                </VoxelButton>
+              </div>
+            </div>
+          </VoxelPanel>
+        </section>
+
+        {/* 2. Interactive RoleForge Operations Console in Voxel Frame */}
+        <section aria-label="RoleForge Operations Console">
+          <div className="voxel-panel-deepslate border-3 border-[#3f4756] overflow-hidden shadow-2xl">
+            <RoleForgeClientView />
           </div>
-
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Your Role. My Engineering. <span className="text-cyan-400">Real Proof.</span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
-            Select a curated discipline or paste your team&apos;s exact technical job description.
-            RoleForge deterministically extracts canonical requirements, categorizes verified evidence across public code repositories, and compiles an adaptive 3D campus mission tailored to your time budget.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-3 mt-6">
-            <Link
-              href="/roleforge/defense"
-              className="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(220,38,38,0.3)]"
-            >
-              <Shield className="w-4 h-4 text-white" />
-              <span>ENTER DEFENSE ARENA 2.0</span>
-            </Link>
-            <Link
-              href="/roleforge/passport"
-              className="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(34,211,238,0.3)]"
-            >
-              <FileText className="w-4 h-4 text-black" />
-              <span>EVIDENCE PASSPORT</span>
-            </Link>
-            <Link
-              href="/?roleforge=open"
-              className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs font-mono font-bold flex items-center gap-2 border border-zinc-800 transition-colors"
-            >
-              <span>🚀</span>
-              <span>3D WORLD TERMINAL [R]</span>
-            </Link>
-            <Link
-              href="/roleforge/review"
-              className="px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs font-mono font-bold flex items-center gap-2 border border-zinc-800 transition-colors"
-            >
-              <FileCheck className="w-4 h-4 text-cyan-400" />
-              <span>TECH REVIEW BOARD</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* 2. Interactive RoleForge Operations Console */}
-        <div className="mb-14 bg-[#0d0f12] border border-cyan-500/30 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.15)]">
-          <RoleForgeClientView />
-        </div>
+        </section>
 
         {/* 3. Curated Role Presets Fast Track */}
-        <div className="mb-14">
-          <div className="border-b border-zinc-800 pb-3 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <section aria-labelledby="curated-roles-title" className="space-y-4">
+          <div className="border-b-2 border-[#2b303c] pb-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
-              <h2 className="text-xl font-bold font-mono text-white">
-                CURATED RECRUITER JOURNEYS
+              <h2 id="curated-roles-title" className="font-pixel text-sm sm:text-base text-white uppercase flex items-center gap-2">
+                <Cpu className="w-4 h-4 text-[#ff8000]" />
+                <span>CURATED RECRUITER JOURNEYS</span>
               </h2>
-              <p className="text-xs text-zinc-400 mt-1">
+              <p className="text-xs font-mono text-zinc-400 mt-1">
                 Pre-compiled evidence briefs and 3D walkthroughs for senior engineering specializations.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {CURATED_ROLE_PRESETS.map((preset) => (
               <Link
                 key={preset.id}
                 href={`/roleforge/role/${preset.slug}`}
-                className="group bg-zinc-900/40 border border-zinc-800/80 hover:border-cyan-500/50 rounded-xl p-5 flex flex-col justify-between transition-all hover:bg-zinc-900/80 shadow-md"
+                className="voxel-panel-deepslate border-2 p-5 flex flex-col justify-between hover:border-amber-400 transition-all group shadow-lg"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-cyan-400 border border-zinc-700">
+                  <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#252a36]">
+                    <span className="font-pixel text-[8px] text-amber-400 uppercase">
                       {preset.discipline.split(",")[0]}
                     </span>
-                    <span className="text-[10px] font-mono text-zinc-500">
+                    <span className="font-mono text-[9px] px-1.5 py-0.5 bg-[#121418] border border-[#2d3542] text-zinc-400">
                       {preset.defaultBudget === "QUICK_90S" ? "90s Fast" : "5m Deep"}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors mb-1">
+                  <h3 className="font-pixel text-xs text-white group-hover:text-amber-400 transition-colors mb-2 leading-snug">
                     {preset.title}
                   </h3>
 
-                  <p className="text-xs text-zinc-400 line-clamp-2 mb-4 leading-relaxed">
+                  <p className="font-mono text-xs text-zinc-300 line-clamp-2 mb-4 leading-relaxed">
                     {preset.description}
                   </p>
 
                   <div className="space-y-1 mb-4">
-                    <div className="text-[10px] font-mono uppercase text-zinc-500">
-                      Top Verified Competencies:
+                    <div className="font-pixel text-[8px] text-zinc-400 uppercase">
+                      VERIFIED COMPETENCIES:
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {preset.coreRequirements.slice(0, 3).map((req) => (
                         <span
                           key={req.canonicalSkillId}
-                          className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300"
+                          className="mc-item-chip px-2 py-0.5 text-[9px] font-mono text-zinc-300"
                         >
                           {req.skillName.split(" ")[0]}
                         </span>
@@ -138,56 +169,60 @@ export default function RoleForgeHubPage() {
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-zinc-800/60 flex items-center justify-between text-xs font-mono text-zinc-400">
-                  <span>Guide: {preset.recommendedGuideNpcId.replace(/-/g, " ")}</span>
-                  <span className="text-cyan-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                    Inspect Role →
+                <div className="pt-3 border-t border-[#252a36] flex items-center justify-between text-xs font-mono text-zinc-400">
+                  <span className="text-[10px]">Guide: {preset.recommendedGuideNpcId.replace(/-/g, " ")}</span>
+                  <span className="text-amber-400 font-pixel text-[9px] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    INSPECT &gt;
                   </span>
                 </div>
               </Link>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* 4. Verification Principles */}
-        <div className="bg-zinc-900/30 border border-zinc-800 rounded-xl p-6 sm:p-8">
-          <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-cyan-400 mb-4">
-            Frontier RoleForge Verification Principles
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-zinc-400 leading-relaxed font-mono">
-            <div>
-              <div className="flex items-center gap-2 text-white font-bold mb-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                Zero Fake ATS Scores
+        {/* 4. Verification Principles Voxel Panel */}
+        <section aria-labelledby="principles-title">
+          <VoxelPanel
+            variant="iron"
+            title="ROLEFORGE VERIFICATION PRINCIPLES // ZERO ATS DRIFT"
+            icon={<ShieldCheck className="w-4 h-4 text-emerald-400" />}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-zinc-300 leading-relaxed font-mono">
+              <div className="p-3 bg-[#121418] border border-[#29303d]">
+                <div className="flex items-center gap-2 text-white font-bold mb-1.5 font-pixel text-[10px]">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Zero Fake ATS Scores</span>
+                </div>
+                <p className="text-zinc-400">
+                  No uncalibrated percentages or fabricated match metrics. Every capability is categorized into DIRECT, RELATED, PARTIAL, or honest NONE with human-readable rationale.
+                </p>
               </div>
-              <p>
-                No uncalibrated percentages or fabricated match metrics. Every capability is categorized into DIRECT, RELATED, PARTIAL, or honest NONE with human-readable rationale.
-              </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-2 text-white font-bold mb-1.5">
-                <FileCheck className="w-4 h-4 text-cyan-400" />
-                100% Client-Side Privacy
+
+              <div className="p-3 bg-[#121418] border border-[#29303d]">
+                <div className="flex items-center gap-2 text-white font-bold mb-1.5 font-pixel text-[10px]">
+                  <FileCheck className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>100% Client-Side Privacy</span>
+                </div>
+                <p className="text-zinc-400">
+                  Job specifications are parsed purely within your browser memory. No text is sent to third-party endpoints or stored on external servers.
+                </p>
               </div>
-              <p>
-                Job specifications are parsed purely within your browser memory. No text is sent to third-party endpoints or stored on external servers.
-              </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-2 text-white font-bold mb-1.5">
-                <GitBranch className="w-4 h-4 text-purple-400" />
-                Verifiable Git Permalinks
+
+              <div className="p-3 bg-[#121418] border border-[#29303d]">
+                <div className="flex items-center gap-2 text-white font-bold mb-1.5 font-pixel text-[10px]">
+                  <GitBranch className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Verifiable Git Permalinks</span>
+                </div>
+                <p className="text-zinc-400">
+                  Every direct claim cites specific repository commits, files, line ranges, and automated test commands runnable on clean machines.
+                </p>
               </div>
-              <p>
-                Every direct claim cites specific repository commits, files, line ranges, and automated test commands runnable on clean machines.
-              </p>
             </div>
-          </div>
-        </div>
+          </VoxelPanel>
+        </section>
       </main>
 
       <PortfolioFooter />
     </div>
   );
 }
-

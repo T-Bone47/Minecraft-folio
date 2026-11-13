@@ -51,11 +51,11 @@ export const DefenseArenaClientView: React.FC<DefenseArenaClientViewProps> = ({
   ];
 
   return (
-    <div className="bg-[#0e1117] border border-zinc-800 rounded-xl overflow-hidden shadow-2xl flex flex-col">
+    <div className="bg-[#0e1117] border-4 border-[#262A31] shadow-2xl overflow-hidden flex flex-col">
       {/* Track Selector Bar */}
-      <div className="bg-[#141822] border-b border-zinc-800 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div className="bg-[#141822] border-b-2 border-zinc-800 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">
+          <span className="text-[10px] font-pixel text-zinc-400 uppercase tracking-wider">
             Select Track:
           </span>
           <div className="flex flex-wrap gap-2">
@@ -64,10 +64,10 @@ export const DefenseArenaClientView: React.FC<DefenseArenaClientViewProps> = ({
                 key={t.id}
                 type="button"
                 onClick={() => selectTrack(t.id)}
-                className={`text-xs font-mono px-3 py-1.5 rounded transition-all ${
+                className={`text-[10px] font-pixel px-3 py-1.5 transition-all ${
                   activeTrackId === t.id
-                    ? "bg-cyan-500 text-black font-bold shadow-[0_0_10px_rgba(34,211,238,0.3)]"
-                    : "bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white"
+                    ? "voxel-btn voxel-btn-cyan text-cyan-200"
+                    : "voxel-btn voxel-btn-stone text-zinc-300 hover:text-white"
                 }`}
               >
                 {t.shortTitle}
@@ -77,12 +77,12 @@ export const DefenseArenaClientView: React.FC<DefenseArenaClientViewProps> = ({
         </div>
 
         <div className="text-xs font-mono text-zinc-400">
-          FACILITY: <span className="text-cyan-400 font-bold">{currentTrack.facilityId.toUpperCase()}</span>
+          FACILITY: <span className="text-cyan-400 font-pixel text-[10px]">{currentTrack.facilityId.toUpperCase()}</span>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="bg-[#10131a] border-b border-zinc-800 px-4 flex items-center gap-1 overflow-x-auto">
+      <div className="bg-[#10131a] border-b-2 border-zinc-800 px-4 flex items-center gap-1 overflow-x-auto">
         {TABS.map((tab) => {
           const isActive = activeTab === tab.id;
           const isDisabled =
@@ -95,9 +95,9 @@ export const DefenseArenaClientView: React.FC<DefenseArenaClientViewProps> = ({
               type="button"
               disabled={isDisabled}
               onClick={() => setActiveTab(tab.id)}
-              className={`py-3 px-3.5 text-xs font-mono font-bold border-b-2 flex items-center gap-1.5 whitespace-nowrap transition-all ${
+              className={`py-3 px-3.5 text-[10px] font-pixel border-b-2 flex items-center gap-1.5 whitespace-nowrap transition-all ${
                 isActive
-                  ? "border-cyan-400 text-cyan-300 bg-cyan-950/20"
+                  ? "border-cyan-400 text-cyan-300 bg-cyan-950/20 mc-text-shadow"
                   : isDisabled
                   ? "border-transparent text-zinc-600 cursor-not-allowed"
                   : "border-transparent text-zinc-400 hover:text-zinc-200 hover:border-zinc-700"

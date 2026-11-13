@@ -146,12 +146,12 @@ export function SystemsForgeEditor() {
   };
 
   return (
-    <div className="w-full flex flex-col bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden text-zinc-100">
+    <div className="w-full flex flex-col bg-zinc-950 border-4 border-[#262A31] shadow-2xl overflow-hidden text-zinc-100">
       {/* Top Header & Presets */}
-      <div className="flex flex-wrap items-center justify-between px-6 py-4 bg-zinc-900/90 border-b border-zinc-800 gap-4">
+      <div className="flex flex-wrap items-center justify-between px-6 py-4 bg-[#191B20] border-b-2 border-zinc-800 gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="font-mono text-xs font-bold tracking-wider uppercase text-zinc-300">
+          <div className="w-2.5 h-2.5 bg-emerald-400 border border-white/60 animate-pulse" />
+          <span className="font-pixel text-xs tracking-wider uppercase text-white mc-text-shadow">
             FRONTIER SYSTEMS FORGE
           </span>
           <span className="text-zinc-600 hidden sm:inline">•</span>
@@ -162,15 +162,15 @@ export function SystemsForgeEditor() {
 
         {/* Preset Selector */}
         <div className="flex items-center gap-2 overflow-x-auto text-xs font-mono">
-          <span className="text-zinc-500 hidden md:inline">Presets:</span>
+          <span className="text-zinc-400 font-pixel text-[9px] uppercase hidden md:inline">Presets:</span>
           {Object.entries(PRESET_BLUEPRINTS).map(([k, p]) => (
             <button
               key={k}
               onClick={() => handleSelectPreset(k)}
-              className={`px-3 py-1 rounded transition-colors ${
+              className={`px-3 py-1 font-pixel text-[9px] uppercase transition-all ${
                 activePresetKey === k
-                  ? "bg-red-600 text-white font-bold border border-red-500 shadow-sm"
-                  : "bg-zinc-800/80 text-zinc-400 hover:text-white"
+                  ? "voxel-btn voxel-btn-redstone text-white"
+                  : "voxel-btn voxel-btn-stone text-zinc-300 hover:text-white"
               }`}
             >
               {p.name.split(" ")[0]} ({p.recommendedRole || "demo"})
@@ -180,11 +180,11 @@ export function SystemsForgeEditor() {
       </div>
 
       {/* Editor Main Canvas & Palette */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-zinc-800 min-h-[480px]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b-2 border-zinc-800 min-h-[480px]">
         {/* Left: Building Block Palette (3 cols) */}
-        <div className="lg:col-span-3 p-5 bg-zinc-950/80 border-b lg:border-b-0 lg:border-r border-zinc-800 flex flex-col justify-between space-y-4">
+        <div className="lg:col-span-3 p-5 bg-[#101115] border-b lg:border-b-0 lg:border-r-2 border-zinc-800 flex flex-col justify-between space-y-4">
           <div className="space-y-3">
-            <div className="text-xs font-mono font-bold uppercase text-zinc-400 flex items-center gap-1.5">
+            <div className="text-[10px] font-pixel uppercase text-zinc-300 flex items-center gap-1.5 mc-text-shadow">
               <Layers className="w-3.5 h-3.5 text-zinc-400" />
               <span>Available Blocks</span>
             </div>
@@ -194,30 +194,30 @@ export function SystemsForgeEditor() {
                 <button
                   key={b.type}
                   onClick={() => handleAddBlock(b.type)}
-                  className="w-full text-left p-2.5 rounded-lg border border-zinc-800/80 bg-zinc-900/60 hover:bg-zinc-900 hover:border-zinc-700 transition-all group flex items-start justify-between gap-2"
+                  className="w-full text-left p-2.5 mc-slot-box hover:border-zinc-500 transition-all group flex items-start justify-between gap-2 active:translate-x-[1px] active:translate-y-[1px]"
                 >
                   <div>
                     <div className="flex items-center gap-1.5">
                       <div
-                        className="w-2 h-2 rounded-full flex-shrink-0"
+                        className="w-2.5 h-2.5 border border-white/40 flex-shrink-0"
                         style={{ backgroundColor: b.color }}
                       />
-                      <span className="text-xs font-mono font-bold text-zinc-300 group-hover:text-white">
+                      <span className="text-xs font-pixel text-zinc-200 group-hover:text-yellow-300 mc-text-shadow">
                         {b.name}
                       </span>
                     </div>
-                    <div className="text-[11px] font-mono text-zinc-500 line-clamp-1 mt-0.5">
+                    <div className="text-[11px] font-mono text-zinc-400 line-clamp-1 mt-0.5">
                       {b.description}
                     </div>
                   </div>
-                  <Plus className="w-3.5 h-3.5 text-zinc-500 group-hover:text-red-400 flex-shrink-0 mt-0.5" />
+                  <Plus className="w-3.5 h-3.5 text-zinc-400 group-hover:text-red-400 flex-shrink-0 mt-0.5" />
                 </button>
               ))}
             </div>
           </div>
 
           {/* Quick Helper */}
-          <div className="pt-3 border-t border-zinc-800 text-[11px] font-mono text-zinc-500">
+          <div className="pt-3 border-t border-zinc-800 text-[11px] font-mono text-zinc-400">
             Click any block above to append it to your pipeline. Connect blocks to compile a directed graph.
           </div>
         </div>
@@ -227,7 +227,7 @@ export function SystemsForgeEditor() {
           {/* Blueprint Title & Description */}
           <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-zinc-800/80">
             <div>
-              <h2 className="text-base sm:text-lg font-bold font-retro text-white">
+              <h2 className="text-base sm:text-lg font-pixel text-white mc-text-shadow">
                 {blueprint.name}
               </h2>
               <p className="text-xs font-mono text-zinc-400 mt-0.5">{blueprint.description}</p>
@@ -237,31 +237,31 @@ export function SystemsForgeEditor() {
               <button
                 onClick={handleAutoConnect}
                 title="Connect blocks in order"
-                className="px-2.5 py-1 text-xs font-mono bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 rounded"
+                className="voxel-btn voxel-btn-stone px-2.5 py-1 text-[10px] font-pixel text-zinc-300 hover:text-white"
               >
                 Auto-Connect Sequence
               </button>
             </div>
           </div>
 
-          {/* Block Pipeline Pipeline Flow Visualizer */}
+          {/* Block Pipeline Flow Visualizer */}
           <div className="flex-1 flex flex-col justify-center py-6">
-            <div className="flex items-center gap-2 overflow-x-auto p-4 bg-zinc-900/40 rounded-xl border border-zinc-800/80 min-h-[160px]">
+            <div className="flex items-center gap-2 overflow-x-auto p-4 mc-slot-box min-h-[160px]">
               {blueprint.nodes.map((node, idx) => {
                 const blockDef = FORGE_BLOCKS[node.blockType];
                 if (!blockDef) return null;
 
                 return (
                   <React.Fragment key={node.id}>
-                    <div className="flex-shrink-0 w-44 p-3 rounded-lg border border-zinc-700 bg-zinc-900 relative shadow-lg group">
+                    <div className="flex-shrink-0 w-44 p-3 mc-gui-box relative shadow-lg group">
                       {/* Color Strip */}
                       <div
-                        className="h-1 w-full rounded-t -mt-3 -mx-3 mb-2"
+                        className="h-1.5 w-full -mt-3 -mx-3 mb-2"
                         style={{ backgroundColor: blockDef.color }}
                       />
 
                       <div className="flex items-start justify-between gap-1">
-                        <span className="text-xs font-mono font-bold text-white truncate">
+                        <span className="text-xs font-pixel text-white mc-text-shadow truncate">
                           {blockDef.name}
                         </span>
                         <button
@@ -299,19 +299,19 @@ export function SystemsForgeEditor() {
           </div>
 
           {/* Graph Validation Status Strip */}
-          <div className="p-3 bg-zinc-900/60 border border-zinc-800 rounded-lg flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+          <div className="p-3 mc-slot-box flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
             <div className="flex items-center gap-2">
               {validation.valid ? (
                 <>
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span className="text-emerald-300 font-bold">
+                  <span className="text-emerald-300 font-pixel text-[10px] mc-text-shadow">
                     Graph Topology Valid (DAG, {validation.topologicalOrder.length} stages)
                   </span>
                 </>
               ) : (
                 <>
                   <AlertTriangle className="w-4 h-4 text-red-400" />
-                  <span className="text-red-300 font-bold">
+                  <span className="text-red-300 font-pixel text-[10px] mc-text-shadow">
                     Validation Issues ({validation.issues.length})
                   </span>
                 </>
@@ -328,12 +328,12 @@ export function SystemsForgeEditor() {
       </div>
 
       {/* Action Footer Bar */}
-      <div className="flex flex-wrap items-center justify-between px-6 py-4 bg-zinc-950 border-t border-zinc-800 gap-4 text-xs font-mono">
+      <div className="flex flex-wrap items-center justify-between px-6 py-4 bg-[#191B20] border-t-2 border-zinc-800 gap-4 text-xs font-mono">
         <div className="flex items-center gap-3">
           <button
             onClick={handleRunSimulation}
             disabled={isExecuting}
-            className="flex items-center gap-2 px-5 py-2.5 rounded bg-red-600 hover:bg-red-500 text-white font-bold uppercase transition-colors shadow-lg shadow-red-950/50 disabled:opacity-50"
+            className="voxel-btn voxel-btn-redstone flex items-center gap-2 px-5 py-2.5 text-white font-pixel text-xs uppercase disabled:opacity-50"
           >
             {isExecuting ? (
               <>
@@ -351,7 +351,7 @@ export function SystemsForgeEditor() {
           {executionTrace && (
             <button
               onClick={() => setShowDebrief(true)}
-              className="px-3 py-2 rounded bg-zinc-900 border border-zinc-700 hover:bg-zinc-800 text-zinc-200 transition-colors"
+              className="voxel-btn voxel-btn-stone px-3 py-2 text-zinc-200 text-xs font-pixel"
             >
               View Last Debrief
             </button>
@@ -361,7 +361,7 @@ export function SystemsForgeEditor() {
         <div className="flex items-center gap-2">
           <button
             onClick={handleExportJson}
-            className="flex items-center gap-1.5 px-3 py-2 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 transition-colors"
+            className="voxel-btn voxel-btn-stone flex items-center gap-1.5 px-3 py-2 text-zinc-300 text-xs font-mono"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export JSON</span>
@@ -369,7 +369,7 @@ export function SystemsForgeEditor() {
 
           <button
             onClick={() => setShowImportModal(true)}
-            className="flex items-center gap-1.5 px-3 py-2 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 transition-colors"
+            className="voxel-btn voxel-btn-stone flex items-center gap-1.5 px-3 py-2 text-zinc-300 text-xs font-mono"
           >
             <Upload className="w-3.5 h-3.5" />
             <span>Import JSON</span>

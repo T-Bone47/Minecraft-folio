@@ -1,0 +1,45 @@
+/**
+ * FRONTIER VOXEL DESIGN SYSTEM — DESIGN TOKENS
+ * Operation: Total Minecraft Engineering Transformation
+ */
+
+:root {
+  /* Core Materials */
+  --vx-deepslate: #101115;
+  --vx-carbon: #191b20;
+  --vx-dark-iron: #262a31;
+  --vx-machine-steel: #414750;
+  --vx-chrome-silver: #c8cdd2;
+  --vx-bright-iron: #e8ebed;
+
+  /* Engineering Signals */
+  --vx-racing-red: #d71d35;
+  --vx-redstone: #e23b3b;
+  --vx-telemetry-cyan: #22d3ee;
+  --vx-engineering-green: #34d399;
+  --vx-golden-circuit: #eabf52;
+  --vx-warning-amber: #f59e0b;
+
+  /* Text & Readability (WCAG 2.2 AA compliant contrast) */
+  --vx-text-primary: #f4f4f5;
+  --vx-text-secondary: #b7c0cb;
+  --vx-text-muted: #8c97a5;
+  --vx-text-faint: #5a6472;
+
+  /* Mechanical Bevel & Shadow Tokens */
+  --vx-bevel-light: #525964;
+  --vx-bevel-dark: #121418;
+  --vx-shadow-hard: 3px 3px 0px #000000;
+  --vx-shadow-raised: 4px 4px 0px #0a0b0e;
+  --vx-shadow-inset: inset 2px 2px 0px #090a0d, inset -1px -1px 0px rgba(255, 255, 255, 0.08);
+
+  /* Borders & Radii */
+  --vx-border-width: 3px;
+  --vx-border-subtle: 2px solid #2d333d;
+  --vx-border-mechanical: 3px solid #3d4450;
+
+  /* Typography Stacks */
+  --vx-font-pixel: "Press Start 2P", monospace;
+  --vx-font-silkscreen: "Silkscreen", monospace;
+  --vx-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}

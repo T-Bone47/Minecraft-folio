@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
+import { RedstoneStatusBar } from "@/components/navigation/RedstoneStatusBar";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
 import {
   multiverseProjects,
@@ -10,6 +11,13 @@ import {
 } from "@/lib/multiverse/projectRegistry";
 import { EvidenceInspectorView } from "@/components/multiverse/EvidenceInspectorView";
 import { RecruiterPathwaysView } from "@/components/multiverse/RecruiterPathwaysView";
+import {
+  VoxelPanel,
+  VoxelButton,
+  VoxelStatusLamp,
+  VoxelBadge,
+  VoxelShieldIcon,
+} from "@/components/ui/voxel";
 import {
   ArrowLeft,
   ExternalLink,
@@ -50,78 +58,93 @@ export default async function MultiverseEngineeringProofPage({ params }: PagePro
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-sky-500/30 selection:text-sky-200">
+    <div className="min-h-screen technical-grid-bg text-zinc-100 flex flex-col font-sans selection:bg-[#ff8000] selection:text-white">
       <PortfolioNav />
+      <RedstoneStatusBar />
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-8">
         {/* Breadcrumb Navigation */}
-        <div className="flex items-center gap-2 text-xs font-mono text-slate-400 mb-6">
-          <Link href="/multiverse" className="hover:text-white flex items-center gap-1">
+        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
+          <Link href="/multiverse" className="hover:text-amber-400 flex items-center gap-1">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>MULTIVERSE HUB</span>
           </Link>
           <span>/</span>
-          <Link href={`/multiverse/${project.slug}`} className="hover:text-white uppercase">
+          <Link href={`/multiverse/${project.slug}`} className="hover:text-amber-400 uppercase">
             {project.shortName}
           </Link>
           <span>/</span>
-          <span className="text-sky-400 font-bold">6-LAYER ENGINEERING PROOF</span>
+          <span className="text-amber-400 font-bold uppercase">6-LAYER ENGINEERING PROOF</span>
         </div>
 
-        {/* Header */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-6 rounded-2xl bg-slate-900/60 border border-slate-800 mb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span
-                className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: project.themeColor }}
-              />
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                AUTHORITATIVE TECHNICAL EVIDENCE
-              </span>
+        {/* Header Voxel Panel */}
+        <VoxelPanel
+          variant="iron"
+          title={`EVIDENCE DOSSIER // ${project.name.toUpperCase()}`}
+          icon={<VoxelShieldIcon size={16} />}
+          headerActions={
+            <VoxelStatusLamp tone="emerald" label="VERIFIED AUDIT" pulse />
+          }
+        >
+          <div className="flex flex-wrap items-start justify-between gap-6">
+            <div className="max-w-2xl space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="font-pixel text-[8px] text-amber-400 uppercase">
+                  AUTHORITATIVE TECHNICAL EVIDENCE
+                </span>
+                <span className="text-zinc-600">•</span>
+                <span className="font-mono text-xs text-zinc-400">
+                  {project.provenance}
+                </span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold font-retro text-white tracking-wide uppercase">
+                {project.name}: 6-Layer Engineering Audit
+              </h1>
+              <p className="text-xs font-mono text-zinc-300">
+                Verified Commit SHA: <code className="text-amber-400 font-bold">{project.commitSha}</code>
+              </p>
             </div>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight mb-1">
-              {project.name}: 6-Layer Engineering Audit
-            </h1>
-            <p className="text-xs text-slate-400 font-mono">
-              Verified Commit SHA: <code className="text-amber-400">{project.commitSha}</code> • Provenance: {project.provenance}
-            </p>
-          </div>
 
-          <div className="flex items-center gap-3">
-            <Link
-              href={`/multiverse/${project.slug}`}
-              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs font-bold border border-slate-700 transition-colors"
-            >
-              EXPERIENCE DEMO
-            </Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <VoxelButton
+                variant="stone"
+                href={`/multiverse/${project.slug}`}
+              >
+                EXPERIENCE DEMO
+              </VoxelButton>
 
-            <a
-              href={project.repositoryUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-mono text-xs font-bold flex items-center gap-2 transition-all shadow-md shadow-sky-950"
-            >
-              <GitBranch className="w-4 h-4 text-amber-300" />
-              <span>SOURCE TREE</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+              <VoxelButton
+                variant="gold"
+                href={project.repositoryUrl}
+                external
+                icon={<GitBranch className="w-3.5 h-3.5 text-black" />}
+              >
+                SOURCE TREE
+              </VoxelButton>
+            </div>
           </div>
-        </div>
+        </VoxelPanel>
 
         {/* 6-Layer Evidence Inspector */}
-        <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 mb-12">
+        <VoxelPanel
+          variant="deepslate"
+          title="6-LAYER MATHEMATICAL & ARCHITECTURAL MANIFEST"
+          icon={<Layers className="w-4 h-4 text-amber-400" />}
+        >
           <EvidenceInspectorView />
-        </div>
+        </VoxelPanel>
 
         {/* Recruiter Pathways & Technical Reviewer Guide */}
-        <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800">
+        <VoxelPanel
+          variant="iron"
+          title="RECRUITER PATHWAYS & TECHNICAL REVIEW GUIDE"
+          icon={<ShieldCheck className="w-4 h-4 text-emerald-400" />}
+        >
           <RecruiterPathwaysView />
-        </div>
+        </VoxelPanel>
       </main>
 
       <PortfolioFooter />
     </div>
   );
 }
-

@@ -7,6 +7,7 @@ import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
 import { RedstoneStatusBar } from "@/components/navigation/RedstoneStatusBar";
 import { EngineeringIndex } from "@/components/work/EngineeringIndex";
+import { VoxelPanel, VoxelBadge, VoxelButton } from "@/components/ui/voxel";
 import {
   Cpu,
   CheckCircle2,
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="min-h-screen bg-transparent text-[#f4f4f5] font-sans selection:bg-[#ff8000] selection:text-black">
+    <div className="technical-grid-bg min-h-screen text-[#f4f4f5] font-sans selection:bg-[#ff8000] selection:text-black">
       <PortfolioNav />
 
       {/* Redstone Status Bar */}
@@ -100,23 +101,24 @@ export default function WorkPage() {
         {/* Detailed system dossiers */}
         <div className="space-y-8">
           {projects.map((proj, idx) => (
-            <article
+            <VoxelPanel
               key={proj.id}
-              className="mc-gui-box p-6 sm:p-8 space-y-5 font-mono group hover:border-[#ff8000] transition-colors"
+              material="dark-iron"
+              title={`SYS-0${idx + 1} // ${proj.facility.toUpperCase()}`}
+              titleLamp={proj.status === "completed" || proj.status === "active" ? "emerald" : "amber"}
+              className="space-y-5 font-mono group hover:border-[#ff8000] transition-colors"
             >
               {/* Header: System ID & Status */}
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#121214] pb-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-zinc-800/80 pb-3">
                 <div className="flex flex-wrap items-center gap-2 text-[10px] uppercase">
-                  <span className="font-pixel text-[10px] text-[#ff8000] mc-text-shadow">
-                    SYS-0{idx + 1} {"//"} {proj.facility.toUpperCase()}
-                  </span>
-                  <span className="text-zinc-600">|</span>
-                  <span className="font-pixel text-[9px] text-emerald-400 mc-text-shadow flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                  <VoxelBadge
+                    tone={proj.status === "completed" || proj.status === "active" ? "emerald" : "amber"}
+                    size="sm"
+                  >
                     {proj.status.toUpperCase()}
-                  </span>
+                  </VoxelBadge>
                   <span className="text-zinc-600">|</span>
-                  <span className="text-zinc-400">YEAR: {proj.year}</span>
+                  <span className="text-zinc-400 font-mono text-[10px]">YEAR: {proj.year}</span>
                 </div>
 
                 <div className="font-pixel text-[9px] text-zinc-400 mc-text-shadow">
@@ -200,10 +202,10 @@ export default function WorkPage() {
               </div>
 
               {/* Action Buttons: 3D Beveled Minecraft Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-3 border-t-2 border-[#121214]">
+              <div className="flex flex-wrap items-center gap-3 pt-3 border-t-2 border-zinc-800/80">
                 <Link
                   href={`/work/${proj.slug}`}
-                  className="mc-btn-gold px-4 py-2.5 text-[10px] sm:text-xs flex items-center gap-2"
+                  className="voxel-btn voxel-btn-gold px-4 py-2 text-[10px] sm:text-xs flex items-center gap-2"
                 >
                   <Terminal className="w-3.5 h-3.5" />
                   <span>VIEW 10-CHAPTER CASE STUDY</span>
@@ -212,7 +214,7 @@ export default function WorkPage() {
 
                 <Link
                   href="/world"
-                  className="mc-btn-stone px-3.5 py-2.5 text-[10px] sm:text-xs flex items-center gap-2"
+                  className="voxel-btn voxel-btn-stone px-3.5 py-2 text-[10px] sm:text-xs flex items-center gap-2 text-yellow-300 hover:text-white"
                 >
                   <Box className="w-3.5 h-3.5 text-yellow-300" />
                   <span>LOCATE IN 3D CAMPUS</span>
@@ -223,14 +225,14 @@ export default function WorkPage() {
                     href={proj.links.repository}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mc-btn-stone px-3 py-2.5 text-[10px] sm:text-xs flex items-center gap-1.5 ml-auto text-zinc-300 hover:text-white"
+                    className="voxel-btn voxel-btn-stone px-3 py-2 text-[10px] sm:text-xs flex items-center gap-1.5 ml-auto text-zinc-300 hover:text-white"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                     <span>SOURCE REPO</span>
                   </a>
                 )}
               </div>
-            </article>
+            </VoxelPanel>
           ))}
         </div>
       </main>

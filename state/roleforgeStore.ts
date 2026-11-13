@@ -70,6 +70,7 @@ interface RoleForgeState {
   // Actions
   openTerminal: (tab?: RoleForgeTab) => void;
   closeTerminal: () => void;
+  setActiveTab: (tab: RoleForgeTab) => void;
   setBudget: (budget: VisitorTimeBudget) => void;
   selectPreset: (slug: string) => void;
   setCustomJobText: (text: string) => void;
@@ -123,6 +124,10 @@ export const useRoleForgeStore = create<RoleForgeState>((set, get) => ({
 
   closeTerminal: () => {
     set({ isOpen: false });
+  },
+
+  setActiveTab: (tab: RoleForgeTab) => {
+    set({ activeTab: tab });
   },
 
   setBudget: (budget: VisitorTimeBudget) => {

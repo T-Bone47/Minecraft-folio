@@ -1,0 +1,69 @@
+/**
+ * FRONTIER VOXEL DESIGN SYSTEM — ORIGINAL PIXEL MATERIALS
+ * 8 Original, lightweight, seamless pixel-art textures rendered with crispEdges.
+ */
+
+/* MATERIAL 01 — ENGINEERING DEEPSLATE (Dark technical surfaces) */
+.voxel-mat-deepslate {
+  background-color: #101115;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23101115'/%3E%3Crect x='0' y='0' width='8' height='8' fill='%2314161c'/%3E%3Crect x='8' y='8' width='8' height='8' fill='%2314161c'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%23191c24'/%3E%3Crect x='10' y='6' width='2' height='2' fill='%230c0d10'/%3E%3Crect x='4' y='12' width='3' height='2' fill='%23181b22'/%3E%3Crect x='12' y='10' width='2' height='3' fill='%23191c24'/%3E%3Cline x1='0' y1='8' x2='16' y2='8' stroke='%23090a0d' stroke-width='1'/%3E%3Cline x1='8' y1='0' x2='8' y2='16' stroke='%23090a0d' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  image-rendering: pixelated;
+}
+
+/* MATERIAL 02 — INDUSTRIAL IRON (Frames, equipment borders & panels) */
+.voxel-mat-iron {
+  background-color: #262a31;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23262a31'/%3E%3Crect x='1' y='1' width='14' height='14' fill='%232e333b'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23414853'/%3E%3Crect x='13' y='2' width='1' height='1' fill='%23414853'/%3E%3Crect x='2' y='13' width='1' height='1' fill='%231b1e23'/%3E%3Crect x='13' y='13' width='1' height='1' fill='%231b1e23'/%3E%3Crect x='6' y='6' width='4' height='4' fill='%23363c46'/%3E%3Cline x1='0' y1='0' x2='16' y2='0' stroke='%23464d59' stroke-width='1'/%3E%3Cline x1='0' y1='0' x2='0' y2='16' stroke='%23464d59' stroke-width='1'/%3E%3Cline x1='0' y1='15' x2='16' y2='15' stroke='%2316181d' stroke-width='1'/%3E%3Cline x1='15' y1='0' x2='15' y2='16' stroke='%2316181d' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  image-rendering: pixelated;
+}
+
+/* MATERIAL 03 — POLISHED CHROME (Workstation headers & command bars) */
+.voxel-mat-chrome {
+  background-color: #383e48;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23343a44'/%3E%3Crect x='0' y='0' width='16' height='4' fill='%2348505c'/%3E%3Crect x='0' y='4' width='16' height='8' fill='%233a414c'/%3E%3Crect x='0' y='12' width='16' height='4' fill='%23282d35'/%3E%3Crect x='2' y='1' width='4' height='1' fill='%23636d7d'/%3E%3Crect x='10' y='1' width='3' height='1' fill='%23636d7d'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  image-rendering: pixelated;
+}
+
+/* MATERIAL 04 — DARK COPPER CIRCUITRY (Mechanical detail surfaces) */
+.voxel-mat-copper {
+  background-color: #1e1713;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%231c1511'/%3E%3Crect x='2' y='2' width='3' height='3' fill='%238c4826'/%3E%3Crect x='11' y='11' width='3' height='3' fill='%238c4826'/%3E%3Cline x1='4' y1='4' x2='12' y2='4' stroke='%235e3019' stroke-width='1'/%3E%3Cline x1='12' y1='4' x2='12' y2='12' stroke='%235e3019' stroke-width='1'/%3E%3Crect x='3' y='3' width='1' height='1' fill='%23c96d3c'/%3E%3Crect x='12' y='12' width='1' height='1' fill='%23c96d3c'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  image-rendering: pixelated;
+}
+
+/* MATERIAL 05 — REDSTONE CIRCUIT BOARD (Processing & logic indicators) */
+.voxel-mat-redstone {
+  background-color: #140d0e;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23130d0e'/%3E%3Crect x='1' y='1' width='2' height='2' fill='%238a1c1c'/%3E%3Crect x='7' y='7' width='3' height='3' fill='%23bf2828'/%3E%3Crect x='13' y='13' width='2' height='2' fill='%238a1c1c'/%3E%3Cline x1='2' y1='2' x2='8' y2='8' stroke='%23521212' stroke-width='1'/%3E%3Cline x1='8' y1='8' x2='14' y2='14' stroke='%23521212' stroke-width='1'/%3E%3Crect x='8' y='8' width='1' height='1' fill='%23ff5252'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  image-rendering: pixelated;
+}
+
+/* MATERIAL 06 — TECHNICAL BLUEPRINT (Schematic backgrounds & graph areas) */
+.voxel-mat-blueprint {
+  background-color: #0b1522;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'%3E%3Crect width='24' height='24' fill='%230b1522'/%3E%3Cline x1='0' y1='23' x2='24' y2='23' stroke='%2316273c' stroke-width='1'/%3E%3Cline x1='23' y1='0' x2='23' y2='24' stroke='%2316273c' stroke-width='1'/%3E%3Crect x='0' y='0' width='2' height='2' fill='%23223f61'/%3E%3Crect x='22' y='22' width='2' height='2' fill='%23223f61'/%3E%3C/svg%3E");
+  background-size: 24px 24px;
+  image-rendering: pixelated;
+}
+
+/* MATERIAL 07 — REINFORCED GLASS (Subtle data display overlays) */
+.voxel-mat-glass {
+  background-color: rgba(18, 24, 30, 0.88);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cline x1='2' y1='4' x2='6' y2='0' stroke='%23486378' stroke-width='1' opacity='0.4'/%3E%3Cline x1='10' y1='12' x2='14' y2='8' stroke='%23486378' stroke-width='1' opacity='0.4'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%236f96b5' opacity='0.6'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  backdrop-filter: blur(4px);
+  image-rendering: pixelated;
+}
+
+/* MATERIAL 08 — VOXEL CARBON (Motorsport systems & technical equipment) */
+.voxel-mat-carbon {
+  background-color: #121316;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%23121316'/%3E%3Crect x='0' y='0' width='4' height='4' fill='%231a1b20'/%3E%3Crect x='4' y='4' width='4' height='4' fill='%231a1b20'/%3E%3Crect x='1' y='1' width='2' height='2' fill='%2324262c'/%3E%3Crect x='5' y='5' width='2' height='2' fill='%2324262c'/%3E%3C/svg%3E");
+  background-size: 8px 8px;
+  image-rendering: pixelated;
+}

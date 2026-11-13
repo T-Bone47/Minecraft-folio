@@ -7,6 +7,14 @@ import { PortfolioNav } from "@/components/navigation/PortfolioNav";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
 import { RedstoneStatusBar } from "@/components/navigation/RedstoneStatusBar";
 import {
+  VoxelPanel,
+  VoxelCard,
+  VoxelBadge,
+  VoxelButton,
+  VoxelDataScreen,
+  VoxelStatusLamp,
+} from "@/components/ui/voxel";
+import {
   Terminal,
   Activity,
   Cpu,
@@ -76,7 +84,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent text-[#f4f4f5] font-sans selection:bg-[#ff8000] selection:text-black">
+    <div className="technical-grid-bg min-h-screen text-[#f4f4f5] font-sans selection:bg-[#ff8000] selection:text-black">
       {/* Global Navigation Styled as Minecraft Hotbar */}
       <PortfolioNav />
 
@@ -118,7 +126,7 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/world"
-                  className="mc-btn-gold h-10 px-5 text-xs flex items-center gap-2.5 shadow-[0_0_16px_rgba(255,128,0,0.4)] shrink-0"
+                  className="voxel-btn voxel-btn-gold h-10 px-5 text-xs flex items-center gap-2.5 shadow-[0_0_16px_rgba(255,128,0,0.4)] shrink-0"
                 >
                   <Box className="w-4 h-4 text-white shrink-0" />
                   <span>ENTER 3D WORLD</span>
@@ -127,7 +135,7 @@ export default function HomePage() {
 
                 <Link
                   href="/work"
-                  className="mc-btn-stone h-10 px-4 text-xs flex items-center gap-2 shrink-0 text-yellow-300 hover:text-white"
+                  className="voxel-btn voxel-btn-stone h-10 px-4 text-xs flex items-center gap-2 shrink-0 text-yellow-300 hover:text-white"
                 >
                   <Cpu className="w-4 h-4 text-sky-400 shrink-0" />
                   <span>CANONICAL SYSTEMS</span>
@@ -138,7 +146,7 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/recruiter"
-                  className="mc-btn-emerald h-9 px-3.5 text-xs flex items-center gap-2 shrink-0"
+                  className="voxel-btn voxel-btn-emerald h-9 px-3.5 text-xs flex items-center gap-2 shrink-0"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-emerald-200 shrink-0" />
                   <span>RECRUITER PASS (30s)</span>
@@ -147,7 +155,7 @@ export default function HomePage() {
                 <a
                   href="/Asish_Oliver_M_Resume.pdf"
                   download="Asish_Oliver_M_Resume.pdf"
-                  className="mc-btn h-9 px-3.5 text-xs flex items-center gap-2 shrink-0 text-sky-200 hover:text-white !bg-sky-950/80 border-sky-500/80"
+                  className="voxel-btn voxel-btn-cyan h-9 px-3.5 text-xs flex items-center gap-2 shrink-0"
                   title="Download Asish Oliver M Resume (PDF)"
                 >
                   <FileText className="w-3.5 h-3.5 text-sky-400 shrink-0" />
@@ -159,15 +167,15 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 <Link
                   href="/proofcast"
-                  className="mc-btn-stone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 text-red-300 hover:text-white border-red-800/80 hover:border-red-500 bg-red-950/30 shrink-0"
+                  className="voxel-btn voxel-btn-redstone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 shrink-0"
                 >
-                  <Film className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                  <Film className="w-3.5 h-3.5 text-red-200 shrink-0" />
                   <span>WATCH PROOFCAST (60s)</span>
                 </Link>
 
                 <Link
                   href="/forge"
-                  className="mc-btn-stone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 text-emerald-300 hover:text-white border-emerald-800/80 hover:border-emerald-500 bg-emerald-950/30 shrink-0"
+                  className="voxel-btn voxel-btn-stone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 text-emerald-300 hover:text-white shrink-0"
                 >
                   <Cpu className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                   <span>SYSTEMS FORGE</span>
@@ -175,7 +183,7 @@ export default function HomePage() {
 
                 <Link
                   href="/observatory"
-                  className="mc-btn-stone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 text-sky-300 hover:text-white border-sky-800/80 hover:border-sky-500 bg-sky-950/30 shrink-0"
+                  className="voxel-btn voxel-btn-stone h-8 px-3 text-[11px] font-pixel flex items-center gap-1.5 text-sky-300 hover:text-white shrink-0"
                 >
                   <Activity className="w-3.5 h-3.5 text-sky-400 shrink-0" />
                   <span>LIVE PULSE</span>
@@ -184,17 +192,22 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Hero Right: Redstone Instrumentation Telemetry Console (5 cols) — Integrated, No Card-in-Card */}
-          <div className="lg:col-span-5 mc-gui-box p-5 space-y-4 font-mono shadow-2xl">
-            {/* Box Header */}
-            <div className="flex items-center justify-between border-b-2 border-[#121214] pb-2.5">
+          {/* Hero Right: Redstone Instrumentation Telemetry Console (5 cols) */}
+          <VoxelPanel
+            material="dark-iron"
+            title="PLAYABLE ENGINEERING"
+            titleLamp="cyan"
+            className="lg:col-span-5 space-y-4 font-mono shadow-2xl"
+          >
+            {/* Box Header Sub-tag */}
+            <div className="flex items-center justify-between border-b-2 border-zinc-800/80 pb-2.5">
               <span className="font-pixel text-[10px] text-yellow-400 mc-text-shadow flex items-center gap-2">
                 <Gauge className="w-4 h-4 text-[#ff8000]" />
-                <span>PLAYABLE ENGINEERING</span>
+                <span>LOCAL SIMULATIONS</span>
               </span>
-              <span className="font-pixel text-[8px] text-emerald-300 bg-emerald-950/80 px-2 py-0.5 border border-emerald-700 mc-text-shadow">
+              <VoxelBadge tone="emerald" size="sm">
                 60 HZ LIVE
-              </span>
+              </VoxelBadge>
             </div>
 
             {/* Integrated Metrics Surface */}
@@ -217,22 +230,22 @@ export default function HomePage() {
 
             {/* Interactive Scenarios Directory */}
             <div className="space-y-2 text-xs font-mono">
-              <div className="flex items-start gap-2.5 p-2 bg-black/30 border border-zinc-800/80">
-                <span className="w-2 h-2 rounded-full bg-[#ff8000] shadow-[0_0_6px_#ff8000] mt-1.5 shrink-0" />
+              <div className="flex items-start gap-2.5 p-2 bg-black/40 border border-zinc-800/80">
+                <VoxelStatusLamp state="amber" className="mt-1" />
                 <div>
                   <div className="font-pixel text-[9px] text-white mc-text-shadow">4-Checkpoint Lap Simulator</div>
                   <div className="text-[11px] text-zinc-400">Timed circuit run, friction-circle limits, recorded replay</div>
                 </div>
               </div>
-              <div className="flex items-start gap-2.5 p-2 bg-black/30 border border-zinc-800/80">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] mt-1.5 shrink-0" />
+              <div className="flex items-start gap-2.5 p-2 bg-black/40 border border-zinc-800/80">
+                <VoxelStatusLamp state="emerald" className="mt-1" />
                 <div>
                   <div className="font-pixel text-[9px] text-white mc-text-shadow">7 Pipeline Fault Diagnostics</div>
                   <div className="text-[11px] text-zinc-400">Stream desync, CRC errors, live packet recovery</div>
                 </div>
               </div>
-              <div className="flex items-start gap-2.5 p-2 bg-black/30 border border-zinc-800/80">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#22d3ee] mt-1.5 shrink-0" />
+              <div className="flex items-start gap-2.5 p-2 bg-black/40 border border-zinc-800/80">
+                <VoxelStatusLamp state="cyan" className="mt-1" />
                 <div>
                   <div className="font-pixel text-[9px] text-white mc-text-shadow">Held-Out ML Evaluation</div>
                   <div className="text-[11px] text-zinc-400">16,228 player embeddings &amp; offline speech parsing</div>
@@ -248,7 +261,7 @@ export default function HomePage() {
                 <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-          </div>
+          </VoxelPanel>
         </section>
 
         {/* 3. ENGINEERING STATEMENT: STYLED AS MINECRAFT OAK SIGN */}
@@ -288,20 +301,23 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((proj) => (
-              <div
+              <VoxelCard
                 key={proj.id}
-                className="mc-gui-box p-6 sm:p-7 flex flex-col justify-between hover:border-[#ff8000] transition-all group"
+                material="dark-iron"
+                className="p-6 sm:p-7 flex flex-col justify-between hover:border-[#ff8000] transition-all group"
               >
                 <div className="space-y-3">
                   {/* Card Header */}
                   <div className="flex items-center justify-between text-xs font-mono border-b border-zinc-800 pb-2">
-                    <span className="font-pixel text-[11px] text-[#ff8000] mc-text-shadow">
+                    <span className="font-pixel text-[10px] text-[#ff8000] mc-text-shadow">
                       SYSTEM SPEC // {proj.facility}
                     </span>
-                    <span className="font-pixel text-[11px] text-emerald-400 mc-text-shadow flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
+                    <VoxelBadge
+                      tone={proj.status === "completed" || proj.status === "active" ? "emerald" : "amber"}
+                      size="sm"
+                    >
                       {proj.status.toUpperCase()}
-                    </span>
+                    </VoxelBadge>
                   </div>
 
                   {/* Project Title in Minecraft Pixel Typography */}
@@ -310,7 +326,7 @@ export default function HomePage() {
                   </h3>
 
                   {proj.isGame && (
-                    <div className="text-[11px] font-pixel text-amber-300 bg-amber-950/80 px-2 py-0.5 border border-amber-700 mc-text-shadow inline-block">
+                    <div className="text-[10px] font-pixel text-amber-300 bg-amber-950/80 px-2 py-0.5 border border-amber-700 mc-text-shadow inline-block">
                       F1 STRATEGY SIMULATION GAME [GAME — IN DEV]
                     </div>
                   )}
@@ -325,13 +341,13 @@ export default function HomePage() {
 
                   {/* Verified Metrics Surface */}
                   {proj.metrics && proj.metrics.length > 0 && (
-                    <div className="bg-[#121214] border border-zinc-800 p-3 grid grid-cols-2 gap-2.5 font-mono my-2 shadow-inner">
+                    <div className="mc-slot-box p-3 grid grid-cols-2 gap-2.5 font-mono my-2 shadow-inner">
                       {proj.metrics.slice(0, 4).map((m, i) => (
                         <div key={i}>
                           <div className="font-pixel text-xs text-white mc-text-shadow">
                             {m.value}
                           </div>
-                          <div className="text-[11px] text-zinc-400 uppercase mt-0.5">
+                          <div className="text-[10px] text-zinc-400 uppercase mt-0.5">
                             {m.label}
                           </div>
                         </div>
@@ -344,7 +360,7 @@ export default function HomePage() {
                     {proj.technologies.slice(0, 6).map((tech) => (
                       <span
                         key={tech}
-                        className="bg-black/50 border border-zinc-700/80 px-2.5 py-1 text-[11px] font-mono text-zinc-200"
+                        className="mc-slot-box px-2.5 py-1 text-[10px] font-mono text-zinc-200 border border-zinc-800"
                       >
                         {tech}
                       </span>
@@ -355,12 +371,12 @@ export default function HomePage() {
                 {/* Action Button */}
                 <Link
                   href={`/work/${proj.slug}`}
-                  className="mc-btn-stone mt-5 w-full py-2.5 px-3 flex items-center justify-between text-yellow-300 hover:text-white text-xs"
+                  className="voxel-btn voxel-btn-stone mt-5 w-full py-2.5 px-3 flex items-center justify-between text-yellow-300 hover:text-white text-xs"
                 >
                   <span>INSPECT 10-STEP CASE STUDY</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
-              </div>
+              </VoxelCard>
             ))}
           </div>
         </section>
@@ -379,9 +395,10 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {engineeringDomains.map((dom, i) => (
-              <div
+              <VoxelCard
                 key={i}
-                className="mc-gui-box p-4 hover:border-[#3b82f6] transition-colors"
+                material="deepslate"
+                className="p-4 hover:border-[#3b82f6] transition-colors"
               >
                 <div className="font-pixel text-[10px] text-yellow-300 mc-text-shadow mb-1 flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#3b82f6] border border-white/40" />
@@ -390,17 +407,22 @@ export default function HomePage() {
                 <p className="text-[11px] font-mono text-zinc-300 leading-relaxed">
                   {dom.desc}
                 </p>
-              </div>
+              </VoxelCard>
             ))}
           </div>
         </section>
 
         {/* 6. AI / MACHINE LEARNING AS AN APPLIED TOOL */}
-        <section className="mc-gui-box p-6 sm:p-8 space-y-6">
+        <VoxelPanel
+          material="carbon"
+          title="APPLIED MACHINE LEARNING"
+          titleLamp="emerald"
+          className="p-6 sm:p-8 space-y-6"
+        >
           <div>
-            <div className="font-pixel text-[11px] uppercase text-emerald-400 mc-text-shadow mb-1 flex items-center gap-2">
+            <div className="font-pixel text-[10px] uppercase text-emerald-400 mc-text-shadow mb-1 flex items-center gap-2">
               <Brain className="w-4 h-4 text-emerald-400" />
-              <span>APPLIED MACHINE LEARNING</span>
+              <span>EMPIRICAL DISCOVERY</span>
             </div>
             <h2 className="font-pixel text-lg sm:text-xl text-white mc-text-shadow text-balance">
               Applied Intelligence vs Buzzwords
@@ -412,7 +434,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* EA FC Intelligence */}
-            <div className="bg-[#121214] border border-zinc-800 p-5 space-y-3 shadow-inner">
+            <div className="mc-slot-box p-5 space-y-3 shadow-inner">
               <div className="font-pixel text-[11px] text-[#00d2be] mc-text-shadow uppercase">
                 SPORTS PLAYER EMBEDDINGS
               </div>
@@ -432,7 +454,7 @@ export default function HomePage() {
             </div>
 
             {/* VyaparPulse */}
-            <div className="bg-[#121214] border border-zinc-800 p-5 space-y-3 shadow-inner">
+            <div className="mc-slot-box p-5 space-y-3 shadow-inner">
               <div className="font-pixel text-[11px] text-amber-400 mc-text-shadow uppercase">
                 VOICE PARSING &amp; REVENUE FORECASTS
               </div>
@@ -451,7 +473,7 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-        </section>
+        </VoxelPanel>
 
         {/* 7. EXPERIENCE & EDUCATION */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -477,17 +499,18 @@ export default function HomePage() {
 
             <div className="space-y-4">
               {experience.map((exp) => (
-                <div
+                <VoxelCard
                   key={exp.id}
-                  className="mc-gui-box p-5 space-y-2"
+                  material="dark-iron"
+                  className="p-5 space-y-2"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-zinc-800 pb-2">
                     <div className="font-pixel text-xs text-white mc-text-shadow">
                       {exp.organization}
                     </div>
-                    <span className="font-pixel text-[8px] text-amber-300 bg-amber-950/80 px-2 py-0.5 border border-amber-700 mc-text-shadow self-start sm:self-auto">
+                    <VoxelBadge tone="amber" size="sm">
                       {exp.period}
-                    </span>
+                    </VoxelBadge>
                   </div>
 
                   <div className="text-xs font-mono text-[#00d2be] font-bold">
@@ -498,13 +521,13 @@ export default function HomePage() {
                     {exp.focus.map((f, idx) => (
                       <span
                         key={idx}
-                        className="mc-slot-box text-[9px] px-2 py-0.5 font-mono text-zinc-300"
+                        className="mc-slot-box text-[9px] px-2 py-0.5 font-mono text-zinc-300 border border-zinc-800"
                       >
                         {f}
                       </span>
                     ))}
                   </div>
-                </div>
+                </VoxelCard>
               ))}
             </div>
           </div>
@@ -522,7 +545,7 @@ export default function HomePage() {
                 </h2>
               </div>
 
-              <div className="mc-gui-box p-4 space-y-2">
+              <VoxelCard material="carbon" className="p-4 space-y-2">
                 <div className="font-pixel text-xs text-white mc-text-shadow">
                   {education.institution}
                 </div>
@@ -532,11 +555,11 @@ export default function HomePage() {
                 <div className="text-[10px] font-mono text-zinc-400 pt-2 border-t border-zinc-800">
                   Focus: Numerical methods, distributed systems, algorithms & real-time computing.
                 </div>
-              </div>
+              </VoxelCard>
             </div>
 
             {/* Currently Building */}
-            <div className="mc-slot-box p-4 space-y-2">
+            <div className="mc-slot-box p-4 space-y-2 border border-zinc-800">
               <div className="font-pixel text-[9px] uppercase text-[#ff8000] mc-text-shadow flex items-center gap-1.5">
                 <Zap className="w-3.5 h-3.5" />
                 <span>CURRENTLY BUILDING</span>
@@ -564,9 +587,10 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {technicalArsenal.map((stack, idx) => (
-              <div
+              <VoxelCard
                 key={idx}
-                className="mc-gui-box p-4 space-y-2.5"
+                material="dark-iron"
+                className="p-4 space-y-2.5"
               >
                 <div className="font-pixel text-[10px] text-yellow-300 mc-text-shadow pb-1 border-b border-zinc-800 flex items-center justify-between">
                   <span>{stack.category}</span>
@@ -578,23 +602,28 @@ export default function HomePage() {
                   {stack.items.map((item) => (
                     <span
                       key={item}
-                      className="mc-slot-box text-[9px] px-2 py-0.5 font-mono text-zinc-300"
+                      className="mc-slot-box text-[9px] px-2 py-0.5 font-mono text-zinc-300 border border-zinc-800"
                     >
                       {item}
                     </span>
                   ))}
                 </div>
-              </div>
+              </VoxelCard>
             ))}
           </div>
         </section>
 
         {/* 9. CONTACT TERMINAL: STYLED AS MINECRAFT COMMAND BLOCK / ENDER TERMINAL */}
-        <section className="mc-gui-box p-6 sm:p-10 text-center sm:text-left shadow-[0_8px_0_#000000]">
+        <VoxelPanel
+          material="carbon"
+          title="COMMUNICATION UPLINK"
+          titleLamp="gold"
+          className="p-6 sm:p-10 text-center sm:text-left shadow-[0_8px_0_#000000]"
+        >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="space-y-2">
               <div className="font-pixel text-[10px] uppercase text-[#ff8000] mc-text-shadow">
-                COMMUNICATION UPLINK
+                TRANSMISSION CHANNEL
               </div>
               <h2 className="font-pixel text-xl sm:text-3xl text-white mc-text-shadow leading-tight">
                 LET&apos;S BUILD SOMETHING USEFUL.
@@ -607,7 +636,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
               <a
                 href={`mailto:${siteIdentity.social.email}`}
-                className="mc-btn-gold px-5 py-3 text-xs flex items-center gap-2"
+                className="voxel-btn voxel-btn-gold px-5 py-3 text-xs flex items-center gap-2"
               >
                 <Mail className="w-4 h-4" />
                 <span>EMAIL ASISH</span>
@@ -615,13 +644,13 @@ export default function HomePage() {
 
               <Link
                 href="/contact"
-                className="mc-btn-stone px-4 py-3 text-xs"
+                className="voxel-btn voxel-btn-stone px-4 py-3 text-xs text-yellow-300 hover:text-white"
               >
                 CONTACT DOSSIER
               </Link>
             </div>
           </div>
-        </section>
+        </VoxelPanel>
       </main>
 
       {/* Global Footer Styled as Minecraft Bedrock / Stone */}

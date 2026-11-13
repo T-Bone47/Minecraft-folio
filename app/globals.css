@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap");
 @import "tailwindcss";
+@import "../styles/voxel-tokens.css";
+@import "../styles/voxel-materials.css";
+@import "../styles/voxel-components.css";
 
 :root {
   --bg-space: #09090b;

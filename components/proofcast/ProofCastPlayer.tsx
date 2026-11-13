@@ -60,12 +60,12 @@ export function ProofCastPlayer({
   const activeBeat: ProofCastBeat = controller.getActiveBeat();
 
   return (
-    <div className="w-full flex flex-col bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden text-zinc-100">
+    <div className="w-full flex flex-col bg-zinc-950 border-4 border-[#262A31] shadow-2xl overflow-hidden text-zinc-100">
       {/* Top Header Bar */}
-      <div className="flex flex-wrap items-center justify-between px-6 py-4 bg-zinc-900/90 border-b border-zinc-800 gap-3">
+      <div className="flex flex-wrap items-center justify-between px-6 py-4 bg-[#191B20] border-b-2 border-zinc-800 gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-          <span className="font-mono text-xs font-bold tracking-wider uppercase text-zinc-300">
+          <div className="w-2.5 h-2.5 bg-red-500 border border-white/60 animate-pulse" />
+          <span className="font-pixel text-xs tracking-wider uppercase text-white mc-text-shadow">
             FRONTIER PROOFCAST
           </span>
           <span className="text-zinc-600 hidden sm:inline">•</span>
@@ -80,10 +80,10 @@ export function ProofCastPlayer({
             <button
               key={r}
               onClick={() => setRole(r)}
-              className={`px-3 py-1 rounded capitalize transition-colors ${
+              className={`px-3 py-1 font-pixel text-[9px] uppercase transition-all ${
                 role === r
-                  ? "bg-red-600/90 text-white font-bold border border-red-500 shadow-sm"
-                  : "bg-zinc-800/80 text-zinc-400 hover:text-white hover:bg-zinc-700"
+                  ? "voxel-btn voxel-btn-redstone text-white"
+                  : "voxel-btn voxel-btn-stone text-zinc-300 hover:text-white"
               }`}
             >
               {r === "aiml" ? "AI / ML" : r}
@@ -93,9 +93,9 @@ export function ProofCastPlayer({
       </div>
 
       {/* Main Cinematic Grid: Beat Display & Timeline */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-zinc-800 min-h-[460px]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b-2 border-zinc-800 min-h-[460px]">
         {/* Left / Center: Cinematic Documentary Stage (8 cols) */}
-        <div className="lg:col-span-8 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-b from-zinc-900/40 via-zinc-950/80 to-zinc-950 relative overflow-hidden">
+        <div className="lg:col-span-8 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-b from-[#101115] via-zinc-950 to-black relative overflow-hidden">
           {/* Ambient Background Grid */}
           <div
             className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -109,50 +109,50 @@ export function ProofCastPlayer({
           {/* Chapter Metadata & Visual Tag */}
           <div className="relative z-10 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="px-2.5 py-1 text-xs font-mono font-bold uppercase bg-red-950/80 text-red-400 border border-red-800/60 rounded">
+              <span className="px-2.5 py-1 text-[10px] font-pixel uppercase bg-red-950/80 text-red-400 border border-red-800/60 mc-text-shadow">
                 {activeBeat.chapterTitle}
               </span>
-              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest flex items-center gap-1.5">
+              <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest flex items-center gap-1.5">
                 <Activity className="w-3.5 h-3.5 text-red-400" />
                 {activeBeat.visualTag}
               </span>
             </div>
 
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold font-retro text-white tracking-wide leading-tight">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-pixel text-white tracking-wide leading-tight mc-text-shadow">
                 {activeBeat.title}
               </h2>
-              <p className="text-sm sm:text-base font-mono text-red-400 font-semibold mt-1">
+              <p className="text-xs sm:text-sm font-mono text-[#00d2be] font-bold mt-1">
                 {activeBeat.subtitle}
               </p>
             </div>
 
-            <p className="text-xs sm:text-sm font-mono text-zinc-300 leading-relaxed max-w-2xl bg-zinc-900/40 p-4 rounded-lg border border-zinc-800/80">
+            <p className="text-xs sm:text-sm font-mono text-zinc-300 leading-relaxed max-w-2xl mc-slot-box p-4 border-l-4 border-l-red-500">
               {activeBeat.narrative}
             </p>
           </div>
 
           {/* Mid Stage: Verified Metrics & Subsystem Cards */}
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
-            <div className="p-4 bg-zinc-900/80 border border-zinc-800 rounded-lg flex flex-col justify-between">
-              <div className="text-xs font-mono uppercase text-zinc-400 mb-1 flex items-center gap-1.5">
+            <div className="p-4 mc-gui-box flex flex-col justify-between">
+              <div className="text-[10px] font-pixel uppercase text-zinc-400 mb-1 flex items-center gap-1.5 mc-text-shadow">
                 <Layers className="w-3.5 h-3.5 text-zinc-400" />
                 Architecture Subsystem
               </div>
-              <div className="text-sm font-bold text-white">{activeBeat.architectureStep.subsystem}</div>
+              <div className="text-xs font-pixel text-white mc-text-shadow">{activeBeat.architectureStep.subsystem}</div>
               <div className="text-xs font-mono text-zinc-400 mt-1">
                 {activeBeat.architectureStep.description}
               </div>
             </div>
 
-            <div className="p-4 bg-zinc-900/80 border border-emerald-900/40 rounded-lg flex flex-col justify-between">
-              <div className="text-xs font-mono uppercase text-emerald-400 mb-1 flex items-center gap-1.5">
+            <div className="p-4 mc-gui-box flex flex-col justify-between">
+              <div className="text-[10px] font-pixel uppercase text-emerald-400 mb-1 flex items-center gap-1.5 mc-text-shadow">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                 Verified Invariant
               </div>
-              <div className="text-xl font-bold font-mono text-white">
+              <div className="text-lg font-pixel text-emerald-300 mc-text-shadow">
                 {activeBeat.keyMetric.value}{" "}
-                <span className="text-xs text-zinc-400 font-normal">
+                <span className="text-xs text-zinc-400 font-mono font-normal">
                   {activeBeat.keyMetric.unit || ""}
                 </span>
               </div>
@@ -161,7 +161,7 @@ export function ProofCastPlayer({
           </div>
 
           {/* Stage Bottom: Quick Proof Banner with Direct Inspect Button */}
-          <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 p-3 bg-red-950/20 border border-red-900/40 rounded-lg">
+          <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 p-3 mc-slot-box border-red-900/40">
             <div className="flex items-center gap-2 text-xs font-mono text-zinc-300 truncate">
               <Code2 className="w-4 h-4 text-red-400 flex-shrink-0" />
               <span className="truncate">{activeBeat.evidenceProof.filePath}</span>
@@ -169,7 +169,7 @@ export function ProofCastPlayer({
 
             <button
               onClick={() => controller.inspectBeat()}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white text-xs font-mono font-bold uppercase rounded transition-colors"
+              className="voxel-btn voxel-btn-redstone flex items-center gap-1.5 px-3 py-1.5 text-white text-xs font-pixel uppercase"
             >
               <span>Inspect Source Code</span>
               <ExternalLink className="w-3 h-3" />
@@ -178,7 +178,7 @@ export function ProofCastPlayer({
         </div>
 
         {/* Right: Chapter Navigation Timeline (4 cols) */}
-        <div className="lg:col-span-4 p-6 bg-zinc-950/90 border-t lg:border-t-0 lg:border-l border-zinc-800 flex flex-col justify-between">
+        <div className="lg:col-span-4 p-6 bg-[#101115] border-t lg:border-t-0 lg:border-l-2 border-zinc-800 flex flex-col justify-between">
           <ProofCastTimeline
             story={story}
             activeBeatIndex={playbackState.activeBeatIndex}

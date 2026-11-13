@@ -5,6 +5,7 @@ import Link from "next/link";
 import { projects } from "@/data/projects";
 import type { EvidenceLevel, Project, ProjectDomain } from "@/types/project";
 import { ArrowRight, Cpu, ShieldCheck, FlaskConical } from "lucide-react";
+import { VoxelCard, VoxelBadge, VoxelButton } from "@/components/ui/voxel";
 
 /**
  * ENGINEERING INDEX — the recruiter fast path.
@@ -90,53 +91,56 @@ export const EngineeringIndex: React.FC = () => {
               key={option.value}
               onClick={() => setFilter(option.value)}
               aria-pressed={isActive}
-              className={`px-3 py-1.5 border-2 font-pixel text-[9px] transition-colors ${
+              className={`px-3 py-1.5 font-pixel text-[9px] uppercase transition-all ${
                 isActive
-                  ? "border-[#ff8000] text-[#ff8000] bg-[#ff8000]/15"
-                  : "border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200"
+                  ? "voxel-btn voxel-btn-gold text-yellow-300 shadow-[0_0_8px_rgba(255,170,0,0.4)]"
+                  : "voxel-btn voxel-btn-stone text-zinc-300 hover:text-white"
               }`}
             >
               {option.label}
-              <span className="ml-1.5 text-zinc-600">{count}</span>
+              <span className="ml-1.5 text-zinc-500 font-mono">[{count}]</span>
             </button>
           );
         })}
       </div>
 
       {/* Result count, announced so screen readers hear filter changes */}
-      <p className="font-mono text-[11px] text-zinc-500" aria-live="polite">
-        Showing {visible.length} of {projects.length} engineering systems
+      <p className="font-mono text-[11px] text-zinc-400" aria-live="polite">
+        Showing <span className="text-white font-bold">{visible.length}</span> of {projects.length} engineering systems
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {visible.map((project) => (
-          <article
+          <VoxelCard
             key={project.slug}
-            className="mc-gui-box p-5 sm:p-6 flex flex-col gap-3 hover:border-[#ff8000] transition-colors"
+            material="dark-iron"
+            className="p-5 sm:p-6 flex flex-col gap-3 group hover:border-[#ff8000] transition-colors"
           >
             {/* Header: status + domain + evidence key */}
             <div className="flex flex-wrap items-center gap-2 border-b border-zinc-800 pb-2">
-              <span
-                className={`font-pixel text-[8px] px-2 py-0.5 border ${STATUS_TONE[project.status]}`}
+              <VoxelBadge
+                tone={project.status === "completed" || project.status === "active" ? "emerald" : "amber"}
+                size="sm"
               >
                 {STATUS_LABEL[project.status]}
-              </span>
+              </VoxelBadge>
               {project.domains.map((domain) => (
-                <span
+                <VoxelBadge
                   key={domain}
-                  className="font-pixel text-[8px] px-2 py-0.5 border border-zinc-700 text-zinc-400"
+                  tone="neutral"
+                  size="sm"
                 >
                   {domain.toUpperCase()}
-                </span>
+                </VoxelBadge>
               ))}
               {project.isGame && (
-                <span className="font-pixel text-[8px] px-2 py-0.5 border border-fuchsia-700/60 bg-fuchsia-950/60 text-fuchsia-300">
+                <VoxelBadge tone="amber" size="sm">
                   GAME
-                </span>
+                </VoxelBadge>
               )}
             </div>
 
-            <h3 className="font-pixel text-sm sm:text-base text-white leading-snug">
+            <h3 className="font-pixel text-sm sm:text-base text-white group-hover:text-yellow-300 mc-text-shadow leading-snug transition-colors">
               {project.title}
             </h3>
 
@@ -155,7 +159,7 @@ export const EngineeringIndex: React.FC = () => {
                   const grade = evidenceOf(metric);
                   return (
                     <div key={metric.label}>
-                      <div className="font-pixel text-[11px] text-white">
+                      <div className="font-pixel text-[11px] text-white mc-text-shadow">
                         {metric.value}
                       </div>
                       <div className="text-[9px] text-zinc-500 uppercase mt-0.5 leading-tight">
@@ -176,7 +180,7 @@ export const EngineeringIndex: React.FC = () => {
               {project.technologies.slice(0, 6).map((tech) => (
                 <span
                   key={tech}
-                  className="mc-slot-box px-2 py-0.5 text-[9px] font-mono text-zinc-400"
+                  className="mc-slot-box px-2 py-0.5 text-[9px] font-mono text-zinc-300 border border-zinc-800"
                 >
                   {tech}
                 </span>
@@ -186,17 +190,17 @@ export const EngineeringIndex: React.FC = () => {
             <div className="flex items-center gap-4 pt-1 mt-auto border-t border-zinc-800 pt-3">
               <Link
                 href={`/work/${project.slug}`}
-                className="font-pixel text-[9px] text-yellow-300 hover:text-white flex items-center gap-1.5"
+                className="font-pixel text-[9px] text-yellow-300 hover:text-white flex items-center gap-1.5 mc-text-shadow transition-colors"
               >
                 <span>OPEN CASE STUDY</span>
                 <ArrowRight className="w-3 h-3" />
               </Link>
-              <span className="font-mono text-[9px] text-zinc-600 flex items-center gap-1">
-                <Cpu className="w-3 h-3" />
+              <span className="font-mono text-[9px] text-zinc-500 flex items-center gap-1 ml-auto">
+                <Cpu className="w-3 h-3 text-zinc-400" />
                 {project.facility}
               </span>
             </div>
-          </article>
+          </VoxelCard>
         ))}
       </div>
 

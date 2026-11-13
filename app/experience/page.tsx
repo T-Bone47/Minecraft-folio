@@ -3,8 +3,20 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { experience, education } from "@/data/experience";
 import { PortfolioNav } from "@/components/navigation/PortfolioNav";
+import { RedstoneStatusBar } from "@/components/navigation/RedstoneStatusBar";
 import { PortfolioFooter } from "@/components/navigation/PortfolioFooter";
 import { experiences } from "@/lib/frontierDirector/experienceRegistry";
+import {
+  VoxelPanel,
+  VoxelButton,
+  VoxelStatusLamp,
+  VoxelBadge,
+  VoxelMissionFlagIcon,
+  VoxelRaceCarIcon,
+  VoxelAiChipIcon,
+  VoxelTelemetryTowerIcon,
+  VoxelShieldIcon,
+} from "@/components/ui/voxel";
 import {
   Activity,
   Briefcase,
@@ -23,7 +35,6 @@ import {
   Shield,
   Layers,
   Cpu,
-  BarChart3,
   Clock,
 } from "lucide-react";
 
@@ -31,177 +42,190 @@ export const metadata: Metadata = {
   title: "Engineering Experiences & Trajectory — Asish Oliver M",
   description:
     "Explore interactive engineering demonstrations and verified technical evidence across motorsport vehicle simulation, AI/ML systems, and distributed telemetry pipelines.",
-  openGraph: {
-    title: "Engineering Demonstrations & Trajectory — Asish Oliver M",
-    description:
-      "Interactive 60-second showcases and 6-layer engineering proof across Motorsport, AI/ML, and Software Systems.",
-    type: "website",
-  },
+};
+
+const CATEGORY_ICONS: Record<string, React.ReactNode> = {
+  motorsport: <VoxelRaceCarIcon size={22} />,
+  "ai-ml": <VoxelAiChipIcon size={22} />,
+  systems: <VoxelTelemetryTowerIcon size={22} />,
 };
 
 export default function ExperiencePage() {
   return (
-    <div className="min-h-screen bg-[#0d0f12] text-[#f4f4f5] font-sans selection:bg-[#D71D35] selection:text-white">
+    <div className="min-h-screen technical-grid-bg text-zinc-100 flex flex-col font-sans selection:bg-[#ff8000] selection:text-white">
       <PortfolioNav />
+      <RedstoneStatusBar />
 
-      {/* Status Bar — Resilient single-row layout */}
-      <div className="bg-[#18181c] border-b border-[#252830] px-4 sm:px-6 py-2 font-mono text-[11px] text-zinc-400 flex items-center justify-between gap-3 shadow-inner overflow-hidden">
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] shrink-0 animate-pulse" />
-          <span className="font-mono text-zinc-200 font-bold uppercase tracking-wider shrink-0">
-            FRONTIER DIRECTOR 2.0
-          </span>
-          <span className="text-zinc-600 shrink-0">|</span>
-          <span className="text-zinc-400 truncate">VERIFIED CODE · REPRODUCIBLE BENCHMARKS</span>
-        </div>
-        <div className="shrink-0 flex items-center gap-3">
-          <Link
-            href="/recruiter"
-            className="font-mono text-emerald-400 hover:text-white flex items-center gap-1 transition-colors whitespace-nowrap text-[10px]"
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12">
+        {/* 1. Voxel Engineering Mission Board Hero */}
+        <section aria-labelledby="experience-hero-title">
+          <VoxelPanel
+            variant="iron"
+            title="CAMPUS MISSION DISPATCH BOARD // TECHNICAL SHOWCASES"
+            icon={<Shield className="w-4 h-4 text-amber-400" />}
+            headerActions={
+              <VoxelStatusLamp tone="emerald" label="3 MISSIONS READY" pulse />
+            }
           >
-            <span>RECRUITER 30s SUMMARY</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-      </div>
+            <div className="max-w-4xl space-y-4">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#121418] border border-[#3f4756] font-mono text-[10px] text-amber-400 uppercase tracking-widest">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span>FRONTIER DIRECTOR 2.0 • INTERACTIVE ENGINEERING SHOWCASES</span>
+              </div>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12">
-        {/* Header Hero */}
-        <header className="bg-[#171A20] border border-[#C8CDD2]/30 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-4">
-          <div className="flex items-center gap-2 font-mono text-xs text-[#22D3EE] uppercase tracking-wider">
-            <Sparkles className="w-4 h-4 text-[#22D3EE]" />
-            <span>Curated Engineering Demonstrations</span>
-          </div>
+              <h1
+                id="experience-hero-title"
+                className="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-retro text-white tracking-tight uppercase"
+              >
+                THE ENGINEERING MISSION BOARD
+              </h1>
 
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight">
-            Engineering Demonstrations & Proof Mode
-          </h1>
+              <p className="text-xs sm:text-sm font-mono text-zinc-300 leading-relaxed max-w-3xl">
+                Inspect live engineering simulations, telemetry pipelines, and machine learning models built by Asish Oliver M. Every demonstration features a 60-second guided showcase and an unredacted 6-layer Engineering Proof Inspector backed by verified project source code.
+              </p>
 
-          <p className="text-sm sm:text-base text-zinc-300 max-w-3xl leading-relaxed font-sans">
-            Inspect live engineering simulations, telemetry pipelines, and machine learning models built by Asish Oliver M. Every demonstration features a 60-second guided showcase and an unredacted 6-layer Engineering Proof Inspector backed by verified project source code.
-          </p>
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <VoxelButton
+                  variant="gold"
+                  href="/world"
+                  icon={<Box className="w-3.5 h-3.5" />}
+                >
+                  EXPLORE 3D CAMPUS
+                </VoxelButton>
 
-          <div className="flex items-center gap-3 pt-2 flex-wrap">
-            <Link
-              href="/?mode=explore"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D71D35] hover:bg-[#b01428] text-white font-mono text-xs font-bold transition-all shadow-md"
-            >
-              <Box className="w-4 h-4" />
-              <span>EXPLORE 3D CAMPUS</span>
-            </Link>
-            <Link
-              href="/recruiter"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1f242c] hover:bg-[#282f3a] text-zinc-200 border border-zinc-700 font-mono text-xs transition-colors"
-            >
-              <span>RECRUITER BRIEFING</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </header>
+                <VoxelButton
+                  variant="emerald"
+                  href="/recruiter"
+                  icon={<ArrowRight className="w-3.5 h-3.5" />}
+                >
+                  RECRUITER BRIEFING
+                </VoxelButton>
+              </div>
+            </div>
+          </VoxelPanel>
+        </section>
 
-        {/* 3 Showcase Experiences Cards */}
-        <section aria-labelledby="showcases-heading" className="space-y-6">
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-            <h2 id="showcases-heading" className="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
-              <Shield className="w-5 h-5 text-[#22D3EE]" />
-              <span>Flagship Engineering Experiences</span>
+        {/* 2. Three Flagship Showcase Mission Panels */}
+        <section aria-labelledby="showcases-heading" className="space-y-4">
+          <div className="flex items-center justify-between border-b-2 border-[#2b303c] pb-3">
+            <h2 id="showcases-heading" className="font-pixel text-sm sm:text-base text-white uppercase flex items-center gap-2">
+              <Cpu className="w-4 h-4 text-[#ff8000]" />
+              <span>FLAGSHIP ENGINEERING MISSIONS</span>
             </h2>
-            <span className="text-xs font-mono text-zinc-400">3 DIRECT DEEP ROUTES</span>
+            <span className="font-mono text-xs text-zinc-400">3 DIRECT DEEP ROUTES</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {experiences.map((exp) => (
-              <article
-                key={exp.id}
-                className="bg-[#171A20] border border-[#C8CDD2]/25 hover:border-[#C8CDD2]/60 rounded-xl p-5 flex flex-col justify-between transition-all shadow-xl group space-y-4"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold text-[#22D3EE] bg-[#22D3EE]/10 px-2 py-0.5 rounded border border-[#22D3EE]/30">
-                      {exp.badge}
-                    </span>
-                    <span className="flex items-center gap-1 text-[11px] font-mono text-zinc-400">
-                      <Clock className="w-3 h-3 text-zinc-500" />
-                      <span>~{exp.estimatedDurationSec}s</span>
-                    </span>
+            {experiences.map((exp) => {
+              const Icon = CATEGORY_ICONS[exp.id] || CATEGORY_ICONS[exp.slug] || <VoxelShieldIcon size={22} />;
+
+              return (
+                <article
+                  key={exp.id}
+                  className="voxel-panel-deepslate border-3 p-5 sm:p-6 flex flex-col justify-between space-y-5 transition-all hover:border-[#ff8000] relative overflow-hidden group shadow-2xl"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between pb-3 border-b border-[#252a36]">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-[#121418] border border-[#384050] flex items-center justify-center shrink-0">
+                          {Icon}
+                        </div>
+                        <span className="font-pixel text-[8px] text-amber-400 uppercase">
+                          {exp.badge}
+                        </span>
+                      </div>
+
+                      <span className="flex items-center gap-1 font-mono text-[10px] text-zinc-400 bg-[#121418] px-2 py-0.5 border border-[#2b3340]">
+                        <Clock className="w-3 h-3 text-zinc-500" />
+                        <span>~{exp.estimatedDurationSec}s</span>
+                      </span>
+                    </div>
+
+                    <h3 className="font-pixel text-sm text-white group-hover:text-amber-400 transition-colors leading-snug">
+                      {exp.title}
+                    </h3>
+
+                    <p className="font-mono text-xs text-zinc-300 leading-relaxed">
+                      {exp.subtitle}
+                    </p>
+
+                    {/* Top Inset Metric Screen */}
+                    <div className="mc-slot-box p-3 font-mono space-y-1">
+                      <div className="text-zinc-400 text-[10px] uppercase">
+                        {exp.keyMetrics[0].label}:
+                      </div>
+                      <div className="font-pixel text-sm text-white">
+                        {exp.keyMetrics[0].value}
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#22D3EE] transition-colors leading-snug">
-                    {exp.title}
-                  </h3>
+                  <div className="space-y-2 pt-3 border-t-2 border-[#202530]">
+                    <VoxelButton
+                      variant="red"
+                      size="sm"
+                      href={`/experience/${exp.slug}`}
+                      className="w-full"
+                      icon={<Play className="w-3 h-3 fill-white" />}
+                    >
+                      LAUNCH MISSION
+                    </VoxelButton>
 
-                  <p className="text-xs text-zinc-300 leading-relaxed">
-                    {exp.subtitle}
-                  </p>
-
-                  {/* Top Metric */}
-                  <div className="bg-[#121418] border border-zinc-800 p-2.5 rounded-lg flex items-center justify-between text-xs font-mono">
-                    <span className="text-zinc-400 text-[11px]">{exp.keyMetrics[0].label}:</span>
-                    <span className="text-white font-bold">{exp.keyMetrics[0].value}</span>
+                    <VoxelButton
+                      variant="stone"
+                      size="sm"
+                      href={`/experience/${exp.slug}/evidence`}
+                      className="w-full"
+                      icon={<Shield className="w-3 h-3 text-cyan-400" />}
+                    >
+                      INSPECT 6-LAYER PROOF
+                    </VoxelButton>
                   </div>
-                </div>
-
-                <div className="space-y-2 pt-2 border-t border-zinc-800">
-                  <Link
-                    href={`/experience/${exp.slug}`}
-                    className="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-[#D71D35] hover:bg-[#b01428] text-white font-mono text-xs font-bold transition-all shadow"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-white" />
-                    <span>LAUNCH SHOWCASE</span>
-                  </Link>
-
-                  <Link
-                    href={`/experience/${exp.slug}/evidence`}
-                    className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1e26] hover:bg-[#252b36] text-zinc-300 hover:text-white font-mono text-xs border border-zinc-700 transition-colors"
-                  >
-                    <Shield className="w-3.5 h-3.5 text-[#22D3EE]" />
-                    <span>INSPECT 6-LAYER PROOF</span>
-                  </Link>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </section>
 
-        {/* Existing Career Trajectory & Quest Archive */}
-        <section aria-labelledby="career-heading" className="space-y-6 pt-6 border-t border-zinc-800">
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-            <h2 id="career-heading" className="text-lg sm:text-xl font-bold text-white tracking-tight flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-amber-400" />
-              <span>Career Trajectory & Project Portfolio</span>
+        {/* 3. Career Trajectory & Project Portfolio */}
+        <section aria-labelledby="career-heading" className="space-y-4">
+          <div className="flex items-center justify-between border-b-2 border-[#2b303c] pb-3">
+            <h2 id="career-heading" className="font-pixel text-sm sm:text-base text-white uppercase flex items-center gap-2">
+              <Briefcase className="w-4 h-4 text-amber-400" />
+              <span>CAREER TRAJECTORY & INDUSTRIAL ROLES</span>
             </h2>
-            <span className="text-xs font-mono text-zinc-400">STRICT ACCREDITATION</span>
+            <span className="font-mono text-xs text-zinc-400">STRICT ACCREDITATION</span>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {experience.map((item, idx) => (
-              <article
+              <VoxelPanel
                 key={item.id || idx}
-                className="bg-[#171A20] border border-[#C8CDD2]/20 rounded-xl p-6 font-mono space-y-4 hover:border-[#D71D35]/50 transition-colors"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-800 pb-3">
-                  <div>
-                    <div className="text-[10px] font-mono text-[#D71D35] uppercase font-bold">
-                      ROLE {String(idx + 1).padStart(2, "0")} &bull; {item.organization}
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mt-0.5">
-                      {item.role}
-                    </h3>
-                  </div>
-                  <span className="px-2.5 py-1 text-xs rounded bg-[#121418] text-zinc-300 border border-zinc-800 self-start sm:self-auto">
+                variant="iron"
+                title={`ROLE ${String(idx + 1).padStart(2, "0")} // ${item.organization.toUpperCase()}`}
+                headerActions={
+                  <span className="font-mono text-[10px] bg-[#121418] text-amber-400 px-2 py-0.5 border border-[#3a4354]">
                     {item.period}
                   </span>
-                </div>
+                }
+              >
+                <div className="space-y-3 font-mono">
+                  <h3 className="font-pixel text-sm text-white">
+                    {item.role}
+                  </h3>
 
-                <div className="space-y-2">
-                  <span className="text-[10px] font-mono text-zinc-500 uppercase">Core Technical Focus Areas:</span>
-                  <ul className="space-y-1.5 text-xs text-zinc-300 pl-4 list-disc font-sans">
-                    {item.focus.map((point: string, fIdx: number) => (
-                      <li key={fIdx}>{point}</li>
-                    ))}
-                  </ul>
+                  <div className="space-y-1.5 pt-2 border-t border-[#262c36]">
+                    <span className="text-[10px] uppercase text-zinc-400 block font-bold">
+                      CORE TECHNICAL FOCUS AREAS:
+                    </span>
+                    <ul className="space-y-1 text-xs text-zinc-300 pl-4 list-disc font-mono">
+                      {item.focus.map((point: string, fIdx: number) => (
+                        <li key={fIdx}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </article>
+              </VoxelPanel>
             ))}
           </div>
         </section>
