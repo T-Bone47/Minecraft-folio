@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { seo, siteIdentity } from "@/data/site";
 import { siteConfig, canonicalUrl } from "@/lib/siteMetadata";
 import { MinecraftAtmosphere } from "@/components/ambient/MinecraftAtmosphere";
+import { GlobalQuakeTerminal } from "@/components/cli/GlobalQuakeTerminal";
 import { education } from "@/data/experience";
 // Runs content integrity checks (duplicate slugs, missing status, undeclared
 // evidence grades, broken links) and warns in development.
@@ -114,6 +115,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
         />
         <MinecraftAtmosphere />
+        <GlobalQuakeTerminal />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#ff8000] focus:text-black focus:font-mono focus:text-xs focus:border-2 focus:border-black"

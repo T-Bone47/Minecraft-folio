@@ -68,6 +68,7 @@ export const PortfolioNav: React.FC = () => {
 
   // More menu items
   const moreMenuItems = [
+    { href: "/cli", label: "QUAKE CLI SHELL (~)", icon: Terminal, desc: "Interactive Unix & voxel terminal with auto-complete" },
     { href: "/garage", label: "F1 GARAGE & SETUP", icon: Wrench, desc: "Aero wing angles, ground effect rake & lap simulation" },
     { href: "/telemetry", label: "FASTF1 OVERLAY", icon: Activity, desc: "Real F1 GPS telemetry overlay & ghost lap" },
     { href: "/chaos", label: "CHAOS STRESS LAB", icon: Zap, desc: "10,000 eps burst & fault injection lab" },
