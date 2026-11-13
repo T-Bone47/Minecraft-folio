@@ -33,3 +33,4 @@ The **Browser Chaos & Stress-Test Lab** proves that the application's real-time 
 2. **Silverstone Sensor Surge:** 10,000 events/sec flood -> FIFO ring eviction maintaining 48MB heap.
 3. **Safety Car Backpressure Storm:** 8,500 events/sec, 350ms jitter -> Adaptive backpressure queue.
 4. **Mobile CPU 6x Throttling:** 22ms CPU delay / frame -> 60Hz physics decoupling prevents tunneling.
+

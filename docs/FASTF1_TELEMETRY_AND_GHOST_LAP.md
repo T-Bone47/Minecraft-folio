@@ -40,3 +40,4 @@ $$F_{\text{net}} = \sqrt{F_x^2 + F_y^2} \le \mu F_z, \quad v_{\text{apex}} = \sq
 | **Curva di Lesmo (T6-T7)** | $165\,\text{km/h}$ | $161\,\text{km/h}$ | $-4\,\text{km/h}$ | 5 |
 | **Variante Ascari (T8-T10)** | $172\,\text{km/h}$ | $168\,\text{km/h}$ | $-4\,\text{km/h}$ | 5 |
 | **Curva Parabolica (T11)** | $185\,\text{km/h}$ | $182\,\text{km/h}$ | $-3\,\text{km/h}$ | 6 |
+

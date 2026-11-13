@@ -161,3 +161,4 @@ export function generateChaosLogs(metrics: ChaosMetrics, scenarioName?: string):
 
   return logs;
 }
+

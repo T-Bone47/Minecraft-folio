@@ -66,3 +66,4 @@ describe("Browser Chaos & Stress-Test Lab Engine", () => {
     assert.ok(logs.some((l) => l.includes("SYS_MONITOR") || l.includes("CHAOS_STRESS")));
   });
 });
+

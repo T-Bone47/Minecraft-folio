@@ -64,3 +64,4 @@ describe("Ghost Lap & FastF1 Real Telemetry Engine", () => {
     assert.equal(slower.formattedDelta, "+1.25s");
   });
 });
+

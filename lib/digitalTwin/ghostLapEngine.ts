@@ -96,3 +96,4 @@ export function computeGhostLapDelta(
     speedDeltaKmh: Math.round(playerSpeedKmh - ghostSpeedKmh),
   };
 }
+

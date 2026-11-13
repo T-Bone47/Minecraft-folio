@@ -36,3 +36,4 @@ export interface ChaosScenario {
   expectedDefense: string;
   invariantValidated: string;
 }
+

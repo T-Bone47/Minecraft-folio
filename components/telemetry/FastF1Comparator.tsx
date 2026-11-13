@@ -261,3 +261,4 @@ export const FastF1Comparator: React.FC = () => {
     </div>
   );
 };
+

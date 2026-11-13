@@ -124,3 +124,4 @@ export const GhostF1Car: React.FC<GhostF1CarProps> = ({
     </group>
   );
 };
+

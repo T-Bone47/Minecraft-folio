@@ -372,3 +372,4 @@ export const ChaosStressLab: React.FC = () => {
     </div>
   );
 };
+
