@@ -1,4 +1,5 @@
 "use client";
+import { GhostF1Car } from "./GhostF1Car";
 import { Cockpit } from "./Cockpit";
 import { useCockpitStore } from "@/state/cockpitStore";
 import { CarChromeDetails } from "./CarChromeDetails";
@@ -87,7 +88,9 @@ export const DriveableF1Car: React.FC = () => {
  });
  if(!isDriving)return null;
   return (
-    <group ref={carGroupRef} position={[-45, 0.58, 0]}>
+    <>
+      <GhostF1Car playerProgress={Math.max(0, sim.current.progress / (Math.PI * 2))} visible={isDriving} />
+      <group ref={carGroupRef} position={[-45, 0.58, 0]}>
       <CarChromeDetails/>
       {/* 1. Carbon Floor / Underbody Plank */}
       <mesh position={[0, 0.15, 0]} castShadow receiveShadow>
@@ -222,5 +225,6 @@ export const DriveableF1Car: React.FC = () => {
         </mesh>
       </group>
     </group>
+    </>
   );
 };

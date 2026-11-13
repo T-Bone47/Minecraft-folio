@@ -21,6 +21,7 @@ import {
   Shield,
   Compass,
   Film,
+  Zap,
 } from "lucide-react";
 
 export const PortfolioNav: React.FC = () => {
@@ -66,6 +67,8 @@ export const PortfolioNav: React.FC = () => {
 
   // More menu items
   const moreMenuItems = [
+    { href: "/telemetry", label: "FASTF1 OVERLAY", icon: Activity, desc: "Real F1 GPS telemetry overlay & ghost lap" },
+    { href: "/chaos", label: "CHAOS STRESS LAB", icon: Zap, desc: "10,000 eps burst & fault injection lab" },
     { href: "/dossier", label: "HIRING DOSSIER", icon: FileText, desc: "1-Click hiring committee 2-page briefing (PDF)" },
     { href: "/silicon", label: "VOXEL SILICON", icon: Cpu, desc: "Redstone-to-silicon logic gates & vehicle ALU" },
     { href: "/proofcast", label: "PROOFCAST", icon: Film, desc: "Interactive 60s engineering documentary" },
